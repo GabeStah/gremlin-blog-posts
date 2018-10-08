@@ -1,0 +1,10 @@
+{
+    "command": {
+        "type": "disk",
+        "args": ["-d", "/tmp", "--length", "30", "-w", "1", "-b", "4", "-p", "100"]
+    },
+    "target": {
+        "type": "Exact",
+        "exact": ["172.31.42.65"]
+    }
+}

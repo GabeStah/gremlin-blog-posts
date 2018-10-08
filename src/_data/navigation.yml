@@ -1,0 +1,15 @@
+main:
+  - title: "Notes to the Editor"
+    url: /notes-to-editor
+
+sidebar:
+  - title: "Categories"
+    url: /categories
+    children:
+      - title: "Chaos Engineering"
+        url: /categories/#chaos-engineering
+        children:
+          - title: "Migrating to the Cloud is Chaotic. Embrace it."
+            url: /chaos-engineering/migrating-cloud-chaotic-embrace
+  - title: "Tags"
+    url: /tags

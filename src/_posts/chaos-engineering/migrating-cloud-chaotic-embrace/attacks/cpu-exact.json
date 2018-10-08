@@ -1,0 +1,10 @@
+{
+    "command": {
+        "type": "cpu",
+        "args": ["-c", "1", "--length", "30"]
+    },
+    "target": {
+        "type": "Exact",
+        "exact": ["172.31.42.65"]
+    }
+}

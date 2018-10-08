@@ -1,0 +1,640 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.13.0 by Michael Rose
+  Copyright 2013-2018 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE.txt
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Migrating to the Cloud is Chaotic. Embrace it. - Gremlin: Blog Posts</title>
+<meta name="description" content="Demonstrating why companies migrating to cloud should embrace Chaos Engineering early and often to avoid pain down the road.">
+
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Gremlin: Blog Posts">
+<meta property="og:title" content="Migrating to the Cloud is Chaotic. Embrace it.">
+<meta property="og:url" content="http://localhost:4000/gremlin-blog-posts/chaos-engineering/migrating-cloud-chaotic-embrace/">
+
+
+  <meta property="og:description" content="Demonstrating why companies migrating to cloud should embrace Chaos Engineering early and often to avoid pain down the road.">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2018-10-05T00:00:00-07:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/gremlin-blog-posts/chaos-engineering/migrating-cloud-chaotic-embrace/">
+
+
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Person",
+      "name": "Gabe Wyatt",
+      "url": "http://localhost:4000/gremlin-blog-posts",
+      "sameAs": null
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/gremlin-blog-posts/feed.xml" type="application/atom+xml" rel="alternate" title="Gremlin: Blog Posts Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/gremlin-blog-posts/assets/css/main.css">
+
+<!--[if lte IE 9]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+    <!-- start custom head snippets -->
+<link rel="icon" href="https://www.gremlin.com/favicon-32x32.png" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    <div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <a class="site-title" href="/gremlin-blog-posts/">Gremlin: Blog Posts</a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/gremlin-blog-posts/notes-to-editor">Notes to the Editor</a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+  
+    
+
+
+
+<nav class="breadcrumbs">
+  <ol itemscope itemtype="http://schema.org/BreadcrumbList">
+    
+    
+    
+      
+        <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+          <a href="http://localhost:4000/gremlin-blog-posts/" itemprop="item"><span itemprop="name">Home</span></a>
+          <meta itemprop="position" content="1">
+        </li>
+        <span class="sep">/</span>
+      
+      
+        
+        <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+          <a href="/gremlin-blog-posts/categories/#chaos-engineering" itemprop="item"><span itemprop="name">Chaos engineering</span></a>
+          <meta itemprop="position" content="2">
+        </li>
+        <span class="sep">/</span>
+      
+    
+      
+      
+        <li class="current">Migrating to the Cloud is Chaotic. Embrace it.</li>
+      
+    
+  </ol>
+</nav>
+
+  
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+  
+    
+      
+      
+      
+    
+    
+      
+
+<nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox">
+  <label for="ac-toc">Toggle menu</label>
+  <ul class="nav__items">
+    
+      <li>
+        
+          
+          
+
+          <a href="/gremlin-blog-posts/categories"><span class="nav__sub-title">Categories</span></a>
+        
+
+        
+        <ul>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/gremlin-blog-posts/categories/#chaos-engineering" class="">Chaos Engineering</a></li>
+          
+        </ul>
+        
+      </li>
+    
+      <li>
+        
+          
+          
+
+          <a href="/gremlin-blog-posts/tags"><span class="nav__sub-title">Tags</span></a>
+        
+
+        
+      </li>
+    
+  </ul>
+</nav>
+    
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Migrating to the Cloud is Chaotic. Embrace it.">
+    <meta itemprop="description" content="Demonstrating why companies migrating to cloud should embrace Chaos Engineering early and often to avoid pain down the road.">
+    <meta itemprop="datePublished" content="October 05, 2018">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">Migrating to the Cloud is Chaotic. Embrace it.
+</h1>
+          
+            <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  4 minute read
+</p>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right sticky">
+            <nav class="toc">
+              <header><h4 class="nav__title">
+<i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu">
+  <li>
+<a href="#examples-of-chaos-experiments-during-migration">Examples of Chaos Experiments During Migration</a>
+    <ul>
+      <li><a href="#gremlin-api-token">Gremlin API Token</a></li>
+      <li><a href="#cpu-attack">CPU Attack</a></li>
+      <li><a href="#disk-latency">Disk Latency</a></li>
+      <li><a href="#blackhole">Blackhole</a></li>
+    </ul>
+  </li>
+  <li><a href="#real-world-examples">Real World Examples</a></li>
+  <li><a href="#hello-there">Hello There</a></li>
+</ul>
+            </nav>
+          </aside>
+        
+        
+<p class="notice--danger"><strong>PURPOSE</strong>: Demonstrate why companies migrating to the cloud should embrace Chaos Engineering early and often to avoid pain down the road.</p>
+
+<h2 id="examples-of-chaos-experiments-during-migration">Examples of Chaos Experiments During Migration</h2>
+
+<ul>
+  <li>Database failover—kill your new, cloudy master node to make sure failover works (and that the slave is replicating).</li>
+  <li>Noisy neighbor? Using a chaos tools to chew up your CPU in your original environment, you can</li>
+  <li>Some services still running on-prem? Test your latency to them. Test Blackholes on them!</li>
+  <li>Test disk latency?</li>
+  <li>Don’t assume new resilience mechanisms from your cloud provider work as you expect. (Honeycomb found out the hard way that Amazon RDS only fails over to hot spares in the face of total infrastructure failure of the primary DB—it does not account for slow queries/bad performance): https://www.honeycomb.io/blog/2018/05/rds-performance-degradation-postmortem/</li>
+  <li>Your cloud environment may be more spread out than your old environment. There’s more space, literally, between all your services. (And we saw in The Cost of Downtime post that Network outages are the number one cause of downtime.)</li>
+  <li>Chaos Engineering forces you to confront your steady state: to know what that state is, think about how to measure it, and how to test its strength.</li>
+  <li>The ephemerality of the cloud</li>
+</ul>
+
+<h3 id="gremlin-api-token">Gremlin API Token</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">export </span><span class="nv">GREMLIN_API_TOKEN</span><span class="o">=</span><span class="s2">"Bearer NzE3NWFjYTktODBkMC01ODU5LTkwYmMtOGQyZTBkNDc1NDU0OmdhYmVAZ2FiZXd5YXR0LmNvbTozZTRkMjI2Ny1jYThhLTEx"</span>
+</code></pre></div></div>
+
+<p class="notice--info"><strong>TIP</strong>: For simplicity you may also opt to <code class="highlighter-rouge">export</code> the <code class="highlighter-rouge">GREMLIN_API_TOKEN</code> within your <code class="highlighter-rouge">.bashrc</code> or <code class="highlighter-rouge">.bash_profile</code> file to keep it permanently available across terminal sessions.</p>
+
+<h3 id="cpu-attack">CPU Attack</h3>
+
+<blockquote>
+  <p>Noisy neighbor? Using a chaos tools to chew up your CPU in your original environment, you can</p>
+</blockquote>
+
+<ul>
+  <li>
+<code class="highlighter-rouge">c</code>: Number of CPU cores to attack.</li>
+  <li>
+<code class="highlighter-rouge">length</code> or <code class="highlighter-rouge">l</code>: Attack duration (in seconds).</li>
+</ul>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">//</span><span class="w"> </span><span class="err">cpu-random.json</span><span class="w">
+</span><span class="p">{</span><span class="w">
+    </span><span class="s2">"command"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cpu"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"args"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"-c"</span><span class="p">,</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w"> </span><span class="s2">"--length"</span><span class="p">,</span><span class="w"> </span><span class="s2">"30"</span><span class="p">]</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"target"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Random"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="nt">-H</span> <span class="s2">"Authorization: </span><span class="nv">$GREMLIN_API_TOKEN</span><span class="s2">"</span> https://api.gremlin.com/v1/attacks/new <span class="nt">-d</span> <span class="s2">"@attacks/cpu-random.json"</span>
+</code></pre></div></div>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">//</span><span class="w"> </span><span class="err">cpu-exact.json</span><span class="w">
+</span><span class="p">{</span><span class="w">
+    </span><span class="s2">"command"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cpu"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"args"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"-c"</span><span class="p">,</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w"> </span><span class="s2">"--length"</span><span class="p">,</span><span class="w"> </span><span class="s2">"30"</span><span class="p">]</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"target"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Exact"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"exact"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"172.31.42.65"</span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="nt">-H</span> <span class="s2">"Authorization: </span><span class="nv">$GREMLIN_API_TOKEN</span><span class="s2">"</span> https://api.gremlin.com/v1/attacks/new <span class="nt">-d</span> <span class="s2">"@attacks/cpu-exact.json"</span>
+</code></pre></div></div>
+
+<h3 id="disk-latency">Disk Latency</h3>
+
+<blockquote>
+  <p>Test disk latency?</p>
+</blockquote>
+
+<ul>
+  <li>
+<code class="highlighter-rouge">d</code>: Root directory which files will be temporarily written to.</li>
+  <li>
+<code class="highlighter-rouge">length</code> or <code class="highlighter-rouge">l</code>: Attack duration (in seconds).</li>
+  <li>
+<code class="highlighter-rouge">w</code>: Number of concurrent disk-write workers.</li>
+  <li>
+<code class="highlighter-rouge">b</code>: Block size (in kilobytes).</li>
+  <li>
+<code class="highlighter-rouge">p</code>: Percentage of volume to fill.</li>
+</ul>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">//</span><span class="w"> </span><span class="err">disk-random.json</span><span class="w">
+</span><span class="p">{</span><span class="w">
+    </span><span class="s2">"command"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"disk"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"args"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"-d"</span><span class="p">,</span><span class="w"> </span><span class="s2">"/tmp"</span><span class="p">,</span><span class="w"> </span><span class="s2">"--length"</span><span class="p">,</span><span class="w"> </span><span class="s2">"30"</span><span class="p">,</span><span class="w"> </span><span class="s2">"-w"</span><span class="p">,</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w"> </span><span class="s2">"-b"</span><span class="p">,</span><span class="w"> </span><span class="s2">"4"</span><span class="p">,</span><span class="w"> </span><span class="s2">"-p"</span><span class="p">,</span><span class="w"> </span><span class="s2">"100"</span><span class="p">]</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"target"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Random"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="nt">-H</span> <span class="s2">"Authorization: </span><span class="nv">$GREMLIN_API_TOKEN</span><span class="s2">"</span> https://api.gremlin.com/v1/attacks/new <span class="nt">-d</span> <span class="s2">"@attacks/cpu-random.json"</span>
+</code></pre></div></div>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">//</span><span class="w"> </span><span class="err">cpu-exact.json</span><span class="w">
+</span><span class="p">{</span><span class="w">
+    </span><span class="s2">"command"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cpu"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"args"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"-c"</span><span class="p">,</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w"> </span><span class="s2">"--length"</span><span class="p">,</span><span class="w"> </span><span class="s2">"30"</span><span class="p">]</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"target"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Exact"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"exact"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"172.31.42.65"</span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="blackhole">Blackhole</h3>
+
+<ol>
+  <li>
+    <p>Start by performing a test to establish a baseline.  In this case, we’re timing how long to recieve a response from <code class="highlighter-rouge">example.com</code> (which has an IP address of <code class="highlighter-rouge">93.184.216.34</code>).</p>
+
+    <div class="language-bash highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code> <span class="nv">$ </span><span class="nb">time </span>curl <span class="nt">-o</span> /dev/null 93.184.216.34
+
+ <span class="c"># OUTPUT</span>
+ real	0m0.025s
+ user	0m0.009s
+ sys	0m0.000s
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>asd</p>
+  </li>
+</ol>
+
+<p><strong>attacks/blackhole-random.json</strong></p>
+
+<ul>
+  <li>
+<code class="highlighter-rouge">length</code> or <code class="highlighter-rouge">l</code>: Attack duration (in seconds).</li>
+  <li>
+<code class="highlighter-rouge">i</code>: Outgoing IP address(es) to affect.  Optionally, you can prefix an IP with a caret (<code class="highlighter-rouge">^</code>) to whitelist it.</li>
+  <li>
+<code class="highlighter-rouge">h</code>: Outgoing hostname(s) to affect.  Optionally, you can prefix a hostname with a caret (<code class="highlighter-rouge">^</code>) to whitelist it.  It is recommended to include <code class="highlighter-rouge">^api.gremlin.com</code> in the whitelist.</li>
+</ul>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"command"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"blackhole"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"args"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"-l"</span><span class="p">,</span><span class="w"> </span><span class="s2">"30"</span><span class="p">,</span><span class="w"> </span><span class="s2">"-i"</span><span class="p">,</span><span class="w"> </span><span class="s2">"93.184.216.34"</span><span class="p">,</span><span class="w"> </span><span class="s2">"-h"</span><span class="p">,</span><span class="w"> </span><span class="s2">"^api.gremlin.com"</span><span class="p">]</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"target"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Random"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">time </span>curl <span class="nt">-o</span> /dev/null 93.184.216.34
+
+<span class="c"># OUTPUT</span>
+real	0m31.623s
+user	0m0.013s
+sys	0m0.000s
+</code></pre></div></div>
+
+<p><code class="highlighter-rouge">aws:aws:us-west-2</code></p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>100.20.0.0/14,176.32
+</code></pre></div></div>
+
+<p><code class="highlighter-rouge">aws:ec2:us-west-2</code></p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>100.20.0.0/14,18.236
+</code></pre></div></div>
+
+<p>```bash
+curl -H “Content-Type: application/json” -H “Authorization: $GREMLIN_API_TOKEN” https://api.gremlin.com/v1/attacks/new -d “@att</p>
+
+<h2 id="real-world-examples">Real World Examples</h2>
+
+<blockquote>
+  <p>find examples of real world outages from migrations that would have been avoided had a particular thing been tested for</p>
+</blockquote>
+
+<h2 id="hello-there">Hello There</h2>
+
+<ol>
+  <li>Doing a thing.</li>
+  <li>Doing another hting.</li>
+</ol>
+
+<div class="notice--info">
+    
+<p>This is a test of the notice.  Links [to self][#migrating-cloud-chaotic-embrace].</p>
+
+<ul>
+  <li>blah</li>
+  <li>bleh</li>
+</ul>
+
+</div>
+
+<ol>
+  <li>Doing a third thing.</li>
+</ol>
+
+<p class="notice--info">This is a test of the notice.  Links <a href="https://www.gremlin.com/product" target="_blank" rel="noopener noreferrer">to gremlin.com/product</a>.</p>
+
+<p class="notice--warning">This is a test of the notice.  Links <a href="/gremlin-blog-posts/chaos-engineering/migrating-cloud-chaotic-embrace">to self</a>.  Here is a <code class="highlighter-rouge">code item</code>.</p>
+
+<p class="text-center">This is a test of text center.  Links [to test][#test].</p>
+
+<p><a href="#link" class="btn btn--danger">Text</a></p>
+
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/gremlin-blog-posts/tags/#migration" class="page__taxonomy-item" rel="tag">migration</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/gremlin-blog-posts/categories/#chaos-engineering" class="page__taxonomy-item" rel="tag">chaos-engineering</a>
+    
+    </span>
+  </p>
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2018-10-05T00:00:00-07:00">October 05, 2018</time></p>
+        
+      </footer>
+
+      
+
+      
+  <nav class="pagination">
+    
+      <a href="#" class="pagination--pager disabled">Previous</a>
+    
+    
+      <a href="/gremlin-blog-posts/gremlin/content-pitches/" class="pagination--pager" title="Content Pitches
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/gremlin-blog-posts/gremlin/content-pitches/" rel="permalink">Content Pitches
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  11 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">Content pitches and ideas for Gremlin.
+</p>
+  </article>
+</div>
+        
+      </div>
+    </div>
+  
+  
+</div>
+    </div>
+
+    
+
+    <div class="page__footer">
+      <footer>
+        
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+    
+    
+    
+    
+    
+    <li><a href="/gremlin-blog-posts/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">© 2018 Gabe Wyatt</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/gremlin-blog-posts/assets/js/main.min.js"></script>
+  <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+
+
+
+
+
+
+
+
+  </body>
+</html>

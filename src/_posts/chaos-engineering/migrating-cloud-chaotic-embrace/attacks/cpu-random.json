@@ -1,0 +1,9 @@
+{
+    "command": {
+        "type": "cpu",
+        "args": ["-c", "1", "--length", "30"]
+    },
+    "target": {
+        "type": "Random"
+    }
+}

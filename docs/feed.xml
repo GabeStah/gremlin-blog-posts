@@ -1,0 +1,434 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.4">Jekyll</generator><link href="http://localhost:4000/gremlin-blog-posts/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/gremlin-blog-posts/" rel="alternate" type="text/html" /><updated>2018-10-08T12:15:48-07:00</updated><id>http://localhost:4000/gremlin-blog-posts/feed.xml</id><title type="html">Gremlin: Blog Posts</title><subtitle>An amazing website.</subtitle><author><name>Gabe Wyatt</name></author><entry><title type="html">Content Pitches</title><link href="http://localhost:4000/gremlin-blog-posts/gremlin/content-pitches/" rel="alternate" type="text/html" title="Content Pitches" /><published>2018-10-08T00:00:00-07:00</published><updated>2018-10-08T00:00:00-07:00</updated><id>http://localhost:4000/gremlin-blog-posts/gremlin/content-pitches</id><content type="html" xml:base="http://localhost:4000/gremlin-blog-posts/gremlin/content-pitches/">&lt;h2 id=&quot;gremlin-docs-update&quot;&gt;Gremlin Docs Update&lt;/h2&gt;
+
+&lt;h3 id=&quot;integrate-gremlin-help-style-guidelines&quot;&gt;Integrate Gremlin Help Style Guidelines&lt;/h3&gt;
+
+&lt;p class=&quot;notice--warning&quot;&gt;&lt;strong&gt;Pitch&lt;/strong&gt;: Update overall &lt;a href=&quot;https://help.gremlin.com/&quot;&gt;Gremlin documentation&lt;/a&gt; to better adhere to a singular documentation style, with the aim of maintaining consistency across both current and future content.&lt;/p&gt;
+
+&lt;p&gt;While many style guides exist (and Gremlin may have a private guide already in use), the &lt;a href=&quot;https://developers.google.com/style/&quot;&gt;Google Developer Documentation Style Guide&lt;/a&gt; is a good generalized guide to take guidance from.  While much of that particular guide may not be relevant to Gremlin documentation, having consistent techniques helps determine when its appropriate to use elements like &lt;strong&gt;bold&lt;/strong&gt;, &lt;em&gt;italic&lt;/em&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;inline code&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;code blocks&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;hyphenated-file.names&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;CamelCase&lt;/code&gt; vs &lt;code class=&quot;highlighter-rouge&quot;&gt;lowercase&lt;/code&gt;, and so forth.&lt;/p&gt;
+
+&lt;p&gt;This process could also be part of other cleanup/update efforts, as seen below.&lt;/p&gt;
+
+&lt;h3 id=&quot;gremlin-api-reference&quot;&gt;Gremlin API Reference&lt;/h3&gt;
+
+&lt;p class=&quot;notice--warning&quot;&gt;&lt;strong&gt;Pitch&lt;/strong&gt;: Update, cleanup, and expand the &lt;a href=&quot;https://help.gremlin.com/api/&quot;&gt;Gremlin API Reference&lt;/a&gt;, in order to give public visitors a better understanding of its capabilities.&lt;/p&gt;
+
+&lt;p&gt;Cleanup to fix a lot of formatting inconsistencies (random headers, ordering, improper casing, etc).  Update to ensure no existing information is out of date with current practices.  Then expand document to include more robust information.  This could include adding additional &lt;strong&gt;Attack&lt;/strong&gt; examples, blowing out valid flags and what they accomplish, including API examples beyond just &lt;strong&gt;Attacks&lt;/strong&gt; (e.g. &lt;strong&gt;Containers&lt;/strong&gt;, &lt;strong&gt;Reports&lt;/strong&gt;, &lt;strong&gt;Schedules&lt;/strong&gt;, etc).  Since the &lt;a href=&quot;https://app.gremlin.com/api&quot;&gt;https://app.gremlin.com/api&lt;/a&gt; API playground is locked behind an active account, expanding the &lt;a href=&quot;https://help.gremlin.com/api&quot;&gt;https://help.gremlin.com/api/&lt;/a&gt; documentation would allow public visitors to get a better sense of everything that can be accomplished with the API.&lt;/p&gt;
+
+&lt;h3 id=&quot;gremlin-installation-tutorials&quot;&gt;Gremlin Installation Tutorials&lt;/h3&gt;
+
+&lt;p class=&quot;notice--warning&quot;&gt;&lt;strong&gt;Pitch&lt;/strong&gt;: Update and expand &lt;a href=&quot;https://help.gremlin.com/api/&quot;&gt;Gremlin Help&lt;/a&gt; documentation, to ensure content is up to date and messaging is consistent across documentation.&lt;/p&gt;
+
+&lt;p&gt;General update process would include going through each &lt;code class=&quot;highlighter-rouge&quot;&gt;how to&lt;/code&gt; tutorial to ensure every step is still relevant to modern Gremlin, making any necessary adjustments along the way.  Some minor adjustment examples:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Update each tutorial &lt;code class=&quot;highlighter-rouge&quot;&gt;Introduction&lt;/code&gt; to be consistent. For many tutorials begins with &lt;code class=&quot;highlighter-rouge&quot;&gt;Gremlin’s “Failure as a Service” makes it easy to find weaknesses in your system...&lt;/code&gt;, but a handful have a different introduction (&lt;a href=&quot;https://help.gremlin.com/install-gremlin-aws/&quot;&gt;AWS&lt;/a&gt;, &lt;a href=&quot;https://help.gremlin.com/install-gremlin-docker-ubuntu-1604/&quot;&gt;Docker&lt;/a&gt;, etc).&lt;/li&gt;
+  &lt;li&gt;Update mentions of Gremlin auto-populated tags.  For example, &lt;a href=&quot;https://help.gremlin.com/install-gremlin-aws/#step-3-registering-with-gremlin&quot;&gt;AWS tutorial&lt;/a&gt; mentions a couple tags, but Gremlin now auto-generates 7+ tags for EC2 instances.&lt;/li&gt;
+  &lt;li&gt;Add screenshots where missing to expand content.  For example, the &lt;a href=&quot;https://help.gremlin.com/install-gremlin-docker-ubuntu-1604/&quot;&gt;Docker tutorial&lt;/a&gt; is very in-depth and includes many images to accompany text, whereas other tutorials are more limited.&lt;/li&gt;
+  &lt;li&gt;Tutorials can be expanded with additional information, such as alternative techniques (i.e. how to create &lt;strong&gt;Attacks&lt;/strong&gt; via the API in addition to the web UI).&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;gremlin-installation---video-tutorials&quot;&gt;Gremlin Installation - Video Tutorials&lt;/h3&gt;
+
+&lt;p class=&quot;notice--warning&quot;&gt;&lt;strong&gt;Pitch&lt;/strong&gt;: Series of video walkthrough tutorials – with accompanying voiceover – showing how to install and use Gremlin on a given infrastructure/technology.&lt;/p&gt;
+
+&lt;p&gt;Video guides offer an alternative learning method for visitors, particularly those trying to determine what Gremlin is capable of and if its appropriate to their use case.  For those that prefer watching video to reading text, simple video tutorials that walkthrough the basic process of installing and using Gremlin on a given technology may be valuable.  While video guides can be published as standalone content to drive traffic, embedding accompanying video guides into existing documentation content would also be beneficial.&lt;/p&gt;
+
+&lt;p&gt;I have a professional microphone, recording equipment, and a lot of editing experience with Adobe Premiere Pro and After Effects.  I’ve created hundreds of commentary guides (for personal gaming-related projects) in the past, so I am certainly capable of handling the entirety of such a project, from inception and script creation to recording and voiceover to final editing and rendering.  &lt;em&gt;Note: I would need access to Gremlin imaging/PSD files or existing video clip to add a simple Gremlin-branded video introduction splash screen.&lt;/em&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;how-to-install-gremlin-on-openshift&quot;&gt;How to Install Gremlin on OpenShift&lt;/h2&gt;
+
+&lt;p class=&quot;notice--warning&quot;&gt;&lt;strong&gt;Pitch&lt;/strong&gt;: A walkthrough tutorial for setting up OpenShift and installing/using Gremlin on it.&lt;/p&gt;
+
+&lt;p&gt;I came close to creating such a guide while writing up the &lt;a href=&quot;https://gabestah.github.io/gremlin-chaos-monkey/alternatives/openshift/&quot;&gt;Chaos Monkey Alternatives - OpenShift&lt;/a&gt; chapter, but didn’t have enough time to dedicate to troubleshoot the issues and finish up the process.  This guide would be similar to &lt;a href=&quot;https://www.gremlin.com/community/tutorials/how-to-install-and-use-gremlin-with-kubernetes/&quot;&gt;How to Install and Use Gremlin with Kubernetes&lt;/a&gt;, since both require the use of a DaemonSet to get Gremlin deployed on each attackable machine.&lt;/p&gt;
+
+&lt;h2 id=&quot;chaos-tooling-showdown-x-vs-y-series&quot;&gt;Chaos Tooling Showdown: X vs Y [Series]&lt;/h2&gt;
+
+&lt;p class=&quot;notice--warning&quot;&gt;&lt;strong&gt;Pitch&lt;/strong&gt;: A blog series in which each article compares two popular Chaos Engineering tools.&lt;/p&gt;
+
+&lt;p&gt;The purpose of these pieces would be to try to provide a factual comparison of two similar tools skewed toward running Chaos Experiments and other general SRE tasks, while allowing the reader to decide which is better.  Each article might provide the following:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Brief overview and explanation of each tool.&lt;/li&gt;
+  &lt;li&gt;Technical tutorial for basic installation, configuration, and usage of both tools.&lt;/li&gt;
+  &lt;li&gt;Comparison of each tool, perhaps using Advantage/Disadvantage list illustrating scenarios where one tool may be preferable.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: It would be ideal to remain as neutral as possible within the tone and content of these articles, to avoid appearing too biased (especially when comparing Gremlin to other tools).  Even a little bit of humility can go a long way.&lt;/p&gt;
+
+&lt;h3 id=&quot;gremlin-vs-chaos-toolkit&quot;&gt;Gremlin vs Chaos Toolkit&lt;/h3&gt;
+
+&lt;p class=&quot;notice--warning&quot;&gt;&lt;strong&gt;Pitch&lt;/strong&gt;: As discussed above, do a deep dive into both Gremlin and Chaos Toolkit, providing a basic installation and usage tutorial, and then comparing the advantages and disadvantages to each tool in a handful of scenarios.&lt;/p&gt;
+
+&lt;p&gt;For example, we could show that for &lt;code class=&quot;highlighter-rouge&quot;&gt;AWS&lt;/code&gt; both tools can fairly easily handle &lt;code class=&quot;highlighter-rouge&quot;&gt;EC2&lt;/code&gt; instance shutdowns, while Gremlin can perform network attacks that Chaos Toolkit cannot.&lt;/p&gt;
+
+&lt;h2 id=&quot;chaos-engineering-through-staged-resiliency-series&quot;&gt;Chaos Engineering Through Staged Resiliency [Series]&lt;/h2&gt;
+
+&lt;p class=&quot;notice--warning&quot;&gt;&lt;strong&gt;Pitch&lt;/strong&gt;: Discuss the danger of performing random Chaos Experiments without first establishing a disaster recovery playbook safety net.&lt;/p&gt;
+
+&lt;p&gt;Rather than defining system resiliency as a binary “yes” or “no”, outline how resiliency can be thought of as a series of defined “levels.”  As resiliency level rises, support costs dramatically fall.  Each post focuses on a specific “resiliency level” and defines what it is, how it is implemented, and provides examples of what such a level of resiliency might look like in an organization.  Overall discussion emphasizes the importance of allowing teams to work towards “climbing the ladder” of resiliency, rather than trying to make a sudden leap from the bottom to the top.&lt;/p&gt;
+
+&lt;p&gt;Sources:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;https://medium.com/walmartlabs/charting-a-path-to-software-resiliency-38148d956f4a&lt;/li&gt;
+  &lt;li&gt;https://www.youtube.com/watch?v=4Gy_5EQMrB4&amp;amp;index=5&amp;amp;list=PLLIx5ktghjqKtZdfDDyuJrlhC-ICfhVAN&amp;amp;t=0s&lt;/li&gt;
+  &lt;li&gt;https://www.slideshare.net/secret/jj7mkHy5JKajpm?from_action=save&lt;/li&gt;
+  &lt;li&gt;https://www.infoq.com/articles/chaos-engineering-conf&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Roles of Cloud Platform team:&lt;/p&gt;
+  &lt;ul&gt;
+    &lt;li&gt;Centralize the best practices, tools and techniques&lt;/li&gt;
+    &lt;li&gt;Enforce and facilitate gamedays&lt;/li&gt;
+    &lt;li&gt;Create tools for every phase of the CD pipeline&lt;/li&gt;
+    &lt;li&gt;Monitor acceptable levels of resiliency and call out “risks”&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;5 Stages of Resiliency:&lt;/p&gt;
+  &lt;ul&gt;
+    &lt;li&gt;1: High revenue loss, high support costs, and low resiliency.&lt;/li&gt;
+    &lt;li&gt;5: Low revenue loss, low support costs, and high resiliency.&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Prerequisites:&lt;/p&gt;
+  &lt;ol&gt;
+    &lt;li&gt;Create your DR failover playbook.&lt;/li&gt;
+    &lt;li&gt;Define critical dependencies.&lt;/li&gt;
+    &lt;li&gt;Compose playbook for critical dependency failures.&lt;/li&gt;
+    &lt;li&gt;Define non-critical dependencies.&lt;/li&gt;
+    &lt;li&gt;Define thresholds at which non-critical dependency failures will impact system.&lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;level-1manualgetting-agreement-from-all-parties-and-dr-failover&quot;&gt;Level 1 — Manual — Getting agreement from all parties and DR failover.&lt;/h3&gt;
+
+&lt;blockquote&gt;
+  &lt;ul&gt;
+    &lt;li&gt;All of the pre-requisites stored in a single well-defined place&lt;/li&gt;
+    &lt;li&gt;Agreement on playbooks to be used by Devs, Testers, Operations, Stakeholders&lt;/li&gt;
+    &lt;li&gt;Manual exercise that validates the DR failover playbook&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;level-2manualcritical-dependency-failures-in-pre-prod&quot;&gt;Level 2 — Manual — critical dependency failures in pre-prod&lt;/h3&gt;
+
+&lt;blockquote&gt;
+  &lt;ul&gt;
+    &lt;li&gt;All of level 1 requirements, plus&lt;/li&gt;
+    &lt;li&gt;Run a failure test for critical dependencies in a non-prod environment&lt;/li&gt;
+    &lt;li&gt;Publish test results to team, stakeholders&lt;/li&gt;
+    &lt;li&gt;Manual tests are acceptable&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;level-3manual-and-automaticregular-exercises&quot;&gt;Level 3 — Manual and Automatic — Regular exercises&lt;/h3&gt;
+
+&lt;blockquote&gt;
+  &lt;ul&gt;
+    &lt;li&gt;All of level 2 requirements, plus&lt;/li&gt;
+    &lt;li&gt;Run tests regularly on a cadence (at least once every 4–5 weeks)&lt;/li&gt;
+    &lt;li&gt;Publish results to dashboards to track resiliency over time&lt;/li&gt;
+    &lt;li&gt;Run at least one resiliency exercise (failure injection) in production environment&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;level-4automatedfully-automated-in-pre-prod&quot;&gt;Level 4 — Automated — fully automated in pre-prod&lt;/h3&gt;
+
+&lt;blockquote&gt;
+  &lt;ul&gt;
+    &lt;li&gt;All of level 3 requirements, plus&lt;/li&gt;
+    &lt;li&gt;Automated resiliency testing in non-prod environment&lt;/li&gt;
+    &lt;li&gt;Semi-automated DR failover scripts (minimal human supervision required)&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;level-5full-automation&quot;&gt;Level 5 — Full automation&lt;/h3&gt;
+
+&lt;blockquote&gt;
+  &lt;ul&gt;
+    &lt;li&gt;All of level 4 requirements, plus&lt;/li&gt;
+    &lt;li&gt;Automated resiliency testing fully integrated into CI/CD environment&lt;/li&gt;
+    &lt;li&gt;Resiliency failure results in build failure&lt;/li&gt;
+    &lt;li&gt;Automated resiliency testing and DR failover testing enabled in production environment&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;uncategorized&quot;&gt;Uncategorized&lt;/h2&gt;
+
+&lt;h3 id=&quot;blamelesscom-ideas&quot;&gt;Blameless.com Ideas&lt;/h3&gt;
+
+&lt;p class=&quot;notice--warning&quot;&gt;&lt;strong&gt;Pitch&lt;/strong&gt;: &lt;em&gt;&lt;strong&gt;(TBD)&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;ag (Slack): “each of the points on &lt;a href=&quot;https://blameless.com/why-blameless/&quot;&gt;this page&lt;/a&gt; could probably be incorporated into a blog post”&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;DEVOPS IS REVOLUTIONIZING SOFTWARE DELIVERY.
+It knocks down barriers in software development, changing how engineering and operations teams work together. It promotes greater communication, faster release cycles, and better code delivery to end-users.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;WHAT’S MISSING IS THE INSTRUCTION MANUAL.
+How do you bridge the gap between development and operations? How do you ensure stability as you release more frequently? How do you measure success?&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;SRE ANSWERS THE HOW.
+SRE (Site Reliability Engineering) makes software realiable in highly complex and ever-changing systems. SRE is implemented by the largest technology companies and being adopted by teams of all sizes.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;WHY BLAMELESS FOR SRE
+Blameless is the first step towards building your SRE practice.
+Our reliability platform helps teams quickly implement SRE best practices, workflows and tooling, resulting in more effective:&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Collaboration &amp;amp; Communication
+Resolve incidents faster by ensuring clear roles &amp;amp; processes.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Post-Incident Workflows
+Prevent incident recurrence by learning from key data.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Insights &amp;amp; Visibility
+Measure reliability with dashboards, data &amp;amp; reports and get insights on how to improve.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;REPORTS &amp;amp; DASHBOARDS
+Reliability metrics make it easy to track improvements in SLAs, org health and feature velocity over time.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;INTEGRATIONS WITH EXISTING TOOLS
+Blameless handles tool and data sprawl by integrating into your existing incident, risk and problem management workflow.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;CHAT AND VIDEO INCIDENT RESOLUTION
+Resolve incidents faster with incident roles, playbooks, war room transcriptions, real time timeline generation and more.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;INCIDENT KNOWLEDGE MANAGEMENT
+Learn painlessly and quickly using our retrospective tooling and workflow. Automatically capture incident data, build timelines, and keep a record of all prior incidents.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;COMMUNICATION MANAGEMENT
+Protect your brand and build trust by keeping internal and external stakeholders notified when an incident occurs.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;AUTOMATED PLAYBOOKS
+Take SRE actions across your infrastructure. Schedule orchestration jobs, build playbooks and automate best practices.&lt;/p&gt;
+&lt;/blockquote&gt;</content><author><name>Gabe Wyatt</name></author><category term="content" /><category term="idea" /><summary type="html">Content pitches and ideas for Gremlin.</summary></entry><entry><title type="html">Migrating to the Cloud is Chaotic. Embrace it.</title><link href="http://localhost:4000/gremlin-blog-posts/chaos-engineering/migrating-cloud-chaotic-embrace/" rel="alternate" type="text/html" title="Migrating to the Cloud is Chaotic. Embrace it." /><published>2018-10-05T00:00:00-07:00</published><updated>2018-10-05T00:00:00-07:00</updated><id>http://localhost:4000/gremlin-blog-posts/chaos-engineering/migrating-cloud-chaotic-embrace</id><content type="html" xml:base="http://localhost:4000/gremlin-blog-posts/chaos-engineering/migrating-cloud-chaotic-embrace/">&lt;p class=&quot;notice--danger&quot;&gt;&lt;strong&gt;PURPOSE&lt;/strong&gt;: Demonstrate why companies migrating to the cloud should embrace Chaos Engineering early and often to avoid pain down the road.&lt;/p&gt;
+
+&lt;h2 id=&quot;examples-of-chaos-experiments-during-migration&quot;&gt;Examples of Chaos Experiments During Migration&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Database failover—kill your new, cloudy master node to make sure failover works (and that the slave is replicating).&lt;/li&gt;
+  &lt;li&gt;Noisy neighbor? Using a chaos tools to chew up your CPU in your original environment, you can&lt;/li&gt;
+  &lt;li&gt;Some services still running on-prem? Test your latency to them. Test Blackholes on them!&lt;/li&gt;
+  &lt;li&gt;Test disk latency?&lt;/li&gt;
+  &lt;li&gt;Don’t assume new resilience mechanisms from your cloud provider work as you expect. (Honeycomb found out the hard way that Amazon RDS only fails over to hot spares in the face of total infrastructure failure of the primary DB—it does not account for slow queries/bad performance): https://www.honeycomb.io/blog/2018/05/rds-performance-degradation-postmortem/&lt;/li&gt;
+  &lt;li&gt;Your cloud environment may be more spread out than your old environment. There’s more space, literally, between all your services. (And we saw in The Cost of Downtime post that Network outages are the number one cause of downtime.)&lt;/li&gt;
+  &lt;li&gt;Chaos Engineering forces you to confront your steady state: to know what that state is, think about how to measure it, and how to test its strength.&lt;/li&gt;
+  &lt;li&gt;The ephemerality of the cloud&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;gremlin-api-token&quot;&gt;Gremlin API Token&lt;/h3&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;GREMLIN_API_TOKEN&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Bearer NzE3NWFjYTktODBkMC01ODU5LTkwYmMtOGQyZTBkNDc1NDU0OmdhYmVAZ2FiZXd5YXR0LmNvbTozZTRkMjI2Ny1jYThhLTEx&quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p class=&quot;notice--info&quot;&gt;&lt;strong&gt;TIP&lt;/strong&gt;: For simplicity you may also opt to &lt;code class=&quot;highlighter-rouge&quot;&gt;export&lt;/code&gt; the &lt;code class=&quot;highlighter-rouge&quot;&gt;GREMLIN_API_TOKEN&lt;/code&gt; within your &lt;code class=&quot;highlighter-rouge&quot;&gt;.bashrc&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;.bash_profile&lt;/code&gt; file to keep it permanently available across terminal sessions.&lt;/p&gt;
+
+&lt;h3 id=&quot;cpu-attack&quot;&gt;CPU Attack&lt;/h3&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Noisy neighbor? Using a chaos tools to chew up your CPU in your original environment, you can&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;c&lt;/code&gt;: Number of CPU cores to attack.&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;length&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;l&lt;/code&gt;: Attack duration (in seconds).&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-json highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;err&quot;&gt;//&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;cpu-random.json&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;command&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;type&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;cpu&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;args&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;-c&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;1&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;--length&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;30&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;target&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;type&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Random&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;curl &lt;span class=&quot;nt&quot;&gt;-H&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Content-Type: application/json&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-H&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Authorization: &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$GREMLIN_API_TOKEN&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt; https://api.gremlin.com/v1/attacks/new &lt;span class=&quot;nt&quot;&gt;-d&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;@attacks/cpu-random.json&quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-json highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;err&quot;&gt;//&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;cpu-exact.json&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;command&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;type&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;cpu&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;args&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;-c&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;1&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;--length&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;30&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;target&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;type&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Exact&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;exact&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;172.31.42.65&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;curl &lt;span class=&quot;nt&quot;&gt;-H&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Content-Type: application/json&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-H&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Authorization: &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$GREMLIN_API_TOKEN&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt; https://api.gremlin.com/v1/attacks/new &lt;span class=&quot;nt&quot;&gt;-d&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;@attacks/cpu-exact.json&quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;disk-latency&quot;&gt;Disk Latency&lt;/h3&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Test disk latency?&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;d&lt;/code&gt;: Root directory which files will be temporarily written to.&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;length&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;l&lt;/code&gt;: Attack duration (in seconds).&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;w&lt;/code&gt;: Number of concurrent disk-write workers.&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;b&lt;/code&gt;: Block size (in kilobytes).&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;p&lt;/code&gt;: Percentage of volume to fill.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-json highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;err&quot;&gt;//&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;disk-random.json&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;command&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;type&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;disk&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;args&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;-d&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;/tmp&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;--length&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;30&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;-w&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;1&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;-b&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;4&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;-p&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;100&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;target&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;type&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Random&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;curl &lt;span class=&quot;nt&quot;&gt;-H&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Content-Type: application/json&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-H&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Authorization: &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$GREMLIN_API_TOKEN&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt; https://api.gremlin.com/v1/attacks/new &lt;span class=&quot;nt&quot;&gt;-d&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;@attacks/cpu-random.json&quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-json highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;err&quot;&gt;//&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;cpu-exact.json&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;command&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;type&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;cpu&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;args&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;-c&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;1&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;--length&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;30&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;target&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;type&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Exact&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;exact&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;172.31.42.65&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;blackhole&quot;&gt;Blackhole&lt;/h3&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;Start by performing a test to establish a baseline.  In this case, we’re timing how long to recieve a response from &lt;code class=&quot;highlighter-rouge&quot;&gt;example.com&lt;/code&gt; (which has an IP address of &lt;code class=&quot;highlighter-rouge&quot;&gt;93.184.216.34&lt;/code&gt;).&lt;/p&gt;
+
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;time &lt;/span&gt;curl &lt;span class=&quot;nt&quot;&gt;-o&lt;/span&gt; /dev/null 93.184.216.34
+
+ &lt;span class=&quot;c&quot;&gt;# OUTPUT&lt;/span&gt;
+ real	0m0.025s
+ user	0m0.009s
+ sys	0m0.000s
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;asd&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;strong&gt;attacks/blackhole-random.json&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;length&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;l&lt;/code&gt;: Attack duration (in seconds).&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;i&lt;/code&gt;: Outgoing IP address(es) to affect.  Optionally, you can prefix an IP with a caret (&lt;code class=&quot;highlighter-rouge&quot;&gt;^&lt;/code&gt;) to whitelist it.&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;h&lt;/code&gt;: Outgoing hostname(s) to affect.  Optionally, you can prefix a hostname with a caret (&lt;code class=&quot;highlighter-rouge&quot;&gt;^&lt;/code&gt;) to whitelist it.  It is recommended to include &lt;code class=&quot;highlighter-rouge&quot;&gt;^api.gremlin.com&lt;/code&gt; in the whitelist.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-json highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;command&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;type&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;blackhole&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;args&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;-l&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;30&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;-i&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;93.184.216.34&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;-h&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;^api.gremlin.com&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;target&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;type&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Random&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;time &lt;/span&gt;curl &lt;span class=&quot;nt&quot;&gt;-o&lt;/span&gt; /dev/null 93.184.216.34
+
+&lt;span class=&quot;c&quot;&gt;# OUTPUT&lt;/span&gt;
+real	0m31.623s
+user	0m0.013s
+sys	0m0.000s
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;aws:aws:us-west-2&lt;/code&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;100.20.0.0/14,176.32
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;aws:ec2:us-west-2&lt;/code&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;100.20.0.0/14,18.236
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;```bash
+curl -H “Content-Type: application/json” -H “Authorization: $GREMLIN_API_TOKEN” https://api.gremlin.com/v1/attacks/new -d “@att&lt;/p&gt;
+
+&lt;h2 id=&quot;real-world-examples&quot;&gt;Real World Examples&lt;/h2&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;find examples of real world outages from migrations that would have been avoided had a particular thing been tested for&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;hello-there&quot;&gt;Hello There&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Doing a thing.&lt;/li&gt;
+  &lt;li&gt;Doing another hting.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;div class=&quot;notice--info&quot;&gt;
+    
+&lt;p&gt;This is a test of the notice.  Links [to self][#migrating-cloud-chaotic-embrace].&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;blah&lt;/li&gt;
+  &lt;li&gt;bleh&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;/div&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Doing a third thing.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p class=&quot;notice--info&quot;&gt;This is a test of the notice.  Links &lt;a href=&quot;https://www.gremlin.com/product&quot;&gt;to gremlin.com/product&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p class=&quot;notice--warning&quot;&gt;This is a test of the notice.  Links &lt;a href=&quot;/gremlin-blog-posts/chaos-engineering/migrating-cloud-chaotic-embrace&quot;&gt;to self&lt;/a&gt;.  Here is a &lt;code class=&quot;highlighter-rouge&quot;&gt;code item&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p class=&quot;text-center&quot;&gt;This is a test of text center.  Links [to test][#test].&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;#link&quot; class=&quot;btn btn--danger&quot;&gt;Text&lt;/a&gt;&lt;/p&gt;</content><author><name>Gabe Wyatt</name></author><category term="migration" /><summary type="html">Demonstrating why companies migrating to cloud should embrace Chaos Engineering early and often to avoid pain down the road.</summary></entry></feed>

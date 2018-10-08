@@ -1,0 +1,9 @@
+{
+    "command": {
+        "type": "blackhole",
+        "args": ["-l", "30", "-i", "93.184.216.34", "-h", "^gremlin.com"]
+    },
+    "target": {
+        "type": "Random"
+    }
+}
