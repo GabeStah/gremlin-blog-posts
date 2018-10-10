@@ -1,10 +1,10 @@
 {
     "command": {
         "type": "disk",
-        "args": ["-d", "/tmp", "--length", "30", "-w", "1", "-b", "4", "-p", "100"]
+        "args": ["-d", "/tmp", "--length", "60", "-w", "2", "-b", "4", "-p", "95"]
     },
     "target": {
         "type": "Exact",
-        "exact": ["172.31.42.65"]
+        "exact": ["aws-nginx"]
     }
 }

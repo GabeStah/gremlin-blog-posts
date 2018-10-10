@@ -5,6 +5,6 @@
     },
     "target": {
         "type": "Exact",
-        "exact": ["172.31.42.65"]
+        "exact": ["aws-nginx"]
     }
 }

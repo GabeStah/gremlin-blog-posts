@@ -1,0 +1,954 @@
+[
+    {
+      "args": [
+        {
+          "default": 1,
+          "deprecated": false,
+          "name": "Delay",
+          "validator": {
+            "min": {
+              "value": 1
+            },
+            "max": {}
+          },
+          "short": "-d",
+          "type": "Integer",
+          "version": "0.0.0",
+          "long": "--delay",
+          "required": false,
+          "info": "The number of minutes to delay before shutting down"
+        },
+        {
+          "default": true,
+          "deprecated": false,
+          "name": "Reboot",
+          "short": "-r",
+          "type": "Boolean",
+          "version": "0.0.0",
+          "long": "--reboot",
+          "required": false,
+          "info": "Indicates the host should reboot after shutting down"
+        }
+      ],
+      "created_at": "2018-10-04T21:21:07.991Z",
+      "deprecated": false,
+      "name": "Shutdown",
+      "type": "State",
+      "version": "0.0.0",
+      "command": "shutdown",
+      "info": "Reboots or shuts down the targeted host operating system",
+      "updated_at": "2018-10-04T21:21:07.991Z"
+    },
+    {
+      "args": [
+        {
+          "default": 60,
+          "deprecated": false,
+          "name": "Length",
+          "validator": {
+            "min": {
+              "value": 1
+            },
+            "max": {}
+          },
+          "short": "-l",
+          "type": "Integer",
+          "version": "0.0.0",
+          "long": "--length",
+          "required": false,
+          "info": "The length of the attack (seconds)"
+        },
+        {
+          "subinfo": "Whitelist a host with a leading '^'",
+          "deprecated": false,
+          "multiple": true,
+          "name": "Ipaddresses",
+          "short": "-i",
+          "type": "IP",
+          "version": "0.0.0",
+          "long": "--ipaddress",
+          "required": false,
+          "info": "Only impact traffic to these IP addresses"
+        },
+        {
+          "subinfo": "Defaults to the first device it finds (Ex: `eth0`)",
+          "deprecated": false,
+          "name": "Device",
+          "short": "-d",
+          "type": "String",
+          "version": "0.0.0",
+          "long": "--device",
+          "required": false,
+          "info": "Impact traffic over this network interface"
+        },
+        {
+          "default": "^api.gremlin.com",
+          "subinfo": "Whitelist a host with a leading '^'",
+          "deprecated": false,
+          "multiple": true,
+          "name": "hostnames",
+          "short": "-h",
+          "type": "URL",
+          "version": "0.0.0",
+          "long": "--hostname",
+          "required": false,
+          "info": "Only impact traffic to these hostnames"
+        },
+        {
+          "subinfo": "Ranges work too: '8080-8085'",
+          "deprecated": false,
+          "multiple": true,
+          "name": "Egress Ports",
+          "short": "-p",
+          "type": "String",
+          "version": "0.0.0",
+          "long": "--egress_port",
+          "required": false,
+          "info": "Only impact egress traffic to these destination ports"
+        },
+        {
+          "subinfo": "Ranges work too: '8080-8085'",
+          "deprecated": false,
+          "multiple": true,
+          "name": "Source Ports",
+          "short": "-s",
+          "type": "String",
+          "version": "0.0.0",
+          "long": "--src_port",
+          "required": false,
+          "info": "Only impact egress traffic from these source ports"
+        },
+        {
+          "default": 1,
+          "deprecated": false,
+          "name": "Percent",
+          "validator": {
+            "min": {
+              "value": 1
+            },
+            "max": {
+              "value": 100
+            }
+          },
+          "short": "-r",
+          "type": "Integer",
+          "version": "0.0.0",
+          "long": "--percent",
+          "required": false,
+          "info": "Percentage of packets to drop (10 is 10%)"
+        },
+        {
+          "subinfo": "Defaults to all protocols",
+          "deprecated": false,
+          "name": "Protocol",
+          "options": {
+            "TCP": "TCP",
+            "UDP": "UDP",
+            "ICMP": "ICMP"
+          },
+          "short": "-P",
+          "type": "Enum",
+          "version": "0.0.0",
+          "long": "--ipprotocol",
+          "required": false,
+          "info": "Impact traffic only for this protocol"
+        },
+        {
+          "deprecated": false,
+          "name": "Corrupt",
+          "short": "-c",
+          "type": "Boolean",
+          "version": "0.0.0",
+          "long": "--corrupt",
+          "required": false,
+          "info": "Corrupt the packets instead of just dropping them."
+        }
+      ],
+      "created_at": "2018-10-04T21:21:07.929Z",
+      "deprecated": false,
+      "name": "Packet Loss",
+      "type": "Network",
+      "version": "0.0.0",
+      "command": "packet_loss",
+      "info": "Introduces packet loss to all matching egress network traffic",
+      "updated_at": "2018-10-04T21:21:07.929Z"
+    },
+    {
+      "args": [
+        {
+          "default": 60,
+          "deprecated": false,
+          "name": "Length",
+          "validator": {
+            "min": {
+              "value": 1
+            },
+            "max": {}
+          },
+          "short": "-l",
+          "type": "Integer",
+          "version": "0.0.0",
+          "long": "--length",
+          "info": "The length of the attack (seconds)"
+        },
+        {
+          "deprecated": false,
+          "name": "MB",
+          "validator": {
+            "min": {
+              "value": 1
+            },
+            "max": {}
+          },
+          "short": "-m",
+          "type": "Integer",
+          "version": "0.0.0",
+          "long": "--megabytes",
+          "required": false,
+          "info": "The number of megabytes to allocate"
+        },
+        {
+          "default": 0.5,
+          "deprecated": false,
+          "name": "GB",
+          "validator": {
+            "min": {
+              "value": 0.1
+            },
+            "max": {}
+          },
+          "short": "-g",
+          "type": "Float",
+          "version": "0.0.0",
+          "long": "--gigabytes",
+          "required": false,
+          "info": "The number of gigabytes to allocate"
+        }
+      ],
+      "created_at": "2018-10-04T21:21:07.949Z",
+      "deprecated": false,
+      "name": "Memory",
+      "type": "Resource",
+      "version": "0.0.0",
+      "command": "memory",
+      "info": "Consumes memory",
+      "updated_at": "2018-10-04T21:21:07.949Z"
+    },
+    {
+      "args": [
+        {
+          "default": 60,
+          "deprecated": false,
+          "name": "Length",
+          "validator": {
+            "min": {
+              "value": 1
+            },
+            "max": {}
+          },
+          "short": "-l",
+          "type": "Integer",
+          "version": "0.0.0",
+          "long": "--length",
+          "required": false,
+          "info": "The length of the attack (seconds)"
+        },
+        {
+          "default": "/tmp",
+          "deprecated": false,
+          "name": "Dir",
+          "short": "-d",
+          "type": "String",
+          "version": "0.0.0",
+          "long": "--dir",
+          "required": false,
+          "info": "The root directory for the IO attack"
+        },
+        {
+          "default": 1,
+          "deprecated": false,
+          "name": "Workers",
+          "validator": {
+            "min": {
+              "value": 1
+            },
+            "max": {}
+          },
+          "short": "-w",
+          "type": "Integer",
+          "version": "0.0.0",
+          "long": "--workers",
+          "required": false,
+          "info": "The number of IO workers to run concurrently"
+        },
+        {
+          "default": "rw",
+          "deprecated": false,
+          "name": "Mode",
+          "options": {
+            "r": "Reading",
+            "rw": "Reading + Writing",
+            "w": "Writing"
+          },
+          "short": "-m",
+          "type": "Enum",
+          "version": "0.0.0",
+          "long": "--mode",
+          "required": false,
+          "info": "Do only reads, only writes, or both"
+        },
+        {
+          "default": 4,
+          "deprecated": false,
+          "name": "Block Size",
+          "validator": {
+            "min": {
+              "value": 1
+            },
+            "max": {}
+          },
+          "short": "-s",
+          "type": "Integer",
+          "version": "0.0.0",
+          "long": "--block-size",
+          "required": false,
+          "info": "Number of Kilobytes (KB) that are read/written at a time"
+        },
+        {
+          "default": 1,
+          "deprecated": false,
+          "name": "Block Count",
+          "validator": {
+            "min": {
+              "value": 1
+            },
+            "max": {}
+          },
+          "short": "-c",
+          "type": "Integer",
+          "version": "0.0.0",
+          "long": "--block-count",
+          "required": false,
+          "info": "The number of blocks read/written by workers"
+        }
+      ],
+      "created_at": "2018-10-04T21:21:07.872Z",
+      "deprecated": false,
+      "name": "IO",
+      "type": "Resource",
+      "version": "0.0.0",
+      "command": "io",
+      "info": "Consumes targeted file system devices resources",
+      "updated_at": "2018-10-04T21:21:07.872Z"
+    },
+    {
+      "args": [
+        {
+          "default": 60,
+          "deprecated": false,
+          "name": "Length",
+          "validator": {
+            "min": {
+              "value": 1
+            },
+            "max": {}
+          },
+          "short": "-l",
+          "type": "Integer",
+          "version": "1.8.0",
+          "long": "--length",
+          "required": false,
+          "info": "The length of the attack (seconds)"
+        },
+        {
+          "default": 1,
+          "deprecated": false,
+          "name": "Interval",
+          "short": "-i",
+          "type": "Integer",
+          "version": "1.8.0",
+          "long": "--interval",
+          "required": false,
+          "info": "The number of seconds to delay before kills"
+        },
+        {
+          "deprecated": false,
+          "name": "Process",
+          "short": "-p",
+          "type": "String",
+          "version": "1.8.0",
+          "long": "--process",
+          "required": true,
+          "info": "The process name to match (allows regex) or the process ID"
+        },
+        {
+          "deprecated": false,
+          "name": "Group",
+          "short": "-g",
+          "type": "String",
+          "version": "1.8.0",
+          "long": "--group",
+          "required": false,
+          "info": "The group name or ID to match against (name matches only)"
+        },
+        {
+          "deprecated": false,
+          "name": "User",
+          "short": "-u",
+          "type": "String",
+          "version": "1.8.0",
+          "long": "--user",
+          "required": false,
+          "info": "The user name or ID to match against (name matches only)"
+        },
+        {
+          "default": false,
+          "deprecated": false,
+          "name": "Newest",
+          "short": "-n",
+          "type": "Boolean",
+          "version": "1.8.0",
+          "long": "--newest",
+          "required": false,
+          "info": "If set the newest matching process will be killed (name matches only, cannot be used with -o)"
+        },
+        {
+          "default": false,
+          "deprecated": false,
+          "name": "Oldest",
+          "short": "-o",
+          "type": "Boolean",
+          "version": "1.8.0",
+          "long": "--oldest",
+          "required": false,
+          "info": "If set the oldest matching process will be killed (name matches only, cannot be used with -n)"
+        },
+        {
+          "default": false,
+          "deprecated": false,
+          "name": "Exact",
+          "short": "-e",
+          "type": "Boolean",
+          "version": "1.8.0",
+          "long": "--exact",
+          "required": false,
+          "info": "If set the match must be exact and not just a substring match (name matches only)"
+        },
+        {
+          "default": false,
+          "deprecated": false,
+          "name": "Kill Children",
+          "short": "-c",
+          "type": "Boolean",
+          "version": "1.8.0",
+          "long": "--kill_children",
+          "required": false,
+          "info": "If set the processes children will also be killed"
+        },
+        {
+          "subinfo": "(allows regex)",
+          "deprecated": false,
+          "name": "Full Match",
+          "short": "-f",
+          "type": "Boolean",
+          "version": "1.8.0",
+          "long": "--full",
+          "required": false,
+          "info": "If set the processes name match will occur against the full command line string that the process was launched with"
+        }
+      ],
+      "created_at": "2018-10-04T21:21:07.966Z",
+      "deprecated": false,
+      "name": "Process Killer",
+      "type": "State",
+      "version": "1.8.0",
+      "command": "process_killer",
+      "info": "An attack which kills the specified process",
+      "updated_at": "2018-10-04T21:21:07.966Z"
+    },
+    {
+      "args": [
+        {
+          "default": 60,
+          "deprecated": false,
+          "name": "Length",
+          "validator": {
+            "min": {
+              "value": 1
+            },
+            "max": {}
+          },
+          "short": "-l",
+          "type": "Integer",
+          "version": "0.0.0",
+          "long": "--length",
+          "required": false,
+          "info": "The length of the attack (seconds)"
+        },
+        {
+          "subinfo": "Whitelist a host with a leading '^'",
+          "deprecated": false,
+          "multiple": true,
+          "name": "Ipaddresses",
+          "short": "-i",
+          "type": "IP",
+          "version": "0.0.0",
+          "long": "--ipaddress",
+          "required": false,
+          "info": "Prevent lookups from these DNS servers"
+        },
+        {
+          "subinfo": "Defaults to the first device it finds (Ex: `eth0`)",
+          "deprecated": false,
+          "name": "Device",
+          "short": "-d",
+          "type": "String",
+          "version": "0.0.0",
+          "long": "--device",
+          "required": false,
+          "info": "Impact traffic over this network interface"
+        },
+        {
+          "subinfo": "Defaults to all protocols",
+          "deprecated": false,
+          "name": "Protocol",
+          "options": {
+            "TCP": "TCP",
+            "UDP": "UDP"
+          },
+          "short": "-P",
+          "type": "Enum",
+          "version": "0.0.0",
+          "long": "--ipprotocol",
+          "required": false,
+          "info": "Impact traffic only for this protocol"
+        }
+      ],
+      "created_at": "2018-10-04T21:21:07.891Z",
+      "deprecated": false,
+      "name": "DNS",
+      "type": "Network",
+      "version": "0.0.0",
+      "command": "dns",
+      "info": "Blocks access to DNS servers",
+      "updated_at": "2018-10-04T21:21:07.891Z"
+    },
+    {
+      "args": [
+        {
+          "default": 60,
+          "deprecated": false,
+          "name": "Length",
+          "validator": {
+            "min": {
+              "value": 1
+            },
+            "max": {}
+          },
+          "short": "-l",
+          "type": "Integer",
+          "version": "0.0.0",
+          "long": "--length",
+          "required": false,
+          "info": "The length of the attack (seconds)"
+        },
+        {
+          "default": 1,
+          "deprecated": false,
+          "name": "Cores",
+          "validator": {
+            "min": {
+              "value": 1
+            },
+            "max": {}
+          },
+          "short": "-c",
+          "type": "Integer",
+          "version": "0.0.0",
+          "long": "--cores",
+          "required": false,
+          "info": "The number of CPU cores to hog"
+        }
+      ],
+      "created_at": "2018-10-04T21:21:07.808Z",
+      "deprecated": false,
+      "name": "CPU",
+      "type": "Resource",
+      "version": "0.0.0",
+      "command": "cpu",
+      "info": "Consumes CPU resources",
+      "updated_at": "2018-10-04T21:21:07.808Z"
+    },
+    {
+      "args": [
+        {
+          "default": 60,
+          "deprecated": false,
+          "name": "Length",
+          "validator": {
+            "min": {
+              "value": 1
+            },
+            "max": {}
+          },
+          "short": "-l",
+          "type": "Integer",
+          "version": "0.0.0",
+          "long": "--length",
+          "required": false,
+          "info": "The length of the attack (seconds)"
+        },
+        {
+          "default": false,
+          "deprecated": false,
+          "name": "NTP",
+          "short": "-n",
+          "type": "Boolean",
+          "version": "0.0.0",
+          "long": "--ntp",
+          "required": false,
+          "info": "Disable NTP from correcting systemtime"
+        },
+        {
+          "default": 86400,
+          "subinfo": "Can be positive or negative",
+          "deprecated": false,
+          "name": "Offset",
+          "short": "-o",
+          "type": "Integer",
+          "version": "0.0.0",
+          "long": "--offset",
+          "required": false,
+          "info": "The offset to the current time (seconds)"
+        }
+      ],
+      "created_at": "2018-10-04T21:21:07.851Z",
+      "deprecated": false,
+      "name": "Time Travel",
+      "type": "State",
+      "version": "0.0.0",
+      "command": "time_travel",
+      "info": "Changes the system time",
+      "updated_at": "2018-10-04T21:21:07.851Z"
+    },
+    {
+      "args": [
+        {
+          "default": 60,
+          "deprecated": false,
+          "name": "Length",
+          "validator": {
+            "min": {
+              "value": 1
+            },
+            "max": {}
+          },
+          "short": "-l",
+          "type": "Integer",
+          "version": "0.0.0",
+          "long": "--length",
+          "required": false,
+          "info": "The length of the attack (seconds)"
+        },
+        {
+          "subinfo": "Whitelist a host with a leading '^'",
+          "deprecated": false,
+          "multiple": true,
+          "name": "Ipaddresses",
+          "short": "-i",
+          "type": "IP",
+          "version": "0.0.0",
+          "long": "--ipaddress",
+          "required": false,
+          "info": "Only impact traffic to these IP addresses"
+        },
+        {
+          "subinfo": "Defaults to the first device it finds (Ex: `eth0`)",
+          "deprecated": false,
+          "name": "Device",
+          "short": "-d",
+          "type": "String",
+          "version": "0.0.0",
+          "long": "--device",
+          "required": false,
+          "info": "Impact traffic over this network interface"
+        },
+        {
+          "default": "^api.gremlin.com",
+          "subinfo": "Whitelist a host with a leading '^'",
+          "deprecated": false,
+          "multiple": true,
+          "name": "hostnames",
+          "short": "-h",
+          "type": "URL",
+          "version": "0.0.0",
+          "long": "--hostname",
+          "required": false,
+          "info": "Only impact traffic to these hostnames"
+        },
+        {
+          "subinfo": "Ranges work too: '8080-8085'",
+          "deprecated": false,
+          "multiple": true,
+          "name": "Egress Ports",
+          "short": "-p",
+          "type": "String",
+          "version": "0.0.0",
+          "long": "--egress_port",
+          "required": false,
+          "info": "Only impact egress traffic to these destination ports"
+        },
+        {
+          "subinfo": "Ranges work too: '8080-8085'",
+          "deprecated": false,
+          "multiple": true,
+          "name": "Ingress Ports",
+          "short": "-n",
+          "type": "String",
+          "version": "0.0.0",
+          "long": "--ingress_port",
+          "required": false,
+          "info": "Only impact ingress traffic to these destination ports"
+        },
+        {
+          "subinfo": "Defaults to all protocols",
+          "deprecated": false,
+          "name": "Protocol",
+          "options": {
+            "TCP": "TCP",
+            "UDP": "UDP",
+            "ICMP": "ICMP"
+          },
+          "short": "-P",
+          "type": "Enum",
+          "version": "0.0.0",
+          "long": "--ipprotocol",
+          "required": false,
+          "info": "Impact traffic only for this protocol"
+        }
+      ],
+      "created_at": "2018-10-04T21:21:07.711Z",
+      "deprecated": false,
+      "name": "Blackhole",
+      "type": "Network",
+      "version": "0.0.0",
+      "command": "blackhole",
+      "info": "Drops all matching network traffic",
+      "updated_at": "2018-10-04T21:21:07.711Z"
+    },
+    {
+      "args": [
+        {
+          "default": 60,
+          "deprecated": false,
+          "name": "Length",
+          "validator": {
+            "min": {
+              "value": 1
+            },
+            "max": {}
+          },
+          "short": "-l",
+          "type": "Integer",
+          "version": "1.8.0",
+          "long": "--length",
+          "required": false,
+          "info": "The length of the attack (seconds)"
+        },
+        {
+          "default": "/tmp",
+          "deprecated": false,
+          "name": "Dir",
+          "short": "-d",
+          "type": "String",
+          "version": "1.8.0",
+          "long": "--dir",
+          "required": false,
+          "info": "The directory files will be written to"
+        },
+        {
+          "default": 1,
+          "deprecated": false,
+          "name": "Workers",
+          "validator": {
+            "min": {
+              "value": 1
+            },
+            "max": {}
+          },
+          "short": "-w",
+          "type": "Integer",
+          "version": "1.8.0",
+          "long": "--workers",
+          "required": false,
+          "info": "The number of disk-write workers to run concurrently"
+        },
+        {
+          "default": 4,
+          "deprecated": false,
+          "name": "Block Size",
+          "validator": {
+            "min": {
+              "value": 1
+            },
+            "max": {}
+          },
+          "short": "-b",
+          "type": "Integer",
+          "version": "1.8.0",
+          "long": "--block-size",
+          "required": false,
+          "info": "Number of Kilobytes (KB) that are written at a time"
+        },
+        {
+          "default": 100,
+          "deprecated": false,
+          "name": "Volume Percentage",
+          "validator": {
+            "min": {
+              "value": 0
+            },
+            "max": {
+              "value": 100
+            }
+          },
+          "short": "-p",
+          "type": "Integer",
+          "version": "1.8.0",
+          "long": "--percent",
+          "required": false,
+          "info": "Percent of Volume to fill (0-100)"
+        }
+      ],
+      "created_at": "2018-10-04T21:21:07.911Z",
+      "deprecated": false,
+      "name": "Disk",
+      "type": "Resource",
+      "version": "1.8.0",
+      "command": "disk",
+      "info": "Consumes disk space",
+      "updated_at": "2018-10-04T21:21:07.911Z"
+    },
+    {
+      "args": [
+        {
+          "default": 60,
+          "deprecated": false,
+          "name": "Length",
+          "validator": {
+            "min": {
+              "value": 1
+            },
+            "max": {}
+          },
+          "short": "-l",
+          "type": "Integer",
+          "version": "0.0.0",
+          "long": "--length",
+          "required": false,
+          "info": "The length of the attack (seconds)"
+        },
+        {
+          "subinfo": "Whitelist a host with a leading '^'",
+          "deprecated": false,
+          "multiple": true,
+          "name": "Ipaddresses",
+          "short": "-i",
+          "type": "IP",
+          "version": "0.0.0",
+          "long": "--ipaddress",
+          "required": false,
+          "info": "Only impact traffic to these IP addresses"
+        },
+        {
+          "subinfo": "Defaults to the first device it finds (Ex: `eth0`)",
+          "deprecated": false,
+          "name": "Device",
+          "short": "-d",
+          "type": "String",
+          "version": "0.0.0",
+          "long": "--device",
+          "required": false,
+          "info": "Impact traffic over this network interface"
+        },
+        {
+          "default": "^api.gremlin.com",
+          "subinfo": "Whitelist a host with a leading '^'",
+          "deprecated": false,
+          "multiple": true,
+          "name": "hostnames",
+          "short": "-h",
+          "type": "URL",
+          "version": "0.0.0",
+          "long": "--hostname",
+          "required": false,
+          "info": "Only impact traffic to these hostnames"
+        },
+        {
+          "subinfo": "Ranges work too: '8080-8085'",
+          "deprecated": false,
+          "multiple": true,
+          "name": "Egress Ports",
+          "short": "-p",
+          "type": "String",
+          "version": "0.0.0",
+          "long": "--egress_port",
+          "required": false,
+          "info": "Only impact egress traffic to these destination ports"
+        },
+        {
+          "subinfo": "Ranges work too: '8080-8085'",
+          "deprecated": false,
+          "multiple": true,
+          "name": "Source Ports",
+          "short": "-s",
+          "type": "String",
+          "version": "0.0.0",
+          "long": "--src_port",
+          "required": false,
+          "info": "Only impact egress traffic from these source ports"
+        },
+        {
+          "default": 100,
+          "deprecated": false,
+          "name": "MS",
+          "validator": {
+            "min": {
+              "value": 100
+            },
+            "max": {}
+          },
+          "short": "-m",
+          "type": "Integer",
+          "version": "0.0.0",
+          "long": "--ms",
+          "required": false,
+          "info": "How long to delay egress packets (millis)"
+        },
+        {
+          "subinfo": "Defaults to all protocols",
+          "deprecated": false,
+          "name": "Protocol",
+          "options": {
+            "TCP": "TCP",
+            "UDP": "UDP",
+            "ICMP": "ICMP"
+          },
+          "short": "-P",
+          "type": "Enum",
+          "version": "0.0.0",
+          "long": "--ipprotocol",
+          "required": false,
+          "info": "Impact traffic only for this protocol"
+        }
+      ],
+      "created_at": "2018-10-04T21:21:07.774Z",
+      "deprecated": false,
+      "name": "Latency",
+      "type": "Network",
+      "version": "0.0.0",
+      "command": "latency",
+      "info": "Adds latency to all matching egress network traffic",
+      "updated_at": "2018-10-04T21:21:07.774Z"
+    }
+  ]

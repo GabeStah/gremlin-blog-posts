@@ -15,6 +15,7 @@ group :jekyll_plugins do
   gem "jekyll-toc"
   gem "premonition", path: "gems/premonition"
   gem 'jekyll-target-blank'
+  gem 'jekyll-assets'
 end
 
 platforms :ruby do

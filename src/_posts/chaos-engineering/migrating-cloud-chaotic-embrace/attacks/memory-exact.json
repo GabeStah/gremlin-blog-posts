@@ -1,0 +1,10 @@
+{
+    "command": {
+        "type": "memory",
+        "args": ["-l", "30", "-g", "0.75"]
+    },
+    "target": {
+        "type": "Exact",
+        "exact": ["aws-nginx"]
+    }
+}

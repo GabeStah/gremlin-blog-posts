@@ -1,245 +1,455 @@
 ---
 title: "Migrating to the Cloud is Chaotic. Embrace it."
-excerpt: "Demonstrating why companies migrating to cloud should embrace Chaos Engineering early and often to avoid pain down the road."
+excerpt: "Why you should embrace Chaos Engineering prior to migrating to the cloud, allowing you to avoid pain down the road."
 categories: [chaos-engineering]
 tags: [migration]
 url: "https://www.gremlin.com/blog/?"
 published: true
-sources: [
-    
-]
+asset-path: chaos-engineering/migrating-cloud-chaotic-embrace
+sources:
+    - https://medium.com/@copyconstruct/testing-in-production-the-safe-way-18ca102d0ef1
+    - https://code.fb.com/production-engineering/how-production-engineers-support-global-events-on-facebook/
+    - outages:
+        papers: 
+            - http://ucare.cs.uchicago.edu/pdf/socc16-cos.pdf
+        instapaper:
+            tags: []
+            urls:
+                - https://medium.com/making-instapaper/instapaper-outage-cause-recovery-3c32a7e9cc5f,
+                - http://blog.instapaper.com/post/157227609796
+        google-app-engine:
+            tags: ["storage back end migration"]
+            urls: https://status.cloud.google.com/incident/appengine/15025
+        google-app-engine:
+            tags: []
+            urls: https://groups.google.com/d/msg/google-appengine-downtime-notify/nBT3UIdC00g/m1li5_-vGLEJ
+        aws-ebs-and-ec2:
+            tags: []
+            urls: https://aws.amazon.com/message/680342/
+        facebook:
+            tags: ["invalid configuration values in persistent store"]
+            urls: https://www.facebook.com/notes/facebook-engineering/more-details-on-todays-outage/431441338919
+        blackberry:
+            tags: ["automatic failover did not function properly"]
+            urls: https://www.cnn.com/2011/10/12/tech/mobile/blackberry-outage/
+        dropbox:
+            tags: ["script bug during OS migration"]
+            urls: https://blogs.dropbox.com/tech/2014/01/outage-post-mortem/
+        google-docs:
+            tags: ["memory management bug, failure to recycle memory"]
+            urls: https://cloud.googleblog.com/2011/09/what-happened-to-google-docs-on.html
+        microsoft-azure:
+            tags: ["repaired storage stamp had 'node protection' disabled"]
+            urls: https://azure.microsoft.com/en-us/blog/details-of-the-december-28th-2012-windows-azure-storage-disruption-in-us-south/
+        microsoft-azure:
+            tags: ["poorly monitored certificate expiration"]
+            urls: https://azure.microsoft.com/en-us/blog/details-of-the-february-22nd-2013-windows-azure-storage-disruption/
+        hotmail-outlook:
+            tags: ["firmware upgrade failed, causing internal temperature spike"]
+            urls: https://www.microsoft.com/en-us/microsoft-365/blog/2013/03/13/details-of-the-hotmail-outlook-com-outage-on-march-12th/
+        office-365:
+            tags: ["Microsoft Online edge network changed incorrectly"]
+            urls: https://www.quadrotech-it.com/blog/feb-1-office-365-outage-incident-review-release/
 ---
-
-{% comment %}
-There's plenty to like about the cloud, but newcomers almost always dread its main drawback: its ephemeral nature. They know they can't count on servers to stick around indefinitely. They expect disk performance to tank without warning. They fear the day that some critical managed service suddenly goes dark. As Chaos Engineering evangelists, we hear these fears all the time. "The cloud is chaotic enough! Why would we add more chaos on purpose?" We get it—we've answered the 3am pages too. But remember: Chaos Engineering grew up in the cloud. Netflix embraced the problem of vanishing cloud servers, they didn't fear it. They created Chaos Monkey not as an optional tool to give their engineers, but as a mandatory tool to impose on them. [As we recently put it](https://www.gremlin.com/continuous-chaos-never-stop-iterating/), the best way to get ahead of natural chaos is to synthesize your own, and synthetic chaos is especially powerful when you apply it regularly—when it's non-negotiable. As you make continuous chaos a part of your normal engineering practice, you gradually learn to stop fearing the ephemerality of the cloud.
-What's even more chaotic than running in the cloud? Migrating to it. Although you might rather start your Chaos Engineering practice after your migration, the truth is that you should be proactively testing and identifying weaknesses as you move over pieces of your infrastructure.. Think about it: this is a golden opportunity to test how your cloud infrastructure behaves, as your old infrastructure is still taking most production traffic. Better to run your cloud environment through the ringer now while it's still in its embryonic stage and it's low stakes. What's the alternative? Migrating all of your mission-critical services and finding out they don't behave in the cloud like you'd hoped? In that scenario, you are impacting customers and not doing what you should to make sure your systems are behaving the way you want them to.
-If you're moving to cloud, you're probably changing your stack in a few other ways too. Perhaps you are experimenting with containers; perhaps you are implementing new CI / CD tools. This is your chance to start doing infrastructure-wide testing, before you get years down the road and don't truly understand your system. This process is table stakes in writing software: when you are building a new application, you don't avoid writing tests for the first six months, do you? No, you do it from day one. We need to shift the mindset of operations from reactive to being more proactive with chaos engineering.
-So too should you practice Chaos Engineering from day one in the cloud, because it's often more chaotic—or at least more ephemeral—than on-prem. When you migrate, oftentimes stuff isn't configured the same way in the new environment; at least not at first. Chaos Eng can help you catch these misconfigurations (e.g. database replication not working right? Then when you shoot the master in the head and the slave takes
-over—but it has no data—you catch the misconfiguration.)
-Objections from the reader/migrator:
-Examples of when to do chaos eng during migration:
-
-- Database failover—kill your new, cloudy master node to make sure failover works (and that the slave is replicating).
-- Noisy neighbor? Using a chaos tools to chew up your CPU in your original environment, you can
-- Some services still running on-prem? Test your latency to them. Test Blackholes on them!
-- Test disk latency?
-- Don't assume new resilience mechanisms from your cloud provider work as you expect. (Honeycomb found out the hard way that Amazon RDS only fails over to hot spares in the face of total infrastructure failure of the primary DB—it does not account for slow queries/bad performance): https://www.honeycomb.io/blog/2018/05/rds-performance-degradation-postmortem/
-- Your cloud environment may be more spread out than your old environment. There's more space, literally, between all your services. (And we saw in The Cost of Downtime post that Network outages are the number one cause of downtime.)
-- Chaos Engineering forces you to confront your steady state: to know what that state is, think about how to measure it, and how to test its strength.
-- The ephemerality of the cloud
-  
-Don't just pick random things to test. Move some stuff over to the cloud, watch your monitoring dashboards, and see where the problem areas may lie. If you don't see anything the first few days, wait a few weeks.
-The meta point: maybe your on-prem deployment was super stable. They can be in certain ways (low network latency, low-to-no contention for CPU/disk, etc), and not in others (not resilient to DC outage (if you're in one DC), major network outages, etc). But if it's stable, and you've gotten complacent
-{% endcomment %}
-
-{% comment %}
-Austin Gunter (Slack):
-this blog post serves to demonstrate why a company migrating to the cloud would want to plan for chaos engineering in advance of their migration
-one of the main objections to folks not doing chaos during their migration is they think that adding this in will slow things down
-but in reality, NOT doing it will just lead to pain later when things don't work out
-in particular, there's a big chunk of technical depth that we can go into about migrating to various distributed technologies
-
-and you can create quick tutorials for the bullets mentioned
-we can make this 2500 words pretty easily
-and i don't mind if it's more
-one thing that would be fun is if you can find examples of real world outages from migrations that would have been avoided had a particular thing been tested for
-{% endcomment %}
 
 **PURPOSE**: Demonstrate why companies migrating to the cloud should embrace Chaos Engineering early and often to avoid pain down the road.
 {: .notice--danger }
 
-## Examples of Chaos Experiments During Migration
+Migrating to the cloud often feels like a monumental task.  This feeling is completely understandable -- there's a sense of comfort in the tangible nature of on-premises systems.  By contrast, moving into the ephemeral cloud can be worrisome, especially if you doubt the stability and resilience of the systems that make up your cloud architecture.  The inherent malleability of a cloud stack is both its greatest strength and a massive source of potential failures.  How can you ensure your software will be safe after migrating to the cloud?  How do you combat the cloud's chaotic nature while ensuring a resilient and stable system?  **By intentionally inducing Chaos well before migration begins.**
 
-- Database failover—kill your new, cloudy master node to make sure failover works (and that the slave is replicating).
-- Noisy neighbor? Using a chaos tools to chew up your CPU in your original environment, you can
-- Some services still running on-prem? Test your latency to them. Test Blackholes on them!
-- Test disk latency?
-- Don't assume new resilience mechanisms from your cloud provider work as you expect. (Honeycomb found out the hard way that Amazon RDS only fails over to hot spares in the face of total infrastructure failure of the primary DB—it does not account for slow queries/bad performance): https://www.honeycomb.io/blog/2018/05/rds-performance-degradation-postmortem/
-- Your cloud environment may be more spread out than your old environment. There's more space, literally, between all your services. (And we saw in The Cost of Downtime post that Network outages are the number one cause of downtime.)
-- Chaos Engineering forces you to confront your steady state: to know what that state is, think about how to measure it, and how to test its strength.
-- The ephemerality of the cloud
+It may feel counter-intuitive to purposely inject additional chaos into your system when your team is actively trying to _reduce_ failures, but the critical difference here is that Chaos Engineering allows your team to _choose_ when and how systems fail.  This ensures your architecture is able to withstand unexpected failures.  By executing Chaos Experiments on both your existing systems and cloud systems you're migrating into, you'll identify weaknesses at both ends of the spectrum.
 
-### Gremlin API Token
+Testing your system resiliency throughout the migration process is critical, as migration is the period in a software's life cycle in which outages are _most likely_ to occur.  In 2016, groups from the University of Chicago and Surya University jointly published an in-depth [cloud outage study](http://ucare.cs.uchicago.edu/pdf/socc16-cos.pdf) that examined the causes of service outages among 32 of the most popular Internet services between 2009 and 2015.  The study found that the _majority_ of unplanned outages (16%) are caused by failures during upgrade and migration procedures.
 
-```bash
-export GREMLIN_API_TOKEN="Bearer NzE3NWFjYTktODBkMC01ODU5LTkwYmMtOGQyZTBkNDc1NDU0OmdhYmVAZ2FiZXd5YXR0LmNvbTozZTRkMjI2Ny1jYThhLTEx"
-```
+## Managing Heavy CPU Load
 
-**TIP**: For simplicity you may also opt to `export` the `GREMLIN_API_TOKEN` within your `.bashrc` or `.bash_profile` file to keep it permanently available across terminal sessions.
-{: .notice--info }
+CPU overloading is an easy yet effective experiment that illuminates bottlenecks and computational failures within the architecture.  This is particularly critical when migrating to a cloud environment, where instability in a single system can quickly cascade into problems elsewhere down the chain.
 
-### CPU Attack
+### Why It Matters: TBD
 
-> Noisy neighbor? Using a chaos tools to chew up your CPU in your original environment, you can
+(TODO)
 
-- `c`: Number of CPU cores to attack.
-- `length` or `l`: Attack duration (in seconds).
+### Performing a CPU Attack with Gremlin
 
-```json
-// cpu-random.json
-{
-    "command": {
-        "type": "cpu",
-        "args": ["-c", "1", "--length", "30"]
-    },
-    "target": {
-        "type": "Random"
+#### Prerequisites
+
+- [Install Gremlin][gremlin#docs#install] on the target machine.
+- Retrieve your [Gremlin API Token][#gremlin-api-token].
+
+A [Gremlin API][gremlin#docs#api] **CPU Attack** accepts the following arguments.
+
+| Short Flag | Long Flag  | Purpose                        |
+| ---------- | ---------- | ------------------------------ |
+| `-c`       | `--cores`  | Number of CPU cores to attack. |
+| `-l`       | `--length` | Attack duration (in seconds).  |
+
+Most [Gremlin API][gremlin#docs#api] calls accept a JSON body payload, which specifies critical arguments.  In all the following examples we'll be creating a local `attacks/<attack-name>.json` file to store the API attack arguments and pass those arguments along to the request.
+
+1. On your local machine, start by creating the `attacks/cpu-random.json` file and paste the following JSON into it.  This will attack a single core for `30` seconds.
+
+    ```json
+    // attacks/cpu-random.json
+    {
+        "command": {
+            "type": "cpu",
+            "args": ["-c", "1", "-l", "30"]
+        },
+        "target": {
+            "type": "Random"
+        }
     }
-}
-```
+    ```
 
-```bash
-curl -H "Content-Type: application/json" -H "Authorization: $GREMLIN_API_TOKEN" https://api.gremlin.com/v1/attacks/new -d "@attacks/cpu-random.json"
-```
+2. Create the new **Attack** by passing the JSON from `attacks/cpu-random.json` to the `https://api.gremlin.com/v1/attacks/new` API endpoint.
+
+    ```bash
+    curl -H "Content-Type: application/json" -H "Authorization: $GREMLIN_API_TOKEN" https://api.gremlin.com/v1/attacks/new -d "@attacks/cpu-random.json"
+    ```
+
+3. The [Gremlin Web UI][gremlin#app] now shows the **Attack** that was created.
+
+    {% asset '{{ page.asset-path }}'/web-ui-cpu-attack.png alt='Gremlin Web UI CPU Attack' %}{: .align-center}
+
+4. Additionally, the targeted machine also has one CPU core maxed out.
+
+    {% asset '{{ page.asset-path }}'/htop-cpu-max.png alt='htop CPU Maximized' %}{: .align-center}
+
+**Optional** If you wish to attack a _specific_ **Client** just change the `target | type` argument value to `"Exact"` and add the `target | exact` field with a list of target **Clients**.  A **Client** is identified on Gremlin as the `GREMLIN_IDENTIFIER` for the instance.
+{: .notice--info}
 
 ```json
-// cpu-exact.json
+// attacks/cpu-exact.json
 {
     "command": {
         "type": "cpu",
-        "args": ["-c", "1", "--length", "30"]
+        "args": ["-c", "1", "-l", "30"]
     },
     "target": {
         "type": "Exact",
-        "exact": ["172.31.42.65"]
+        "exact": ["aws-nginx"]
     }
 }
 ```
 
-```bash
-curl -H "Content-Type: application/json" -H "Authorization: $GREMLIN_API_TOKEN" https://api.gremlin.com/v1/attacks/new -d "@attacks/cpu-exact.json"
-```
+## Storage Disk Limitations
 
-### Disk Latency
+Migrating to a new system frequently requires moving volumes across disks and to other cloud-based storage layers.  It's vital to determine if the new storage system can handle the increase in volume the migration will require.  Additionally, to properly test the resilience of the system you'll also want to test how the system reacts when disks are overburdened or unavailable.
 
-> Test disk latency?
+### Why It Matters: Instapaper (2017)
 
-- `d`: Root directory which files will be temporarily written to.
-- `length` or `l`: Attack duration (in seconds).
-- `w`: Number of concurrent disk-write workers.
-- `b`: Block size (in kilobytes).
-- `p`: Percentage of volume to fill.
+In February 2017 the popular web content bookmarking service Instapaper suffered [a service outage](https://medium.com/making-instapaper/instapaper-outage-cause-recovery-3c32a7e9cc5f) due to a [2 TB file size limit](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Limits.html#RDS_Limits.FileSize) within Instapaper's Amazon RDS MySQL instance.
 
-```json
-// disk-random.json
-{
-    "command": {
-        "type": "disk",
-        "args": ["-d", "/tmp", "--length", "30", "-w", "1", "-b", "4", "-p", "100"]
-    },
-    "target": {
-        "type": "Random"
+This issue was unknown to Instapaper ever since their migration to AWS in 2013.  At that time, they migrated their database to MySQL on Amazon RDS, which was using a slightly outdated version of MySQL that enforced the 2 TB file size limit.  Even after attempting to upgrade to newer hardware and a newer MySQL version in March 2015, the original instance that contained the 2 TB limit was replicated, thereby retaining the hidden problem.
+
+Eventually their database finally hit that limit in early 2017 and caused a day+ service outage.  As Instapaper points out in their post mortem, it was difficult for the team to be aware of this limitation and potential issue ahead of time.  However, this unfortunate event illustrates the importance of properly testing data storage systems prior to migration.
+
+### Performing a Disk Attack with Gremlin
+
+Gremlin's **Disk Attack** rapidly consumes disk space on the targeted machine, allowing you to test the resiliency of that machine and other related systems when unexpected disk failures occur.
+
+#### Prerequisites
+
+- [Install Gremlin][gremlin#docs#install] on the target machine.
+- Retrieve your [Gremlin API Token][#gremlin-api-token].
+
+A [Gremlin API][gremlin#docs#api] **Disk Attack** accepts the following arguments.
+
+| Short Flag | Long Flag      | Purpose                                                |
+| ---------- | -------------- | ------------------------------------------------------ |
+| `-b`       | `--block-size` | The block size (in kilobytes) that are written.        |
+| `-d`       | `--dir`        | The directory that temporary files will be written to. |
+| `-l`       | `--length`     | Attack duration (in seconds).                          |
+| `-p`       | `--percent`    | The percentage of volume to fill.                      |
+| `-w`       | `--workers`    | The number of disk-write workers to run concurrently.  |
+
+1. On your local machine, start by creating the `attacks/disk-exact.json` file and paste the following JSON into it.  Be sure to change your target **Client**.  This will attempt to fill `95%` of the volume over the course of a `60` second attack using `2` workers.
+
+    ```json
+    // attacks/disk-random.json
+    {
+        "command": {
+            "type": "disk",
+            "args": ["-d", "/tmp", "-l", "60", "-w", "2", "-b", "4", "-p", "95"]
+        },
+        "target": {
+            "type": "Exact",
+            "exact": ["aws-nginx"]
+        }
     }
-}
-```
+    ```
 
-```bash
-curl -H "Content-Type: application/json" -H "Authorization: $GREMLIN_API_TOKEN" https://api.gremlin.com/v1/attacks/new -d "@attacks/cpu-random.json"
-```
+2. *(Optional)* Check the current disk usage on the target machine.
 
-```json
-// cpu-exact.json
-{
-    "command": {
-        "type": "cpu",
-        "args": ["-c", "1", "--length", "30"]
-    },
-    "target": {
-        "type": "Exact",
-        "exact": ["172.31.42.65"]
-    }
-}
-```
+    ```bash
+    df -H
+    # OUTPUT
+    Filesystem      Size  Used Avail Use% Mounted on
+    /dev/xvda1      8.3G  1.4G  6.9G  17% /
+    ```
 
-### Blackhole
+3. Create the new **Disk Attack** by passing the JSON from `attacks/disk-exact.json` to the `https://api.gremlin.com/v1/attacks/new` API endpoint.
 
-1. Start by performing a test to establish a baseline.  In this case, we're timing how long to recieve a response from `example.com` (which has an IP address of `93.184.216.34`).
+    ```bash
+    curl -H "Content-Type: application/json" -H "Authorization: $GREMLIN_API_TOKEN" https://api.gremlin.com/v1/attacks/new -d "@attacks/disk-exact.json"
+    ```
+
+4. The [Gremlin Web UI][gremlin#app] now shows the **Attack** that was created.
+
+    {% asset '{{ page.asset-path }}'/web-ui-disk-attack.png alt='Gremlin Web UI Disk Attack' %}{: .align-center}
+
+5. Check the attack target's current disk space, which will soon reach the specified percentage before Gremlin rolls back and returns the disk to the original state.
+
+    ```bash
+    df -H
+    # OUTPUT
+    Filesystem      Size  Used Avail Use% Mounted on
+    /dev/xvda1      8.3G  7.9G  396M  96% /
+    ```
+
+## Evaluating Network Resiliency
+
+While the majority of Internet service outages are caused by failures during migration and upgrade procedures, the [Why Does the Cloud Stop Computing?
+Lessons from Hundreds of Service Outages](http://ucare.cs.uchicago.edu/pdf/socc16-cos.pdf) study found that network problems are the second most common cause and account for some `15%` of service outages.  Even architectures designed with network redundancies can experience multiple, stacking network failures without proper testing and experimentation.  Moreover, most modern software relies on external networks to some degree, which means a network outage completely outside of your control could cause a failure to propagate throughout your system.
+
+### Why It Matters: Microsoft Office 365 (2013)
+
+On February 1st, 2013 a change to the Microsoft Online edge network prevented some internet traffic from reaching the Microsoft Office 365 service, which prevented customers from accessing Exchange and SharePoint services for a few hours.  While the [incident report](https://www.quadrotech-it.com/blog/feb-1-office-365-outage-incident-review-release/) doesn't explicitly name the underlying change that caused the problem, it does state that that a procedural error was unintentionally and automatically propagated to multiple devices within the Microsoft Online network, which "caused incorrect routing for a portion of the inbound internet traffic."  Additionally, affected customers were unable to access administrative services within the **Service Health Dashboard** (SHD) provided by Microsoft, but the backup process for supporting customers unable to access the SHD did not work as well as expected.
+
+While this overall incident only lasted a few hours and affected a small subset of customers, it illustrates the importance of proper network resiliency testing prior to and during system migrations and upgrade procedures.  Chaos Experiments that cause networking failures -- such as creating a blackhole so certain traffic is halted -- are a great way to test system stability under these unexpected conditions.
+
+### Performing a Blackhole Attack with Gremlin
+
+A **Blackhole Attack** temporarily drop all traffic based on the parameters of the attack.  You can use a **Blackhole Attack** to test routing protocols, loss of communication to specific hosts, port-based traffic, network device failure, and much more.
+
+#### Prerequisites
+
+- [Install Gremlin][gremlin#docs#install] on the target machine.
+- Retrieve your [Gremlin API Token][#gremlin-api-token].
+
+A [Gremlin API][gremlin#docs#api] **Blackhole Attack** accepts the following arguments.
+
+| Short Flag | Long Flag        | Purpose                                                                                                                                                                     |
+| ---------- | ---------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `-d`       | `--device`       | Network device through which traffic should be affected.  Defaults to the first device found.                                                                               |
+| `-h`       | `--hostname`     | Outgoing hostnames to affect.  Optionally, you can prefix a hostname with a caret (`^`) to whitelist it.  It is recommended to include `^api.gremlin.com` in the whitelist. |
+| `-i`       | `--ipaddress`    | Outgoing IP addresses to affect.  Optionally, you can prefix an IP with a caret (`^`) to whitelist it.                                                                      |
+| `-l`       | `--length`        | Attack duration (in seconds).                                                                                                                                               |
+| `-n`       | `--ingress_port` | Only affect ingress traffic to these destination ports.  Optionally, ranges can also be specified (e.g. `8080-8085`).                                                       |
+| `-p`       | `--egress_port`  | Only affect egress traffic to these destination ports.  Optionally, ranges can also be specified (e.g. `8080-8085`).                                                        |
+| `-P`       | `--ipprotocol`   | Only affect traffic using this protocol.                                                                                                                                    |
+
+1. Start by performing a test to establish a baseline.  The following command tests the response time of a request to `example.com` (which has an IP address of `93.184.216.34`).
 
     ```bash
     $ time curl -o /dev/null 93.184.216.34
 
     # OUTPUT
-    real	0m0.025s
-    user	0m0.009s
-    sys	0m0.000s
+    real    0m0.025s
+    user    0m0.009s
+    sys     0m0.000s
     ```
 
-2. asd
+2. On your local machine, create the `attacks/blackhole-exact.json` file and paste the following JSON into it.  Set your target **Client** as necessary.  This attack creates a `30` second blackhole that drops traffic to the `93.184.216.34` IP address.
 
-**attacks/blackhole-random.json**
-
-- `length` or `l`: Attack duration (in seconds).
-- `i`: Outgoing IP address(es) to affect.  Optionally, you can prefix an IP with a caret (`^`) to whitelist it.
-- `h`: Outgoing hostname(s) to affect.  Optionally, you can prefix a hostname with a caret (`^`) to whitelist it.  It is recommended to include `^api.gremlin.com` in the whitelist.
-
-```json
-{
-    "command": {
-        "type": "blackhole",
-        "args": ["-l", "30", "-i", "93.184.216.34", "-h", "^api.gremlin.com"]
-    },
-    "target": {
-        "type": "Random"
+    ```json
+    // attacks/blackhole-random.json
+    {
+        "command": {
+            "type": "blackhole",
+            "args": ["-l", "30", "-i", "93.184.216.34", "-h", "^api.gremlin.com"]
+        },
+        "target": {
+            "type": "Exact",
+            "exact": ["aws-nginx"]
+        }
     }
-}
+    ```
+
+3. Execute the **Blackhole Attack** by passing the JSON from `attacks/blackhole-exact.json` to the `https://api.gremlin.com/v1/attacks/new` API endpoint.
+
+    ```bash
+    curl -H "Content-Type: application/json" -H "Authorization: $GREMLIN_API_TOKEN" https://api.gremlin.com/v1/attacks/new -d "@attacks/blackhole-exact.json"
+    ```
+
+4. On the target machine run the same timed `curl` test as before.  It should hang for approximately `30` seconds, until the blackhole has been terminated and a response is finally received.
+
+    ```bash
+    $ time curl -o /dev/null 93.184.216.34
+
+    # OUTPUT
+    real    0m31.623s
+    user    0m0.013s
+    sys     0m0.000s
+    ```
+
+5. You can also view the **Attack** on the [Gremlin Web UI][gremlin#app] to confirm it functioned properly.
+
+    {% asset '{{ page.asset-path }}'/web-ui-blackhole-attack.png alt='Gremlin Web UI Blackhole Attack' %}{: .align-center}
+
+6. Check the attack target's current disk space, which will soon reach the specified percentage before Gremlin rolls back and returns the disk to the original state.
+
+    ```bash
+    df -H
+    # OUTPUT
+    Filesystem      Size  Used Avail Use% Mounted on
+    /dev/xvda1      8.3G  7.9G  396M  96% /
+    ```
+
+## Proper Memory Management
+
+While most commonly-used cloud platforms provide auto-balancing and scaling services, it's impossible to rely solely on these technologies to ensure your migrated software will remain stable and responsive.  Memory management is a crucial part of maintaining a healthy and inexpensive cloud stack.  An improper configuration or poorly tested system may not necessarily cause a system failure or outage, but even a tiny memory issue can add up to thousands of dollars in extra support costs.
+
+Therefore, performing Chaos Engineering before, during, and after cloud migration to test system failures when instances, containers, or nodes run out of memory ensures your stack remains active and fully functional when an _unexpected_ memory leak occurs.
+
+### Why It Matters: Google Docs (2011)
+
+In early September, 2011 Google Docs suffered a widespread, hour-long outage that prevented the majority of customers from accessing documents, drawings, lists, and App Scripts.  As Google [later reported](https://cloud.googleblog.com/2011/09/what-happened-to-google-docs-on.html), the incident was caused by a change that exposed a memory leak that _only occurred under heavy load_.  The lookup service that tracks of Google Doc modifications wasn't properly recycling memory, which eventually caused those machines to restart.  Of course, the redundancy systems immediately picked up the slack from these now-offline lookup service machines, but the excessive load caused the replacement machines to run out of memory ever faster.  Eventually the servers couldn't handle the number of requests that were backed up.
+
+The Google engineering team was quick to diagnose the issue and roll out a fix within an hour of the first automated alert.  Unfortunately, Google engineers were unaware of the root cause _because_ it only occurred while the system was heavily loaded, which shows the importance of expressly testing system resilience when memory usage spikes.
+
+### Performing a Memory Attack with Gremlin
+
+A Gremlin **Memory Attack** consumes memory on the targeted machine, making it easy to test how that system and other dependencies behave when memory is unavailable.
+
+#### Prerequisites
+
+- [Install Gremlin][gremlin#docs#install] on the target machine.
+- Retrieve your [Gremlin API Token][#gremlin-api-token].
+
+A [Gremlin API][gremlin#docs#api] **Memory Attack** accepts the following arguments.
+
+| Short Flag | Long Flag     | Purpose                                   |
+| ---------- | ------------- | ----------------------------------------- |
+| `-g`       | `--gigabytes` | The amount of memory (in GB) to allocate. |
+| `-l`       | `--length`    | Attack duration (in seconds).             |
+| `-m`       | `--megabytes` | The amount of memory (in MB) to allocate. |
+
+1. _(Optional)_ On the target machine check the current memory usage to establish a baseline prior to executing the attack.
+
+    ```bash
+    htop
+    ```
+
+    {% asset '{{ page.asset-path }}'/htop-pre-memory-attack.png alt='HTOP Pre-Attack Memory Usage' %}{: .align-center}
+
+2. On your local machine create a `attacks/memory-exact.json` file and paste the following JSON into it, ensuring you change your target **Client**.  This attack will consume up to `750 MB` of memory for a total of `30` seconds.
+
+    ```json
+    // attacks/memory-exact.json
+    {
+        "command": {
+            "type": "memory",
+            "args": ["-l", "30", "-g", "0.75"]
+        },
+        "target": {
+            "type": "Exact",
+            "exact": ["aws-nginx"]
+        }
+    }
+    ```
+3. Launch the **Memory Attack** by passing the JSON from `attacks/memory-exact.json` to the `https://api.gremlin.com/v1/attacks/new` API endpoint.
+
+    ```bash
+    curl -H "Content-Type: application/json" -H "Authorization: $GREMLIN_API_TOKEN" https://api.gremlin.com/v1/attacks/new -d "@attacks/memory-exact.json"
+    ```
+
+4. That additional memory is now consumed on the target machine.
+
+    ```bash
+    htop
+    ```
+
+    {% asset '{{ page.asset-path }}'/htop-post-memory-attack.png alt='HTOP Post-Attack Memory Usage' %}{: .align-center}
+
+5. As always, you can view the **Attack** within the [Gremlin Web UI][gremlin#app].
+
+    {% asset '{{ page.asset-path }}'/web-ui-memory-attack.png alt='Gremlin Web UI Memory Attack' %}{: .align-center}
+
+## IO
+
+(TODO)
+
+### Why It Matters: TBD
+
+(TODO)
+
+### Performing an IO Attack with Gremlin
+
+(TODO)
+
+#### Prerequisites
+
+- [Install Gremlin][gremlin#docs#install] on the target machine.
+- Retrieve your [Gremlin API Token][#gremlin-api-token].
+
+(TODO)
+
+```bash
+-l 45 -d /tmp -w 2 -m rw -s 4 -c 1
 ```
 
 ```bash
-$ time curl -o /dev/null 93.184.216.34
-
-# OUTPUT
-real	0m31.623s
-user	0m0.013s
-sys	0m0.000s
+Total DISK READ :       0.00 B/s | Total DISK WRITE :       3.92 M/s
+Actual DISK READ:       0.00 B/s | Actual DISK WRITE:      15.77 M/s
+  PID  PRIO  USER     DISK READ  DISK WRITE  SWAPIN     IO>    COMMAND                                                                   
+  323 be/3 root          0.00 B     68.00 K  0.00 % 71.28 % [jbd2/xvda1-8]
+20030 be/4 gremlin       0.00 B    112.15 M  0.00 % 17.11 % gremlin attack io -l 45 -d /tmp -w 2 -m rw -s 4 -c 1
 ```
 
-`aws:aws:us-west-2`
+## Obtaining a Gremlin API Token
 
-```
-100.20.0.0/14,176.32
-```
+To use the Gremlin API you'll first need your organization's API access token.  This can be obtained by authenticating with the appropriate API endpoint.
 
-`aws:ec2:us-west-2`
+1. Retrieve your Gremlin API token by passing your `email`, `password`, and `companyName`.
+    - For non-MFA authentication use the `https://api.gremlin.com/v1/users/auth` endpoint.
 
-```
-100.20.0.0/14,18.236
-```
+        ```bash
+        curl -X POST --header 'Content-Type: application/x-www-form-urlencoded' \
+            --data-urlencode 'email=you@example.com' \
+            --data-urlencode 'password=password' \
+            --data-urlencode 'companyName=Company Name' \
+            'https://api.gremlin.com/v1/users/auth'
+        ```
 
-```bash
-curl -H "Content-Type: application/json" -H "Authorization: $GREMLIN_API_TOKEN" https://api.gremlin.com/v1/attacks/new -d "@att
+    - For MFA authentication you'll also need to include the MFA `token` value and pass it to the `https://api.gremlin.com/v1/users/auth/mfa/auth` endpoint.
 
-## Real World Examples
+        ```bash
+        curl -X POST --header 'Content-Type: application/x-www-form-urlencoded' \
+            --data-urlencode 'email=you@example.com' \
+            --data-urlencode 'password=password' \
+            --data-urlencode 'companyName=Company Name' \
+            --data-urlencode 'token=123456' \
+            'https://api.gremlin.com/v1/users/auth/mfa/auth'
+        ```
 
-> find examples of real world outages from migrations that would have been avoided had a particular thing been tested for
+2. The response JSON object will include your API token within the `header` field.
 
-## Hello There
+    ```json
+    [
+        {
+            "company_id": "82708afe-80d0-5859-90bc-8d2e0d475454",
+            "company_name": "Company Name",
+            "company_is_alfi_enabled": true,
+            "expires_at": "2018-10-09T04:46:52.484Z",
+            "header": "Bearer NzE3NWFjYTktODBkMC01ODU5LTkwYmMtOGQyZTBkNDc1NDU0OmdhYmVAZ2FiZXd5YXR0LmNvbTpjMjA5YzA5OTgtYjhmZi0wMjQyNTI2NDdmZjY=",
+            "identifier": "you@example.com",
+            "org_id": "82708afe-80d0-5859-90bc-8d2e0d475454",
+            "org_name": "Company Name",
+            "renew_token": "8784ca0e-03aa-4753-93ca-0e03aa775336",
+            "role": "SUPER",
+            "token": "c209c098-cb19-11e8-b8ff-784513247988"
+        }
+    ]
+    ```
 
-1. Doing a thing.
-2. Doing another hting.
+3. Export the API token found in the returned `header` value.
 
-{% capture notice-text %}
-This is a test of the notice.  Links [to self][#migrating-cloud-chaotic-embrace].
+    ```bash
+    export GREMLIN_API_TOKEN="Bearer NzE3NWFjYTktODBkMC01ODU5LTkwYmMtOGQyZTBkNDc1NDU0OmdhYmVAZ2FiZXd5YXR0LmNvbTpjMjA5YzA5OTgtYjhmZi0wMjQyNTI2NDdmZjY="
+    ```
 
-- blah
-- bleh
-{% endcapture %}
-
-<div class="notice--info">
-    {{ notice-text | markdownify }}
-</div>
-
-3. Doing a third thing.
-
-This is a test of the notice.  Links [to gremlin.com/product][gremlin.com/product].
-{: .notice--info}
-
-This is a test of the notice.  Links [to self][#migrating-cloud-chaotic-embrace].  Here is a `code item`.
-{: .notice--warning}
-
-This is a test of text center.  Links [to test][#test].
-{: .text-center}
-
-[Text](#link){: .btn .btn--danger}
+    **TIP**: For simplicity you may `export` the `GREMLIN_API_TOKEN` within your `.bashrc` or `.bash_profile` file to keep the token permanently available across terminal sessions.
+    {: .notice--info }
 
 {% include          links-global.md %}
 {% include_relative links.md %}

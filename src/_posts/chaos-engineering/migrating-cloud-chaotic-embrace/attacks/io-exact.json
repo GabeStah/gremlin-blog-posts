@@ -1,0 +1,10 @@
+{
+    "command": {
+        "type": "io",
+        "args": ["-l", "45", "-d", "/tmp", "-w", "2", "-m", "rw", "-s", "4", "-c", "1"]
+    },
+    "target": {
+        "type": "Exact",
+        "exact": ["aws-nginx"]
+    }
+}
