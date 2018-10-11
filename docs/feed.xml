@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.4">Jekyll</generator><link href="http://localhost:4000/gremlin-blog-posts/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/gremlin-blog-posts/" rel="alternate" type="text/html" /><updated>2018-10-09T22:49:20-07:00</updated><id>http://localhost:4000/gremlin-blog-posts/feed.xml</id><title type="html">Gremlin: Blog Posts</title><subtitle>An amazing website.</subtitle><author><name>Gabe Wyatt</name></author><entry><title type="html">Content Pitches</title><link href="http://localhost:4000/gremlin-blog-posts/gremlin/content-pitches/" rel="alternate" type="text/html" title="Content Pitches" /><published>2018-10-08T00:00:00-07:00</published><updated>2018-10-08T00:00:00-07:00</updated><id>http://localhost:4000/gremlin-blog-posts/gremlin/content-pitches</id><content type="html" xml:base="http://localhost:4000/gremlin-blog-posts/gremlin/content-pitches/">&lt;h2 id=&quot;gremlin-docs-update&quot;&gt;Gremlin Docs Update&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.4">Jekyll</generator><link href="http://localhost:4000/gremlin-blog-posts/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/gremlin-blog-posts/" rel="alternate" type="text/html" /><updated>2018-10-10T17:03:48-07:00</updated><id>http://localhost:4000/gremlin-blog-posts/feed.xml</id><title type="html">Gremlin: Blog Posts</title><subtitle>An amazing website.</subtitle><author><name>Gabe Wyatt</name></author><entry><title type="html">Content Pitches</title><link href="http://localhost:4000/gremlin-blog-posts/gremlin/content-pitches/" rel="alternate" type="text/html" title="Content Pitches" /><published>2018-10-08T00:00:00-07:00</published><updated>2018-10-08T00:00:00-07:00</updated><id>http://localhost:4000/gremlin-blog-posts/gremlin/content-pitches</id><content type="html" xml:base="http://localhost:4000/gremlin-blog-posts/gremlin/content-pitches/">&lt;h2 id=&quot;gremlin-docs-update&quot;&gt;Gremlin Docs Update&lt;/h2&gt;
 
 &lt;h3 id=&quot;integrate-gremlin-help-style-guidelines&quot;&gt;Integrate Gremlin Help Style Guidelines&lt;/h3&gt;
 
@@ -232,478 +232,33 @@ Protect your brand and build trust by keeping internal and external stakeholders
 &lt;blockquote&gt;
   &lt;p&gt;AUTOMATED PLAYBOOKS
 Take SRE actions across your infrastructure. Schedule orchestration jobs, build playbooks and automate best practices.&lt;/p&gt;
-&lt;/blockquote&gt;</content><author><name>Gabe Wyatt</name></author><category term="content" /><category term="idea" /><summary type="html">Content pitches and ideas for Gremlin.</summary></entry><entry><title type="html">Migrating to the Cloud is Chaotic. Embrace it.</title><link href="http://localhost:4000/gremlin-blog-posts/chaos-engineering/migrating-cloud-chaotic-embrace/" rel="alternate" type="text/html" title="Migrating to the Cloud is Chaotic. Embrace it." /><published>2018-10-05T00:00:00-07:00</published><updated>2018-10-05T00:00:00-07:00</updated><id>http://localhost:4000/gremlin-blog-posts/chaos-engineering/migrating-cloud-chaotic-embrace</id><content type="html" xml:base="http://localhost:4000/gremlin-blog-posts/chaos-engineering/migrating-cloud-chaotic-embrace/">&lt;p class=&quot;notice--danger&quot;&gt;&lt;strong&gt;PURPOSE&lt;/strong&gt;: Demonstrate why companies migrating to the cloud should embrace Chaos Engineering early and often to avoid pain down the road.&lt;/p&gt;
+&lt;/blockquote&gt;</content><author><name>Gabe Wyatt</name></author><category term="content" /><category term="idea" /><summary type="html">Content pitches and ideas for Gremlin.</summary></entry><entry><title type="html">Migrating to the Cloud Is Chaotic. Embrace It.</title><link href="http://localhost:4000/gremlin-blog-posts/chaos-engineering/migrating-cloud-chaotic-embrace/" rel="alternate" type="text/html" title="Migrating to the Cloud Is Chaotic. Embrace It." /><published>2018-10-05T00:00:00-07:00</published><updated>2018-10-05T00:00:00-07:00</updated><id>http://localhost:4000/gremlin-blog-posts/chaos-engineering/migrating-cloud-chaotic-embrace</id><content type="html" xml:base="http://localhost:4000/gremlin-blog-posts/chaos-engineering/migrating-cloud-chaotic-embrace/">&lt;p class=&quot;notice--danger&quot;&gt;Why organizations planning to migrate to the cloud should embrace Chaos Engineering as a thoughtful strategy to avoid pain down the road.&lt;/p&gt;
 
-&lt;p&gt;Migrating to the cloud often feels like a monumental task.  This feeling is completely understandable – there’s a sense of comfort in the tangible nature of on-premises systems.  By contrast, moving into the ephemeral cloud can be worrisome, especially if you doubt the stability and resilience of the systems that make up your cloud architecture.  The inherent malleability of a cloud stack is both its greatest strength and a massive source of potential failures.  How can you ensure your software will be safe after migrating to the cloud?  How do you combat the cloud’s chaotic nature while ensuring a resilient and stable system?  &lt;strong&gt;By intentionally inducing Chaos well before migration begins.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;For many people, migrating to the cloud feels like an insurmountable task and understandably so – there’s a sense of comfort in the tangible nature of on-premises systems.  By contrast, moving into the ephemeral cloud is worrisome, especially if you doubt the stability and resilience of the systems that make up your cloud architecture.  The inherent malleability of a cloud stack is both its greatest strength and one of its biggest sources of potential failure.&lt;/p&gt;
 
-&lt;p&gt;It may feel counter-intuitive to purposely inject additional chaos into your system when your team is actively trying to &lt;em&gt;reduce&lt;/em&gt; failures, but the critical difference here is that Chaos Engineering allows your team to &lt;em&gt;choose&lt;/em&gt; when and how systems fail.  This ensures your architecture is able to withstand unexpected failures.  By executing Chaos Experiments on both your existing systems and cloud systems you’re migrating into, you’ll identify weaknesses at both ends of the spectrum.&lt;/p&gt;
+&lt;p class=&quot;notice--success&quot;&gt;How can you ensure your software will be safe after migrating to the cloud?  How do you combat the cloud’s chaotic nature while ensuring a resilient and stable system?  &lt;strong&gt;By intentionally inducing Chaos well before migration begins.&lt;/strong&gt;&lt;/p&gt;
 
-&lt;p&gt;Testing your system resiliency throughout the migration process is critical, as migration is the period in a software’s life cycle in which outages are &lt;em&gt;most likely&lt;/em&gt; to occur.  In 2016, groups from the University of Chicago and Surya University jointly published an in-depth &lt;a href=&quot;http://ucare.cs.uchicago.edu/pdf/socc16-cos.pdf&quot;&gt;cloud outage study&lt;/a&gt; that examined the causes of service outages among 32 of the most popular Internet services between 2009 and 2015.  The study found that the &lt;em&gt;majority&lt;/em&gt; of unplanned outages (16%) are caused by failures during upgrade and migration procedures.&lt;/p&gt;
+&lt;p&gt;It may feel counter-intuitive to purposely inject additional chaos into your system when your team is actively trying to &lt;em&gt;reduce&lt;/em&gt; failures.  The critical difference here is that Chaos Engineering allows your team to &lt;em&gt;choose&lt;/em&gt; when and how systems fail.  This ensures your architecture is able to withstand unexpected failures.  By executing Chaos Experiments on both existing and cloud systems you’re migrating into, you’ll identify weaknesses at both ends of the spectrum.&lt;/p&gt;
+
+&lt;p&gt;Testing your system resiliency throughout the migration process is critical, as migration is the period in a software’s life cycle in which outages are &lt;em&gt;most likely&lt;/em&gt; to occur.  In 2016, groups from the University of Chicago and Surya University jointly published an in-depth &lt;a href=&quot;http://ucare.cs.uchicago.edu/pdf/socc16-cos.pdf&quot;&gt;cloud outage study&lt;/a&gt; that examined the causes of service outages among 32 of the most popular Internet services between 2009 and 2015.&lt;/p&gt;
+
+&lt;p class=&quot;notice--success&quot;&gt;The &lt;a href=&quot;http://ucare.cs.uchicago.edu/pdf/socc16-cos.pdf&quot;&gt;study&lt;/a&gt; found that the &lt;em&gt;majority&lt;/em&gt; of unplanned outages (16%) are caused by failures during upgrade and migration processes.&lt;/p&gt;
 
 &lt;h2 id=&quot;managing-heavy-cpu-load&quot;&gt;Managing Heavy CPU Load&lt;/h2&gt;
 
-&lt;p&gt;CPU overloading is an easy yet effective experiment that illuminates bottlenecks and computational failures within the architecture.  This is particularly critical when migrating to a cloud environment, where instability in a single system can quickly cascade into problems elsewhere down the chain.&lt;/p&gt;
+&lt;p&gt;An overloaded CPU can quickly create bottlenecks and cause computational failures within most cloud architectures.  This is critical when migrating to a cloud environment, where instability in a single system can quickly cascade into problems elsewhere down the chain.  Proper CPU resilience testing helps to determine which existing systems are currently resilient to a CPU failure, and which need to be prioritized for upgrade and migration necessary to maintain a stable stack.&lt;/p&gt;
 
-&lt;h3 id=&quot;why-it-matters-tbd&quot;&gt;Why It Matters: TBD&lt;/h3&gt;
+&lt;h3 id=&quot;why-it-matters-hotmail--outlook-2013&quot;&gt;Why It Matters: Hotmail &amp;amp; Outlook (2013)&lt;/h3&gt;
 
-&lt;p&gt;(TODO)&lt;/p&gt;
+&lt;p&gt;Microsoft’s customer migration from Hotmail to the new Outlook.com was generally executed without a hitch.  Unfortunately, on March 12th, 2013 a failed firmware upgrade &lt;a href=&quot;https://www.microsoft.com/en-us/microsoft-365/blog/2013/03/13/details-of-the-hotmail-outlook-com-outage-on-march-12th/&quot;&gt;caused&lt;/a&gt; a 16+ hour outage for some customers trying to access SkyDrive, Hotmail, and Outlook.com services.&lt;/p&gt;
 
-&lt;h3 id=&quot;performing-a-cpu-attack-with-gremlin&quot;&gt;Performing a CPU Attack with Gremlin&lt;/h3&gt;
+&lt;p&gt;Microsoft reported that the firmware update “failed […] in an unexpected way,” but did not provide any additional details on the root cause.  However, this failure resulted in rapid, substantial temperature spikes within the datacenter.  The increase in temperature triggered automatic safeguards for a large portion of the servers within the datacenter.  Consequently, the safeguards prevented mailbox access for affected customers, and also prevented automatic failover processes from performing their normal duties.&lt;/p&gt;
 
-&lt;h4 id=&quot;prerequisites&quot;&gt;Prerequisites&lt;/h4&gt;
+&lt;p&gt;Without additional details on the root cause and the specific impacts, we can only speculate, but a temperature spike points toward a dramatic spike in CPU load for some servers within the datacenter.  In this particular instance, it’s possible that pre-emptive Chaos Engineering may have allowed engineers to simulate similar heavy CPU load scenarios.&lt;/p&gt;
 
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://help.gremlin.com/installation/&quot;&gt;Install Gremlin&lt;/a&gt; on the target machine.&lt;/li&gt;
-  &lt;li&gt;Retrieve your &lt;a href=&quot;#obtaining-a-gremlin-api-token&quot;&gt;Gremlin API Token&lt;/a&gt;.&lt;/li&gt;
-&lt;/ul&gt;
+&lt;h3 id=&quot;obtaining-a-gremlin-api-token&quot;&gt;Obtaining a Gremlin API Token&lt;/h3&gt;
 
-&lt;p&gt;A &lt;a href=&quot;https://help.gremlin.com/api/&quot;&gt;Gremlin API&lt;/a&gt; &lt;strong&gt;CPU Attack&lt;/strong&gt; accepts the following arguments.&lt;/p&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;Short Flag&lt;/th&gt;
-      &lt;th&gt;Long Flag&lt;/th&gt;
-      &lt;th&gt;Purpose&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;-c&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;--cores&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;Number of CPU cores to attack.&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;-l&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;--length&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;Attack duration (in seconds).&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;p&gt;Most &lt;a href=&quot;https://help.gremlin.com/api/&quot;&gt;Gremlin API&lt;/a&gt; calls accept a JSON body payload, which specifies critical arguments.  In all the following examples we’ll be creating a local &lt;code class=&quot;highlighter-rouge&quot;&gt;attacks/&amp;lt;attack-name&amp;gt;.json&lt;/code&gt; file to store the API attack arguments and pass those arguments along to the request.&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;On your local machine, start by creating the &lt;code class=&quot;highlighter-rouge&quot;&gt;attacks/cpu-random.json&lt;/code&gt; file and paste the following JSON into it.  This will attack a single core for &lt;code class=&quot;highlighter-rouge&quot;&gt;30&lt;/code&gt; seconds.&lt;/p&gt;
-
-    &lt;div class=&quot;language-json highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;//&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;attacks/cpu-random.json&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
- &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-     &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;command&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-         &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;type&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;cpu&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-         &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;args&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;-c&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;1&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;-l&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;30&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-     &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-     &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;target&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-         &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;type&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Random&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-     &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
- &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Create the new &lt;strong&gt;Attack&lt;/strong&gt; by passing the JSON from &lt;code class=&quot;highlighter-rouge&quot;&gt;attacks/cpu-random.json&lt;/code&gt; to the &lt;code class=&quot;highlighter-rouge&quot;&gt;https://api.gremlin.com/v1/attacks/new&lt;/code&gt; API endpoint.&lt;/p&gt;
-
-    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; curl &lt;span class=&quot;nt&quot;&gt;-H&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Content-Type: application/json&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-H&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Authorization: &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$GREMLIN_API_TOKEN&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt; https://api.gremlin.com/v1/attacks/new &lt;span class=&quot;nt&quot;&gt;-d&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;@attacks/cpu-random.json&quot;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;The &lt;a href=&quot;https://app.gremlin.com/&quot;&gt;Gremlin Web UI&lt;/a&gt; now shows the &lt;strong&gt;Attack&lt;/strong&gt; that was created.&lt;/p&gt;
-
-    &lt;p&gt;&lt;img alt=&quot;Gremlin Web UI CPU Attack&quot; src=&quot;/gremlin-blog-posts/assets/chaos-engineering/migrating-cloud-chaotic-embrace/web-ui-cpu-attack-a4b0c805d6d2e406611908b22a848de1cf03193d1db5ae434fc14f9905c200b3.png&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Additionally, the targeted machine also has one CPU core maxed out.&lt;/p&gt;
-
-    &lt;p&gt;&lt;img alt=&quot;htop CPU Maximized&quot; src=&quot;/gremlin-blog-posts/assets/chaos-engineering/migrating-cloud-chaotic-embrace/htop-cpu-max-22d1f36521ae859ff70072681c19c490d4f9d27aadca4e03ddddaa47f6dc69d8.png&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p class=&quot;notice--info&quot;&gt;&lt;strong&gt;Optional&lt;/strong&gt; If you wish to attack a &lt;em&gt;specific&lt;/em&gt; &lt;strong&gt;Client&lt;/strong&gt; just change the &lt;code class=&quot;highlighter-rouge&quot;&gt;target | type&lt;/code&gt; argument value to &lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;Exact&quot;&lt;/code&gt; and add the &lt;code class=&quot;highlighter-rouge&quot;&gt;target | exact&lt;/code&gt; field with a list of target &lt;strong&gt;Clients&lt;/strong&gt;.  A &lt;strong&gt;Client&lt;/strong&gt; is identified on Gremlin as the &lt;code class=&quot;highlighter-rouge&quot;&gt;GREMLIN_IDENTIFIER&lt;/code&gt; for the instance.&lt;/p&gt;
-
-&lt;div class=&quot;language-json highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;err&quot;&gt;//&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;attacks/cpu-exact.json&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-    &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;command&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-        &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;type&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;cpu&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-        &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;args&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;-c&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;1&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;-l&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;30&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-    &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;target&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-        &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;type&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Exact&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-        &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;exact&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;aws-nginx&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;storage-disk-limitations&quot;&gt;Storage Disk Limitations&lt;/h2&gt;
-
-&lt;p&gt;Migrating to a new system frequently requires moving volumes across disks and to other cloud-based storage layers.  It’s vital to determine if the new storage system can handle the increase in volume the migration will require.  Additionally, to properly test the resilience of the system you’ll also want to test how the system reacts when disks are overburdened or unavailable.&lt;/p&gt;
-
-&lt;h3 id=&quot;why-it-matters-instapaper-2017&quot;&gt;Why It Matters: Instapaper (2017)&lt;/h3&gt;
-
-&lt;p&gt;In February 2017 the popular web content bookmarking service Instapaper suffered &lt;a href=&quot;https://medium.com/making-instapaper/instapaper-outage-cause-recovery-3c32a7e9cc5f&quot;&gt;a service outage&lt;/a&gt; due to a &lt;a href=&quot;https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Limits.html#RDS_Limits.FileSize&quot;&gt;2 TB file size limit&lt;/a&gt; within Instapaper’s Amazon RDS MySQL instance.&lt;/p&gt;
-
-&lt;p&gt;This issue was unknown to Instapaper ever since their migration to AWS in 2013.  At that time, they migrated their database to MySQL on Amazon RDS, which was using a slightly outdated version of MySQL that enforced the 2 TB file size limit.  Even after attempting to upgrade to newer hardware and a newer MySQL version in March 2015, the original instance that contained the 2 TB limit was replicated, thereby retaining the hidden problem.&lt;/p&gt;
-
-&lt;p&gt;Eventually their database finally hit that limit in early 2017 and caused a day+ service outage.  As Instapaper points out in their post mortem, it was difficult for the team to be aware of this limitation and potential issue ahead of time.  However, this unfortunate event illustrates the importance of properly testing data storage systems prior to migration.&lt;/p&gt;
-
-&lt;h3 id=&quot;performing-a-disk-attack-with-gremlin&quot;&gt;Performing a Disk Attack with Gremlin&lt;/h3&gt;
-
-&lt;p&gt;Gremlin’s &lt;strong&gt;Disk Attack&lt;/strong&gt; rapidly consumes disk space on the targeted machine, allowing you to test the resiliency of that machine and other related systems when unexpected disk failures occur.&lt;/p&gt;
-
-&lt;h4 id=&quot;prerequisites-1&quot;&gt;Prerequisites&lt;/h4&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://help.gremlin.com/installation/&quot;&gt;Install Gremlin&lt;/a&gt; on the target machine.&lt;/li&gt;
-  &lt;li&gt;Retrieve your &lt;a href=&quot;#obtaining-a-gremlin-api-token&quot;&gt;Gremlin API Token&lt;/a&gt;.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;A &lt;a href=&quot;https://help.gremlin.com/api/&quot;&gt;Gremlin API&lt;/a&gt; &lt;strong&gt;Disk Attack&lt;/strong&gt; accepts the following arguments.&lt;/p&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;Short Flag&lt;/th&gt;
-      &lt;th&gt;Long Flag&lt;/th&gt;
-      &lt;th&gt;Purpose&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;-b&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;--block-size&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;The block size (in kilobytes) that are written.&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;-d&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;--dir&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;The directory that temporary files will be written to.&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;-l&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;--length&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;Attack duration (in seconds).&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;-p&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;--percent&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;The percentage of volume to fill.&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;-w&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;--workers&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;The number of disk-write workers to run concurrently.&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;On your local machine, start by creating the &lt;code class=&quot;highlighter-rouge&quot;&gt;attacks/disk-exact.json&lt;/code&gt; file and paste the following JSON into it.  Be sure to change your target &lt;strong&gt;Client&lt;/strong&gt;.  This will attempt to fill &lt;code class=&quot;highlighter-rouge&quot;&gt;95%&lt;/code&gt; of the volume over the course of a &lt;code class=&quot;highlighter-rouge&quot;&gt;60&lt;/code&gt; second attack using &lt;code class=&quot;highlighter-rouge&quot;&gt;2&lt;/code&gt; workers.&lt;/p&gt;
-
-    &lt;div class=&quot;language-json highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;//&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;attacks/disk-random.json&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
- &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-     &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;command&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-         &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;type&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;disk&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-         &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;args&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;-d&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;/tmp&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;-l&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;60&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;-w&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;2&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;-b&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;4&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;-p&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;95&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-     &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-     &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;target&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-         &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;type&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Exact&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-         &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;exact&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;aws-nginx&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-     &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
- &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;em&gt;(Optional)&lt;/em&gt; Check the current disk usage on the target machine.&lt;/p&gt;
-
-    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;nb&quot;&gt;df&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-H&lt;/span&gt;
- &lt;span class=&quot;c&quot;&gt;# OUTPUT&lt;/span&gt;
- Filesystem      Size  Used Avail Use% Mounted on
- /dev/xvda1      8.3G  1.4G  6.9G  17% /
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Create the new &lt;strong&gt;Disk Attack&lt;/strong&gt; by passing the JSON from &lt;code class=&quot;highlighter-rouge&quot;&gt;attacks/disk-exact.json&lt;/code&gt; to the &lt;code class=&quot;highlighter-rouge&quot;&gt;https://api.gremlin.com/v1/attacks/new&lt;/code&gt; API endpoint.&lt;/p&gt;
-
-    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; curl &lt;span class=&quot;nt&quot;&gt;-H&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Content-Type: application/json&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-H&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Authorization: &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$GREMLIN_API_TOKEN&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt; https://api.gremlin.com/v1/attacks/new &lt;span class=&quot;nt&quot;&gt;-d&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;@attacks/disk-exact.json&quot;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;The &lt;a href=&quot;https://app.gremlin.com/&quot;&gt;Gremlin Web UI&lt;/a&gt; now shows the &lt;strong&gt;Attack&lt;/strong&gt; that was created.&lt;/p&gt;
-
-    &lt;p&gt;&lt;img alt=&quot;Gremlin Web UI Disk Attack&quot; src=&quot;/gremlin-blog-posts/assets/chaos-engineering/migrating-cloud-chaotic-embrace/web-ui-disk-attack-57c40e03b827748989ab14c9d7277c326e7fc3dab092ad569fee72d6069eb5d7.png&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Check the attack target’s current disk space, which will soon reach the specified percentage before Gremlin rolls back and returns the disk to the original state.&lt;/p&gt;
-
-    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;nb&quot;&gt;df&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-H&lt;/span&gt;
- &lt;span class=&quot;c&quot;&gt;# OUTPUT&lt;/span&gt;
- Filesystem      Size  Used Avail Use% Mounted on
- /dev/xvda1      8.3G  7.9G  396M  96% /
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&quot;evaluating-network-resiliency&quot;&gt;Evaluating Network Resiliency&lt;/h2&gt;
-
-&lt;p&gt;While the majority of Internet service outages are caused by failures during migration and upgrade procedures, the &lt;a href=&quot;http://ucare.cs.uchicago.edu/pdf/socc16-cos.pdf&quot;&gt;Why Does the Cloud Stop Computing?
-Lessons from Hundreds of Service Outages&lt;/a&gt; study found that network problems are the second most common cause and account for some &lt;code class=&quot;highlighter-rouge&quot;&gt;15%&lt;/code&gt; of service outages.  Even architectures designed with network redundancies can experience multiple, stacking network failures without proper testing and experimentation.  Moreover, most modern software relies on external networks to some degree, which means a network outage completely outside of your control could cause a failure to propagate throughout your system.&lt;/p&gt;
-
-&lt;h3 id=&quot;why-it-matters-microsoft-office-365-2013&quot;&gt;Why It Matters: Microsoft Office 365 (2013)&lt;/h3&gt;
-
-&lt;p&gt;On February 1st, 2013 a change to the Microsoft Online edge network prevented some internet traffic from reaching the Microsoft Office 365 service, which prevented customers from accessing Exchange and SharePoint services for a few hours.  While the &lt;a href=&quot;https://www.quadrotech-it.com/blog/feb-1-office-365-outage-incident-review-release/&quot;&gt;incident report&lt;/a&gt; doesn’t explicitly name the underlying change that caused the problem, it does state that that a procedural error was unintentionally and automatically propagated to multiple devices within the Microsoft Online network, which “caused incorrect routing for a portion of the inbound internet traffic.”  Additionally, affected customers were unable to access administrative services within the &lt;strong&gt;Service Health Dashboard&lt;/strong&gt; (SHD) provided by Microsoft, but the backup process for supporting customers unable to access the SHD did not work as well as expected.&lt;/p&gt;
-
-&lt;p&gt;While this overall incident only lasted a few hours and affected a small subset of customers, it illustrates the importance of proper network resiliency testing prior to and during system migrations and upgrade procedures.  Chaos Experiments that cause networking failures – such as creating a blackhole so certain traffic is halted – are a great way to test system stability under these unexpected conditions.&lt;/p&gt;
-
-&lt;h3 id=&quot;performing-a-blackhole-attack-with-gremlin&quot;&gt;Performing a Blackhole Attack with Gremlin&lt;/h3&gt;
-
-&lt;p&gt;A &lt;strong&gt;Blackhole Attack&lt;/strong&gt; temporarily drop all traffic based on the parameters of the attack.  You can use a &lt;strong&gt;Blackhole Attack&lt;/strong&gt; to test routing protocols, loss of communication to specific hosts, port-based traffic, network device failure, and much more.&lt;/p&gt;
-
-&lt;h4 id=&quot;prerequisites-2&quot;&gt;Prerequisites&lt;/h4&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://help.gremlin.com/installation/&quot;&gt;Install Gremlin&lt;/a&gt; on the target machine.&lt;/li&gt;
-  &lt;li&gt;Retrieve your &lt;a href=&quot;#obtaining-a-gremlin-api-token&quot;&gt;Gremlin API Token&lt;/a&gt;.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;A &lt;a href=&quot;https://help.gremlin.com/api/&quot;&gt;Gremlin API&lt;/a&gt; &lt;strong&gt;Blackhole Attack&lt;/strong&gt; accepts the following arguments.&lt;/p&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;Short Flag&lt;/th&gt;
-      &lt;th&gt;Long Flag&lt;/th&gt;
-      &lt;th&gt;Purpose&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;-d&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;--device&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;Network device through which traffic should be affected.  Defaults to the first device found.&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;-h&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;--hostname&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;Outgoing hostnames to affect.  Optionally, you can prefix a hostname with a caret (&lt;code class=&quot;highlighter-rouge&quot;&gt;^&lt;/code&gt;) to whitelist it.  It is recommended to include &lt;code class=&quot;highlighter-rouge&quot;&gt;^api.gremlin.com&lt;/code&gt; in the whitelist.&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;-i&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;--ipaddress&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;Outgoing IP addresses to affect.  Optionally, you can prefix an IP with a caret (&lt;code class=&quot;highlighter-rouge&quot;&gt;^&lt;/code&gt;) to whitelist it.&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;-l&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;--length&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;Attack duration (in seconds).&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;-n&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;--ingress_port&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;Only affect ingress traffic to these destination ports.  Optionally, ranges can also be specified (e.g. &lt;code class=&quot;highlighter-rouge&quot;&gt;8080-8085&lt;/code&gt;).&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;-p&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;--egress_port&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;Only affect egress traffic to these destination ports.  Optionally, ranges can also be specified (e.g. &lt;code class=&quot;highlighter-rouge&quot;&gt;8080-8085&lt;/code&gt;).&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;-P&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;--ipprotocol&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;Only affect traffic using this protocol.&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;Start by performing a test to establish a baseline.  The following command tests the response time of a request to &lt;code class=&quot;highlighter-rouge&quot;&gt;example.com&lt;/code&gt; (which has an IP address of &lt;code class=&quot;highlighter-rouge&quot;&gt;93.184.216.34&lt;/code&gt;).&lt;/p&gt;
-
-    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;time &lt;/span&gt;curl &lt;span class=&quot;nt&quot;&gt;-o&lt;/span&gt; /dev/null 93.184.216.34
-
- &lt;span class=&quot;c&quot;&gt;# OUTPUT&lt;/span&gt;
- real    0m0.025s
- user    0m0.009s
- sys     0m0.000s
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;On your local machine, create the &lt;code class=&quot;highlighter-rouge&quot;&gt;attacks/blackhole-exact.json&lt;/code&gt; file and paste the following JSON into it.  Set your target &lt;strong&gt;Client&lt;/strong&gt; as necessary.  This attack creates a &lt;code class=&quot;highlighter-rouge&quot;&gt;30&lt;/code&gt; second blackhole that drops traffic to the &lt;code class=&quot;highlighter-rouge&quot;&gt;93.184.216.34&lt;/code&gt; IP address.&lt;/p&gt;
-
-    &lt;div class=&quot;language-json highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;//&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;attacks/blackhole-random.json&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
- &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-     &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;command&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-         &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;type&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;blackhole&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-         &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;args&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;-l&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;30&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;-i&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;93.184.216.34&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;-h&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;^api.gremlin.com&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-     &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-     &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;target&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-         &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;type&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Exact&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-         &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;exact&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;aws-nginx&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-     &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
- &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Execute the &lt;strong&gt;Blackhole Attack&lt;/strong&gt; by passing the JSON from &lt;code class=&quot;highlighter-rouge&quot;&gt;attacks/blackhole-exact.json&lt;/code&gt; to the &lt;code class=&quot;highlighter-rouge&quot;&gt;https://api.gremlin.com/v1/attacks/new&lt;/code&gt; API endpoint.&lt;/p&gt;
-
-    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; curl &lt;span class=&quot;nt&quot;&gt;-H&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Content-Type: application/json&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-H&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Authorization: &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$GREMLIN_API_TOKEN&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt; https://api.gremlin.com/v1/attacks/new &lt;span class=&quot;nt&quot;&gt;-d&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;@attacks/blackhole-exact.json&quot;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;On the target machine run the same timed &lt;code class=&quot;highlighter-rouge&quot;&gt;curl&lt;/code&gt; test as before.  It should hang for approximately &lt;code class=&quot;highlighter-rouge&quot;&gt;30&lt;/code&gt; seconds, until the blackhole has been terminated and a response is finally received.&lt;/p&gt;
-
-    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;time &lt;/span&gt;curl &lt;span class=&quot;nt&quot;&gt;-o&lt;/span&gt; /dev/null 93.184.216.34
-
- &lt;span class=&quot;c&quot;&gt;# OUTPUT&lt;/span&gt;
- real    0m31.623s
- user    0m0.013s
- sys     0m0.000s
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;You can also view the &lt;strong&gt;Attack&lt;/strong&gt; on the &lt;a href=&quot;https://app.gremlin.com/&quot;&gt;Gremlin Web UI&lt;/a&gt; to confirm it functioned properly.&lt;/p&gt;
-
-    &lt;p&gt;&lt;img alt=&quot;Gremlin Web UI Blackhole Attack&quot; src=&quot;/gremlin-blog-posts/assets/chaos-engineering/migrating-cloud-chaotic-embrace/web-ui-blackhole-attack-5568e6cf288a9ee0b6f17b6c0527fd80d2d917e83b2b513c3dc64a846389dbea.png&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Check the attack target’s current disk space, which will soon reach the specified percentage before Gremlin rolls back and returns the disk to the original state.&lt;/p&gt;
-
-    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;nb&quot;&gt;df&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-H&lt;/span&gt;
- &lt;span class=&quot;c&quot;&gt;# OUTPUT&lt;/span&gt;
- Filesystem      Size  Used Avail Use% Mounted on
- /dev/xvda1      8.3G  7.9G  396M  96% /
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&quot;proper-memory-management&quot;&gt;Proper Memory Management&lt;/h2&gt;
-
-&lt;p&gt;While most commonly-used cloud platforms provide auto-balancing and scaling services, it’s impossible to rely solely on these technologies to ensure your migrated software will remain stable and responsive.  Memory management is a crucial part of maintaining a healthy and inexpensive cloud stack.  An improper configuration or poorly tested system may not necessarily cause a system failure or outage, but even a tiny memory issue can add up to thousands of dollars in extra support costs.&lt;/p&gt;
-
-&lt;p&gt;Therefore, performing Chaos Engineering before, during, and after cloud migration to test system failures when instances, containers, or nodes run out of memory ensures your stack remains active and fully functional when an &lt;em&gt;unexpected&lt;/em&gt; memory leak occurs.&lt;/p&gt;
-
-&lt;h3 id=&quot;why-it-matters-google-docs-2011&quot;&gt;Why It Matters: Google Docs (2011)&lt;/h3&gt;
-
-&lt;p&gt;In early September, 2011 Google Docs suffered a widespread, hour-long outage that prevented the majority of customers from accessing documents, drawings, lists, and App Scripts.  As Google &lt;a href=&quot;https://cloud.googleblog.com/2011/09/what-happened-to-google-docs-on.html&quot;&gt;later reported&lt;/a&gt;, the incident was caused by a change that exposed a memory leak that &lt;em&gt;only occurred under heavy load&lt;/em&gt;.  The lookup service that tracks of Google Doc modifications wasn’t properly recycling memory, which eventually caused those machines to restart.  Of course, the redundancy systems immediately picked up the slack from these now-offline lookup service machines, but the excessive load caused the replacement machines to run out of memory ever faster.  Eventually the servers couldn’t handle the number of requests that were backed up.&lt;/p&gt;
-
-&lt;p&gt;The Google engineering team was quick to diagnose the issue and roll out a fix within an hour of the first automated alert.  Unfortunately, Google engineers were unaware of the root cause &lt;em&gt;because&lt;/em&gt; it only occurred while the system was heavily loaded, which shows the importance of expressly testing system resilience when memory usage spikes.&lt;/p&gt;
-
-&lt;h3 id=&quot;performing-a-memory-attack-with-gremlin&quot;&gt;Performing a Memory Attack with Gremlin&lt;/h3&gt;
-
-&lt;p&gt;A Gremlin &lt;strong&gt;Memory Attack&lt;/strong&gt; consumes memory on the targeted machine, making it easy to test how that system and other dependencies behave when memory is unavailable.&lt;/p&gt;
-
-&lt;h4 id=&quot;prerequisites-3&quot;&gt;Prerequisites&lt;/h4&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://help.gremlin.com/installation/&quot;&gt;Install Gremlin&lt;/a&gt; on the target machine.&lt;/li&gt;
-  &lt;li&gt;Retrieve your &lt;a href=&quot;#obtaining-a-gremlin-api-token&quot;&gt;Gremlin API Token&lt;/a&gt;.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;A &lt;a href=&quot;https://help.gremlin.com/api/&quot;&gt;Gremlin API&lt;/a&gt; &lt;strong&gt;Memory Attack&lt;/strong&gt; accepts the following arguments.&lt;/p&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;Short Flag&lt;/th&gt;
-      &lt;th&gt;Long Flag&lt;/th&gt;
-      &lt;th&gt;Purpose&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;-g&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;--gigabytes&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;The amount of memory (in GB) to allocate.&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;-l&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;--length&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;Attack duration (in seconds).&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;-m&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;--megabytes&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;The amount of memory (in MB) to allocate.&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;em&gt;(Optional)&lt;/em&gt; On the target machine check the current memory usage to establish a baseline prior to executing the attack.&lt;/p&gt;
-
-    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; htop
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-
-    &lt;p&gt;&lt;img alt=&quot;HTOP Pre-Attack Memory Usage&quot; src=&quot;/gremlin-blog-posts/assets/chaos-engineering/migrating-cloud-chaotic-embrace/htop-pre-memory-attack-8f541073fd8265545cde63ef1806cf4289a92ae5c2e6efc579be3b4942fa040d.png&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;On your local machine create a &lt;code class=&quot;highlighter-rouge&quot;&gt;attacks/memory-exact.json&lt;/code&gt; file and paste the following JSON into it, ensuring you change your target &lt;strong&gt;Client&lt;/strong&gt;.  This attack will consume up to &lt;code class=&quot;highlighter-rouge&quot;&gt;750 MB&lt;/code&gt; of memory for a total of &lt;code class=&quot;highlighter-rouge&quot;&gt;30&lt;/code&gt; seconds.&lt;/p&gt;
-
-    &lt;div class=&quot;language-json highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;//&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;attacks/memory-exact.json&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
- &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-     &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;command&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-         &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;type&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;memory&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-         &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;args&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;-l&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;30&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;-g&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;0.75&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-     &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-     &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;target&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-         &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;type&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Exact&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-         &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;exact&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;aws-nginx&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-     &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
- &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Launch the &lt;strong&gt;Memory Attack&lt;/strong&gt; by passing the JSON from &lt;code class=&quot;highlighter-rouge&quot;&gt;attacks/memory-exact.json&lt;/code&gt; to the &lt;code class=&quot;highlighter-rouge&quot;&gt;https://api.gremlin.com/v1/attacks/new&lt;/code&gt; API endpoint.&lt;/p&gt;
-
-    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; curl &lt;span class=&quot;nt&quot;&gt;-H&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Content-Type: application/json&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-H&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Authorization: &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$GREMLIN_API_TOKEN&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt; https://api.gremlin.com/v1/attacks/new &lt;span class=&quot;nt&quot;&gt;-d&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;@attacks/memory-exact.json&quot;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;That additional memory is now consumed on the target machine.&lt;/p&gt;
-
-    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; htop
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-
-    &lt;p&gt;&lt;img alt=&quot;HTOP Post-Attack Memory Usage&quot; src=&quot;/gremlin-blog-posts/assets/chaos-engineering/migrating-cloud-chaotic-embrace/htop-post-memory-attack-3304d7bc26cdcd93493cb940279150f05d359173b9fe466042d0d8a6c1345036.png&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;As always, you can view the &lt;strong&gt;Attack&lt;/strong&gt; within the &lt;a href=&quot;https://app.gremlin.com/&quot;&gt;Gremlin Web UI&lt;/a&gt;.&lt;/p&gt;
-
-    &lt;p&gt;&lt;img alt=&quot;Gremlin Web UI Memory Attack&quot; src=&quot;/gremlin-blog-posts/assets/chaos-engineering/migrating-cloud-chaotic-embrace/web-ui-memory-attack-56e3fb4d678bd41298bd5d8e68a4f90e8bf12ec6fc9f633bdc2af50585249edd.png&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&quot;io&quot;&gt;IO&lt;/h2&gt;
-
-&lt;p&gt;(TODO)&lt;/p&gt;
-
-&lt;h3 id=&quot;why-it-matters-tbd-1&quot;&gt;Why It Matters: TBD&lt;/h3&gt;
-
-&lt;p&gt;(TODO)&lt;/p&gt;
-
-&lt;h3 id=&quot;performing-an-io-attack-with-gremlin&quot;&gt;Performing an IO Attack with Gremlin&lt;/h3&gt;
-
-&lt;p&gt;(TODO)&lt;/p&gt;
-
-&lt;h4 id=&quot;prerequisites-4&quot;&gt;Prerequisites&lt;/h4&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://help.gremlin.com/installation/&quot;&gt;Install Gremlin&lt;/a&gt; on the target machine.&lt;/li&gt;
-  &lt;li&gt;Retrieve your &lt;a href=&quot;#obtaining-a-gremlin-api-token&quot;&gt;Gremlin API Token&lt;/a&gt;.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;(TODO)&lt;/p&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;-l&lt;/span&gt; 45 &lt;span class=&quot;nt&quot;&gt;-d&lt;/span&gt; /tmp &lt;span class=&quot;nt&quot;&gt;-w&lt;/span&gt; 2 &lt;span class=&quot;nt&quot;&gt;-m&lt;/span&gt; rw &lt;span class=&quot;nt&quot;&gt;-s&lt;/span&gt; 4 &lt;span class=&quot;nt&quot;&gt;-c&lt;/span&gt; 1
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Total DISK READ :       0.00 B/s | Total DISK WRITE :       3.92 M/s
-Actual DISK READ:       0.00 B/s | Actual DISK WRITE:      15.77 M/s
-  PID  PRIO  USER     DISK READ  DISK WRITE  SWAPIN     IO&amp;gt;    COMMAND                                                                   
-  323 be/3 root          0.00 B     68.00 K  0.00 % 71.28 % &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;jbd2/xvda1-8]
-20030 be/4 gremlin       0.00 B    112.15 M  0.00 % 17.11 % gremlin attack io &lt;span class=&quot;nt&quot;&gt;-l&lt;/span&gt; 45 &lt;span class=&quot;nt&quot;&gt;-d&lt;/span&gt; /tmp &lt;span class=&quot;nt&quot;&gt;-w&lt;/span&gt; 2 &lt;span class=&quot;nt&quot;&gt;-m&lt;/span&gt; rw &lt;span class=&quot;nt&quot;&gt;-s&lt;/span&gt; 4 &lt;span class=&quot;nt&quot;&gt;-c&lt;/span&gt; 1
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;obtaining-a-gremlin-api-token&quot;&gt;Obtaining a Gremlin API Token&lt;/h2&gt;
+&lt;p&gt;All the examples throughout this article use the Gremlin API to perform Chaos Experiments.  If you prefer a graphical interface all examples can also be created within the &lt;a href=&quot;https://app.gremlin.com/attacks&quot;&gt;Gremlin Attacks Web UI&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;To use the Gremlin API you’ll first need your organization’s API access token.  This can be obtained by authenticating with the appropriate API endpoint.&lt;/p&gt;
 
@@ -759,6 +314,545 @@ Actual DISK READ:       0.00 B/s | Actual DISK WRITE:      15.77 M/s
     &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;GREMLIN_API_TOKEN&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Bearer NzE3NWFjYTktODBkMC01ODU5LTkwYmMtOGQyZTBkNDc1NDU0OmdhYmVAZ2FiZXd5YXR0LmNvbTpjMjA5YzA5OTgtYjhmZi0wMjQyNTI2NDdmZjY=&quot;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
 
-    &lt;p class=&quot;notice--info&quot;&gt;&lt;strong&gt;TIP&lt;/strong&gt;: For simplicity you may &lt;code class=&quot;highlighter-rouge&quot;&gt;export&lt;/code&gt; the &lt;code class=&quot;highlighter-rouge&quot;&gt;GREMLIN_API_TOKEN&lt;/code&gt; within your &lt;code class=&quot;highlighter-rouge&quot;&gt;.bashrc&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;.bash_profile&lt;/code&gt; file to keep the token permanently available across terminal sessions.&lt;/p&gt;
+    &lt;p class=&quot;notice--info&quot;&gt;For simplicity you may &lt;code class=&quot;highlighter-rouge&quot;&gt;export&lt;/code&gt; the &lt;code class=&quot;highlighter-rouge&quot;&gt;GREMLIN_API_TOKEN&lt;/code&gt; within your &lt;code class=&quot;highlighter-rouge&quot;&gt;.bashrc&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;.bash_profile&lt;/code&gt; file to retain token access between terminal sessions.&lt;/p&gt;
   &lt;/li&gt;
-&lt;/ol&gt;</content><author><name>Gabe Wyatt</name></author><category term="migration" /><summary type="html">Why you should embrace Chaos Engineering prior to migrating to the cloud, allowing you to avoid pain down the road.</summary></entry></feed>
+&lt;/ol&gt;
+
+&lt;h4 id=&quot;next-steps&quot;&gt;Next Steps&lt;/h4&gt;
+
+&lt;p&gt;With your &lt;code class=&quot;highlighter-rouge&quot;&gt;GREMLIN_API_TOKEN&lt;/code&gt; in hand, you’re ready to begin Chaos Engineering with Gremlin.  Check out &lt;a href=&quot;#performing-a-cpu-attack-with-gremlin&quot;&gt;Performing a CPU Attack with Gremlin&lt;/a&gt;, &lt;a href=&quot;#handling-storage-disk-limitations&quot;&gt;Handling Storage Disk Limitations&lt;/a&gt;, &lt;a href=&quot;#evaluating-network-resiliency&quot;&gt;Evaluating Network Resiliency&lt;/a&gt;, &lt;a href=&quot;#proper-memory-management&quot;&gt;Proper Memory Management&lt;/a&gt;, and &lt;a href=&quot;#troubleshooting-io-bottlenecks&quot;&gt;Troubleshooting IO Bottlenecks&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;performing-a-cpu-attack-with-gremlin&quot;&gt;Performing a CPU Attack with Gremlin&lt;/h3&gt;
+
+&lt;p&gt;A Gremlin &lt;strong&gt;CPU Attack&lt;/strong&gt; consumes 100% of the specified CPU cores on the target system.  The &lt;strong&gt;CPU Attack&lt;/strong&gt; is a great way to test the stability of the targeted machine – along with its critical dependencies – when the CPU is overloaded.&lt;/p&gt;
+
+&lt;h4 id=&quot;prerequisites&quot;&gt;Prerequisites&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://help.gremlin.com/installation/&quot;&gt;Install Gremlin&lt;/a&gt; on the target machine.&lt;/li&gt;
+  &lt;li&gt;Retrieve your &lt;a href=&quot;#obtaining-a-gremlin-api-token&quot;&gt;Gremlin API Token&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;A &lt;a href=&quot;https://help.gremlin.com/api/&quot;&gt;Gremlin API&lt;/a&gt; &lt;strong&gt;CPU Attack&lt;/strong&gt; accepts the following arguments.&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Short Flag&lt;/th&gt;
+      &lt;th&gt;Long Flag&lt;/th&gt;
+      &lt;th&gt;Purpose&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;-c&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;--cores&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;Number of CPU cores to attack.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;-l&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;--length&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;Attack duration (in seconds).&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;Most &lt;a href=&quot;https://help.gremlin.com/api/&quot;&gt;Gremlin API&lt;/a&gt; calls accept a JSON body payload, which specifies critical arguments.  In all the following examples you’ll be creating a local &lt;code class=&quot;highlighter-rouge&quot;&gt;attacks/&amp;lt;attack-name&amp;gt;.json&lt;/code&gt; file to store the API attack arguments.  You’ll then pass those arguments along to the API request.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;On your local machine, start by creating the &lt;code class=&quot;highlighter-rouge&quot;&gt;attacks/cpu.json&lt;/code&gt; file and paste the following JSON into it.  This will attack a single core for &lt;code class=&quot;highlighter-rouge&quot;&gt;30&lt;/code&gt; seconds.&lt;/p&gt;
+
+    &lt;div class=&quot;language-json highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+     &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;command&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+         &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;type&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;cpu&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+         &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;args&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;-c&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;1&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;-l&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;30&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+     &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+     &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;target&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+         &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;type&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Random&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+     &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+ &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Create the new &lt;strong&gt;Attack&lt;/strong&gt; by passing the JSON from &lt;code class=&quot;highlighter-rouge&quot;&gt;attacks/cpu.json&lt;/code&gt; to the &lt;code class=&quot;highlighter-rouge&quot;&gt;https://api.gremlin.com/v1/attacks/new&lt;/code&gt; API endpoint.&lt;/p&gt;
+
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; curl &lt;span class=&quot;nt&quot;&gt;-H&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Content-Type: application/json&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-H&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Authorization: &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$GREMLIN_API_TOKEN&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt; https://api.gremlin.com/v1/attacks/new &lt;span class=&quot;nt&quot;&gt;-d&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;@attacks/cpu.json&quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;The &lt;a href=&quot;https://app.gremlin.com/attacks&quot;&gt;Gremlin Web UI&lt;/a&gt; also shows the &lt;strong&gt;Attack&lt;/strong&gt; that was created.&lt;/p&gt;
+
+    &lt;p&gt;&lt;img alt=&quot;Gremlin Web UI CPU Attack&quot; src=&quot;/gremlin-blog-posts/assets/chaos-engineering/migrating-cloud-chaotic-embrace/web-ui-cpu-attack-a4b0c805d6d2e406611908b22a848de1cf03193d1db5ae434fc14f9905c200b3.png&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;On the targeted machine you’ll see that one CPU core is maxed out.&lt;/p&gt;
+
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; htop
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+
+    &lt;p&gt;&lt;img alt=&quot;htop CPU Maximized&quot; src=&quot;/gremlin-blog-posts/assets/chaos-engineering/migrating-cloud-chaotic-embrace/htop-cpu-max-22d1f36521ae859ff70072681c19c490d4f9d27aadca4e03ddddaa47f6dc69d8.png&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p class=&quot;notice--info&quot;&gt;If you wish to attack a &lt;em&gt;specific&lt;/em&gt; &lt;strong&gt;Client&lt;/strong&gt; just change the &lt;code class=&quot;highlighter-rouge&quot;&gt;target : type&lt;/code&gt; argument value to &lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;Exact&quot;&lt;/code&gt; and add the &lt;code class=&quot;highlighter-rouge&quot;&gt;target : exact&lt;/code&gt; field with a list of target &lt;strong&gt;Clients&lt;/strong&gt;.  A &lt;strong&gt;Client&lt;/strong&gt; is identified on Gremlin as the &lt;code class=&quot;highlighter-rouge&quot;&gt;GREMLIN_IDENTIFIER&lt;/code&gt; for the instance, which can also be specified in a local environment variable when running the &lt;code class=&quot;highlighter-rouge&quot;&gt;gremlin init&lt;/code&gt; command.&lt;/p&gt;
+
+&lt;div class=&quot;language-json highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;command&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;type&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;cpu&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;args&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;-c&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;1&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;-l&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;30&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;target&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;type&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Exact&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;exact&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;aws-nginx&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;handling-storage-disk-limitations&quot;&gt;Handling Storage Disk Limitations&lt;/h2&gt;
+
+&lt;p&gt;Migrating to a new system frequently requires moving volumes across disks and to other cloud-based storage layers.  It’s vital to determine if the new storage system can handle the increase in volume that the migration will require.  Additionally, to properly test the resilience of the system you’ll also want to test how the system reacts when volumes are overburdened or unavailable.&lt;/p&gt;
+
+&lt;h3 id=&quot;why-it-matters-instapaper-2017&quot;&gt;Why It Matters: Instapaper (2017)&lt;/h3&gt;
+
+&lt;p&gt;In February 2017 the popular web content bookmarking service Instapaper suffered &lt;a href=&quot;https://medium.com/making-instapaper/instapaper-outage-cause-recovery-3c32a7e9cc5f&quot;&gt;a service outage&lt;/a&gt; due to a &lt;a href=&quot;https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Limits.html#RDS_Limits.FileSize&quot;&gt;2 TB file size limit&lt;/a&gt; within Instapaper’s Amazon RDS MySQL instance.&lt;/p&gt;
+
+&lt;p&gt;This issue was unknown to Instapaper ever since their migration to AWS in 2013.  At that time, they migrated their database to MySQL on Amazon RDS, which was using a slightly outdated version of MySQL that enforced the 2 TB file size limit.  Even after attempting to upgrade to newer hardware and a newer MySQL version in March 2015, the original instance that contained the 2 TB limit was replicated, thereby retaining the underlying problem.&lt;/p&gt;
+
+&lt;p&gt;Eventually, their database finally hit that limit in early 2017 and caused a day+ service outage.  As Instapaper points out in their &lt;a href=&quot;https://medium.com/making-instapaper/instapaper-outage-cause-recovery-3c32a7e9cc5f&quot;&gt;postmortem&lt;/a&gt;, it was difficult for the team to be aware of this limitation and potential issue ahead of time.  However, this unfortunate event illustrates the importance of properly testing data storage systems prior to migration.&lt;/p&gt;
+
+&lt;h3 id=&quot;performing-a-disk-attack-with-gremlin&quot;&gt;Performing a Disk Attack with Gremlin&lt;/h3&gt;
+
+&lt;p&gt;Gremlin’s &lt;strong&gt;Disk Attack&lt;/strong&gt; rapidly consumes disk space on the targeted machine, allowing you to test the resiliency of that machine and other related systems when unexpected disk failures occur.&lt;/p&gt;
+
+&lt;h4 id=&quot;prerequisites-1&quot;&gt;Prerequisites&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://help.gremlin.com/installation/&quot;&gt;Install Gremlin&lt;/a&gt; on the target machine.&lt;/li&gt;
+  &lt;li&gt;Retrieve your &lt;a href=&quot;#obtaining-a-gremlin-api-token&quot;&gt;Gremlin API Token&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;A &lt;a href=&quot;https://help.gremlin.com/api/&quot;&gt;Gremlin API&lt;/a&gt; &lt;strong&gt;Disk Attack&lt;/strong&gt; accepts the following arguments.&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Short Flag&lt;/th&gt;
+      &lt;th&gt;Long Flag&lt;/th&gt;
+      &lt;th&gt;Purpose&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;-b&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;--block-size&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;The block size (in kilobytes) that are written.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;-d&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;--dir&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;The directory that temporary files will be written to.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;-l&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;--length&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;Attack duration (in seconds).&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;-p&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;--percent&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;The percentage of the volume to fill.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;-w&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;--workers&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;The number of disk-write workers to run concurrently.&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;On your local machine, start by creating the &lt;code class=&quot;highlighter-rouge&quot;&gt;attacks/disk.json&lt;/code&gt; file and paste the following JSON into it.  Be sure to change your target &lt;strong&gt;Client&lt;/strong&gt;.  This attack will fill &lt;code class=&quot;highlighter-rouge&quot;&gt;95%&lt;/code&gt; of the volume over the course of a &lt;code class=&quot;highlighter-rouge&quot;&gt;60-second&lt;/code&gt; attack using &lt;code class=&quot;highlighter-rouge&quot;&gt;2&lt;/code&gt; workers.&lt;/p&gt;
+
+    &lt;div class=&quot;language-json highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+     &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;command&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+         &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;type&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;disk&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+         &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;args&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;-d&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;/tmp&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;-l&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;60&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;-w&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;2&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;-b&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;4&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;-p&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;95&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+     &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+     &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;target&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+         &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;type&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Exact&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+         &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;exact&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;aws-nginx&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+     &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+ &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;em&gt;(Optional)&lt;/em&gt; Check the current disk usage on the target machine.&lt;/p&gt;
+
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;nb&quot;&gt;df&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-H&lt;/span&gt;
+ &lt;span class=&quot;c&quot;&gt;# OUTPUT&lt;/span&gt;
+ Filesystem      Size  Used Avail Use% Mounted on
+ /dev/xvda1      8.3G  1.4G  6.9G  17% /
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Create the new &lt;strong&gt;Disk Attack&lt;/strong&gt; by passing the JSON from &lt;code class=&quot;highlighter-rouge&quot;&gt;attacks/disk.json&lt;/code&gt; to the &lt;code class=&quot;highlighter-rouge&quot;&gt;https://api.gremlin.com/v1/attacks/new&lt;/code&gt; API endpoint.&lt;/p&gt;
+
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; curl &lt;span class=&quot;nt&quot;&gt;-H&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Content-Type: application/json&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-H&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Authorization: &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$GREMLIN_API_TOKEN&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt; https://api.gremlin.com/v1/attacks/new &lt;span class=&quot;nt&quot;&gt;-d&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;@attacks/disk.json&quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;The &lt;a href=&quot;https://app.gremlin.com/attacks&quot;&gt;Gremlin Web UI&lt;/a&gt; now shows the &lt;strong&gt;Attack&lt;/strong&gt; that was created.&lt;/p&gt;
+
+    &lt;p&gt;&lt;img alt=&quot;Gremlin Web UI Disk Attack&quot; src=&quot;/gremlin-blog-posts/assets/chaos-engineering/migrating-cloud-chaotic-embrace/web-ui-disk-attack-57c40e03b827748989ab14c9d7277c326e7fc3dab092ad569fee72d6069eb5d7.png&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Check the attack target’s current disk space, which will soon reach the specified percentage before Gremlin rolls back and returns the disk to the original state.&lt;/p&gt;
+
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;nb&quot;&gt;df&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-H&lt;/span&gt;
+ &lt;span class=&quot;c&quot;&gt;# OUTPUT&lt;/span&gt;
+ Filesystem      Size  Used Avail Use% Mounted on
+ /dev/xvda1      8.3G  7.9G  396M  96% /
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;evaluating-network-resiliency&quot;&gt;Evaluating Network Resiliency&lt;/h2&gt;
+
+&lt;p&gt;While the majority of Internet service outages are caused by failures during migration and upgrade procedures, the aforementioned &lt;a href=&quot;http://ucare.cs.uchicago.edu/pdf/socc16-cos.pdf&quot;&gt;Why Does the Cloud Stop Computing?
+Lessons from Hundreds of Service Outages&lt;/a&gt; study found that network problems are the second most common cause and account for some &lt;code class=&quot;highlighter-rouge&quot;&gt;15%&lt;/code&gt; of service outages.  Even architectures designed with network redundancies can experience multiple, cumulative network failures without proper testing and experimentation.  Moreover, most modern software relies on external networks to some degree, which means a network outage completely outside of your control could cause a failure to propagate throughout your system.&lt;/p&gt;
+
+&lt;h3 id=&quot;why-it-matters-microsoft-office-365-2013&quot;&gt;Why It Matters: Microsoft Office 365 (2013)&lt;/h3&gt;
+
+&lt;p&gt;On February 1st, 2013 a change to the Microsoft Online edge network prevented some internet traffic from reaching the Microsoft Office 365 service, which prevented customers from accessing Exchange and SharePoint services for a few hours.  While the &lt;a href=&quot;https://www.quadrotech-it.com/blog/feb-1-office-365-outage-incident-review-release/&quot;&gt;incident report&lt;/a&gt; doesn’t explicitly name the underlying change that caused the problem, it does state that a procedural error was unintentionally and automatically propagated to multiple devices within the Microsoft Online network, which “caused incorrect routing for a portion of the inbound internet traffic.”  Additionally, affected customers were unable to access administrative services within the &lt;strong&gt;Service Health Dashboard&lt;/strong&gt; (SHD) provided by Microsoft, but the backup process intended to provide support to customers that were unable to access the SHD did not work as well as expected.&lt;/p&gt;
+
+&lt;p&gt;While this overall incident only lasted a few hours and affected a small subset of customers, it illustrates the importance of proper network resiliency testing prior to and during system migrations.  Chaos Experiments that cause networking failures – such as creating a black hole so certain traffic is halted – are a great way to test system stability under these unexpected conditions.&lt;/p&gt;
+
+&lt;h3 id=&quot;performing-a-black-hole-attack-with-gremlin&quot;&gt;Performing a Black Hole Attack with Gremlin&lt;/h3&gt;
+
+&lt;p&gt;A &lt;strong&gt;Black Hole Attack&lt;/strong&gt; temporarily drops all traffic based on the parameters of the attack.  You can use a &lt;strong&gt;Black Hole Attack&lt;/strong&gt; to test routing protocols, loss of communication to specific hosts, port-based traffic, network device failure, and much more.&lt;/p&gt;
+
+&lt;h4 id=&quot;prerequisites-2&quot;&gt;Prerequisites&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://help.gremlin.com/installation/&quot;&gt;Install Gremlin&lt;/a&gt; on the target machine.&lt;/li&gt;
+  &lt;li&gt;Retrieve your &lt;a href=&quot;#obtaining-a-gremlin-api-token&quot;&gt;Gremlin API Token&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;A &lt;a href=&quot;https://help.gremlin.com/api/&quot;&gt;Gremlin API&lt;/a&gt; &lt;strong&gt;Black Hole Attack&lt;/strong&gt; accepts the following arguments.&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Short Flag&lt;/th&gt;
+      &lt;th&gt;Long Flag&lt;/th&gt;
+      &lt;th&gt;Purpose&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;-d&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;--device&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;Network device through which traffic should be affected.  Defaults to the first device found.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;-h&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;--hostname&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;Outgoing hostnames to affect.  Optionally, you can prefix a hostname with a caret (&lt;code class=&quot;highlighter-rouge&quot;&gt;^&lt;/code&gt;) to whitelist it.  It is recommended to include &lt;code class=&quot;highlighter-rouge&quot;&gt;^api.gremlin.com&lt;/code&gt; in the whitelist.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;-i&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;--ipaddress&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;Outgoing IP addresses to affect.  Optionally, you can prefix an IP with a caret (&lt;code class=&quot;highlighter-rouge&quot;&gt;^&lt;/code&gt;) to whitelist it.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;-l&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;--length&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;Attack duration (in seconds).&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;-n&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;--ingress_port&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;Only affect ingress traffic to these destination ports.  Ranges can also be specified (e.g. &lt;code class=&quot;highlighter-rouge&quot;&gt;8080-8085&lt;/code&gt;).&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;-p&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;--egress_port&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;Only affect egress traffic to these destination ports.  Ranges can also be specified (e.g. &lt;code class=&quot;highlighter-rouge&quot;&gt;8080-8085&lt;/code&gt;).&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;-P&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;--ipprotocol&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;Only affect traffic using this protocol.&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;Start by performing a test to establish a baseline.  The following command tests the response time of a request to &lt;code class=&quot;highlighter-rouge&quot;&gt;example.com&lt;/code&gt; (which has an IP address of &lt;code class=&quot;highlighter-rouge&quot;&gt;93.184.216.34&lt;/code&gt;).&lt;/p&gt;
+
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;time &lt;/span&gt;curl &lt;span class=&quot;nt&quot;&gt;-o&lt;/span&gt; /dev/null 93.184.216.34
+
+ &lt;span class=&quot;c&quot;&gt;# OUTPUT&lt;/span&gt;
+ real    0m0.025s
+ user    0m0.009s
+ sys     0m0.000s
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;On your local machine, create the &lt;code class=&quot;highlighter-rouge&quot;&gt;attacks/blackhole.json&lt;/code&gt; file and paste the following JSON into it.  Set your target &lt;strong&gt;Client&lt;/strong&gt; as necessary.  This attack creates a &lt;code class=&quot;highlighter-rouge&quot;&gt;30-second&lt;/code&gt; black hole that drops traffic to the &lt;code class=&quot;highlighter-rouge&quot;&gt;93.184.216.34&lt;/code&gt; IP address.&lt;/p&gt;
+
+    &lt;div class=&quot;language-json highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+     &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;command&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+         &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;type&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;blackhole&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+         &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;args&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;-l&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;30&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;-i&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;93.184.216.34&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;-h&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;^api.gremlin.com&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+     &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+     &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;target&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+         &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;type&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Exact&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+         &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;exact&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;aws-nginx&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+     &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+ &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Execute the &lt;strong&gt;Black Hole Attack&lt;/strong&gt; by passing the JSON from &lt;code class=&quot;highlighter-rouge&quot;&gt;attacks/blackhole.json&lt;/code&gt; to the &lt;code class=&quot;highlighter-rouge&quot;&gt;https://api.gremlin.com/v1/attacks/new&lt;/code&gt; API endpoint.&lt;/p&gt;
+
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; curl &lt;span class=&quot;nt&quot;&gt;-H&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Content-Type: application/json&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-H&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Authorization: &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$GREMLIN_API_TOKEN&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt; https://api.gremlin.com/v1/attacks/new &lt;span class=&quot;nt&quot;&gt;-d&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;@attacks/blackhole.json&quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;On the target machine run the same timed &lt;code class=&quot;highlighter-rouge&quot;&gt;curl&lt;/code&gt; test as before.  It now hangs for approximately &lt;code class=&quot;highlighter-rouge&quot;&gt;30&lt;/code&gt; seconds until the black hole has been terminated and a response is finally received.&lt;/p&gt;
+
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;time &lt;/span&gt;curl &lt;span class=&quot;nt&quot;&gt;-o&lt;/span&gt; /dev/null 93.184.216.34
+
+ &lt;span class=&quot;c&quot;&gt;# OUTPUT&lt;/span&gt;
+ real    0m31.623s
+ user    0m0.013s
+ sys     0m0.000s
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;You can also view the &lt;strong&gt;Attack&lt;/strong&gt; on the &lt;a href=&quot;https://app.gremlin.com/attacks&quot;&gt;Gremlin Web UI&lt;/a&gt; to confirm it functioned properly.&lt;/p&gt;
+
+    &lt;p&gt;&lt;img alt=&quot;Gremlin Web UI Black Hole Attack&quot; src=&quot;/gremlin-blog-posts/assets/chaos-engineering/migrating-cloud-chaotic-embrace/web-ui-blackhole-attack-5568e6cf288a9ee0b6f17b6c0527fd80d2d917e83b2b513c3dc64a846389dbea.png&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;proper-memory-management&quot;&gt;Proper Memory Management&lt;/h2&gt;
+
+&lt;p&gt;While most commonly-used cloud platforms provide auto-balancing and scaling services, it’s impossible to rely solely on these technologies to ensure your migrated software will remain stable and responsive.  Memory management is a crucial part of maintaining a healthy and inexpensive cloud stack.  An improper configuration or poorly tested system may not necessarily cause a system failure or outage, but even a tiny memory issue can add up to thousands of dollars in extra support costs.&lt;/p&gt;
+
+&lt;p&gt;Performing Chaos Engineering before, during, and after cloud migration lets you test system failures when instances, containers, or nodes run out of memory.  This testing ensures your stack remains active and fully functional when an &lt;em&gt;unexpected&lt;/em&gt; memory leak occurs.&lt;/p&gt;
+
+&lt;h3 id=&quot;why-it-matters-google-docs-2011&quot;&gt;Why It Matters: Google Docs (2011)&lt;/h3&gt;
+
+&lt;p&gt;In early September 2011 Google Docs suffered a widespread, hour-long outage that prevented the majority of customers from accessing documents, drawings, lists, and App Scripts.  As Google &lt;a href=&quot;https://cloud.googleblog.com/2011/09/what-happened-to-google-docs-on.html&quot;&gt;later reported&lt;/a&gt;, the incident was caused by a change that exposed a memory leak that &lt;em&gt;only occurred under heavy load&lt;/em&gt;.  The lookup service that tracks Google Doc modifications wasn’t properly recycling memory, which eventually caused those machines to restart.  Redundancy systems immediately picked up the slack from these now-offline lookup service machines, but the excessive load caused the replacement machines to run out of memory even faster.  Eventually, the servers couldn’t handle the number of requests that were backed up, which led to the outage.&lt;/p&gt;
+
+&lt;p&gt;The Google engineering team was quick to diagnose the issue and roll out a fix within an hour of the first automated alert.  Unfortunately, Google engineers were unaware of the root cause &lt;em&gt;because&lt;/em&gt; it only occurred while the system was heavily loaded, which shows the importance of expressly testing system resilience when memory usage spikes.&lt;/p&gt;
+
+&lt;h3 id=&quot;performing-a-memory-attack-with-gremlin&quot;&gt;Performing a Memory Attack with Gremlin&lt;/h3&gt;
+
+&lt;p&gt;A Gremlin &lt;strong&gt;Memory Attack&lt;/strong&gt; consumes memory on the targeted machine, making it easy to test how that system and other dependencies behave when memory is unavailable.&lt;/p&gt;
+
+&lt;h4 id=&quot;prerequisites-3&quot;&gt;Prerequisites&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://help.gremlin.com/installation/&quot;&gt;Install Gremlin&lt;/a&gt; on the target machine.&lt;/li&gt;
+  &lt;li&gt;Retrieve your &lt;a href=&quot;#obtaining-a-gremlin-api-token&quot;&gt;Gremlin API Token&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;A &lt;a href=&quot;https://help.gremlin.com/api/&quot;&gt;Gremlin API&lt;/a&gt; &lt;strong&gt;Memory Attack&lt;/strong&gt; accepts the following arguments.&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Short Flag&lt;/th&gt;
+      &lt;th&gt;Long Flag&lt;/th&gt;
+      &lt;th&gt;Purpose&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;-g&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;--gigabytes&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;The amount of memory (in GB) to allocate.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;-l&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;--length&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;Attack duration (in seconds).&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;-m&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;--megabytes&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;The amount of memory (in MB) to allocate.&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;em&gt;(Optional)&lt;/em&gt; On the target machine check the current memory usage to establish a baseline prior to executing the attack.&lt;/p&gt;
+
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; htop
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+
+    &lt;p&gt;&lt;img alt=&quot;HTOP Pre-Attack Memory Usage&quot; src=&quot;/gremlin-blog-posts/assets/chaos-engineering/migrating-cloud-chaotic-embrace/htop-pre-memory-attack-8f541073fd8265545cde63ef1806cf4289a92ae5c2e6efc579be3b4942fa040d.png&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;On your local machine create an &lt;code class=&quot;highlighter-rouge&quot;&gt;attacks/memory.json&lt;/code&gt; file and paste the following JSON into it, ensuring you change your target &lt;strong&gt;Client&lt;/strong&gt;.  This attack will consume up to &lt;code class=&quot;highlighter-rouge&quot;&gt;0.75 GB&lt;/code&gt; of memory for a total of &lt;code class=&quot;highlighter-rouge&quot;&gt;30&lt;/code&gt; seconds.&lt;/p&gt;
+
+    &lt;div class=&quot;language-json highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+     &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;command&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+         &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;type&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;memory&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+         &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;args&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;-l&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;30&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;-g&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;0.75&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+     &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+     &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;target&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+         &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;type&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Exact&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+         &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;exact&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;aws-nginx&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+     &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+ &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Launch the &lt;strong&gt;Memory Attack&lt;/strong&gt; by passing the JSON from &lt;code class=&quot;highlighter-rouge&quot;&gt;attacks/memory.json&lt;/code&gt; to the &lt;code class=&quot;highlighter-rouge&quot;&gt;https://api.gremlin.com/v1/attacks/new&lt;/code&gt; API endpoint.&lt;/p&gt;
+
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; curl &lt;span class=&quot;nt&quot;&gt;-H&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Content-Type: application/json&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-H&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Authorization: &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$GREMLIN_API_TOKEN&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt; https://api.gremlin.com/v1/attacks/new &lt;span class=&quot;nt&quot;&gt;-d&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;@attacks/memory.json&quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;That additional memory is now consumed on the target machine.&lt;/p&gt;
+
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; htop
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+
+    &lt;p&gt;&lt;img alt=&quot;HTOP Post-Attack Memory Usage&quot; src=&quot;/gremlin-blog-posts/assets/chaos-engineering/migrating-cloud-chaotic-embrace/htop-post-memory-attack-3304d7bc26cdcd93493cb940279150f05d359173b9fe466042d0d8a6c1345036.png&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;As always, you can view the &lt;strong&gt;Attack&lt;/strong&gt; within the &lt;a href=&quot;https://app.gremlin.com/attacks&quot;&gt;Gremlin Web UI&lt;/a&gt;.&lt;/p&gt;
+
+    &lt;p&gt;&lt;img alt=&quot;Gremlin Web UI Memory Attack&quot; src=&quot;/gremlin-blog-posts/assets/chaos-engineering/migrating-cloud-chaotic-embrace/web-ui-memory-attack-56e3fb4d678bd41298bd5d8e68a4f90e8bf12ec6fc9f633bdc2af50585249edd.png&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;troubleshooting-io-bottlenecks&quot;&gt;Troubleshooting IO Bottlenecks&lt;/h2&gt;
+
+&lt;p&gt;Due to the proliferation of automatic monitoring and elastic scaling, IO failure may seem like one of the least likely problems within a cloud architecture.  However, even when IO failure isn’t necessarily the &lt;em&gt;root&lt;/em&gt; cause of an outage it is often the &lt;em&gt;result&lt;/em&gt; of another issue.  IO failure typically triggers a &lt;a href=&quot;https://aws.amazon.com/message/680342/&quot;&gt;negative cascading effect&lt;/a&gt; throughout the many other dependent systems.  Moreover, since IO failure is often considered an unlikely event, it’s more common for cloud-based stacks to be particularly vulnerable to IO-induced outages.&lt;/p&gt;
+
+&lt;h3 id=&quot;why-it-matters-amazon-ec2-ebs-and-rds-2011&quot;&gt;Why It Matters: Amazon EC2, EBS, and RDS (2011)&lt;/h3&gt;
+
+&lt;p&gt;Over the course of about a week in April 2011, Amazon EC2 customers suffered a &lt;a href=&quot;https://aws.amazon.com/message/65648/&quot;&gt;significant service outage&lt;/a&gt; when a high percentage of Amazon Elastic Block Store (EBS) volumes within a single Availability Zone in the US East Region became “stuck” – unable to perform read and write operations.  Other service instances attempting to access these “stuck” EBS volumes &lt;em&gt;also&lt;/em&gt; became “stuck” while trying to read or write to the volumes.  In turn, this degraded EBS cluster performance and increased latencies and error rates for EBS API calls across the entire US East Region.&lt;/p&gt;
+
+&lt;p&gt;Understanding the root cause of this outage and everything that was impacted requires a bit of understanding of how Amazon EBS functions.  Normally, an EBS cluster is comprised of a set of EBS nodes that automatically store EBS volume replicas and serve as fast failover redundancies.  If any single EBS volume is out of sync or is unavailable the peer-to-peer failover quickly provisions a new replica to replace the unavailable copy.  EBS nodes communicate over two networks.  The primary network handles high bandwidth connections for normal node-to-node, EC2, and control plane service communications.  The secondary network is a backup network to provide overflow capacity for data replication, but this secondary network is not intended to handle the traffic level of the primary network.&lt;/p&gt;
+
+&lt;p&gt;The outage stemmed from an improperly executed traffic shift while performing a configuration change to the primary network.  Traffic was incorrectly moved onto the low-capacity secondary network.  This had the effect of isolating many of the EBS nodes within the impacted Availability Zone, severing their connections to their replicas.&lt;/p&gt;
+
+&lt;p&gt;While the issue was quickly noticed and addressed, once traffic was reverted back to the primary network the affected EBS nodes swarmed the EBS cluster trying to find available server space to re-mirror data.  This overloaded the cluster and quickly consumed all free capacity, thereby leaving many EBS nodes in a “stuck” state.&lt;/p&gt;
+
+&lt;p class=&quot;notice--success&quot;&gt;In total, around 13% of all volumes in the affected Availability Zone were in a “stuck” state.&lt;/p&gt;
+
+&lt;p&gt;The full &lt;a href=&quot;https://aws.amazon.com/message/65648/&quot;&gt;incident summary report&lt;/a&gt; is a fascinating read if you have the time.  This incident presents a solid real-world example of the dramatic and costly impacts that even an initially minor IO failure can have on a large, distributed system.&lt;/p&gt;
+
+&lt;h3 id=&quot;performing-an-io-attack-with-gremlin&quot;&gt;Performing an IO Attack with Gremlin&lt;/h3&gt;
+
+&lt;p&gt;Gremlin’s &lt;strong&gt;IO Attack&lt;/strong&gt; performs rapid read and/or write actions on the targeted system volume.&lt;/p&gt;
+
+&lt;h4 id=&quot;prerequisites-4&quot;&gt;Prerequisites&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://help.gremlin.com/installation/&quot;&gt;Install Gremlin&lt;/a&gt; on the target machine.&lt;/li&gt;
+  &lt;li&gt;Retrieve your &lt;a href=&quot;#obtaining-a-gremlin-api-token&quot;&gt;Gremlin API Token&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;A &lt;a href=&quot;https://help.gremlin.com/api/&quot;&gt;Gremlin API&lt;/a&gt; &lt;strong&gt;IO Attack&lt;/strong&gt; accepts the following arguments.&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Short Flag&lt;/th&gt;
+      &lt;th&gt;Long Flag&lt;/th&gt;
+      &lt;th&gt;Purpose&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;-c&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;--block-count&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;The number of blocks read or written by workers.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;-d&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;--dir&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;The directory that temporary files will be written to.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;-l&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;--length&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;Attack duration (in seconds).&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;-m&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;--mode&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;Specifies if workers are in read (&lt;code class=&quot;highlighter-rouge&quot;&gt;r&lt;/code&gt;), write (&lt;code class=&quot;highlighter-rouge&quot;&gt;w&lt;/code&gt;), or read+write (&lt;code class=&quot;highlighter-rouge&quot;&gt;rw&lt;/code&gt;) mode.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;-s&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;--block-size&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;Size of blocks (in KB) that are read or written by workers.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;-w&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;--workers&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;The number of concurrent workers.&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;On your local machine create an &lt;code class=&quot;highlighter-rouge&quot;&gt;attacks/io.json&lt;/code&gt; file and paste the following JSON into it.  Change the target &lt;strong&gt;Client&lt;/strong&gt; as necessary.  This &lt;strong&gt;IO Attack&lt;/strong&gt; creates two workers that will perform both reads and writes during the &lt;code class=&quot;highlighter-rouge&quot;&gt;45-second&lt;/code&gt; attack.&lt;/p&gt;
+
+    &lt;div class=&quot;language-json highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+     &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;command&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+         &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;type&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;io&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+         &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;args&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;-l&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;45&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;-d&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;/tmp&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;-w&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;2&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;-m&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;rw&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;-s&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;4&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;-c&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;1&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+     &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+     &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;target&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+         &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;type&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Exact&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+         &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;exact&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;aws-nginx&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+     &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+ &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Launch the &lt;strong&gt;IO Attack&lt;/strong&gt; by passing the JSON from &lt;code class=&quot;highlighter-rouge&quot;&gt;attacks/io.json&lt;/code&gt; to the &lt;code class=&quot;highlighter-rouge&quot;&gt;https://api.gremlin.com/v1/attacks/new&lt;/code&gt; API endpoint.&lt;/p&gt;
+
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; curl &lt;span class=&quot;nt&quot;&gt;-H&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Content-Type: application/json&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-H&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Authorization: &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$GREMLIN_API_TOKEN&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt; https://api.gremlin.com/v1/attacks/new &lt;span class=&quot;nt&quot;&gt;-d&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;@attacks/io.json&quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;On the target machine verify that the attack is running and that IO is currently overloaded.&lt;/p&gt;
+
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;iotop &lt;span class=&quot;nt&quot;&gt;-aoP&lt;/span&gt;
+ &lt;span class=&quot;c&quot;&gt;# OUTPUT&lt;/span&gt;
+ Total DISK READ :       0.00 B/s | Total DISK WRITE :       3.92 M/s
+ Actual DISK READ:       0.00 B/s | Actual DISK WRITE:      15.77 M/s
+ PID  PRIO  USER       DISK READ  DISK WRITE  SWAPIN     IO&amp;gt;     COMMAND
+ 323   be/3 root          0.00 B     68.00 K  0.00 % 71.28 %   &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;jbd2/xvda1-8]
+ 20030 be/4 gremlin       0.00 B    112.15 M  0.00 % 17.11 %   gremlin attack io &lt;span class=&quot;nt&quot;&gt;-l&lt;/span&gt; 45 &lt;span class=&quot;nt&quot;&gt;-d&lt;/span&gt; /tmp &lt;span class=&quot;nt&quot;&gt;-w&lt;/span&gt; 2 &lt;span class=&quot;nt&quot;&gt;-m&lt;/span&gt; rw &lt;span class=&quot;nt&quot;&gt;-s&lt;/span&gt; 4 &lt;span class=&quot;nt&quot;&gt;-c&lt;/span&gt; 1
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;You can also view the &lt;strong&gt;Attack&lt;/strong&gt; within the &lt;a href=&quot;https://app.gremlin.com/attacks&quot;&gt;Gremlin Web UI&lt;/a&gt;.&lt;/p&gt;
+
+    &lt;p&gt;&lt;img alt=&quot;Gremlin Web UI IO Attack&quot; src=&quot;/gremlin-blog-posts/assets/chaos-engineering/migrating-cloud-chaotic-embrace/web-ui-io-attack-ff90b8f038d7908f60d63c251445b438473139c381d0ff2dab50061f5261a656.png&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;what-comes-next&quot;&gt;What Comes Next?&lt;/h2&gt;
+
+&lt;p&gt;This article explored a number of common issues and outages related to failed migrations and upgrade procedures.  As impactful and expensive as those outages may have been, their existence shouldn’t dissuade you from making the move to the cloud.  The myriad benefits of a distributed stack are undeniable, particularly as software expands outward and continues to embrace microservice-based architecture.&lt;/p&gt;
+
+&lt;p&gt;Instead, the occurrence of migration issues for even the biggest organizations in the industry illustrates the necessity of proper resilience testing.  Chaos Engineering is a critical piece of that finished and fully-resilient puzzle.  Planning ahead and inducing controlled chaos on your systems, both prior to and during migration, will help ensure you’re creating the most stable, robust, and resilient system possible.  Moreover, Chaos Engineering reduces downtime, lowers support costs, and speeds up the overall migration process.  Intelligent Chaos Experiments reveal weaknesses, thereby empowering your team to patch up any holes before they bust wide open within a post-migration state.&lt;/p&gt;</content><author><name>Gabe Wyatt</name></author><category term="migration" /><category term="experiment" /><category term="outage" /><summary type="html">Why organizations planning to migrate to the cloud should embrace Chaos Engineering as a thoughtful strategy to avoid pain down the road.</summary></entry></feed>

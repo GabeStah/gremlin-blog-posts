@@ -9,19 +9,19 @@
   <head>
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>Migrating to the Cloud is Chaotic. Embrace it. - Gremlin: Blog Posts</title>
-<meta name="description" content="Why you should embrace Chaos Engineering prior to migrating to the cloud, allowing you to avoid pain down the road.">
+<!-- begin _includes/seo.html --><title>Migrating to the Cloud Is Chaotic. Embrace It. - Gremlin: Blog Posts</title>
+<meta name="description" content="Why organizations planning to migrate to the cloud should embrace Chaos Engineering as a thoughtful strategy to avoid pain down the road.">
 
 
 
 <meta property="og:type" content="article">
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="Gremlin: Blog Posts">
-<meta property="og:title" content="Migrating to the Cloud is Chaotic. Embrace it.">
+<meta property="og:title" content="Migrating to the Cloud Is Chaotic. Embrace It.">
 <meta property="og:url" content="http://localhost:4000/gremlin-blog-posts/chaos-engineering/migrating-cloud-chaotic-embrace/">
 
 
-  <meta property="og:description" content="Why you should embrace Chaos Engineering prior to migrating to the cloud, allowing you to avoid pain down the road.">
+  <meta property="og:description" content="Why organizations planning to migrate to the cloud should embrace Chaos Engineering as a thoughtful strategy to avoid pain down the road.">
 
 
 
@@ -98,7 +98,7 @@
 
 
     <!-- start custom head snippets -->
-<link rel="icon" href="https://www.gremlin.com/favicon-32x32.png" />
+<link rel="icon" href="/gremlin-blog-posts/assets/images/favicon.ico" />
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
 <!-- insert favicons. use https://realfavicongenerator.net/ -->
 
@@ -164,7 +164,7 @@
     
       
       
-        <li class="current">Migrating to the Cloud is Chaotic. Embrace it.</li>
+        <li class="current">Migrating to the Cloud Is Chaotic. Embrace It.</li>
       
     
   </ol>
@@ -234,15 +234,15 @@
 
 
   <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
-    <meta itemprop="headline" content="Migrating to the Cloud is Chaotic. Embrace it.">
-    <meta itemprop="description" content="Why you should embrace Chaos Engineering prior to migrating to the cloud, allowing you to avoid pain down the road.">
+    <meta itemprop="headline" content="Migrating to the Cloud Is Chaotic. Embrace It.">
+    <meta itemprop="description" content="Why organizations planning to migrate to the cloud should embrace Chaos Engineering as a thoughtful strategy to avoid pain down the road.">
     <meta itemprop="datePublished" content="October 05, 2018">
     
 
     <div class="page__inner-wrap">
       
         <header>
-          <h1 id="page-title" class="page__title" itemprop="headline">Migrating to the Cloud is Chaotic. Embrace it.
+          <h1 id="page-title" class="page__title" itemprop="headline">Migrating to the Cloud Is Chaotic. Embrace It.
 </h1>
           
             <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
@@ -250,7 +250,7 @@
 
 
 
-  17 minute read
+  24 minute read
 </p>
           
         </header>
@@ -266,12 +266,13 @@
   <li>
 <a href="#managing-heavy-cpu-load">Managing Heavy CPU Load</a>
     <ul>
-      <li><a href="#why-it-matters-tbd">Why It Matters: TBD</a></li>
+      <li><a href="#why-it-matters-hotmail--outlook-2013">Why It Matters: Hotmail &amp; Outlook (2013)</a></li>
+      <li><a href="#obtaining-a-gremlin-api-token">Obtaining a Gremlin API Token</a></li>
       <li><a href="#performing-a-cpu-attack-with-gremlin">Performing a CPU Attack with Gremlin</a></li>
     </ul>
   </li>
   <li>
-<a href="#storage-disk-limitations">Storage Disk Limitations</a>
+<a href="#handling-storage-disk-limitations">Handling Storage Disk Limitations</a>
     <ul>
       <li><a href="#why-it-matters-instapaper-2017">Why It Matters: Instapaper (2017)</a></li>
       <li><a href="#performing-a-disk-attack-with-gremlin">Performing a Disk Attack with Gremlin</a></li>
@@ -281,7 +282,7 @@
 <a href="#evaluating-network-resiliency">Evaluating Network Resiliency</a>
     <ul>
       <li><a href="#why-it-matters-microsoft-office-365-2013">Why It Matters: Microsoft Office 365 (2013)</a></li>
-      <li><a href="#performing-a-blackhole-attack-with-gremlin">Performing a Blackhole Attack with Gremlin</a></li>
+      <li><a href="#performing-a-black-hole-attack-with-gremlin">Performing a Black Hole Attack with Gremlin</a></li>
     </ul>
   </li>
   <li>
@@ -292,509 +293,44 @@
     </ul>
   </li>
   <li>
-<a href="#io">IO</a>
+<a href="#troubleshooting-io-bottlenecks">Troubleshooting IO Bottlenecks</a>
     <ul>
-      <li><a href="#why-it-matters-tbd-1">Why It Matters: TBD</a></li>
+      <li><a href="#why-it-matters-amazon-ec2-ebs-and-rds-2011">Why It Matters: Amazon EC2, EBS, and RDS (2011)</a></li>
       <li><a href="#performing-an-io-attack-with-gremlin">Performing an IO Attack with Gremlin</a></li>
     </ul>
   </li>
-  <li><a href="#obtaining-a-gremlin-api-token">Obtaining a Gremlin API Token</a></li>
+  <li><a href="#what-comes-next">What Comes Next?</a></li>
 </ul>
             </nav>
           </aside>
         
-        <p class="notice--danger"><strong>PURPOSE</strong>: Demonstrate why companies migrating to the cloud should embrace Chaos Engineering early and often to avoid pain down the road.</p>
+        <p class="notice--danger">Why organizations planning to migrate to the cloud should embrace Chaos Engineering as a thoughtful strategy to avoid pain down the road.</p>
 
-<p>Migrating to the cloud often feels like a monumental task.  This feeling is completely understandable – there’s a sense of comfort in the tangible nature of on-premises systems.  By contrast, moving into the ephemeral cloud can be worrisome, especially if you doubt the stability and resilience of the systems that make up your cloud architecture.  The inherent malleability of a cloud stack is both its greatest strength and a massive source of potential failures.  How can you ensure your software will be safe after migrating to the cloud?  How do you combat the cloud’s chaotic nature while ensuring a resilient and stable system?  <strong>By intentionally inducing Chaos well before migration begins.</strong></p>
+<p>For many people, migrating to the cloud feels like an insurmountable task and understandably so – there’s a sense of comfort in the tangible nature of on-premises systems.  By contrast, moving into the ephemeral cloud is worrisome, especially if you doubt the stability and resilience of the systems that make up your cloud architecture.  The inherent malleability of a cloud stack is both its greatest strength and one of its biggest sources of potential failure.</p>
 
-<p>It may feel counter-intuitive to purposely inject additional chaos into your system when your team is actively trying to <em>reduce</em> failures, but the critical difference here is that Chaos Engineering allows your team to <em>choose</em> when and how systems fail.  This ensures your architecture is able to withstand unexpected failures.  By executing Chaos Experiments on both your existing systems and cloud systems you’re migrating into, you’ll identify weaknesses at both ends of the spectrum.</p>
+<p class="notice--success">How can you ensure your software will be safe after migrating to the cloud?  How do you combat the cloud’s chaotic nature while ensuring a resilient and stable system?  <strong>By intentionally inducing Chaos well before migration begins.</strong></p>
 
-<p>Testing your system resiliency throughout the migration process is critical, as migration is the period in a software’s life cycle in which outages are <em>most likely</em> to occur.  In 2016, groups from the University of Chicago and Surya University jointly published an in-depth <a href="http://ucare.cs.uchicago.edu/pdf/socc16-cos.pdf" target="_blank" rel="noopener noreferrer">cloud outage study</a> that examined the causes of service outages among 32 of the most popular Internet services between 2009 and 2015.  The study found that the <em>majority</em> of unplanned outages (16%) are caused by failures during upgrade and migration procedures.</p>
+<p>It may feel counter-intuitive to purposely inject additional chaos into your system when your team is actively trying to <em>reduce</em> failures.  The critical difference here is that Chaos Engineering allows your team to <em>choose</em> when and how systems fail.  This ensures your architecture is able to withstand unexpected failures.  By executing Chaos Experiments on both existing and cloud systems you’re migrating into, you’ll identify weaknesses at both ends of the spectrum.</p>
+
+<p>Testing your system resiliency throughout the migration process is critical, as migration is the period in a software’s life cycle in which outages are <em>most likely</em> to occur.  In 2016, groups from the University of Chicago and Surya University jointly published an in-depth <a href="http://ucare.cs.uchicago.edu/pdf/socc16-cos.pdf" target="_blank" rel="noopener noreferrer">cloud outage study</a> that examined the causes of service outages among 32 of the most popular Internet services between 2009 and 2015.</p>
+
+<p class="notice--success">The <a href="http://ucare.cs.uchicago.edu/pdf/socc16-cos.pdf" target="_blank" rel="noopener noreferrer">study</a> found that the <em>majority</em> of unplanned outages (16%) are caused by failures during upgrade and migration processes.</p>
 
 <h2 id="managing-heavy-cpu-load">Managing Heavy CPU Load</h2>
 
-<p>CPU overloading is an easy yet effective experiment that illuminates bottlenecks and computational failures within the architecture.  This is particularly critical when migrating to a cloud environment, where instability in a single system can quickly cascade into problems elsewhere down the chain.</p>
+<p>An overloaded CPU can quickly create bottlenecks and cause computational failures within most cloud architectures.  This is critical when migrating to a cloud environment, where instability in a single system can quickly cascade into problems elsewhere down the chain.  Proper CPU resilience testing helps to determine which existing systems are currently resilient to a CPU failure, and which need to be prioritized for upgrade and migration necessary to maintain a stable stack.</p>
 
-<h3 id="why-it-matters-tbd">Why It Matters: TBD</h3>
+<h3 id="why-it-matters-hotmail--outlook-2013">Why It Matters: Hotmail &amp; Outlook (2013)</h3>
 
-<p>(TODO)</p>
+<p>Microsoft’s customer migration from Hotmail to the new Outlook.com was generally executed without a hitch.  Unfortunately, on March 12th, 2013 a failed firmware upgrade <a href="https://www.microsoft.com/en-us/microsoft-365/blog/2013/03/13/details-of-the-hotmail-outlook-com-outage-on-march-12th/" target="_blank" rel="noopener noreferrer">caused</a> a 16+ hour outage for some customers trying to access SkyDrive, Hotmail, and Outlook.com services.</p>
 
-<h3 id="performing-a-cpu-attack-with-gremlin">Performing a CPU Attack with Gremlin</h3>
+<p>Microsoft reported that the firmware update “failed […] in an unexpected way,” but did not provide any additional details on the root cause.  However, this failure resulted in rapid, substantial temperature spikes within the datacenter.  The increase in temperature triggered automatic safeguards for a large portion of the servers within the datacenter.  Consequently, the safeguards prevented mailbox access for affected customers, and also prevented automatic failover processes from performing their normal duties.</p>
 
-<h4 id="prerequisites">Prerequisites</h4>
+<p>Without additional details on the root cause and the specific impacts, we can only speculate, but a temperature spike points toward a dramatic spike in CPU load for some servers within the datacenter.  In this particular instance, it’s possible that pre-emptive Chaos Engineering may have allowed engineers to simulate similar heavy CPU load scenarios.</p>
 
-<ul>
-  <li>
-<a href="https://help.gremlin.com/installation/" target="_blank" rel="noopener noreferrer">Install Gremlin</a> on the target machine.</li>
-  <li>Retrieve your <a href="#obtaining-a-gremlin-api-token">Gremlin API Token</a>.</li>
-</ul>
+<h3 id="obtaining-a-gremlin-api-token">Obtaining a Gremlin API Token</h3>
 
-<p>A <a href="https://help.gremlin.com/api/" target="_blank" rel="noopener noreferrer">Gremlin API</a> <strong>CPU Attack</strong> accepts the following arguments.</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>Short Flag</th>
-      <th>Long Flag</th>
-      <th>Purpose</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code class="highlighter-rouge">-c</code></td>
-      <td><code class="highlighter-rouge">--cores</code></td>
-      <td>Number of CPU cores to attack.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">-l</code></td>
-      <td><code class="highlighter-rouge">--length</code></td>
-      <td>Attack duration (in seconds).</td>
-    </tr>
-  </tbody>
-</table>
-
-<p>Most <a href="https://help.gremlin.com/api/" target="_blank" rel="noopener noreferrer">Gremlin API</a> calls accept a JSON body payload, which specifies critical arguments.  In all the following examples we’ll be creating a local <code class="highlighter-rouge">attacks/&lt;attack-name&gt;.json</code> file to store the API attack arguments and pass those arguments along to the request.</p>
-
-<ol>
-  <li>
-    <p>On your local machine, start by creating the <code class="highlighter-rouge">attacks/cpu-random.json</code> file and paste the following JSON into it.  This will attack a single core for <code class="highlighter-rouge">30</code> seconds.</p>
-
-    <div class="language-json highlighter-rouge">
-<div class="highlight"><pre class="highlight"><code><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">attacks/cpu-random.json</span><span class="w">
- </span><span class="p">{</span><span class="w">
-     </span><span class="s2">"command"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-         </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cpu"</span><span class="p">,</span><span class="w">
-         </span><span class="s2">"args"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"-c"</span><span class="p">,</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w"> </span><span class="s2">"-l"</span><span class="p">,</span><span class="w"> </span><span class="s2">"30"</span><span class="p">]</span><span class="w">
-     </span><span class="p">},</span><span class="w">
-     </span><span class="s2">"target"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-         </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Random"</span><span class="w">
-     </span><span class="p">}</span><span class="w">
- </span><span class="p">}</span><span class="w">
-</span></code></pre></div>    </div>
-  </li>
-  <li>
-    <p>Create the new <strong>Attack</strong> by passing the JSON from <code class="highlighter-rouge">attacks/cpu-random.json</code> to the <code class="highlighter-rouge">https://api.gremlin.com/v1/attacks/new</code> API endpoint.</p>
-
-    <div class="language-bash highlighter-rouge">
-<div class="highlight"><pre class="highlight"><code> curl <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="nt">-H</span> <span class="s2">"Authorization: </span><span class="nv">$GREMLIN_API_TOKEN</span><span class="s2">"</span> https://api.gremlin.com/v1/attacks/new <span class="nt">-d</span> <span class="s2">"@attacks/cpu-random.json"</span>
-</code></pre></div>    </div>
-  </li>
-  <li>
-    <p>The <a href="https://app.gremlin.com/" target="_blank" rel="noopener noreferrer">Gremlin Web UI</a> now shows the <strong>Attack</strong> that was created.</p>
-
-    <p><img alt="Gremlin Web UI CPU Attack" src="/gremlin-blog-posts/assets/chaos-engineering/migrating-cloud-chaotic-embrace/web-ui-cpu-attack-a4b0c805d6d2e406611908b22a848de1cf03193d1db5ae434fc14f9905c200b3.png" class="align-center"></p>
-  </li>
-  <li>
-    <p>Additionally, the targeted machine also has one CPU core maxed out.</p>
-
-    <p><img alt="htop CPU Maximized" src="/gremlin-blog-posts/assets/chaos-engineering/migrating-cloud-chaotic-embrace/htop-cpu-max-22d1f36521ae859ff70072681c19c490d4f9d27aadca4e03ddddaa47f6dc69d8.png" class="align-center"></p>
-  </li>
-</ol>
-
-<p class="notice--info"><strong>Optional</strong> If you wish to attack a <em>specific</em> <strong>Client</strong> just change the <code class="highlighter-rouge">target | type</code> argument value to <code class="highlighter-rouge">"Exact"</code> and add the <code class="highlighter-rouge">target | exact</code> field with a list of target <strong>Clients</strong>.  A <strong>Client</strong> is identified on Gremlin as the <code class="highlighter-rouge">GREMLIN_IDENTIFIER</code> for the instance.</p>
-
-<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">//</span><span class="w"> </span><span class="err">attacks/cpu-exact.json</span><span class="w">
-</span><span class="p">{</span><span class="w">
-    </span><span class="s2">"command"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cpu"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"args"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"-c"</span><span class="p">,</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w"> </span><span class="s2">"-l"</span><span class="p">,</span><span class="w"> </span><span class="s2">"30"</span><span class="p">]</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="s2">"target"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Exact"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"exact"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"aws-nginx"</span><span class="p">]</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div></div>
-
-<h2 id="storage-disk-limitations">Storage Disk Limitations</h2>
-
-<p>Migrating to a new system frequently requires moving volumes across disks and to other cloud-based storage layers.  It’s vital to determine if the new storage system can handle the increase in volume the migration will require.  Additionally, to properly test the resilience of the system you’ll also want to test how the system reacts when disks are overburdened or unavailable.</p>
-
-<h3 id="why-it-matters-instapaper-2017">Why It Matters: Instapaper (2017)</h3>
-
-<p>In February 2017 the popular web content bookmarking service Instapaper suffered <a href="https://medium.com/making-instapaper/instapaper-outage-cause-recovery-3c32a7e9cc5f" target="_blank" rel="noopener noreferrer">a service outage</a> due to a <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Limits.html#RDS_Limits.FileSize" target="_blank" rel="noopener noreferrer">2 TB file size limit</a> within Instapaper’s Amazon RDS MySQL instance.</p>
-
-<p>This issue was unknown to Instapaper ever since their migration to AWS in 2013.  At that time, they migrated their database to MySQL on Amazon RDS, which was using a slightly outdated version of MySQL that enforced the 2 TB file size limit.  Even after attempting to upgrade to newer hardware and a newer MySQL version in March 2015, the original instance that contained the 2 TB limit was replicated, thereby retaining the hidden problem.</p>
-
-<p>Eventually their database finally hit that limit in early 2017 and caused a day+ service outage.  As Instapaper points out in their post mortem, it was difficult for the team to be aware of this limitation and potential issue ahead of time.  However, this unfortunate event illustrates the importance of properly testing data storage systems prior to migration.</p>
-
-<h3 id="performing-a-disk-attack-with-gremlin">Performing a Disk Attack with Gremlin</h3>
-
-<p>Gremlin’s <strong>Disk Attack</strong> rapidly consumes disk space on the targeted machine, allowing you to test the resiliency of that machine and other related systems when unexpected disk failures occur.</p>
-
-<h4 id="prerequisites-1">Prerequisites</h4>
-
-<ul>
-  <li>
-<a href="https://help.gremlin.com/installation/" target="_blank" rel="noopener noreferrer">Install Gremlin</a> on the target machine.</li>
-  <li>Retrieve your <a href="#obtaining-a-gremlin-api-token">Gremlin API Token</a>.</li>
-</ul>
-
-<p>A <a href="https://help.gremlin.com/api/" target="_blank" rel="noopener noreferrer">Gremlin API</a> <strong>Disk Attack</strong> accepts the following arguments.</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>Short Flag</th>
-      <th>Long Flag</th>
-      <th>Purpose</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code class="highlighter-rouge">-b</code></td>
-      <td><code class="highlighter-rouge">--block-size</code></td>
-      <td>The block size (in kilobytes) that are written.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">-d</code></td>
-      <td><code class="highlighter-rouge">--dir</code></td>
-      <td>The directory that temporary files will be written to.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">-l</code></td>
-      <td><code class="highlighter-rouge">--length</code></td>
-      <td>Attack duration (in seconds).</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">-p</code></td>
-      <td><code class="highlighter-rouge">--percent</code></td>
-      <td>The percentage of volume to fill.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">-w</code></td>
-      <td><code class="highlighter-rouge">--workers</code></td>
-      <td>The number of disk-write workers to run concurrently.</td>
-    </tr>
-  </tbody>
-</table>
-
-<ol>
-  <li>
-    <p>On your local machine, start by creating the <code class="highlighter-rouge">attacks/disk-exact.json</code> file and paste the following JSON into it.  Be sure to change your target <strong>Client</strong>.  This will attempt to fill <code class="highlighter-rouge">95%</code> of the volume over the course of a <code class="highlighter-rouge">60</code> second attack using <code class="highlighter-rouge">2</code> workers.</p>
-
-    <div class="language-json highlighter-rouge">
-<div class="highlight"><pre class="highlight"><code><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">attacks/disk-random.json</span><span class="w">
- </span><span class="p">{</span><span class="w">
-     </span><span class="s2">"command"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-         </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"disk"</span><span class="p">,</span><span class="w">
-         </span><span class="s2">"args"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"-d"</span><span class="p">,</span><span class="w"> </span><span class="s2">"/tmp"</span><span class="p">,</span><span class="w"> </span><span class="s2">"-l"</span><span class="p">,</span><span class="w"> </span><span class="s2">"60"</span><span class="p">,</span><span class="w"> </span><span class="s2">"-w"</span><span class="p">,</span><span class="w"> </span><span class="s2">"2"</span><span class="p">,</span><span class="w"> </span><span class="s2">"-b"</span><span class="p">,</span><span class="w"> </span><span class="s2">"4"</span><span class="p">,</span><span class="w"> </span><span class="s2">"-p"</span><span class="p">,</span><span class="w"> </span><span class="s2">"95"</span><span class="p">]</span><span class="w">
-     </span><span class="p">},</span><span class="w">
-     </span><span class="s2">"target"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-         </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Exact"</span><span class="p">,</span><span class="w">
-         </span><span class="s2">"exact"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"aws-nginx"</span><span class="p">]</span><span class="w">
-     </span><span class="p">}</span><span class="w">
- </span><span class="p">}</span><span class="w">
-</span></code></pre></div>    </div>
-  </li>
-  <li>
-    <p><em>(Optional)</em> Check the current disk usage on the target machine.</p>
-
-    <div class="language-bash highlighter-rouge">
-<div class="highlight"><pre class="highlight"><code> <span class="nb">df</span> <span class="nt">-H</span>
- <span class="c"># OUTPUT</span>
- Filesystem      Size  Used Avail Use% Mounted on
- /dev/xvda1      8.3G  1.4G  6.9G  17% /
-</code></pre></div>    </div>
-  </li>
-  <li>
-    <p>Create the new <strong>Disk Attack</strong> by passing the JSON from <code class="highlighter-rouge">attacks/disk-exact.json</code> to the <code class="highlighter-rouge">https://api.gremlin.com/v1/attacks/new</code> API endpoint.</p>
-
-    <div class="language-bash highlighter-rouge">
-<div class="highlight"><pre class="highlight"><code> curl <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="nt">-H</span> <span class="s2">"Authorization: </span><span class="nv">$GREMLIN_API_TOKEN</span><span class="s2">"</span> https://api.gremlin.com/v1/attacks/new <span class="nt">-d</span> <span class="s2">"@attacks/disk-exact.json"</span>
-</code></pre></div>    </div>
-  </li>
-  <li>
-    <p>The <a href="https://app.gremlin.com/" target="_blank" rel="noopener noreferrer">Gremlin Web UI</a> now shows the <strong>Attack</strong> that was created.</p>
-
-    <p><img alt="Gremlin Web UI Disk Attack" src="/gremlin-blog-posts/assets/chaos-engineering/migrating-cloud-chaotic-embrace/web-ui-disk-attack-57c40e03b827748989ab14c9d7277c326e7fc3dab092ad569fee72d6069eb5d7.png" class="align-center"></p>
-  </li>
-  <li>
-    <p>Check the attack target’s current disk space, which will soon reach the specified percentage before Gremlin rolls back and returns the disk to the original state.</p>
-
-    <div class="language-bash highlighter-rouge">
-<div class="highlight"><pre class="highlight"><code> <span class="nb">df</span> <span class="nt">-H</span>
- <span class="c"># OUTPUT</span>
- Filesystem      Size  Used Avail Use% Mounted on
- /dev/xvda1      8.3G  7.9G  396M  96% /
-</code></pre></div>    </div>
-  </li>
-</ol>
-
-<h2 id="evaluating-network-resiliency">Evaluating Network Resiliency</h2>
-
-<p>While the majority of Internet service outages are caused by failures during migration and upgrade procedures, the <a href="http://ucare.cs.uchicago.edu/pdf/socc16-cos.pdf" target="_blank" rel="noopener noreferrer">Why Does the Cloud Stop Computing?
-Lessons from Hundreds of Service Outages</a> study found that network problems are the second most common cause and account for some <code class="highlighter-rouge">15%</code> of service outages.  Even architectures designed with network redundancies can experience multiple, stacking network failures without proper testing and experimentation.  Moreover, most modern software relies on external networks to some degree, which means a network outage completely outside of your control could cause a failure to propagate throughout your system.</p>
-
-<h3 id="why-it-matters-microsoft-office-365-2013">Why It Matters: Microsoft Office 365 (2013)</h3>
-
-<p>On February 1st, 2013 a change to the Microsoft Online edge network prevented some internet traffic from reaching the Microsoft Office 365 service, which prevented customers from accessing Exchange and SharePoint services for a few hours.  While the <a href="https://www.quadrotech-it.com/blog/feb-1-office-365-outage-incident-review-release/" target="_blank" rel="noopener noreferrer">incident report</a> doesn’t explicitly name the underlying change that caused the problem, it does state that that a procedural error was unintentionally and automatically propagated to multiple devices within the Microsoft Online network, which “caused incorrect routing for a portion of the inbound internet traffic.”  Additionally, affected customers were unable to access administrative services within the <strong>Service Health Dashboard</strong> (SHD) provided by Microsoft, but the backup process for supporting customers unable to access the SHD did not work as well as expected.</p>
-
-<p>While this overall incident only lasted a few hours and affected a small subset of customers, it illustrates the importance of proper network resiliency testing prior to and during system migrations and upgrade procedures.  Chaos Experiments that cause networking failures – such as creating a blackhole so certain traffic is halted – are a great way to test system stability under these unexpected conditions.</p>
-
-<h3 id="performing-a-blackhole-attack-with-gremlin">Performing a Blackhole Attack with Gremlin</h3>
-
-<p>A <strong>Blackhole Attack</strong> temporarily drop all traffic based on the parameters of the attack.  You can use a <strong>Blackhole Attack</strong> to test routing protocols, loss of communication to specific hosts, port-based traffic, network device failure, and much more.</p>
-
-<h4 id="prerequisites-2">Prerequisites</h4>
-
-<ul>
-  <li>
-<a href="https://help.gremlin.com/installation/" target="_blank" rel="noopener noreferrer">Install Gremlin</a> on the target machine.</li>
-  <li>Retrieve your <a href="#obtaining-a-gremlin-api-token">Gremlin API Token</a>.</li>
-</ul>
-
-<p>A <a href="https://help.gremlin.com/api/" target="_blank" rel="noopener noreferrer">Gremlin API</a> <strong>Blackhole Attack</strong> accepts the following arguments.</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>Short Flag</th>
-      <th>Long Flag</th>
-      <th>Purpose</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code class="highlighter-rouge">-d</code></td>
-      <td><code class="highlighter-rouge">--device</code></td>
-      <td>Network device through which traffic should be affected.  Defaults to the first device found.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">-h</code></td>
-      <td><code class="highlighter-rouge">--hostname</code></td>
-      <td>Outgoing hostnames to affect.  Optionally, you can prefix a hostname with a caret (<code class="highlighter-rouge">^</code>) to whitelist it.  It is recommended to include <code class="highlighter-rouge">^api.gremlin.com</code> in the whitelist.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">-i</code></td>
-      <td><code class="highlighter-rouge">--ipaddress</code></td>
-      <td>Outgoing IP addresses to affect.  Optionally, you can prefix an IP with a caret (<code class="highlighter-rouge">^</code>) to whitelist it.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">-l</code></td>
-      <td><code class="highlighter-rouge">--length</code></td>
-      <td>Attack duration (in seconds).</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">-n</code></td>
-      <td><code class="highlighter-rouge">--ingress_port</code></td>
-      <td>Only affect ingress traffic to these destination ports.  Optionally, ranges can also be specified (e.g. <code class="highlighter-rouge">8080-8085</code>).</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">-p</code></td>
-      <td><code class="highlighter-rouge">--egress_port</code></td>
-      <td>Only affect egress traffic to these destination ports.  Optionally, ranges can also be specified (e.g. <code class="highlighter-rouge">8080-8085</code>).</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">-P</code></td>
-      <td><code class="highlighter-rouge">--ipprotocol</code></td>
-      <td>Only affect traffic using this protocol.</td>
-    </tr>
-  </tbody>
-</table>
-
-<ol>
-  <li>
-    <p>Start by performing a test to establish a baseline.  The following command tests the response time of a request to <code class="highlighter-rouge">example.com</code> (which has an IP address of <code class="highlighter-rouge">93.184.216.34</code>).</p>
-
-    <div class="language-bash highlighter-rouge">
-<div class="highlight"><pre class="highlight"><code> <span class="nv">$ </span><span class="nb">time </span>curl <span class="nt">-o</span> /dev/null 93.184.216.34
-
- <span class="c"># OUTPUT</span>
- real    0m0.025s
- user    0m0.009s
- sys     0m0.000s
-</code></pre></div>    </div>
-  </li>
-  <li>
-    <p>On your local machine, create the <code class="highlighter-rouge">attacks/blackhole-exact.json</code> file and paste the following JSON into it.  Set your target <strong>Client</strong> as necessary.  This attack creates a <code class="highlighter-rouge">30</code> second blackhole that drops traffic to the <code class="highlighter-rouge">93.184.216.34</code> IP address.</p>
-
-    <div class="language-json highlighter-rouge">
-<div class="highlight"><pre class="highlight"><code><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">attacks/blackhole-random.json</span><span class="w">
- </span><span class="p">{</span><span class="w">
-     </span><span class="s2">"command"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-         </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"blackhole"</span><span class="p">,</span><span class="w">
-         </span><span class="s2">"args"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"-l"</span><span class="p">,</span><span class="w"> </span><span class="s2">"30"</span><span class="p">,</span><span class="w"> </span><span class="s2">"-i"</span><span class="p">,</span><span class="w"> </span><span class="s2">"93.184.216.34"</span><span class="p">,</span><span class="w"> </span><span class="s2">"-h"</span><span class="p">,</span><span class="w"> </span><span class="s2">"^api.gremlin.com"</span><span class="p">]</span><span class="w">
-     </span><span class="p">},</span><span class="w">
-     </span><span class="s2">"target"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-         </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Exact"</span><span class="p">,</span><span class="w">
-         </span><span class="s2">"exact"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"aws-nginx"</span><span class="p">]</span><span class="w">
-     </span><span class="p">}</span><span class="w">
- </span><span class="p">}</span><span class="w">
-</span></code></pre></div>    </div>
-  </li>
-  <li>
-    <p>Execute the <strong>Blackhole Attack</strong> by passing the JSON from <code class="highlighter-rouge">attacks/blackhole-exact.json</code> to the <code class="highlighter-rouge">https://api.gremlin.com/v1/attacks/new</code> API endpoint.</p>
-
-    <div class="language-bash highlighter-rouge">
-<div class="highlight"><pre class="highlight"><code> curl <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="nt">-H</span> <span class="s2">"Authorization: </span><span class="nv">$GREMLIN_API_TOKEN</span><span class="s2">"</span> https://api.gremlin.com/v1/attacks/new <span class="nt">-d</span> <span class="s2">"@attacks/blackhole-exact.json"</span>
-</code></pre></div>    </div>
-  </li>
-  <li>
-    <p>On the target machine run the same timed <code class="highlighter-rouge">curl</code> test as before.  It should hang for approximately <code class="highlighter-rouge">30</code> seconds, until the blackhole has been terminated and a response is finally received.</p>
-
-    <div class="language-bash highlighter-rouge">
-<div class="highlight"><pre class="highlight"><code> <span class="nv">$ </span><span class="nb">time </span>curl <span class="nt">-o</span> /dev/null 93.184.216.34
-
- <span class="c"># OUTPUT</span>
- real    0m31.623s
- user    0m0.013s
- sys     0m0.000s
-</code></pre></div>    </div>
-  </li>
-  <li>
-    <p>You can also view the <strong>Attack</strong> on the <a href="https://app.gremlin.com/" target="_blank" rel="noopener noreferrer">Gremlin Web UI</a> to confirm it functioned properly.</p>
-
-    <p><img alt="Gremlin Web UI Blackhole Attack" src="/gremlin-blog-posts/assets/chaos-engineering/migrating-cloud-chaotic-embrace/web-ui-blackhole-attack-5568e6cf288a9ee0b6f17b6c0527fd80d2d917e83b2b513c3dc64a846389dbea.png" class="align-center"></p>
-  </li>
-  <li>
-    <p>Check the attack target’s current disk space, which will soon reach the specified percentage before Gremlin rolls back and returns the disk to the original state.</p>
-
-    <div class="language-bash highlighter-rouge">
-<div class="highlight"><pre class="highlight"><code> <span class="nb">df</span> <span class="nt">-H</span>
- <span class="c"># OUTPUT</span>
- Filesystem      Size  Used Avail Use% Mounted on
- /dev/xvda1      8.3G  7.9G  396M  96% /
-</code></pre></div>    </div>
-  </li>
-</ol>
-
-<h2 id="proper-memory-management">Proper Memory Management</h2>
-
-<p>While most commonly-used cloud platforms provide auto-balancing and scaling services, it’s impossible to rely solely on these technologies to ensure your migrated software will remain stable and responsive.  Memory management is a crucial part of maintaining a healthy and inexpensive cloud stack.  An improper configuration or poorly tested system may not necessarily cause a system failure or outage, but even a tiny memory issue can add up to thousands of dollars in extra support costs.</p>
-
-<p>Therefore, performing Chaos Engineering before, during, and after cloud migration to test system failures when instances, containers, or nodes run out of memory ensures your stack remains active and fully functional when an <em>unexpected</em> memory leak occurs.</p>
-
-<h3 id="why-it-matters-google-docs-2011">Why It Matters: Google Docs (2011)</h3>
-
-<p>In early September, 2011 Google Docs suffered a widespread, hour-long outage that prevented the majority of customers from accessing documents, drawings, lists, and App Scripts.  As Google <a href="https://cloud.googleblog.com/2011/09/what-happened-to-google-docs-on.html" target="_blank" rel="noopener noreferrer">later reported</a>, the incident was caused by a change that exposed a memory leak that <em>only occurred under heavy load</em>.  The lookup service that tracks of Google Doc modifications wasn’t properly recycling memory, which eventually caused those machines to restart.  Of course, the redundancy systems immediately picked up the slack from these now-offline lookup service machines, but the excessive load caused the replacement machines to run out of memory ever faster.  Eventually the servers couldn’t handle the number of requests that were backed up.</p>
-
-<p>The Google engineering team was quick to diagnose the issue and roll out a fix within an hour of the first automated alert.  Unfortunately, Google engineers were unaware of the root cause <em>because</em> it only occurred while the system was heavily loaded, which shows the importance of expressly testing system resilience when memory usage spikes.</p>
-
-<h3 id="performing-a-memory-attack-with-gremlin">Performing a Memory Attack with Gremlin</h3>
-
-<p>A Gremlin <strong>Memory Attack</strong> consumes memory on the targeted machine, making it easy to test how that system and other dependencies behave when memory is unavailable.</p>
-
-<h4 id="prerequisites-3">Prerequisites</h4>
-
-<ul>
-  <li>
-<a href="https://help.gremlin.com/installation/" target="_blank" rel="noopener noreferrer">Install Gremlin</a> on the target machine.</li>
-  <li>Retrieve your <a href="#obtaining-a-gremlin-api-token">Gremlin API Token</a>.</li>
-</ul>
-
-<p>A <a href="https://help.gremlin.com/api/" target="_blank" rel="noopener noreferrer">Gremlin API</a> <strong>Memory Attack</strong> accepts the following arguments.</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>Short Flag</th>
-      <th>Long Flag</th>
-      <th>Purpose</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code class="highlighter-rouge">-g</code></td>
-      <td><code class="highlighter-rouge">--gigabytes</code></td>
-      <td>The amount of memory (in GB) to allocate.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">-l</code></td>
-      <td><code class="highlighter-rouge">--length</code></td>
-      <td>Attack duration (in seconds).</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">-m</code></td>
-      <td><code class="highlighter-rouge">--megabytes</code></td>
-      <td>The amount of memory (in MB) to allocate.</td>
-    </tr>
-  </tbody>
-</table>
-
-<ol>
-  <li>
-    <p><em>(Optional)</em> On the target machine check the current memory usage to establish a baseline prior to executing the attack.</p>
-
-    <div class="language-bash highlighter-rouge">
-<div class="highlight"><pre class="highlight"><code> htop
-</code></pre></div>    </div>
-
-    <p><img alt="HTOP Pre-Attack Memory Usage" src="/gremlin-blog-posts/assets/chaos-engineering/migrating-cloud-chaotic-embrace/htop-pre-memory-attack-8f541073fd8265545cde63ef1806cf4289a92ae5c2e6efc579be3b4942fa040d.png" class="align-center"></p>
-  </li>
-  <li>
-    <p>On your local machine create a <code class="highlighter-rouge">attacks/memory-exact.json</code> file and paste the following JSON into it, ensuring you change your target <strong>Client</strong>.  This attack will consume up to <code class="highlighter-rouge">750 MB</code> of memory for a total of <code class="highlighter-rouge">30</code> seconds.</p>
-
-    <div class="language-json highlighter-rouge">
-<div class="highlight"><pre class="highlight"><code><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">attacks/memory-exact.json</span><span class="w">
- </span><span class="p">{</span><span class="w">
-     </span><span class="s2">"command"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-         </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"memory"</span><span class="p">,</span><span class="w">
-         </span><span class="s2">"args"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"-l"</span><span class="p">,</span><span class="w"> </span><span class="s2">"30"</span><span class="p">,</span><span class="w"> </span><span class="s2">"-g"</span><span class="p">,</span><span class="w"> </span><span class="s2">"0.75"</span><span class="p">]</span><span class="w">
-     </span><span class="p">},</span><span class="w">
-     </span><span class="s2">"target"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-         </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Exact"</span><span class="p">,</span><span class="w">
-         </span><span class="s2">"exact"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"aws-nginx"</span><span class="p">]</span><span class="w">
-     </span><span class="p">}</span><span class="w">
- </span><span class="p">}</span><span class="w">
-</span></code></pre></div>    </div>
-  </li>
-  <li>
-    <p>Launch the <strong>Memory Attack</strong> by passing the JSON from <code class="highlighter-rouge">attacks/memory-exact.json</code> to the <code class="highlighter-rouge">https://api.gremlin.com/v1/attacks/new</code> API endpoint.</p>
-
-    <div class="language-bash highlighter-rouge">
-<div class="highlight"><pre class="highlight"><code> curl <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="nt">-H</span> <span class="s2">"Authorization: </span><span class="nv">$GREMLIN_API_TOKEN</span><span class="s2">"</span> https://api.gremlin.com/v1/attacks/new <span class="nt">-d</span> <span class="s2">"@attacks/memory-exact.json"</span>
-</code></pre></div>    </div>
-  </li>
-  <li>
-    <p>That additional memory is now consumed on the target machine.</p>
-
-    <div class="language-bash highlighter-rouge">
-<div class="highlight"><pre class="highlight"><code> htop
-</code></pre></div>    </div>
-
-    <p><img alt="HTOP Post-Attack Memory Usage" src="/gremlin-blog-posts/assets/chaos-engineering/migrating-cloud-chaotic-embrace/htop-post-memory-attack-3304d7bc26cdcd93493cb940279150f05d359173b9fe466042d0d8a6c1345036.png" class="align-center"></p>
-  </li>
-  <li>
-    <p>As always, you can view the <strong>Attack</strong> within the <a href="https://app.gremlin.com/" target="_blank" rel="noopener noreferrer">Gremlin Web UI</a>.</p>
-
-    <p><img alt="Gremlin Web UI Memory Attack" src="/gremlin-blog-posts/assets/chaos-engineering/migrating-cloud-chaotic-embrace/web-ui-memory-attack-56e3fb4d678bd41298bd5d8e68a4f90e8bf12ec6fc9f633bdc2af50585249edd.png" class="align-center"></p>
-  </li>
-</ol>
-
-<h2 id="io">IO</h2>
-
-<p>(TODO)</p>
-
-<h3 id="why-it-matters-tbd-1">Why It Matters: TBD</h3>
-
-<p>(TODO)</p>
-
-<h3 id="performing-an-io-attack-with-gremlin">Performing an IO Attack with Gremlin</h3>
-
-<p>(TODO)</p>
-
-<h4 id="prerequisites-4">Prerequisites</h4>
-
-<ul>
-  <li>
-<a href="https://help.gremlin.com/installation/" target="_blank" rel="noopener noreferrer">Install Gremlin</a> on the target machine.</li>
-  <li>Retrieve your <a href="#obtaining-a-gremlin-api-token">Gremlin API Token</a>.</li>
-</ul>
-
-<p>(TODO)</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">-l</span> 45 <span class="nt">-d</span> /tmp <span class="nt">-w</span> 2 <span class="nt">-m</span> rw <span class="nt">-s</span> 4 <span class="nt">-c</span> 1
-</code></pre></div></div>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Total DISK READ :       0.00 B/s | Total DISK WRITE :       3.92 M/s
-Actual DISK READ:       0.00 B/s | Actual DISK WRITE:      15.77 M/s
-  PID  PRIO  USER     DISK READ  DISK WRITE  SWAPIN     IO&gt;    COMMAND                                                                   
-  323 be/3 root          0.00 B     68.00 K  0.00 % 71.28 % <span class="o">[</span>jbd2/xvda1-8]
-20030 be/4 gremlin       0.00 B    112.15 M  0.00 % 17.11 % gremlin attack io <span class="nt">-l</span> 45 <span class="nt">-d</span> /tmp <span class="nt">-w</span> 2 <span class="nt">-m</span> rw <span class="nt">-s</span> 4 <span class="nt">-c</span> 1
-</code></pre></div></div>
-
-<h2 id="obtaining-a-gremlin-api-token">Obtaining a Gremlin API Token</h2>
+<p>All the examples throughout this article use the Gremlin API to perform Chaos Experiments.  If you prefer a graphical interface all examples can also be created within the <a href="https://app.gremlin.com/attacks" target="_blank" rel="noopener noreferrer">Gremlin Attacks Web UI</a>.</p>
 
 <p>To use the Gremlin API you’ll first need your organization’s API access token.  This can be obtained by authenticating with the appropriate API endpoint.</p>
 
@@ -854,9 +390,571 @@ Actual DISK READ:       0.00 B/s | Actual DISK WRITE:      15.77 M/s
 <div class="highlight"><pre class="highlight"><code> <span class="nb">export </span><span class="nv">GREMLIN_API_TOKEN</span><span class="o">=</span><span class="s2">"Bearer NzE3NWFjYTktODBkMC01ODU5LTkwYmMtOGQyZTBkNDc1NDU0OmdhYmVAZ2FiZXd5YXR0LmNvbTpjMjA5YzA5OTgtYjhmZi0wMjQyNTI2NDdmZjY="</span>
 </code></pre></div>    </div>
 
-    <p class="notice--info"><strong>TIP</strong>: For simplicity you may <code class="highlighter-rouge">export</code> the <code class="highlighter-rouge">GREMLIN_API_TOKEN</code> within your <code class="highlighter-rouge">.bashrc</code> or <code class="highlighter-rouge">.bash_profile</code> file to keep the token permanently available across terminal sessions.</p>
+    <p class="notice--info">For simplicity you may <code class="highlighter-rouge">export</code> the <code class="highlighter-rouge">GREMLIN_API_TOKEN</code> within your <code class="highlighter-rouge">.bashrc</code> or <code class="highlighter-rouge">.bash_profile</code> file to retain token access between terminal sessions.</p>
   </li>
 </ol>
+
+<h4 id="next-steps">Next Steps</h4>
+
+<p>With your <code class="highlighter-rouge">GREMLIN_API_TOKEN</code> in hand, you’re ready to begin Chaos Engineering with Gremlin.  Check out <a href="#performing-a-cpu-attack-with-gremlin">Performing a CPU Attack with Gremlin</a>, <a href="#handling-storage-disk-limitations">Handling Storage Disk Limitations</a>, <a href="#evaluating-network-resiliency">Evaluating Network Resiliency</a>, <a href="#proper-memory-management">Proper Memory Management</a>, and <a href="#troubleshooting-io-bottlenecks">Troubleshooting IO Bottlenecks</a>.</p>
+
+<h3 id="performing-a-cpu-attack-with-gremlin">Performing a CPU Attack with Gremlin</h3>
+
+<p>A Gremlin <strong>CPU Attack</strong> consumes 100% of the specified CPU cores on the target system.  The <strong>CPU Attack</strong> is a great way to test the stability of the targeted machine – along with its critical dependencies – when the CPU is overloaded.</p>
+
+<h4 id="prerequisites">Prerequisites</h4>
+
+<ul>
+  <li>
+<a href="https://help.gremlin.com/installation/" target="_blank" rel="noopener noreferrer">Install Gremlin</a> on the target machine.</li>
+  <li>Retrieve your <a href="#obtaining-a-gremlin-api-token">Gremlin API Token</a>.</li>
+</ul>
+
+<p>A <a href="https://help.gremlin.com/api/" target="_blank" rel="noopener noreferrer">Gremlin API</a> <strong>CPU Attack</strong> accepts the following arguments.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Short Flag</th>
+      <th>Long Flag</th>
+      <th>Purpose</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">-c</code></td>
+      <td><code class="highlighter-rouge">--cores</code></td>
+      <td>Number of CPU cores to attack.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">-l</code></td>
+      <td><code class="highlighter-rouge">--length</code></td>
+      <td>Attack duration (in seconds).</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Most <a href="https://help.gremlin.com/api/" target="_blank" rel="noopener noreferrer">Gremlin API</a> calls accept a JSON body payload, which specifies critical arguments.  In all the following examples you’ll be creating a local <code class="highlighter-rouge">attacks/&lt;attack-name&gt;.json</code> file to store the API attack arguments.  You’ll then pass those arguments along to the API request.</p>
+
+<ol>
+  <li>
+    <p>On your local machine, start by creating the <code class="highlighter-rouge">attacks/cpu.json</code> file and paste the following JSON into it.  This will attack a single core for <code class="highlighter-rouge">30</code> seconds.</p>
+
+    <div class="language-json highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code><span class="w"> </span><span class="p">{</span><span class="w">
+     </span><span class="s2">"command"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+         </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cpu"</span><span class="p">,</span><span class="w">
+         </span><span class="s2">"args"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"-c"</span><span class="p">,</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w"> </span><span class="s2">"-l"</span><span class="p">,</span><span class="w"> </span><span class="s2">"30"</span><span class="p">]</span><span class="w">
+     </span><span class="p">},</span><span class="w">
+     </span><span class="s2">"target"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+         </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Random"</span><span class="w">
+     </span><span class="p">}</span><span class="w">
+ </span><span class="p">}</span><span class="w">
+</span></code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Create the new <strong>Attack</strong> by passing the JSON from <code class="highlighter-rouge">attacks/cpu.json</code> to the <code class="highlighter-rouge">https://api.gremlin.com/v1/attacks/new</code> API endpoint.</p>
+
+    <div class="language-bash highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code> curl <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="nt">-H</span> <span class="s2">"Authorization: </span><span class="nv">$GREMLIN_API_TOKEN</span><span class="s2">"</span> https://api.gremlin.com/v1/attacks/new <span class="nt">-d</span> <span class="s2">"@attacks/cpu.json"</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>The <a href="https://app.gremlin.com/attacks" target="_blank" rel="noopener noreferrer">Gremlin Web UI</a> also shows the <strong>Attack</strong> that was created.</p>
+
+    <p><img alt="Gremlin Web UI CPU Attack" src="/gremlin-blog-posts/assets/chaos-engineering/migrating-cloud-chaotic-embrace/web-ui-cpu-attack-a4b0c805d6d2e406611908b22a848de1cf03193d1db5ae434fc14f9905c200b3.png" class="align-center"></p>
+  </li>
+  <li>
+    <p>On the targeted machine you’ll see that one CPU core is maxed out.</p>
+
+    <div class="language-bash highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code> htop
+</code></pre></div>    </div>
+
+    <p><img alt="htop CPU Maximized" src="/gremlin-blog-posts/assets/chaos-engineering/migrating-cloud-chaotic-embrace/htop-cpu-max-22d1f36521ae859ff70072681c19c490d4f9d27aadca4e03ddddaa47f6dc69d8.png" class="align-center"></p>
+  </li>
+</ol>
+
+<p class="notice--info">If you wish to attack a <em>specific</em> <strong>Client</strong> just change the <code class="highlighter-rouge">target : type</code> argument value to <code class="highlighter-rouge">"Exact"</code> and add the <code class="highlighter-rouge">target : exact</code> field with a list of target <strong>Clients</strong>.  A <strong>Client</strong> is identified on Gremlin as the <code class="highlighter-rouge">GREMLIN_IDENTIFIER</code> for the instance, which can also be specified in a local environment variable when running the <code class="highlighter-rouge">gremlin init</code> command.</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"command"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cpu"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"args"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"-c"</span><span class="p">,</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w"> </span><span class="s2">"-l"</span><span class="p">,</span><span class="w"> </span><span class="s2">"30"</span><span class="p">]</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"target"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Exact"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"exact"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"aws-nginx"</span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<h2 id="handling-storage-disk-limitations">Handling Storage Disk Limitations</h2>
+
+<p>Migrating to a new system frequently requires moving volumes across disks and to other cloud-based storage layers.  It’s vital to determine if the new storage system can handle the increase in volume that the migration will require.  Additionally, to properly test the resilience of the system you’ll also want to test how the system reacts when volumes are overburdened or unavailable.</p>
+
+<h3 id="why-it-matters-instapaper-2017">Why It Matters: Instapaper (2017)</h3>
+
+<p>In February 2017 the popular web content bookmarking service Instapaper suffered <a href="https://medium.com/making-instapaper/instapaper-outage-cause-recovery-3c32a7e9cc5f" target="_blank" rel="noopener noreferrer">a service outage</a> due to a <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Limits.html#RDS_Limits.FileSize" target="_blank" rel="noopener noreferrer">2 TB file size limit</a> within Instapaper’s Amazon RDS MySQL instance.</p>
+
+<p>This issue was unknown to Instapaper ever since their migration to AWS in 2013.  At that time, they migrated their database to MySQL on Amazon RDS, which was using a slightly outdated version of MySQL that enforced the 2 TB file size limit.  Even after attempting to upgrade to newer hardware and a newer MySQL version in March 2015, the original instance that contained the 2 TB limit was replicated, thereby retaining the underlying problem.</p>
+
+<p>Eventually, their database finally hit that limit in early 2017 and caused a day+ service outage.  As Instapaper points out in their <a href="https://medium.com/making-instapaper/instapaper-outage-cause-recovery-3c32a7e9cc5f" target="_blank" rel="noopener noreferrer">postmortem</a>, it was difficult for the team to be aware of this limitation and potential issue ahead of time.  However, this unfortunate event illustrates the importance of properly testing data storage systems prior to migration.</p>
+
+<h3 id="performing-a-disk-attack-with-gremlin">Performing a Disk Attack with Gremlin</h3>
+
+<p>Gremlin’s <strong>Disk Attack</strong> rapidly consumes disk space on the targeted machine, allowing you to test the resiliency of that machine and other related systems when unexpected disk failures occur.</p>
+
+<h4 id="prerequisites-1">Prerequisites</h4>
+
+<ul>
+  <li>
+<a href="https://help.gremlin.com/installation/" target="_blank" rel="noopener noreferrer">Install Gremlin</a> on the target machine.</li>
+  <li>Retrieve your <a href="#obtaining-a-gremlin-api-token">Gremlin API Token</a>.</li>
+</ul>
+
+<p>A <a href="https://help.gremlin.com/api/" target="_blank" rel="noopener noreferrer">Gremlin API</a> <strong>Disk Attack</strong> accepts the following arguments.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Short Flag</th>
+      <th>Long Flag</th>
+      <th>Purpose</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">-b</code></td>
+      <td><code class="highlighter-rouge">--block-size</code></td>
+      <td>The block size (in kilobytes) that are written.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">-d</code></td>
+      <td><code class="highlighter-rouge">--dir</code></td>
+      <td>The directory that temporary files will be written to.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">-l</code></td>
+      <td><code class="highlighter-rouge">--length</code></td>
+      <td>Attack duration (in seconds).</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">-p</code></td>
+      <td><code class="highlighter-rouge">--percent</code></td>
+      <td>The percentage of the volume to fill.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">-w</code></td>
+      <td><code class="highlighter-rouge">--workers</code></td>
+      <td>The number of disk-write workers to run concurrently.</td>
+    </tr>
+  </tbody>
+</table>
+
+<ol>
+  <li>
+    <p>On your local machine, start by creating the <code class="highlighter-rouge">attacks/disk.json</code> file and paste the following JSON into it.  Be sure to change your target <strong>Client</strong>.  This attack will fill <code class="highlighter-rouge">95%</code> of the volume over the course of a <code class="highlighter-rouge">60-second</code> attack using <code class="highlighter-rouge">2</code> workers.</p>
+
+    <div class="language-json highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code><span class="w"> </span><span class="p">{</span><span class="w">
+     </span><span class="s2">"command"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+         </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"disk"</span><span class="p">,</span><span class="w">
+         </span><span class="s2">"args"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"-d"</span><span class="p">,</span><span class="w"> </span><span class="s2">"/tmp"</span><span class="p">,</span><span class="w"> </span><span class="s2">"-l"</span><span class="p">,</span><span class="w"> </span><span class="s2">"60"</span><span class="p">,</span><span class="w"> </span><span class="s2">"-w"</span><span class="p">,</span><span class="w"> </span><span class="s2">"2"</span><span class="p">,</span><span class="w"> </span><span class="s2">"-b"</span><span class="p">,</span><span class="w"> </span><span class="s2">"4"</span><span class="p">,</span><span class="w"> </span><span class="s2">"-p"</span><span class="p">,</span><span class="w"> </span><span class="s2">"95"</span><span class="p">]</span><span class="w">
+     </span><span class="p">},</span><span class="w">
+     </span><span class="s2">"target"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+         </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Exact"</span><span class="p">,</span><span class="w">
+         </span><span class="s2">"exact"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"aws-nginx"</span><span class="p">]</span><span class="w">
+     </span><span class="p">}</span><span class="w">
+ </span><span class="p">}</span><span class="w">
+</span></code></pre></div>    </div>
+  </li>
+  <li>
+    <p><em>(Optional)</em> Check the current disk usage on the target machine.</p>
+
+    <div class="language-bash highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code> <span class="nb">df</span> <span class="nt">-H</span>
+ <span class="c"># OUTPUT</span>
+ Filesystem      Size  Used Avail Use% Mounted on
+ /dev/xvda1      8.3G  1.4G  6.9G  17% /
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Create the new <strong>Disk Attack</strong> by passing the JSON from <code class="highlighter-rouge">attacks/disk.json</code> to the <code class="highlighter-rouge">https://api.gremlin.com/v1/attacks/new</code> API endpoint.</p>
+
+    <div class="language-bash highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code> curl <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="nt">-H</span> <span class="s2">"Authorization: </span><span class="nv">$GREMLIN_API_TOKEN</span><span class="s2">"</span> https://api.gremlin.com/v1/attacks/new <span class="nt">-d</span> <span class="s2">"@attacks/disk.json"</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>The <a href="https://app.gremlin.com/attacks" target="_blank" rel="noopener noreferrer">Gremlin Web UI</a> now shows the <strong>Attack</strong> that was created.</p>
+
+    <p><img alt="Gremlin Web UI Disk Attack" src="/gremlin-blog-posts/assets/chaos-engineering/migrating-cloud-chaotic-embrace/web-ui-disk-attack-57c40e03b827748989ab14c9d7277c326e7fc3dab092ad569fee72d6069eb5d7.png" class="align-center"></p>
+  </li>
+  <li>
+    <p>Check the attack target’s current disk space, which will soon reach the specified percentage before Gremlin rolls back and returns the disk to the original state.</p>
+
+    <div class="language-bash highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code> <span class="nb">df</span> <span class="nt">-H</span>
+ <span class="c"># OUTPUT</span>
+ Filesystem      Size  Used Avail Use% Mounted on
+ /dev/xvda1      8.3G  7.9G  396M  96% /
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<h2 id="evaluating-network-resiliency">Evaluating Network Resiliency</h2>
+
+<p>While the majority of Internet service outages are caused by failures during migration and upgrade procedures, the aforementioned <a href="http://ucare.cs.uchicago.edu/pdf/socc16-cos.pdf" target="_blank" rel="noopener noreferrer">Why Does the Cloud Stop Computing?
+Lessons from Hundreds of Service Outages</a> study found that network problems are the second most common cause and account for some <code class="highlighter-rouge">15%</code> of service outages.  Even architectures designed with network redundancies can experience multiple, cumulative network failures without proper testing and experimentation.  Moreover, most modern software relies on external networks to some degree, which means a network outage completely outside of your control could cause a failure to propagate throughout your system.</p>
+
+<h3 id="why-it-matters-microsoft-office-365-2013">Why It Matters: Microsoft Office 365 (2013)</h3>
+
+<p>On February 1st, 2013 a change to the Microsoft Online edge network prevented some internet traffic from reaching the Microsoft Office 365 service, which prevented customers from accessing Exchange and SharePoint services for a few hours.  While the <a href="https://www.quadrotech-it.com/blog/feb-1-office-365-outage-incident-review-release/" target="_blank" rel="noopener noreferrer">incident report</a> doesn’t explicitly name the underlying change that caused the problem, it does state that a procedural error was unintentionally and automatically propagated to multiple devices within the Microsoft Online network, which “caused incorrect routing for a portion of the inbound internet traffic.”  Additionally, affected customers were unable to access administrative services within the <strong>Service Health Dashboard</strong> (SHD) provided by Microsoft, but the backup process intended to provide support to customers that were unable to access the SHD did not work as well as expected.</p>
+
+<p>While this overall incident only lasted a few hours and affected a small subset of customers, it illustrates the importance of proper network resiliency testing prior to and during system migrations.  Chaos Experiments that cause networking failures – such as creating a black hole so certain traffic is halted – are a great way to test system stability under these unexpected conditions.</p>
+
+<h3 id="performing-a-black-hole-attack-with-gremlin">Performing a Black Hole Attack with Gremlin</h3>
+
+<p>A <strong>Black Hole Attack</strong> temporarily drops all traffic based on the parameters of the attack.  You can use a <strong>Black Hole Attack</strong> to test routing protocols, loss of communication to specific hosts, port-based traffic, network device failure, and much more.</p>
+
+<h4 id="prerequisites-2">Prerequisites</h4>
+
+<ul>
+  <li>
+<a href="https://help.gremlin.com/installation/" target="_blank" rel="noopener noreferrer">Install Gremlin</a> on the target machine.</li>
+  <li>Retrieve your <a href="#obtaining-a-gremlin-api-token">Gremlin API Token</a>.</li>
+</ul>
+
+<p>A <a href="https://help.gremlin.com/api/" target="_blank" rel="noopener noreferrer">Gremlin API</a> <strong>Black Hole Attack</strong> accepts the following arguments.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Short Flag</th>
+      <th>Long Flag</th>
+      <th>Purpose</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">-d</code></td>
+      <td><code class="highlighter-rouge">--device</code></td>
+      <td>Network device through which traffic should be affected.  Defaults to the first device found.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">-h</code></td>
+      <td><code class="highlighter-rouge">--hostname</code></td>
+      <td>Outgoing hostnames to affect.  Optionally, you can prefix a hostname with a caret (<code class="highlighter-rouge">^</code>) to whitelist it.  It is recommended to include <code class="highlighter-rouge">^api.gremlin.com</code> in the whitelist.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">-i</code></td>
+      <td><code class="highlighter-rouge">--ipaddress</code></td>
+      <td>Outgoing IP addresses to affect.  Optionally, you can prefix an IP with a caret (<code class="highlighter-rouge">^</code>) to whitelist it.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">-l</code></td>
+      <td><code class="highlighter-rouge">--length</code></td>
+      <td>Attack duration (in seconds).</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">-n</code></td>
+      <td><code class="highlighter-rouge">--ingress_port</code></td>
+      <td>Only affect ingress traffic to these destination ports.  Ranges can also be specified (e.g. <code class="highlighter-rouge">8080-8085</code>).</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">-p</code></td>
+      <td><code class="highlighter-rouge">--egress_port</code></td>
+      <td>Only affect egress traffic to these destination ports.  Ranges can also be specified (e.g. <code class="highlighter-rouge">8080-8085</code>).</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">-P</code></td>
+      <td><code class="highlighter-rouge">--ipprotocol</code></td>
+      <td>Only affect traffic using this protocol.</td>
+    </tr>
+  </tbody>
+</table>
+
+<ol>
+  <li>
+    <p>Start by performing a test to establish a baseline.  The following command tests the response time of a request to <code class="highlighter-rouge">example.com</code> (which has an IP address of <code class="highlighter-rouge">93.184.216.34</code>).</p>
+
+    <div class="language-bash highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code> <span class="nv">$ </span><span class="nb">time </span>curl <span class="nt">-o</span> /dev/null 93.184.216.34
+
+ <span class="c"># OUTPUT</span>
+ real    0m0.025s
+ user    0m0.009s
+ sys     0m0.000s
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>On your local machine, create the <code class="highlighter-rouge">attacks/blackhole.json</code> file and paste the following JSON into it.  Set your target <strong>Client</strong> as necessary.  This attack creates a <code class="highlighter-rouge">30-second</code> black hole that drops traffic to the <code class="highlighter-rouge">93.184.216.34</code> IP address.</p>
+
+    <div class="language-json highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code><span class="w"> </span><span class="p">{</span><span class="w">
+     </span><span class="s2">"command"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+         </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"blackhole"</span><span class="p">,</span><span class="w">
+         </span><span class="s2">"args"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"-l"</span><span class="p">,</span><span class="w"> </span><span class="s2">"30"</span><span class="p">,</span><span class="w"> </span><span class="s2">"-i"</span><span class="p">,</span><span class="w"> </span><span class="s2">"93.184.216.34"</span><span class="p">,</span><span class="w"> </span><span class="s2">"-h"</span><span class="p">,</span><span class="w"> </span><span class="s2">"^api.gremlin.com"</span><span class="p">]</span><span class="w">
+     </span><span class="p">},</span><span class="w">
+     </span><span class="s2">"target"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+         </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Exact"</span><span class="p">,</span><span class="w">
+         </span><span class="s2">"exact"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"aws-nginx"</span><span class="p">]</span><span class="w">
+     </span><span class="p">}</span><span class="w">
+ </span><span class="p">}</span><span class="w">
+</span></code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Execute the <strong>Black Hole Attack</strong> by passing the JSON from <code class="highlighter-rouge">attacks/blackhole.json</code> to the <code class="highlighter-rouge">https://api.gremlin.com/v1/attacks/new</code> API endpoint.</p>
+
+    <div class="language-bash highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code> curl <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="nt">-H</span> <span class="s2">"Authorization: </span><span class="nv">$GREMLIN_API_TOKEN</span><span class="s2">"</span> https://api.gremlin.com/v1/attacks/new <span class="nt">-d</span> <span class="s2">"@attacks/blackhole.json"</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>On the target machine run the same timed <code class="highlighter-rouge">curl</code> test as before.  It now hangs for approximately <code class="highlighter-rouge">30</code> seconds until the black hole has been terminated and a response is finally received.</p>
+
+    <div class="language-bash highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code> <span class="nv">$ </span><span class="nb">time </span>curl <span class="nt">-o</span> /dev/null 93.184.216.34
+
+ <span class="c"># OUTPUT</span>
+ real    0m31.623s
+ user    0m0.013s
+ sys     0m0.000s
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>You can also view the <strong>Attack</strong> on the <a href="https://app.gremlin.com/attacks" target="_blank" rel="noopener noreferrer">Gremlin Web UI</a> to confirm it functioned properly.</p>
+
+    <p><img alt="Gremlin Web UI Black Hole Attack" src="/gremlin-blog-posts/assets/chaos-engineering/migrating-cloud-chaotic-embrace/web-ui-blackhole-attack-5568e6cf288a9ee0b6f17b6c0527fd80d2d917e83b2b513c3dc64a846389dbea.png" class="align-center"></p>
+  </li>
+</ol>
+
+<h2 id="proper-memory-management">Proper Memory Management</h2>
+
+<p>While most commonly-used cloud platforms provide auto-balancing and scaling services, it’s impossible to rely solely on these technologies to ensure your migrated software will remain stable and responsive.  Memory management is a crucial part of maintaining a healthy and inexpensive cloud stack.  An improper configuration or poorly tested system may not necessarily cause a system failure or outage, but even a tiny memory issue can add up to thousands of dollars in extra support costs.</p>
+
+<p>Performing Chaos Engineering before, during, and after cloud migration lets you test system failures when instances, containers, or nodes run out of memory.  This testing ensures your stack remains active and fully functional when an <em>unexpected</em> memory leak occurs.</p>
+
+<h3 id="why-it-matters-google-docs-2011">Why It Matters: Google Docs (2011)</h3>
+
+<p>In early September 2011 Google Docs suffered a widespread, hour-long outage that prevented the majority of customers from accessing documents, drawings, lists, and App Scripts.  As Google <a href="https://cloud.googleblog.com/2011/09/what-happened-to-google-docs-on.html" target="_blank" rel="noopener noreferrer">later reported</a>, the incident was caused by a change that exposed a memory leak that <em>only occurred under heavy load</em>.  The lookup service that tracks Google Doc modifications wasn’t properly recycling memory, which eventually caused those machines to restart.  Redundancy systems immediately picked up the slack from these now-offline lookup service machines, but the excessive load caused the replacement machines to run out of memory even faster.  Eventually, the servers couldn’t handle the number of requests that were backed up, which led to the outage.</p>
+
+<p>The Google engineering team was quick to diagnose the issue and roll out a fix within an hour of the first automated alert.  Unfortunately, Google engineers were unaware of the root cause <em>because</em> it only occurred while the system was heavily loaded, which shows the importance of expressly testing system resilience when memory usage spikes.</p>
+
+<h3 id="performing-a-memory-attack-with-gremlin">Performing a Memory Attack with Gremlin</h3>
+
+<p>A Gremlin <strong>Memory Attack</strong> consumes memory on the targeted machine, making it easy to test how that system and other dependencies behave when memory is unavailable.</p>
+
+<h4 id="prerequisites-3">Prerequisites</h4>
+
+<ul>
+  <li>
+<a href="https://help.gremlin.com/installation/" target="_blank" rel="noopener noreferrer">Install Gremlin</a> on the target machine.</li>
+  <li>Retrieve your <a href="#obtaining-a-gremlin-api-token">Gremlin API Token</a>.</li>
+</ul>
+
+<p>A <a href="https://help.gremlin.com/api/" target="_blank" rel="noopener noreferrer">Gremlin API</a> <strong>Memory Attack</strong> accepts the following arguments.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Short Flag</th>
+      <th>Long Flag</th>
+      <th>Purpose</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">-g</code></td>
+      <td><code class="highlighter-rouge">--gigabytes</code></td>
+      <td>The amount of memory (in GB) to allocate.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">-l</code></td>
+      <td><code class="highlighter-rouge">--length</code></td>
+      <td>Attack duration (in seconds).</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">-m</code></td>
+      <td><code class="highlighter-rouge">--megabytes</code></td>
+      <td>The amount of memory (in MB) to allocate.</td>
+    </tr>
+  </tbody>
+</table>
+
+<ol>
+  <li>
+    <p><em>(Optional)</em> On the target machine check the current memory usage to establish a baseline prior to executing the attack.</p>
+
+    <div class="language-bash highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code> htop
+</code></pre></div>    </div>
+
+    <p><img alt="HTOP Pre-Attack Memory Usage" src="/gremlin-blog-posts/assets/chaos-engineering/migrating-cloud-chaotic-embrace/htop-pre-memory-attack-8f541073fd8265545cde63ef1806cf4289a92ae5c2e6efc579be3b4942fa040d.png" class="align-center"></p>
+  </li>
+  <li>
+    <p>On your local machine create an <code class="highlighter-rouge">attacks/memory.json</code> file and paste the following JSON into it, ensuring you change your target <strong>Client</strong>.  This attack will consume up to <code class="highlighter-rouge">0.75 GB</code> of memory for a total of <code class="highlighter-rouge">30</code> seconds.</p>
+
+    <div class="language-json highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code><span class="w"> </span><span class="p">{</span><span class="w">
+     </span><span class="s2">"command"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+         </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"memory"</span><span class="p">,</span><span class="w">
+         </span><span class="s2">"args"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"-l"</span><span class="p">,</span><span class="w"> </span><span class="s2">"30"</span><span class="p">,</span><span class="w"> </span><span class="s2">"-g"</span><span class="p">,</span><span class="w"> </span><span class="s2">"0.75"</span><span class="p">]</span><span class="w">
+     </span><span class="p">},</span><span class="w">
+     </span><span class="s2">"target"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+         </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Exact"</span><span class="p">,</span><span class="w">
+         </span><span class="s2">"exact"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"aws-nginx"</span><span class="p">]</span><span class="w">
+     </span><span class="p">}</span><span class="w">
+ </span><span class="p">}</span><span class="w">
+</span></code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Launch the <strong>Memory Attack</strong> by passing the JSON from <code class="highlighter-rouge">attacks/memory.json</code> to the <code class="highlighter-rouge">https://api.gremlin.com/v1/attacks/new</code> API endpoint.</p>
+
+    <div class="language-bash highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code> curl <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="nt">-H</span> <span class="s2">"Authorization: </span><span class="nv">$GREMLIN_API_TOKEN</span><span class="s2">"</span> https://api.gremlin.com/v1/attacks/new <span class="nt">-d</span> <span class="s2">"@attacks/memory.json"</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>That additional memory is now consumed on the target machine.</p>
+
+    <div class="language-bash highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code> htop
+</code></pre></div>    </div>
+
+    <p><img alt="HTOP Post-Attack Memory Usage" src="/gremlin-blog-posts/assets/chaos-engineering/migrating-cloud-chaotic-embrace/htop-post-memory-attack-3304d7bc26cdcd93493cb940279150f05d359173b9fe466042d0d8a6c1345036.png" class="align-center"></p>
+  </li>
+  <li>
+    <p>As always, you can view the <strong>Attack</strong> within the <a href="https://app.gremlin.com/attacks" target="_blank" rel="noopener noreferrer">Gremlin Web UI</a>.</p>
+
+    <p><img alt="Gremlin Web UI Memory Attack" src="/gremlin-blog-posts/assets/chaos-engineering/migrating-cloud-chaotic-embrace/web-ui-memory-attack-56e3fb4d678bd41298bd5d8e68a4f90e8bf12ec6fc9f633bdc2af50585249edd.png" class="align-center"></p>
+  </li>
+</ol>
+
+<h2 id="troubleshooting-io-bottlenecks">Troubleshooting IO Bottlenecks</h2>
+
+<p>Due to the proliferation of automatic monitoring and elastic scaling, IO failure may seem like one of the least likely problems within a cloud architecture.  However, even when IO failure isn’t necessarily the <em>root</em> cause of an outage it is often the <em>result</em> of another issue.  IO failure typically triggers a <a href="https://aws.amazon.com/message/680342/" target="_blank" rel="noopener noreferrer">negative cascading effect</a> throughout the many other dependent systems.  Moreover, since IO failure is often considered an unlikely event, it’s more common for cloud-based stacks to be particularly vulnerable to IO-induced outages.</p>
+
+<h3 id="why-it-matters-amazon-ec2-ebs-and-rds-2011">Why It Matters: Amazon EC2, EBS, and RDS (2011)</h3>
+
+<p>Over the course of about a week in April 2011, Amazon EC2 customers suffered a <a href="https://aws.amazon.com/message/65648/" target="_blank" rel="noopener noreferrer">significant service outage</a> when a high percentage of Amazon Elastic Block Store (EBS) volumes within a single Availability Zone in the US East Region became “stuck” – unable to perform read and write operations.  Other service instances attempting to access these “stuck” EBS volumes <em>also</em> became “stuck” while trying to read or write to the volumes.  In turn, this degraded EBS cluster performance and increased latencies and error rates for EBS API calls across the entire US East Region.</p>
+
+<p>Understanding the root cause of this outage and everything that was impacted requires a bit of understanding of how Amazon EBS functions.  Normally, an EBS cluster is comprised of a set of EBS nodes that automatically store EBS volume replicas and serve as fast failover redundancies.  If any single EBS volume is out of sync or is unavailable the peer-to-peer failover quickly provisions a new replica to replace the unavailable copy.  EBS nodes communicate over two networks.  The primary network handles high bandwidth connections for normal node-to-node, EC2, and control plane service communications.  The secondary network is a backup network to provide overflow capacity for data replication, but this secondary network is not intended to handle the traffic level of the primary network.</p>
+
+<p>The outage stemmed from an improperly executed traffic shift while performing a configuration change to the primary network.  Traffic was incorrectly moved onto the low-capacity secondary network.  This had the effect of isolating many of the EBS nodes within the impacted Availability Zone, severing their connections to their replicas.</p>
+
+<p>While the issue was quickly noticed and addressed, once traffic was reverted back to the primary network the affected EBS nodes swarmed the EBS cluster trying to find available server space to re-mirror data.  This overloaded the cluster and quickly consumed all free capacity, thereby leaving many EBS nodes in a “stuck” state.</p>
+
+<p class="notice--success">In total, around 13% of all volumes in the affected Availability Zone were in a “stuck” state.</p>
+
+<p>The full <a href="https://aws.amazon.com/message/65648/" target="_blank" rel="noopener noreferrer">incident summary report</a> is a fascinating read if you have the time.  This incident presents a solid real-world example of the dramatic and costly impacts that even an initially minor IO failure can have on a large, distributed system.</p>
+
+<h3 id="performing-an-io-attack-with-gremlin">Performing an IO Attack with Gremlin</h3>
+
+<p>Gremlin’s <strong>IO Attack</strong> performs rapid read and/or write actions on the targeted system volume.</p>
+
+<h4 id="prerequisites-4">Prerequisites</h4>
+
+<ul>
+  <li>
+<a href="https://help.gremlin.com/installation/" target="_blank" rel="noopener noreferrer">Install Gremlin</a> on the target machine.</li>
+  <li>Retrieve your <a href="#obtaining-a-gremlin-api-token">Gremlin API Token</a>.</li>
+</ul>
+
+<p>A <a href="https://help.gremlin.com/api/" target="_blank" rel="noopener noreferrer">Gremlin API</a> <strong>IO Attack</strong> accepts the following arguments.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Short Flag</th>
+      <th>Long Flag</th>
+      <th>Purpose</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">-c</code></td>
+      <td><code class="highlighter-rouge">--block-count</code></td>
+      <td>The number of blocks read or written by workers.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">-d</code></td>
+      <td><code class="highlighter-rouge">--dir</code></td>
+      <td>The directory that temporary files will be written to.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">-l</code></td>
+      <td><code class="highlighter-rouge">--length</code></td>
+      <td>Attack duration (in seconds).</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">-m</code></td>
+      <td><code class="highlighter-rouge">--mode</code></td>
+      <td>Specifies if workers are in read (<code class="highlighter-rouge">r</code>), write (<code class="highlighter-rouge">w</code>), or read+write (<code class="highlighter-rouge">rw</code>) mode.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">-s</code></td>
+      <td><code class="highlighter-rouge">--block-size</code></td>
+      <td>Size of blocks (in KB) that are read or written by workers.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">-w</code></td>
+      <td><code class="highlighter-rouge">--workers</code></td>
+      <td>The number of concurrent workers.</td>
+    </tr>
+  </tbody>
+</table>
+
+<ol>
+  <li>
+    <p>On your local machine create an <code class="highlighter-rouge">attacks/io.json</code> file and paste the following JSON into it.  Change the target <strong>Client</strong> as necessary.  This <strong>IO Attack</strong> creates two workers that will perform both reads and writes during the <code class="highlighter-rouge">45-second</code> attack.</p>
+
+    <div class="language-json highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code><span class="w"> </span><span class="p">{</span><span class="w">
+     </span><span class="s2">"command"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+         </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"io"</span><span class="p">,</span><span class="w">
+         </span><span class="s2">"args"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"-l"</span><span class="p">,</span><span class="w"> </span><span class="s2">"45"</span><span class="p">,</span><span class="w"> </span><span class="s2">"-d"</span><span class="p">,</span><span class="w"> </span><span class="s2">"/tmp"</span><span class="p">,</span><span class="w"> </span><span class="s2">"-w"</span><span class="p">,</span><span class="w"> </span><span class="s2">"2"</span><span class="p">,</span><span class="w"> </span><span class="s2">"-m"</span><span class="p">,</span><span class="w"> </span><span class="s2">"rw"</span><span class="p">,</span><span class="w"> </span><span class="s2">"-s"</span><span class="p">,</span><span class="w"> </span><span class="s2">"4"</span><span class="p">,</span><span class="w"> </span><span class="s2">"-c"</span><span class="p">,</span><span class="w"> </span><span class="s2">"1"</span><span class="p">]</span><span class="w">
+     </span><span class="p">},</span><span class="w">
+     </span><span class="s2">"target"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+         </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Exact"</span><span class="p">,</span><span class="w">
+         </span><span class="s2">"exact"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"aws-nginx"</span><span class="p">]</span><span class="w">
+     </span><span class="p">}</span><span class="w">
+ </span><span class="p">}</span><span class="w">
+</span></code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Launch the <strong>IO Attack</strong> by passing the JSON from <code class="highlighter-rouge">attacks/io.json</code> to the <code class="highlighter-rouge">https://api.gremlin.com/v1/attacks/new</code> API endpoint.</p>
+
+    <div class="language-bash highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code> curl <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="nt">-H</span> <span class="s2">"Authorization: </span><span class="nv">$GREMLIN_API_TOKEN</span><span class="s2">"</span> https://api.gremlin.com/v1/attacks/new <span class="nt">-d</span> <span class="s2">"@attacks/io.json"</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>On the target machine verify that the attack is running and that IO is currently overloaded.</p>
+
+    <div class="language-bash highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code> <span class="nv">$ </span><span class="nb">sudo </span>iotop <span class="nt">-aoP</span>
+ <span class="c"># OUTPUT</span>
+ Total DISK READ :       0.00 B/s | Total DISK WRITE :       3.92 M/s
+ Actual DISK READ:       0.00 B/s | Actual DISK WRITE:      15.77 M/s
+ PID  PRIO  USER       DISK READ  DISK WRITE  SWAPIN     IO&gt;     COMMAND
+ 323   be/3 root          0.00 B     68.00 K  0.00 % 71.28 %   <span class="o">[</span>jbd2/xvda1-8]
+ 20030 be/4 gremlin       0.00 B    112.15 M  0.00 % 17.11 %   gremlin attack io <span class="nt">-l</span> 45 <span class="nt">-d</span> /tmp <span class="nt">-w</span> 2 <span class="nt">-m</span> rw <span class="nt">-s</span> 4 <span class="nt">-c</span> 1
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>You can also view the <strong>Attack</strong> within the <a href="https://app.gremlin.com/attacks" target="_blank" rel="noopener noreferrer">Gremlin Web UI</a>.</p>
+
+    <p><img alt="Gremlin Web UI IO Attack" src="/gremlin-blog-posts/assets/chaos-engineering/migrating-cloud-chaotic-embrace/web-ui-io-attack-ff90b8f038d7908f60d63c251445b438473139c381d0ff2dab50061f5261a656.png" class="align-center"></p>
+  </li>
+</ol>
+
+<h2 id="what-comes-next">What Comes Next?</h2>
+
+<p>This article explored a number of common issues and outages related to failed migrations and upgrade procedures.  As impactful and expensive as those outages may have been, their existence shouldn’t dissuade you from making the move to the cloud.  The myriad benefits of a distributed stack are undeniable, particularly as software expands outward and continues to embrace microservice-based architecture.</p>
+
+<p>Instead, the occurrence of migration issues for even the biggest organizations in the industry illustrates the necessity of proper resilience testing.  Chaos Engineering is a critical piece of that finished and fully-resilient puzzle.  Planning ahead and inducing controlled chaos on your systems, both prior to and during migration, will help ensure you’re creating the most stable, robust, and resilient system possible.  Moreover, Chaos Engineering reduces downtime, lowers support costs, and speeds up the overall migration process.  Intelligent Chaos Experiments reveal weaknesses, thereby empowering your team to patch up any holes before they bust wide open within a post-migration state.</p>
 
 
         
@@ -878,7 +976,15 @@ Actual DISK READ:       0.00 B/s | Actual DISK WRITE:      15.77 M/s
     
       
       
-      <a href="/gremlin-blog-posts/tags/#migration" class="page__taxonomy-item" rel="tag">migration</a>
+      <a href="/gremlin-blog-posts/tags/#experiment" class="page__taxonomy-item" rel="tag">experiment</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/gremlin-blog-posts/tags/#migration" class="page__taxonomy-item" rel="tag">migration</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/gremlin-blog-posts/tags/#outage" class="page__taxonomy-item" rel="tag">outage</a>
     
     </span>
   </p>
