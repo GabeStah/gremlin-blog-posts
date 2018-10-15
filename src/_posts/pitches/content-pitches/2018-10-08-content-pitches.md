@@ -77,6 +77,8 @@ For example, we could show that for `AWS` both tools can fairly easily handle `E
 
 ## Chaos Engineering Through Staged Resiliency [Series]
 
+### STATUS: **Complete**
+
 **Pitch**: Discuss the danger of performing random Chaos Experiments without first establishing a disaster recovery playbook safety net.
 {: .notice--warning}
 
@@ -106,7 +108,7 @@ Sources:
 > 4. Define non-critical dependencies.
 > 5. Define thresholds at which non-critical dependency failures will impact system.
 
-### Level 1 — Manual — Getting agreement from all parties and DR failover.
+### Level 1 — Manual — Getting agreement from all parties and DR failover
 
 > - All of the pre-requisites stored in a single well-defined place
 > - Agreement on playbooks to be used by Devs, Testers, Operations, Stakeholders
@@ -138,6 +140,12 @@ Sources:
 > - Automated resiliency testing fully integrated into CI/CD environment
 > - Resiliency failure results in build failure
 > - Automated resiliency testing and DR failover testing enabled in production environment
+
+## How to Build Effective Disaster Recovery Strategies
+
+**Pitch**: 1 - 2 articles discussing **Disaster Recovery** techniques including guides for implementing a basic disaster recovery plan on the more common platforms (AWS, Azure, etc).
+
+Articles will also explore subsets of disaster recovery such as failover playbooks and how Chaos practices (e.g. gamedays) fit into proper disaster recovery strategies.
 
 ## Uncategorized
 

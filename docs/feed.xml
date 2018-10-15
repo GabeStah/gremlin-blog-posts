@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.4">Jekyll</generator><link href="http://localhost:4000/gremlin-blog-posts/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/gremlin-blog-posts/" rel="alternate" type="text/html" /><updated>2018-10-10T17:03:48-07:00</updated><id>http://localhost:4000/gremlin-blog-posts/feed.xml</id><title type="html">Gremlin: Blog Posts</title><subtitle>An amazing website.</subtitle><author><name>Gabe Wyatt</name></author><entry><title type="html">Content Pitches</title><link href="http://localhost:4000/gremlin-blog-posts/gremlin/content-pitches/" rel="alternate" type="text/html" title="Content Pitches" /><published>2018-10-08T00:00:00-07:00</published><updated>2018-10-08T00:00:00-07:00</updated><id>http://localhost:4000/gremlin-blog-posts/gremlin/content-pitches</id><content type="html" xml:base="http://localhost:4000/gremlin-blog-posts/gremlin/content-pitches/">&lt;h2 id=&quot;gremlin-docs-update&quot;&gt;Gremlin Docs Update&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.4">Jekyll</generator><link href="http://localhost:4000/gremlin-blog-posts/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/gremlin-blog-posts/" rel="alternate" type="text/html" /><updated>2018-10-15T16:25:53-07:00</updated><id>http://localhost:4000/gremlin-blog-posts/feed.xml</id><title type="html">Gremlin: Blog Posts</title><subtitle>An amazing website.</subtitle><author><name>Gabe Wyatt</name></author><entry><title type="html">Content Pitches</title><link href="http://localhost:4000/gremlin-blog-posts/gremlin/content-pitches/" rel="alternate" type="text/html" title="Content Pitches" /><published>2018-10-08T00:00:00-07:00</published><updated>2018-10-08T00:00:00-07:00</updated><id>http://localhost:4000/gremlin-blog-posts/gremlin/content-pitches</id><content type="html" xml:base="http://localhost:4000/gremlin-blog-posts/gremlin/content-pitches/">&lt;h2 id=&quot;gremlin-docs-update&quot;&gt;Gremlin Docs Update&lt;/h2&gt;
 
 &lt;h3 id=&quot;integrate-gremlin-help-style-guidelines&quot;&gt;Integrate Gremlin Help Style Guidelines&lt;/h3&gt;
 
@@ -63,6 +63,8 @@
 
 &lt;h2 id=&quot;chaos-engineering-through-staged-resiliency-series&quot;&gt;Chaos Engineering Through Staged Resiliency [Series]&lt;/h2&gt;
 
+&lt;h3 id=&quot;status-complete&quot;&gt;STATUS: &lt;strong&gt;Complete&lt;/strong&gt;&lt;/h3&gt;
+
 &lt;p class=&quot;notice--warning&quot;&gt;&lt;strong&gt;Pitch&lt;/strong&gt;: Discuss the danger of performing random Chaos Experiments without first establishing a disaster recovery playbook safety net.&lt;/p&gt;
 
 &lt;p&gt;Rather than defining system resiliency as a binary “yes” or “no”, outline how resiliency can be thought of as a series of defined “levels.”  As resiliency level rises, support costs dramatically fall.  Each post focuses on a specific “resiliency level” and defines what it is, how it is implemented, and provides examples of what such a level of resiliency might look like in an organization.  Overall discussion emphasizes the importance of allowing teams to work towards “climbing the ladder” of resiliency, rather than trying to make a sudden leap from the bottom to the top.&lt;/p&gt;
@@ -105,7 +107,7 @@
   &lt;/ol&gt;
 &lt;/blockquote&gt;
 
-&lt;h3 id=&quot;level-1manualgetting-agreement-from-all-parties-and-dr-failover&quot;&gt;Level 1 — Manual — Getting agreement from all parties and DR failover.&lt;/h3&gt;
+&lt;h3 id=&quot;level-1manualgetting-agreement-from-all-parties-and-dr-failover&quot;&gt;Level 1 — Manual — Getting agreement from all parties and DR failover&lt;/h3&gt;
 
 &lt;blockquote&gt;
   &lt;ul&gt;
@@ -157,6 +159,12 @@
     &lt;li&gt;Automated resiliency testing and DR failover testing enabled in production environment&lt;/li&gt;
   &lt;/ul&gt;
 &lt;/blockquote&gt;
+
+&lt;h2 id=&quot;how-to-build-effective-disaster-recovery-strategies&quot;&gt;How to Build Effective Disaster Recovery Strategies&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;Pitch&lt;/strong&gt;: 1 - 2 articles discussing &lt;strong&gt;Disaster Recovery&lt;/strong&gt; techniques including guides for implementing a basic disaster recovery plan on the more common platforms (AWS, Azure, etc).&lt;/p&gt;
+
+&lt;p&gt;Articles will also explore subsets of disaster recovery such as failover playbooks and how Chaos practices (e.g. gamedays) fit into proper disaster recovery strategies.&lt;/p&gt;
 
 &lt;h2 id=&quot;uncategorized&quot;&gt;Uncategorized&lt;/h2&gt;
 
@@ -234,19 +242,19 @@ Protect your brand and build trust by keeping internal and external stakeholders
 Take SRE actions across your infrastructure. Schedule orchestration jobs, build playbooks and automate best practices.&lt;/p&gt;
 &lt;/blockquote&gt;</content><author><name>Gabe Wyatt</name></author><category term="content" /><category term="idea" /><summary type="html">Content pitches and ideas for Gremlin.</summary></entry><entry><title type="html">Migrating to the Cloud Is Chaotic. Embrace It.</title><link href="http://localhost:4000/gremlin-blog-posts/chaos-engineering/migrating-cloud-chaotic-embrace/" rel="alternate" type="text/html" title="Migrating to the Cloud Is Chaotic. Embrace It." /><published>2018-10-05T00:00:00-07:00</published><updated>2018-10-05T00:00:00-07:00</updated><id>http://localhost:4000/gremlin-blog-posts/chaos-engineering/migrating-cloud-chaotic-embrace</id><content type="html" xml:base="http://localhost:4000/gremlin-blog-posts/chaos-engineering/migrating-cloud-chaotic-embrace/">&lt;p class=&quot;notice--danger&quot;&gt;Why organizations planning to migrate to the cloud should embrace Chaos Engineering as a thoughtful strategy to avoid pain down the road.&lt;/p&gt;
 
-&lt;p&gt;For many people, migrating to the cloud feels like an insurmountable task and understandably so – there’s a sense of comfort in the tangible nature of on-premises systems.  By contrast, moving into the ephemeral cloud is worrisome, especially if you doubt the stability and resilience of the systems that make up your cloud architecture.  The inherent malleability of a cloud stack is both its greatest strength and one of its biggest sources of potential failure.&lt;/p&gt;
+&lt;p&gt;Migrating to the cloud is an intimidating prospect and understandably so – there’s a lot that will change in your systems from on-prem to the cloud, and changes can mean instability in your systems.&lt;/p&gt;
 
 &lt;p class=&quot;notice--success&quot;&gt;How can you ensure your software will be safe after migrating to the cloud?  How do you combat the cloud’s chaotic nature while ensuring a resilient and stable system?  &lt;strong&gt;By intentionally inducing Chaos well before migration begins.&lt;/strong&gt;&lt;/p&gt;
 
-&lt;p&gt;It may feel counter-intuitive to purposely inject additional chaos into your system when your team is actively trying to &lt;em&gt;reduce&lt;/em&gt; failures.  The critical difference here is that Chaos Engineering allows your team to &lt;em&gt;choose&lt;/em&gt; when and how systems fail.  This ensures your architecture is able to withstand unexpected failures.  By executing Chaos Experiments on both existing and cloud systems you’re migrating into, you’ll identify weaknesses at both ends of the spectrum.&lt;/p&gt;
+&lt;p&gt;It sounds counter-intuitive to perform Chaos Engineering while your team is actively migrating to the cloud. Wouldn’t that just add failure and slow down an already challenging process? The reality is that when you’re migrating to the cloud Chaos Engineering is the best way to be confident that you’ve tested how your new system will behave once you switch traffic over. By performing Chaos Experiments on the environment you’re migrating into, you’ll identify weaknesses with plenty of time to mitigate them.&lt;/p&gt;
 
-&lt;p&gt;Testing your system resiliency throughout the migration process is critical, as migration is the period in a software’s life cycle in which outages are &lt;em&gt;most likely&lt;/em&gt; to occur.  In 2016, groups from the University of Chicago and Surya University jointly published an in-depth &lt;a href=&quot;http://ucare.cs.uchicago.edu/pdf/socc16-cos.pdf&quot;&gt;cloud outage study&lt;/a&gt; that examined the causes of service outages among 32 of the most popular Internet services between 2009 and 2015.&lt;/p&gt;
+&lt;p&gt;In 2016, groups from the University of Chicago and Surya University jointly published an in-depth &lt;a href=&quot;http://ucare.cs.uchicago.edu/pdf/socc16-cos.pdf&quot;&gt;cloud outage study&lt;/a&gt; that examined the causes of service outages among 32 of the most popular Internet services between 2009 and 2015.  This post will go into a number of these outages and provide tutorials to run Chaos Experiments and proactively identify potential issues before they turn into production outages.&lt;/p&gt;
 
 &lt;p class=&quot;notice--success&quot;&gt;The &lt;a href=&quot;http://ucare.cs.uchicago.edu/pdf/socc16-cos.pdf&quot;&gt;study&lt;/a&gt; found that the &lt;em&gt;majority&lt;/em&gt; of unplanned outages (16%) are caused by failures during upgrade and migration processes.&lt;/p&gt;
 
 &lt;h2 id=&quot;managing-heavy-cpu-load&quot;&gt;Managing Heavy CPU Load&lt;/h2&gt;
 
-&lt;p&gt;An overloaded CPU can quickly create bottlenecks and cause computational failures within most cloud architectures.  This is critical when migrating to a cloud environment, where instability in a single system can quickly cascade into problems elsewhere down the chain.  Proper CPU resilience testing helps to determine which existing systems are currently resilient to a CPU failure, and which need to be prioritized for upgrade and migration necessary to maintain a stable stack.&lt;/p&gt;
+&lt;p&gt;An overloaded CPU can quickly create bottlenecks and cause failures within most architectures. In a distributed cloud environment, instability in a single system can quickly cascade into problems elsewhere down the chain. Proper CPU resilience testing helps to determine which existing systems are currently resilient to a CPU failure, and which need to be prioritized for upgrade and migration necessary to maintain a stable stack.&lt;/p&gt;
 
 &lt;h3 id=&quot;why-it-matters-hotmail--outlook-2013&quot;&gt;Why It Matters: Hotmail &amp;amp; Outlook (2013)&lt;/h3&gt;
 
@@ -853,6 +861,6 @@ Lessons from Hundreds of Service Outages&lt;/a&gt; study found that network prob
 
 &lt;h2 id=&quot;what-comes-next&quot;&gt;What Comes Next?&lt;/h2&gt;
 
-&lt;p&gt;This article explored a number of common issues and outages related to failed migrations and upgrade procedures.  As impactful and expensive as those outages may have been, their existence shouldn’t dissuade you from making the move to the cloud.  The myriad benefits of a distributed stack are undeniable, particularly as software expands outward and continues to embrace microservice-based architecture.&lt;/p&gt;
+&lt;p&gt;This article explored a number of common issues and outages related to failed migrations and upgrade procedures. As impactful and expensive as those outages may have been, their existence shouldn’t dissuade you from making the move to the cloud. A distributed architecture allows you to enjoy faster release cycles and, in general, increased developer productivity.&lt;/p&gt;
 
-&lt;p&gt;Instead, the occurrence of migration issues for even the biggest organizations in the industry illustrates the necessity of proper resilience testing.  Chaos Engineering is a critical piece of that finished and fully-resilient puzzle.  Planning ahead and inducing controlled chaos on your systems, both prior to and during migration, will help ensure you’re creating the most stable, robust, and resilient system possible.  Moreover, Chaos Engineering reduces downtime, lowers support costs, and speeds up the overall migration process.  Intelligent Chaos Experiments reveal weaknesses, thereby empowering your team to patch up any holes before they bust wide open within a post-migration state.&lt;/p&gt;</content><author><name>Gabe Wyatt</name></author><category term="migration" /><category term="experiment" /><category term="outage" /><summary type="html">Why organizations planning to migrate to the cloud should embrace Chaos Engineering as a thoughtful strategy to avoid pain down the road.</summary></entry></feed>
+&lt;p&gt;Instead, the occurrence of migration issues for even the biggest organizations in the industry illustrates the necessity of proper resilience testing.  Chaos Engineering is a critical piece of that finished and fully-resilient puzzle.  Planning ahead and running Chaos Experiments on your systems, both prior to and during migration, will help ensure you’re creating the most stable, robust, and resilient system possible.&lt;/p&gt;</content><author><name>Gabe Wyatt</name></author><category term="migration" /><category term="experiment" /><category term="outage" /><summary type="html">Why organizations planning to migrate to the cloud should embrace Chaos Engineering as a thoughtful strategy to avoid pain down the road.</summary></entry></feed>

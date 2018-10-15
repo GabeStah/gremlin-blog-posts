@@ -61,21 +61,21 @@ sources:
 Why organizations planning to migrate to the cloud should embrace Chaos Engineering as a thoughtful strategy to avoid pain down the road.
 {: .notice--danger }
 
-For many people, migrating to the cloud feels like an insurmountable task and understandably so -- there's a sense of comfort in the tangible nature of on-premises systems.  By contrast, moving into the ephemeral cloud is worrisome, especially if you doubt the stability and resilience of the systems that make up your cloud architecture.  The inherent malleability of a cloud stack is both its greatest strength and one of its biggest sources of potential failure.
+Migrating to the cloud is an intimidating prospect and understandably so – there’s a lot that will change in your systems from on-prem to the cloud, and changes can mean instability in your systems.
 
 How can you ensure your software will be safe after migrating to the cloud?  How do you combat the cloud's chaotic nature while ensuring a resilient and stable system?  **By intentionally inducing Chaos well before migration begins.**
 {: .notice--success }
 
-It may feel counter-intuitive to purposely inject additional chaos into your system when your team is actively trying to _reduce_ failures.  The critical difference here is that Chaos Engineering allows your team to _choose_ when and how systems fail.  This ensures your architecture is able to withstand unexpected failures.  By executing Chaos Experiments on both existing and cloud systems you're migrating into, you'll identify weaknesses at both ends of the spectrum.
+It sounds counter-intuitive to perform Chaos Engineering while your team is actively migrating to the cloud. Wouldn't that just add failure and slow down an already challenging process? The reality is that when you're migrating to the cloud Chaos Engineering is the best way to be confident that you've tested how your new system will behave once you switch traffic over. By performing Chaos Experiments on the environment you're migrating into, you'll identify weaknesses with plenty of time to mitigate them.
 
-Testing your system resiliency throughout the migration process is critical, as migration is the period in a software's life cycle in which outages are _most likely_ to occur.  In 2016, groups from the University of Chicago and Surya University jointly published an in-depth [cloud outage study](http://ucare.cs.uchicago.edu/pdf/socc16-cos.pdf) that examined the causes of service outages among 32 of the most popular Internet services between 2009 and 2015.
+In 2016, groups from the University of Chicago and Surya University jointly published an in-depth [cloud outage study](http://ucare.cs.uchicago.edu/pdf/socc16-cos.pdf) that examined the causes of service outages among 32 of the most popular Internet services between 2009 and 2015.  This post will go into a number of these outages and provide tutorials to run Chaos Experiments and proactively identify potential issues before they turn into production outages.
 
 The [study](http://ucare.cs.uchicago.edu/pdf/socc16-cos.pdf) found that the _majority_ of unplanned outages (16%) are caused by failures during upgrade and migration processes.
 {: .notice--success }
 
 ## Managing Heavy CPU Load
 
-An overloaded CPU can quickly create bottlenecks and cause computational failures within most cloud architectures.  This is critical when migrating to a cloud environment, where instability in a single system can quickly cascade into problems elsewhere down the chain.  Proper CPU resilience testing helps to determine which existing systems are currently resilient to a CPU failure, and which need to be prioritized for upgrade and migration necessary to maintain a stable stack.
+An overloaded CPU can quickly create bottlenecks and cause failures within most architectures. In a distributed cloud environment, instability in a single system can quickly cascade into problems elsewhere down the chain. Proper CPU resilience testing helps to determine which existing systems are currently resilient to a CPU failure, and which need to be prioritized for upgrade and migration necessary to maintain a stable stack.
 
 ### Why It Matters: Hotmail & Outlook (2013)
 
@@ -512,9 +512,9 @@ A [Gremlin API][gremlin#docs/api] **IO Attack** accepts the following arguments.
 
 ## What Comes Next?
 
-This article explored a number of common issues and outages related to failed migrations and upgrade procedures.  As impactful and expensive as those outages may have been, their existence shouldn't dissuade you from making the move to the cloud.  The myriad benefits of a distributed stack are undeniable, particularly as software expands outward and continues to embrace microservice-based architecture.
+This article explored a number of common issues and outages related to failed migrations and upgrade procedures. As impactful and expensive as those outages may have been, their existence shouldn't dissuade you from making the move to the cloud. A distributed architecture allows you to enjoy faster release cycles and, in general, increased developer productivity.
 
-Instead, the occurrence of migration issues for even the biggest organizations in the industry illustrates the necessity of proper resilience testing.  Chaos Engineering is a critical piece of that finished and fully-resilient puzzle.  Planning ahead and inducing controlled chaos on your systems, both prior to and during migration, will help ensure you're creating the most stable, robust, and resilient system possible.  Moreover, Chaos Engineering reduces downtime, lowers support costs, and speeds up the overall migration process.  Intelligent Chaos Experiments reveal weaknesses, thereby empowering your team to patch up any holes before they bust wide open within a post-migration state.
+Instead, the occurrence of migration issues for even the biggest organizations in the industry illustrates the necessity of proper resilience testing.  Chaos Engineering is a critical piece of that finished and fully-resilient puzzle.  Planning ahead and running Chaos Experiments on your systems, both prior to and during migration, will help ensure you're creating the most stable, robust, and resilient system possible.
 
 {% include          links-global.md %}
 {% include_relative links.md %}
