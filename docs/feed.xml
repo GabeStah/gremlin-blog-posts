@@ -1,4 +1,92 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.4">Jekyll</generator><link href="http://localhost:4000/gremlin-blog-posts/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/gremlin-blog-posts/" rel="alternate" type="text/html" /><updated>2018-10-15T16:25:53-07:00</updated><id>http://localhost:4000/gremlin-blog-posts/feed.xml</id><title type="html">Gremlin: Blog Posts</title><subtitle>An amazing website.</subtitle><author><name>Gabe Wyatt</name></author><entry><title type="html">Content Pitches</title><link href="http://localhost:4000/gremlin-blog-posts/gremlin/content-pitches/" rel="alternate" type="text/html" title="Content Pitches" /><published>2018-10-08T00:00:00-07:00</published><updated>2018-10-08T00:00:00-07:00</updated><id>http://localhost:4000/gremlin-blog-posts/gremlin/content-pitches</id><content type="html" xml:base="http://localhost:4000/gremlin-blog-posts/gremlin/content-pitches/">&lt;h2 id=&quot;gremlin-docs-update&quot;&gt;Gremlin Docs Update&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.4">Jekyll</generator><link href="http://localhost:4000/gremlin-blog-posts/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/gremlin-blog-posts/" rel="alternate" type="text/html" /><updated>2018-10-18T00:11:08-07:00</updated><id>http://localhost:4000/gremlin-blog-posts/feed.xml</id><title type="html">Gremlin: Blog Posts</title><subtitle>An amazing website.</subtitle><author><name>Gabe Wyatt</name></author><entry><title type="html">Chaos Engineering Through Staged Resiliency - Stage 1</title><link href="http://localhost:4000/gremlin-blog-posts/chaos-engineering/chaos-engineering-through-staged-resiliency-stage-1/" rel="alternate" type="text/html" title="Chaos Engineering Through Staged Resiliency - Stage 1" /><published>2018-10-11T00:00:00-07:00</published><updated>2018-10-11T00:00:00-07:00</updated><id>http://localhost:4000/gremlin-blog-posts/chaos-engineering/chaos-engineering-through-staged-resiliency-stage-1</id><content type="html" xml:base="http://localhost:4000/gremlin-blog-posts/chaos-engineering/chaos-engineering-through-staged-resiliency-stage-1/">&lt;h2 id=&quot;introduction&quot;&gt;Introduction&lt;/h2&gt;
+
+&lt;p&gt;In spite of what the name may suggest, Chaos Engineering is the &lt;em&gt;disciplined&lt;/em&gt; approach of identifying potential failures before they become outages.  Ultimately, the goal of Chaos Engineering is to create more stable and &lt;strong&gt;resilient&lt;/strong&gt; systems.  There is some disagreement in the community about proper terminology, but regardless of which side of the &lt;a href=&quot;https://medium.com/@jpaulreed/chaos-engineered-or-otherwise-is-not-enough-ad5792309ecf&quot;&gt;Chaos Engineering&lt;/a&gt; vs &lt;a href=&quot;https://www.linkedin.com/pulse/would-chaos-any-othername-casey-rosenthal/&quot;&gt;Resilience Engineering&lt;/a&gt; debate you come down on, most engineers probably agree that proper implementation is more important than naming semantics.&lt;/p&gt;
+
+&lt;p&gt;Creating resilient software is a fundamental necessity within modern cloud applications and architectures.  As systems become more distributed the potential for unplanned outages and unexpected failure significantly increases.  Thankfully, Chaos and Resilience Engineering techniques are quickly gaining traction within the community.  &lt;a href=&quot;https://coggle.it/diagram/WiKceGDAwgABrmyv/t/chaos-engineering-companies%2C-people%2C-tools-practices&quot;&gt;Many organizations&lt;/a&gt;, both big and small, have embraced Chaos Engineering over the last few years.  In his fascinating [ChaosConf 2018][#chaosconf-2018] talk titled &lt;a href=&quot;https://www.youtube.com/watch?v=4Gy_5EQMrB4&quot;&gt;&lt;em&gt;Practicing Chaos Engineering at Walmart&lt;/em&gt;&lt;/a&gt;, Walmart’s Director of Engineering Vilas Veeraraghavan outlines how he and the hundreds of engineering teams at Walmart have implemented Resilience Engineering.  By creating a robust series of “levels” or “stages” that each separate engineering team can work through, Walmart is able to progressively improve system resiliency while dramatically reducing support costs.&lt;/p&gt;
+
+&lt;p&gt;This blog series expands on Vilas’ and Walmart’s techniques by diving deep into each of the &lt;strong&gt;five&lt;/strong&gt; &lt;em&gt;Stages of Resiliency&lt;/em&gt;.  Each post examines the necessary components of a stage, describes how those components are evaluated and assembled, and outlines the step-by-step process necessary to move from one stage to the next.  With a bit of adjustment for your own organizational needs, you and your team can implement similar practices to quickly add Chaos Engineering to your own systems with relative ease.  After climbing through all five stages your system and its deployment will be almost entirely automated and will feature significant resiliency testing and robust disaster recovery failover.&lt;/p&gt;
+
+&lt;h2 id=&quot;prerequisites&quot;&gt;Prerequisites&lt;/h2&gt;
+
+&lt;p&gt;Before you can begin moving through the resiliency stages there are a few prerequisite steps you’ll need to complete.  Most of these requirements are standard fare for a well-designed system, but ensuring each and every unique application team is fully prepared for the unknown is paramount to developing resilient systems.&lt;/p&gt;
+
+&lt;p class=&quot;notice--tip&quot;&gt;&lt;strong&gt;NOTE&lt;/strong&gt;: The remainder of this article will use the term &lt;code class=&quot;highlighter-rouge&quot;&gt;team&lt;/code&gt; to indicate a singular group that is responsible for an application that is progressing through the resiliency stages.&lt;/p&gt;
+
+&lt;h3 id=&quot;1-define-the-critical-dependencies&quot;&gt;1. Define the Critical Dependencies&lt;/h3&gt;
+
+&lt;p&gt;Start by documenting every application dependency that is &lt;em&gt;required&lt;/em&gt; for the application to function at all.  This type of dependency is referred to as a &lt;strong&gt;critical dependency&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;2-define-the-non-critical-dependencies&quot;&gt;2. Define the Non-Critical Dependencies&lt;/h3&gt;
+
+&lt;p&gt;Once all critical dependencies are identified then all remaining dependencies should be &lt;strong&gt;non-critical dependencies&lt;/strong&gt;.  If the core application can still function – even in a degraded state – when a dependency is missing, then that dependency is considered non-critical.&lt;/p&gt;
+
+&lt;h3 id=&quot;3-create-a-disaster-recovery-failover-playbook&quot;&gt;3. Create a Disaster Recovery Failover Playbook&lt;/h3&gt;
+
+&lt;p&gt;Your team should create a disaster recovery plan specific to &lt;strong&gt;failover&lt;/strong&gt;.  A &lt;strong&gt;disaster recovery failover playbook&lt;/strong&gt; should include the following information, at a minimum:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Contact information&lt;/strong&gt;: Document contact info for all relevant team members.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Notification procedures&lt;/strong&gt;: This answers the “Who/What/When/Why/How” of notifying relevant members.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Failover procedures&lt;/strong&gt;: Deliberate, step-by-step instructions for handling each potential &lt;strong&gt;failover scenario&lt;/strong&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p class=&quot;notice--tip&quot;&gt;&lt;strong&gt;TIP&lt;/strong&gt;: Not sure which failover scenarios to expect or plan for?  Unable to determine if a dependency is critical vs non-critical?  Consider running a GameDay to better prepare for and test specific scenarios in a controlled manner.  Check out &lt;a href=&quot;https://www.gremlin.com/community/tutorials/how-to-run-a-gameday/&quot;&gt;How to Run a GameDay&lt;/a&gt; for more info.&lt;/p&gt;
+
+&lt;h3 id=&quot;4-create-a-critical-dependency-failover-playbook&quot;&gt;4. Create a Critical Dependency Failover Playbook&lt;/h3&gt;
+
+&lt;p&gt;A &lt;strong&gt;critical dependency failover playbook&lt;/strong&gt; is a subset of the disaster recovery failover playbook and it should detail the step-by-step procedures for handling the potential failover scenarios for each critical dependency.&lt;/p&gt;
+
+&lt;h3 id=&quot;5-create-a-non-critical-dependency-failover-playbook&quot;&gt;5. Create a Non-Critical Dependency Failover Playbook&lt;/h3&gt;
+
+&lt;p&gt;The final prerequisite is to determine how non-critical dependency failures will impact the system.  Your team may not &lt;em&gt;necessarily&lt;/em&gt; have failover procedures in place for non-critical dependencies, so this process can be as simple as testing and documenting what happens when each non-critical dependency is unavailable.  Be sure to gauge the &lt;strong&gt;severity&lt;/strong&gt; of the failure impact on the core application, which will provide the team with a better understanding of the system and its interactions (see &lt;a href=&quot;#recovery-objectives&quot;&gt;Recovery Objectives&lt;/a&gt;).&lt;/p&gt;
+
+&lt;h4 id=&quot;recovery-objectives&quot;&gt;Recovery Objectives&lt;/h4&gt;
+
+&lt;p&gt;Most disaster recovery playbooks define the goals and allowed impact of a given failure using two common terms: &lt;strong&gt;Recovery Time Objective&lt;/strong&gt; and &lt;strong&gt;Recovery Point Objective&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Recovery Time Objective&lt;/strong&gt;: RTO defines the maximum period of time in which the functionality of a failed service should be restored.  For example, if a service with an RTO of twelve hours experiences an outage at 5:00 PM then functionality should be restored to the service by 5:00 AM the next morning.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Recovery Point Objective&lt;/strong&gt;: RPO defines the maximum period of time during which data can be lost during a service failure.  For example, if a service with an RPO of two hours experiences an outage at 5:00 PM then &lt;em&gt;only&lt;/em&gt; data generated between 3:00 PM and 5:00 PM should be lost – all existing data prior to 3:00 PM should still be intact.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p class=&quot;text-center&quot;&gt;&lt;img alt=&quot;RTO &amp;amp; RPO Example - Courtesy of Wikipedia&quot; src=&quot;/gremlin-blog-posts/assets/chaos-engineering/chaos-engineering-through-staged-resiliency/stage-1/rto-rpo-example-wikipedia-2294d0f2a372d637a46304bc07fa57dd380b7cae63a3b16d1c79788378750ef7.png&quot; class=&quot;align-center&quot; /&gt;
+&lt;em&gt;Image Courtesy of Wikipedia&lt;/em&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;resiliency-stage-1-prerequisites-playbook-agreement-and-manual-failover-exercises&quot;&gt;Resiliency Stage 1: Prerequisites, Playbook Agreement, and Manual Failover Exercises&lt;/h2&gt;
+
+&lt;p&gt;It’s now time to work through the first of the five resiliency stages by confirming all prerequisite steps have been completed, ensuring the entire team agrees on everything defined in the prerequisites, and manually performing at least one failover exercise.&lt;/p&gt;
+
+&lt;h3 id=&quot;complete-and-available-prerequisites&quot;&gt;Complete and Available Prerequisites&lt;/h3&gt;
+
+&lt;p&gt;Ensure that all &lt;a href=&quot;#prerequisites&quot;&gt;Prerequisites&lt;/a&gt; have been met.  All playbooks, dependency definitions, and other relevant documentation should placed in a singular, globally accessible location so every single team member has immediate access to that information.  Maintaining a single repository for the information also maintains consistency across the team, so there’s never any confusion about the steps in a particular scenario or what is defined as a critical dependency.&lt;/p&gt;
+
+&lt;h3 id=&quot;team-wide-agreement-on-playbooks&quot;&gt;Team-Wide Agreement on Playbooks&lt;/h3&gt;
+
+&lt;p&gt;With unfettered access to all documentation the next step is to ensure the entire team agrees with all documented information as its laid out.  If there is disagreement about the best way to approach a given failover scenario or the risk and potential impact of a non-critical dependency failure, this is the best time to suss out those differences of opinion and come to a unanimous “best” solution.  A healthy, active debate provides the team with a deeper understanding of the system and encourages the best ideas and techniques to bubble up to the surface.&lt;/p&gt;
+
+&lt;p&gt;While the goal is agreement on the playbooks currently laid out, documentation can (and should) be updated in the future as experiments shed new light on the system.  The team should be encouraged and empowered to challenge the norms in order to create a system that is always adapting and evolving to be as resilient as possible.&lt;/p&gt;
+
+&lt;h3 id=&quot;manually-execute-a-failover-exercise&quot;&gt;Manually Execute a Failover Exercise&lt;/h3&gt;
+
+&lt;p&gt;The last step is to manually perform a failover exercise.  The goal of this exercise is to verify that the disaster recovery failover playbook works as expected.  Therefore, the step-by-step process defined in the playbook should be followed exactly as documented.&lt;/p&gt;
+
+&lt;p class=&quot;notice--warning&quot;&gt;&lt;strong&gt;WARNING&lt;/strong&gt;: If an action or step is not &lt;em&gt;explicitly&lt;/em&gt; documented within a playbook then it should be ignored.  If the exercise fails or cannot be completed this likely indicates that the playbook needs to be updated.&lt;/p&gt;
+
+&lt;h2 id=&quot;implementation-example&quot;&gt;Implementation Example&lt;/h2&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Ansible?
+https://docs.ansible.com/ansible/latest/user_guide/playbooks.html
+https://galaxy.ansible.com/search?tags=cloud&amp;amp;order_by=-relevance&amp;amp;page_size=10&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;(TODO)&lt;/p&gt;
+
+&lt;p&gt;The last step necessary to complete &lt;strong&gt;Resiliency Stage 1&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;conclusion-1&quot;&gt;Conclusion&lt;/h2&gt;</content><author><name>Gabe Wyatt</name></author><category term="resiliency" /><category term="staging" /></entry><entry><title type="html">Content Pitches</title><link href="http://localhost:4000/gremlin-blog-posts/gremlin/content-pitches/" rel="alternate" type="text/html" title="Content Pitches" /><published>2018-10-08T00:00:00-07:00</published><updated>2018-10-08T00:00:00-07:00</updated><id>http://localhost:4000/gremlin-blog-posts/gremlin/content-pitches</id><content type="html" xml:base="http://localhost:4000/gremlin-blog-posts/gremlin/content-pitches/">&lt;h2 id=&quot;gremlin-docs-update&quot;&gt;Gremlin Docs Update&lt;/h2&gt;
 
 &lt;h3 id=&quot;integrate-gremlin-help-style-guidelines&quot;&gt;Integrate Gremlin Help Style Guidelines&lt;/h3&gt;
 
@@ -162,9 +250,15 @@
 
 &lt;h2 id=&quot;how-to-build-effective-disaster-recovery-strategies&quot;&gt;How to Build Effective Disaster Recovery Strategies&lt;/h2&gt;
 
-&lt;p&gt;&lt;strong&gt;Pitch&lt;/strong&gt;: 1 - 2 articles discussing &lt;strong&gt;Disaster Recovery&lt;/strong&gt; techniques including guides for implementing a basic disaster recovery plan on the more common platforms (AWS, Azure, etc).&lt;/p&gt;
+&lt;p class=&quot;notice--warning&quot;&gt;&lt;strong&gt;Pitch&lt;/strong&gt;: 1 - 2 articles discussing &lt;strong&gt;Disaster Recovery&lt;/strong&gt; techniques including guides for implementing a basic disaster recovery plan on the more common platforms (AWS, Azure, etc).&lt;/p&gt;
 
 &lt;p&gt;Articles will also explore subsets of disaster recovery such as failover playbooks and how Chaos practices (e.g. gamedays) fit into proper disaster recovery strategies.&lt;/p&gt;
+
+&lt;h2 id=&quot;deploying-a-chaos-engineered-stack-with-ansible-playbooks&quot;&gt;Deploying a Chaos Engineered Stack with Ansible Playbooks&lt;/h2&gt;
+
+&lt;p class=&quot;notice--warning&quot;&gt;&lt;strong&gt;Pitch&lt;/strong&gt;: Article(s) providing a step-by-step tutorial for deploying a (simple) application stack in the cloud using &lt;a href=&quot;https://docs.ansible.com/ansible/latest/user_guide/playbooks.html&quot;&gt;Ansible Playbooks&lt;/a&gt; that &lt;em&gt;includes&lt;/em&gt; Gremlin ready to go (“pre-installed”) as a Chaos Engineering solution.&lt;/p&gt;
+
+&lt;p&gt;Total length is unknown but would likely be rather in-depth as Ansible playbooks can get complex.  Gremlin auto-inclusion would need to be tested to see how feasible/workable this idea is.&lt;/p&gt;
 
 &lt;h2 id=&quot;uncategorized&quot;&gt;Uncategorized&lt;/h2&gt;
 

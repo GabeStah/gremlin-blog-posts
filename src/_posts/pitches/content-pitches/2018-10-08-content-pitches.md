@@ -144,8 +144,16 @@ Sources:
 ## How to Build Effective Disaster Recovery Strategies
 
 **Pitch**: 1 - 2 articles discussing **Disaster Recovery** techniques including guides for implementing a basic disaster recovery plan on the more common platforms (AWS, Azure, etc).
+{: .notice--warning}
 
 Articles will also explore subsets of disaster recovery such as failover playbooks and how Chaos practices (e.g. gamedays) fit into proper disaster recovery strategies.
+
+## Deploying a Chaos Engineered Stack with Ansible Playbooks
+
+**Pitch**: Article(s) providing a step-by-step tutorial for deploying a (simple) application stack in the cloud using [Ansible Playbooks](https://docs.ansible.com/ansible/latest/user_guide/playbooks.html) that _includes_ Gremlin ready to go ("pre-installed") as a Chaos Engineering solution.
+{: .notice--warning}
+
+Total length is unknown but would likely be rather in-depth as Ansible playbooks can get complex.  Gremlin auto-inclusion would need to be tested to see how feasible/workable this idea is.
 
 ## Uncategorized
 

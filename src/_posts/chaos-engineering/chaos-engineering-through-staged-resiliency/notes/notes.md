@@ -57,6 +57,8 @@ Sources:
 > - Publish test results to team, stakeholders
 > - Manual tests are acceptable
 
+> level two is it's again edited, all of these levels are edited. it this level to it the only thing that changes is making sure that you can do failure injection test for all of your dependencies for application dependencies.
+
 ### Stage 3 — Manual and Automatic — Regular exercises
 
 > - All of level 2 requirements, plus
@@ -64,11 +66,15 @@ Sources:
 > - Publish results to dashboards to track resiliency over time
 > - Run at least one resiliency exercise (failure injection) in production environment
 
+> level three is where automation starts kicking in. so we are pushing teams to start doing using tools right tools like gremlin we have internal tools which they can use to basically push that either infrastructure or that applications to fail and then see what the response looks like and make sure that they have good playbooks to fix that and reduce the revenue loss over time.
+
 ### Stage 4 — Automated — fully automated in pre-prod
 
 > - All of level 3 requirements, plus
 > - Automated resiliency testing in non-prod environment
 > - Semi-automated DR failover scripts (minimal human supervision required)
+
+> level four increases the amount of automation.
 
 ### Stage 5 — Full automation
 
@@ -76,3 +82,5 @@ Sources:
 > - Automated resiliency testing fully integrated into CI/CD environment
 > - Resiliency failure results in build failure
 > - Automated resiliency testing and DR failover testing enabled in production environment
+
+> by the time you are at level five you are completely automated and literally the only support that someone in sre or SiteOps have to give you is a few hours of engineer time to ensure that the right buttons are clicked.

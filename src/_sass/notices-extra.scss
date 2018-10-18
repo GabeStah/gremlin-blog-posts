@@ -1,0 +1,7 @@
+$tip-color: #23c386 !default;
+
+/* Tip notice */
+
+.notice--tip {
+  @include notice($tip-color);
+}
