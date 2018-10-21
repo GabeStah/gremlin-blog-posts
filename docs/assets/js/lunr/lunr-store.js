@@ -15,7 +15,7 @@ var store = [{
         "url": "http://localhost:4000/gremlin-blog-posts/chaos-engineering/chaos-engineering-through-staged-resiliency-stage-1/",
         "teaser":null},{
         "title": "Create a Serverless Twitter Bot with Airbrake and AWS Lambda - Part 1",
-        "excerpt":"In this series, you’ll learn how to create a fully-automated, NodeJS, serverless Twitter bot that can tweet links to posts from your favorite blog. In Part 1 of our three-part series, you’ll create a bot and configure it to manually create tweets. In Part 2 you’ll learn how to add...","categories": [],
+        "excerpt":"In this series, you’ll learn how to create a fully-automated, NodeJS, serverless Twitter bot that can tweet links to posts from your favorite blog or RSS feed. In part one of our three-part series, you’ll create a bot and configure it to manually create tweets. In part two you’ll learn...","categories": [],
         "tags": [],
         "url": "http://localhost:4000/gremlin-blog-posts/serverless-twitter-bot-aws-lambda/",
         "teaser":null}]

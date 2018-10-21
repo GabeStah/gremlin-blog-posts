@@ -6,7 +6,9 @@ asset-path: misc/examples
 sources:
 ---
 
-In this series, you'll learn how to create a fully-automated, NodeJS, serverless Twitter bot that can tweet links to posts from your favorite blog.  In Part 1 of our three-part series, you'll create a bot and configure it to manually create tweets.  In [Part 2](https://airbrake.io/blog/nodejs/serverless-twitter-bot-airbrake-lambda-part-2) you'll learn how to add real-time error monitoring by integrating <a class="js-cta-utm" href="https://airbrake.io/languages/nodejs-error-monitoring?utm_source=blog&utm_medium=end-post&utm_campaign=airbrake-serverless-twitter-bot">Airbrake's Node.js</a> software.  Finally, [Part 3](https://airbrake.io/blog/nodejs/serverless-twitter-bot-airbrake-lambda-part-3) will walk you through the process of automating your bot by integrating it into the serverless AWS Lambda platform.  Let's get to it!
+In this series, you'll learn how to create a fully-automated, NodeJS, serverless Twitter bot that can tweet links to posts from your favorite blog or RSS feed.
+
+In part one of our three-part series, you'll create a bot and configure it to manually create tweets.  In [part two](https://airbrake.io/blog/nodejs/serverless-twitter-bot-airbrake-lambda-part-2) you'll learn how to add real-time error monitoring by integrating <a class="js-cta-utm" href="https://airbrake.io/languages/nodejs-error-monitoring?utm_source=blog&utm_medium=end-post&utm_campaign=airbrake-serverless-twitter-bot">Airbrake's Node.js</a> software.  Finally, [part three](https://airbrake.io/blog/nodejs/serverless-twitter-bot-airbrake-lambda-part-3) will walk you through the process of automating your bot by integrating it into the serverless AWS Lambda platform.  Let's get to it!
 
 ## Initialize Your Project
 
