@@ -1,0 +1,3 @@
+[submodule "staged-resiliency-django_example"]
+    path = src/_posts/chaos-engineering/chaos-engineering-through-staged-resiliency/django_example
+    url = git@github.com:GabeStah/django_example.git
