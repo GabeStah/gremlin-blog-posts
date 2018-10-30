@@ -41,9 +41,15 @@ sources:
 
 ## Introduction
 
-{% comment %}
-{% asset '{{ page.asset-path }}'/web-ui-blackhole-attack.png %}{: .align-center}
-{% endcomment %}
+## Resiliency Stage 3: 
+
+> Level 3 — manual + automated — Regular exercises
+> All of level 2 requirements, plus
+> Run tests regularly on a cadence (at least once every 4–5 weeks)
+> Publish results to dashboards to track resiliency over time
+> Run at least one resiliency exercise (failure injection) in production environment
+
+> level three is where automation starts kicking in. so we are pushing teams to start doing using tools right tools like gremlin we have internal tools which they can use to basically push that either infrastructure or that applications to fail and then see what the response looks like and make sure that they have good playbooks to fix that and reduce the revenue loss over time.
 
 ## Conclusion
 

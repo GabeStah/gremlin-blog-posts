@@ -41,9 +41,14 @@ sources:
 
 ## Introduction
 
-{% comment %}
-{% asset '{{ page.asset-path }}'/web-ui-blackhole-attack.png %}{: .align-center}
-{% endcomment %}
+## Resiliency Stage 4: 
+
+> Level 4 — Automated — fully automated in pre-prod
+> All of level 3 requirements, plus
+> Automated resiliency testing in non-prod environment
+> Semi-automated DR failover scripts (minimal human supervision required)
+
+> level four increases the amount of automation.
 
 ## Conclusion
 

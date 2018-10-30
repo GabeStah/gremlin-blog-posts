@@ -41,9 +41,15 @@ sources:
 
 ## Introduction
 
-{% comment %}
-{% asset '{{ page.asset-path }}'/web-ui-blackhole-attack.png %}{: .align-center}
-{% endcomment %}
+## Resiliency Stage 5: 
+
+> Level 5 — Full automation
+> All of level 4 requirements, plus
+> Automated resiliency testing fully integrated into CI/CD environment
+> Resiliency failure results in build failure
+> Automated resiliency testing and DR failover testing enabled in production environment
+
+> by the time you are at level five you are completely automated and literally the only support that someone in sre or SiteOps have to give you is a few hours of engineer time to ensure that the right buttons are clicked.
 
 ## Conclusion
 
