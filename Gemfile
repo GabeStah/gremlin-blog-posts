@@ -16,6 +16,7 @@ group :jekyll_plugins do
   gem "premonition", path: "gems/premonition"
   gem 'jekyll-target-blank'
   gem 'jekyll-assets'
+  gem 'jekyll-redirect-from'
 end
 
 platforms :ruby do
