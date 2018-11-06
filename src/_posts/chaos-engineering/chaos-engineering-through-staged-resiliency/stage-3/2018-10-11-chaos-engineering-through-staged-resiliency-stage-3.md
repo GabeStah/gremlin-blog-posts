@@ -4,7 +4,7 @@ excerpt: ""
 categories: [chaos-engineering]
 tags: [resiliency, staging]
 url: "https://www.gremlin.com/blog/?"
-published: false
+published: true
 asset-path: chaos-engineering/chaos-engineering-through-staged-resiliency/stage-3
 sources:
     - tags: [base source, walmart, resilience, chaosconf 2018]

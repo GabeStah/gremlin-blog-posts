@@ -9,7 +9,7 @@
   <head>
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>Chaos Engineering Through Staged Resiliency - Stage 2 - Gremlin: Blog Posts</title>
+<!-- begin _includes/seo.html --><title>Chaos Engineering Through Staged Resiliency - Stage 3 - Gremlin: Blog Posts</title>
 <meta name="description" content="An amazing website.">
 
 
@@ -17,8 +17,8 @@
 <meta property="og:type" content="article">
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="Gremlin: Blog Posts">
-<meta property="og:title" content="Chaos Engineering Through Staged Resiliency - Stage 2">
-<meta property="og:url" content="http://localhost:4000/gremlin-blog-posts/chaos-engineering/chaos-engineering-through-staged-resiliency-stage-2/">
+<meta property="og:title" content="Chaos Engineering Through Staged Resiliency - Stage 3">
+<meta property="og:url" content="http://localhost:4000/gremlin-blog-posts/chaos-engineering/chaos-engineering-through-staged-resiliency-stage-3/">
 
 
   <meta property="og:description" content="An amazing website.">
@@ -40,7 +40,7 @@
   
 
 
-<link rel="canonical" href="http://localhost:4000/gremlin-blog-posts/chaos-engineering/chaos-engineering-through-staged-resiliency-stage-2/">
+<link rel="canonical" href="http://localhost:4000/gremlin-blog-posts/chaos-engineering/chaos-engineering-through-staged-resiliency-stage-3/">
 
 
 
@@ -165,7 +165,7 @@
     
       
       
-        <li class="current">Chaos Engineering Through Staged Resiliency - Stage 2</li>
+        <li class="current">Chaos Engineering Through Staged Resiliency - Stage 3</li>
       
     
   </ol>
@@ -235,7 +235,7 @@
 
 
   <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
-    <meta itemprop="headline" content="Chaos Engineering Through Staged Resiliency - Stage 2">
+    <meta itemprop="headline" content="Chaos Engineering Through Staged Resiliency - Stage 3">
     <meta itemprop="description" content="">
     <meta itemprop="datePublished" content="October 11, 2018">
     
@@ -243,7 +243,7 @@
     <div class="page__inner-wrap">
       
         <header>
-          <h1 id="page-title" class="page__title" itemprop="headline">Chaos Engineering Through Staged Resiliency - Stage 2
+          <h1 id="page-title" class="page__title" itemprop="headline">Chaos Engineering Through Staged Resiliency - Stage 3
 </h1>
           
             <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
@@ -251,7 +251,7 @@
 
 
 
-  2 minute read
+  1 minute read
 </p>
           
         </header>
@@ -265,51 +265,50 @@
 <i class="fas fa-file-alt"></i> On this page</h4></header>
               <ul class="toc__menu">
   <li>
-<a href="#resiliency-stage-2-critical-dependency-failure-testing-in-non-production">Resiliency Stage 2: Critical Dependency Failure Testing in Non-Production</a>
+<a href="#resiliency-stage-3-minimal-automation-and-improving-test-frequency">Resiliency Stage 3: Minimal Automation and Improving Test Frequency</a>
     <ul>
       <li><a href="#prerequisites">Prerequisites</a></li>
-      <li><a href="#perform-critical-dependency-failure-tests-in-non-production">Perform Critical Dependency Failure Tests in Non-Production</a></li>
+      <li><a href="#perform-frequent-semi-automated-tests">Perform Frequent, Semi-Automated Tests</a></li>
       <li><a href="#publish-test-results">Publish Test Results</a></li>
+      <li><a href="#execute-a-resiliency-experiment-in-production">Execute a Resiliency Experiment in Production</a></li>
     </ul>
   </li>
-  <li><a href="#implementation-example">Implementation Example</a></li>
-  <li><a href="#stage-2-completion">Stage 2 Completion</a></li>
+  <li><a href="#conclusion">Conclusion</a></li>
 </ul>
             </nav>
           </aside>
         
-        <p>In <a href="https://www.gremlin.com/blog/chaos-engineering-through-staged-resiliency-stage-1" target="_blank" rel="noopener noreferrer">Chaos Engineering Through Staged Resiliency - Stage 1</a> we explored how engineering teams at Walmart successfully identify and combat unexpected system failure using a series of “resiliency stages.”  Completing <strong>Resiliency Stage 1</strong> requires the definition of a disaster recovery failover playbook, dependency failover playbooks, team-wide agreement on said playbooks, and execution of a manual failover exercise.</p>
+        <p>Performing occasional, manual resiliency testing is useful, but your system must be automatically and frequently tested to provide any real sense of stability.  In <a href="https://www.gremlin.com/blog/chaos-engineering-through-staged-resiliency-stage-2" target="_blank" rel="noopener noreferrer">Chaos Engineering Through Staged Resiliency - Stage 2</a> we focused on critical dependency failure testing in non-production environments.  To work through <strong>Resiliency Stage 3</strong> your team will need to begin automating these test and experiments.  This allows the testing frequency to improve dramatically and no longer rely on (quite as much) manual interaction.</p>
 
-<p>In this second part we’ll dive into the components of <strong>Resiliency Stage 2</strong>, which focuses on critical dependency failure testing in non-production environments.</p>
-
-<h2 id="resiliency-stage-2-critical-dependency-failure-testing-in-non-production">Resiliency Stage 2: Critical Dependency Failure Testing in Non-Production</h2>
+<h2 id="resiliency-stage-3-minimal-automation-and-improving-test-frequency">Resiliency Stage 3: Minimal Automation and Improving Test Frequency</h2>
 
 <h3 id="prerequisites">Prerequisites</h3>
 
 <ul>
-  <li>Creation and agreement on <a href="https://www.gremlin.com/blog/chaos-engineering-through-staged-resiliency-stage-1#prerequisites" target="_blank" rel="noopener noreferrer">Disaster Recovery and Dependency Failover Playbooks</a>.</li>
+  <li>Creation and agreement on [Disaster Recovery and Dependency Failover Playbooks][#stage-1#prerequisites].</li>
   <li>Completion of <a href="https://www.gremlin.com/blog/chaos-engineering-through-staged-resiliency-stage-1" target="_blank" rel="noopener noreferrer">Resiliency Stage 1</a>.</li>
+  <li>Completion of <a href="https://www.gremlin.com/blog/chaos-engineering-through-staged-resiliency-stage-2" target="_blank" rel="noopener noreferrer">Resiliency Stage 2</a>.</li>
 </ul>
 
-<h3 id="perform-critical-dependency-failure-tests-in-non-production">Perform Critical Dependency Failure Tests in Non-Production</h3>
-
-<p>The most important aspect of <strong>Resiliency Stage 2</strong> is testing the resilience of your systems when critical dependencies fail.  However, this early in the process the system can’t be expected to handle such failures in a production environment, so these tests should be performed in a non-production setting.</p>
-
-<h4 id="manual-testing-is-okay">Manual Testing Is Okay</h4>
-
-<p>Eventually, all experiments should be executed automatically, with little to no human intervention required.  However, during <strong>Resiliency Stage 2</strong> the team should feel comfortable performing manual tests.  The goal here isn’t to test the <em>automation</em> of the system, but rather to determine the outcome and system-wide impact whenever a critical dependency fails.</p>
+<h3 id="perform-frequent-semi-automated-tests">Perform Frequent, Semi-Automated Tests</h3>
 
 <h3 id="publish-test-results">Publish Test Results</h3>
 
-<p>After every critical dependency failure test is performed the results should be globally published to the entire team.  This allows every team member to closely scrutinize the outcome of a given test.  This encourages feedback and communication, which naturally provides insightful evaluation from the members that are best equipped to analyze the test results.</p>
+<h3 id="execute-a-resiliency-experiment-in-production">Execute a Resiliency Experiment in Production</h3>
 
-<h2 id="implementation-example">Implementation Example</h2>
+<blockquote>
+  <p>Level 3 — manual + automated — Regular exercises
+All of level 2 requirements, plus
+Run tests regularly on a cadence (at least once every 4–5 weeks)
+Publish results to dashboards to track resiliency over time
+Run at least one resiliency exercise (failure injection) in production environment</p>
+</blockquote>
 
-<p>(TODO)</p>
+<blockquote>
+  <p>level three is where automation starts kicking in. so we are pushing teams to start doing using tools right tools like gremlin we have internal tools which they can use to basically push that either infrastructure or that applications to fail and then see what the response looks like and make sure that they have good playbooks to fix that and reduce the revenue loss over time.</p>
+</blockquote>
 
-<h2 id="stage-2-completion">Stage 2 Completion</h2>
-
-<p>Once all critical dependencies have been failure tested and those test results have been disseminated throughout the team then <strong>Resiliency Stage 2</strong> is complete!  Your system should now have well-defined recovery playbooks and been manually tested for both failover and critical dependency failures.  In <a href="https://www.gremlin.com/blog/chaos-engineering-through-staged-resiliency-stage-3" target="_blank" rel="noopener noreferrer">Chaos Engineering Through Staged Resiliency - Stage 3</a> we’ll look at the transition into automating some of these tests and performing them at regular intervals.</p>
+<h2 id="conclusion">Conclusion</h2>
 
 
         
@@ -372,11 +371,11 @@
       
   <nav class="pagination">
     
-      <a href="/gremlin-blog-posts/chaos-engineering/chaos-engineering-through-staged-resiliency-stage-1/" class="pagination--pager" title="Chaos Engineering Through Staged Resiliency - Stage 1
+      <a href="/gremlin-blog-posts/chaos-engineering/chaos-engineering-through-staged-resiliency-stage-2/" class="pagination--pager" title="Chaos Engineering Through Staged Resiliency - Stage 2
 ">Previous</a>
     
     
-      <a href="/gremlin-blog-posts/chaos-engineering/chaos-engineering-through-staged-resiliency-stage-3/" class="pagination--pager" title="Chaos Engineering Through Staged Resiliency - Stage 3
+      <a href="/gremlin-blog-posts/serverless-twitter-bot-aws-lambda/" class="pagination--pager" title="Create a Serverless Twitter Bot with Airbrake and AWS Lambda - Part 1
 ">Next</a>
     
   </nav>
@@ -428,7 +427,7 @@
     
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="/gremlin-blog-posts/chaos-engineering/chaos-engineering-through-staged-resiliency-stage-3/" rel="permalink">Chaos Engineering Through Staged Resiliency - Stage 3
+        <a href="/gremlin-blog-posts/chaos-engineering/chaos-engineering-through-staged-resiliency-stage-2/" rel="permalink">Chaos Engineering Through Staged Resiliency - Stage 2
 </a>
       
     </h2>
@@ -438,7 +437,7 @@
 
 
 
-  1 minute read
+  2 minute read
 </p>
     
     <p class="archive__item-excerpt" itemprop="description">
