@@ -18,7 +18,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="Gremlin: Blog Posts">
 <meta property="og:title" content="Chaos Engineering Through Staged Resiliency - Stage 2">
-<meta property="og:url" content="/gremlin-blog-posts/chaos-engineering/chaos-engineering-through-staged-resiliency-stage-2/">
+<meta property="og:url" content="http://localhost:4000/gremlin-blog-posts/chaos-engineering/chaos-engineering-through-staged-resiliency-stage-2/">
 
 
   <meta property="og:description" content="An amazing website.">
@@ -40,7 +40,7 @@
   
 
 
-<link rel="canonical" href="/gremlin-blog-posts/chaos-engineering/chaos-engineering-through-staged-resiliency-stage-2/">
+<link rel="canonical" href="http://localhost:4000/gremlin-blog-posts/chaos-engineering/chaos-engineering-through-staged-resiliency-stage-2/">
 
 
 
@@ -53,7 +53,7 @@
       "@context": "http://schema.org",
       "@type": "Person",
       "name": "Gabe Wyatt",
-      "url": "/gremlin-blog-posts",
+      "url": "http://localhost:4000/gremlin-blog-posts",
       "sameAs": null
     }
   </script>
@@ -99,7 +99,7 @@
 
     <!-- start custom head snippets -->
 <link rel="icon" href="/gremlin-blog-posts/assets/images/favicon.ico" />
-<meta name="robots" content="noindex" />
+<meta name="robots" content="noindex, nofollow" />
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
 <!-- insert favicons. use https://realfavicongenerator.net/ -->
 
@@ -149,7 +149,7 @@
     
       
         <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
-          <a href="/gremlin-blog-posts/" itemprop="item"><span itemprop="name">Home</span></a>
+          <a href="http://localhost:4000/gremlin-blog-posts/" itemprop="item"><span itemprop="name">Home</span></a>
           <meta itemprop="position" content="1">
         </li>
         <span class="sep">/</span>
@@ -251,7 +251,7 @@
 
 
 
-  less than 1 minute read
+  2 minute read
 </p>
           
         </header>
@@ -264,52 +264,52 @@
               <header><h4 class="nav__title">
 <i class="fas fa-file-alt"></i> On this page</h4></header>
               <ul class="toc__menu">
-  <li><a href="#prerequisites">Prerequisites</a></li>
   <li>
 <a href="#resiliency-stage-2-critical-dependency-failure-testing-in-non-production">Resiliency Stage 2: Critical Dependency Failure Testing in Non-Production</a>
     <ul>
-      <li><a href="#perform-a-critical-dependency-failure-test-in-non-production">Perform a Critical Dependency Failure Test in Non-Production</a></li>
+      <li><a href="#prerequisites">Prerequisites</a></li>
+      <li><a href="#perform-critical-dependency-failure-tests-in-non-production">Perform Critical Dependency Failure Tests in Non-Production</a></li>
       <li><a href="#publish-test-results">Publish Test Results</a></li>
     </ul>
   </li>
-  <li><a href="#conclusion">Conclusion</a></li>
+  <li><a href="#implementation-example">Implementation Example</a></li>
+  <li><a href="#stage-2-completion">Stage 2 Completion</a></li>
 </ul>
             </nav>
           </aside>
         
-        <p>(TODO)</p>
+        <p>In <a href="https://www.gremlin.com/blog/chaos-engineering-through-staged-resiliency-stage-1" target="_blank" rel="noopener noreferrer">Chaos Engineering Through Staged Resiliency - Stage 1</a> we explored how engineering teams at Walmart successfully identify and combat unexpected system failure using a series of “resiliency stages.”  Completing <strong>Resiliency Stage 1</strong> requires the definition of a disaster recovery failover playbook, dependency failover playbooks, team-wide agreement on said playbooks, and execution of a manual failover exercise.</p>
 
-<p>In <a href="https://www.gremlin.com/blog/chaos-engineering-through-staged-resiliency-stage-1" target="_blank" rel="noopener noreferrer">Chaos Engineering Through Staged Resiliency - Stage 1</a>, the first part of this series, we examined the prerequisites</p>
-
-<h2 id="prerequisites">Prerequisites</h2>
-
-<ul>
-  <li><a href="https://www.gremlin.com/blog/chaos-engineering-through-staged-resiliency-stage-1#prerequisites" target="_blank" rel="noopener noreferrer">Disaster Recovery and Dependency Failover Playbooks</a></li>
-  <li>Completion of <a href="https://www.gremlin.com/blog/chaos-engineering-through-staged-resiliency-stage-1" target="_blank" rel="noopener noreferrer">Resiliency Stage 1</a>
-</li>
-</ul>
+<p>In this second part we’ll dive into the components of <strong>Resiliency Stage 2</strong>, which focuses on critical dependency failure testing in non-production environments.</p>
 
 <h2 id="resiliency-stage-2-critical-dependency-failure-testing-in-non-production">Resiliency Stage 2: Critical Dependency Failure Testing in Non-Production</h2>
 
-<h3 id="perform-a-critical-dependency-failure-test-in-non-production">Perform a Critical Dependency Failure Test in Non-Production</h3>
+<h3 id="prerequisites">Prerequisites</h3>
 
-<h4 id="manual-testing">Manual Testing</h4>
+<ul>
+  <li>Creation and agreement on <a href="https://www.gremlin.com/blog/chaos-engineering-through-staged-resiliency-stage-1#prerequisites" target="_blank" rel="noopener noreferrer">Disaster Recovery and Dependency Failover Playbooks</a>.</li>
+  <li>Completion of <a href="https://www.gremlin.com/blog/chaos-engineering-through-staged-resiliency-stage-1" target="_blank" rel="noopener noreferrer">Resiliency Stage 1</a>.</li>
+</ul>
+
+<h3 id="perform-critical-dependency-failure-tests-in-non-production">Perform Critical Dependency Failure Tests in Non-Production</h3>
+
+<p>The most important aspect of <strong>Resiliency Stage 2</strong> is testing the resilience of your systems when critical dependencies fail.  However, this early in the process the system can’t be expected to handle such failures in a production environment, so these tests should be performed in a non-production setting.</p>
+
+<h4 id="manual-testing-is-okay">Manual Testing Is Okay</h4>
+
+<p>Eventually, all experiments should be executed automatically, with little to no human intervention required.  However, during <strong>Resiliency Stage 2</strong> the team should feel comfortable performing manual tests.  The goal here isn’t to test the <em>automation</em> of the system, but rather to determine the outcome and system-wide impact whenever a critical dependency fails.</p>
 
 <h3 id="publish-test-results">Publish Test Results</h3>
 
-<blockquote>
-  <p>Level 2 — Manual — critical dependency failures in pre-prod
-All of level 1 requirements, plus
-Run a failure test for critical dependencies in a non-prod environment
-Publish test results to team, stakeholders
-Manual tests are acceptable</p>
-</blockquote>
+<p>After every critical dependency failure test is performed the results should be globally published to the entire team.  This allows every team member to closely scrutinize the outcome of a given test.  This encourages feedback and communication, which naturally provides insightful evaluation from the members that are best equipped to analyze the test results.</p>
 
-<blockquote>
-  <p>level two is it’s again edited, all of these levels are edited. it this level to it the only thing that changes is making sure that you can do failure injection test for all of your dependencies for application dependencies.</p>
-</blockquote>
+<h2 id="implementation-example">Implementation Example</h2>
 
-<h2 id="conclusion">Conclusion</h2>
+<p>(TODO)</p>
+
+<h2 id="stage-2-completion">Stage 2 Completion</h2>
+
+<p>Once all critical dependencies have been failure tested and those test results have been disseminated throughout the team then <strong>Resiliency Stage 2</strong> is complete!  Your system should now have well-defined recovery playbooks and been manually tested for both failover and critical dependency failures.  In <a href="https://www.gremlin.com/blog/chaos-engineering-through-staged-resiliency-stage-3" target="_blank" rel="noopener noreferrer">Chaos Engineering Through Staged Resiliency - Stage 3</a> we’ll look at the transition into automating some of these tests and performing them at regular intervals.</p>
 
 
         

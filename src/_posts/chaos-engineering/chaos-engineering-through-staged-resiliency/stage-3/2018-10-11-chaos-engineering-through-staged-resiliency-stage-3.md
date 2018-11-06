@@ -39,9 +39,21 @@ sources:
       urls:   
 ---
 
-## Introduction
+Performing occasional, manual resiliency testing is useful, but your system must be automatically and frequently tested to provide any real sense of stability.  In [Chaos Engineering Through Staged Resiliency - Stage 2][#stage-2] we focused on critical dependency failure testing in non-production environments.  To work through **Resiliency Stage 3** your team will need to begin automating these test and experiments.  This allows the testing frequency to improve dramatically and no longer rely on (quite as much) manual interaction.
 
-## Resiliency Stage 3: 
+## Resiliency Stage 3: Minimal Automation and Improving Test Frequency
+
+### Prerequisites
+
+- Creation and agreement on [Disaster Recovery and Dependency Failover Playbooks][#stage-1#prerequisites].
+- Completion of [Resiliency Stage 1][#stage-1].
+- Completion of [Resiliency Stage 2][#stage-2].
+
+### Perform Frequent, Semi-Automated Tests
+
+### Publish Test Results
+
+### Execute a Resiliency Experiment in Production
 
 > Level 3 — manual + automated — Regular exercises
 > All of level 2 requirements, plus

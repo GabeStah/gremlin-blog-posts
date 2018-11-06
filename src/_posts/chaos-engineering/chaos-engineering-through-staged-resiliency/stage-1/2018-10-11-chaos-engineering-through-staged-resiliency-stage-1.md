@@ -46,7 +46,7 @@ In spite of what the name may suggest, Chaos Engineering is a _disciplined_ appr
 
 Creating resilient software is a fundamental necessity within modern cloud applications and architectures.  As systems become more distributed the potential for unplanned outages and unexpected failure significantly increases.  Thankfully, Chaos and Resilience Engineering techniques are quickly gaining traction within the community.  [Many organizations](https://coggle.it/diagram/WiKceGDAwgABrmyv/t/chaos-engineering-companies%2C-people%2C-tools-practices) -- both big and small -- have embraced Chaos Engineering over the last few years.  In his fascinating [ChaosConf 2018][#chaosconf-2018] talk titled [_Practicing Chaos Engineering at Walmart_][#youtube-practicing], Walmart's Director of Engineering Vilas Veeraraghavan outlines how he and the hundreds of engineering teams at Walmart have implemented Resilience Engineering.  By creating a robust series of "levels" or "stages" that each engineering team can work through, Walmart is able to progressively improve system resiliency while dramatically reducing support costs.
 
-This blog series expands on Vilas' and Walmart's techniques by diving deep into the **five** _Stages of Resiliency_.  Each post examines the necessary components of a stage, describes how those components are evaluated and assembled, and outlines the step-by-step process necessary to move from one stage to the next.  With a bit of adjustment for your own organizational needs, you and your team can implement similar practices to quickly add Chaos Engineering to your own systems with relative ease.  After climbing through all five stages your system and its deployment will be almost entirely automated and will feature significant resiliency testing and robust disaster recovery failover.
+This blog series expands on Vilas' and Walmart's techniques by diving deep into the **five** **Stages of Resiliency**.  Each post examines the necessary components of a stage, describes how those components are evaluated and assembled, and outlines the step-by-step process necessary to move from one stage to the next.  With a bit of adjustment for your own organizational needs, you and your team can implement similar practices to quickly add Chaos Engineering to your own systems with relative ease.  After climbing through all five stages your system and its deployment will be almost entirely automated and will feature significant resiliency testing and robust disaster recovery failover.
 
 **NOTE**: The remainder of this article will use the term `team` to indicate a singular group that is responsible for an application that is progressing through the resiliency stages.
 {: .notice--tip }
@@ -116,22 +116,15 @@ The last step is to manually perform a failover exercise.  The goal of this exer
 
 ## Implementation Example
 
-Web Server: NGINX
+{% asset '{{ page.asset-path }}'/stage-1-initial.png alt='Stage 1 - Initial' %}{: .align-center }
+_Initial System Configuration_
+{: .text-center }
 
 (TODO)
 
-AWS
-Nginx
-Database?
-S3?
+## Stage 1 Completion
 
-Visio for diagrams
-
-> https://aws.amazon.com/getting-started/tutorials/
-
-## Additional Stages
-
-This post laid the groundwork for how to implement resilience engineering practices through thoughtfully-designed dependency identification and disaster recovery playbooks.  We also broke down the requirements and steps of _Resiliency Stage 1_, which empowers your team to begin the journey toward a highly-resilient system.  Stay tuned to the [Gremlin Blog](https://www.gremlin.com/blog/) for additional posts that will break down the four remaining _Stages of Resiliency_!
+This post laid the groundwork for how to implement resilience engineering practices through thoughtfully-designed dependency identification and disaster recovery playbooks.  We also broke down the requirements and steps of **Resiliency Stage 1**, which empowers your team to begin the journey toward a highly-resilient system.  Stay tuned to the [Gremlin Blog](https://www.gremlin.com/blog/) for additional posts that will break down the four remaining **Stages of Resiliency**!
 
 {% include          links-global.md %}
 {% include_relative links.md %}

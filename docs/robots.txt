@@ -1,1 +1,1 @@
-Sitemap: /gremlin-blog-posts/sitemap.xml
+Sitemap: http://localhost:4000/gremlin-blog-posts/sitemap.xml

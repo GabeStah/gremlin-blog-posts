@@ -18,7 +18,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="Gremlin: Blog Posts">
 <meta property="og:title" content="Chaos Engineering Through Staged Resiliency - Stage 1">
-<meta property="og:url" content="/gremlin-blog-posts/chaos-engineering/chaos-engineering-through-staged-resiliency-stage-1/">
+<meta property="og:url" content="http://localhost:4000/gremlin-blog-posts/chaos-engineering/chaos-engineering-through-staged-resiliency-stage-1/">
 
 
   <meta property="og:description" content="An amazing website.">
@@ -40,7 +40,7 @@
   
 
 
-<link rel="canonical" href="/gremlin-blog-posts/chaos-engineering/chaos-engineering-through-staged-resiliency-stage-1/">
+<link rel="canonical" href="http://localhost:4000/gremlin-blog-posts/chaos-engineering/chaos-engineering-through-staged-resiliency-stage-1/">
 
 
 
@@ -53,7 +53,7 @@
       "@context": "http://schema.org",
       "@type": "Person",
       "name": "Gabe Wyatt",
-      "url": "/gremlin-blog-posts",
+      "url": "http://localhost:4000/gremlin-blog-posts",
       "sameAs": null
     }
   </script>
@@ -99,7 +99,7 @@
 
     <!-- start custom head snippets -->
 <link rel="icon" href="/gremlin-blog-posts/assets/images/favicon.ico" />
-<meta name="robots" content="noindex" />
+<meta name="robots" content="noindex, nofollow" />
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
 <!-- insert favicons. use https://realfavicongenerator.net/ -->
 
@@ -149,7 +149,7 @@
     
       
         <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
-          <a href="/gremlin-blog-posts/" itemprop="item"><span itemprop="name">Home</span></a>
+          <a href="http://localhost:4000/gremlin-blog-posts/" itemprop="item"><span itemprop="name">Home</span></a>
           <meta itemprop="position" content="1">
         </li>
         <span class="sep">/</span>
@@ -283,7 +283,7 @@
     </ul>
   </li>
   <li><a href="#implementation-example">Implementation Example</a></li>
-  <li><a href="#additional-stages">Additional Stages</a></li>
+  <li><a href="#stage-1-completion">Stage 1 Completion</a></li>
 </ul>
             </nav>
           </aside>
@@ -292,7 +292,7 @@
 
 <p>Creating resilient software is a fundamental necessity within modern cloud applications and architectures.  As systems become more distributed the potential for unplanned outages and unexpected failure significantly increases.  Thankfully, Chaos and Resilience Engineering techniques are quickly gaining traction within the community.  <a href="https://coggle.it/diagram/WiKceGDAwgABrmyv/t/chaos-engineering-companies%2C-people%2C-tools-practices" target="_blank" rel="noopener noreferrer">Many organizations</a> – both big and small – have embraced Chaos Engineering over the last few years.  In his fascinating <a href="https://chaosconf.splashthat.com/" target="_blank" rel="noopener noreferrer">ChaosConf 2018</a> talk titled <a href="https://www.youtube.com/watch?v=4Gy_5EQMrB4" target="_blank" rel="noopener noreferrer"><em>Practicing Chaos Engineering at Walmart</em></a>, Walmart’s Director of Engineering Vilas Veeraraghavan outlines how he and the hundreds of engineering teams at Walmart have implemented Resilience Engineering.  By creating a robust series of “levels” or “stages” that each engineering team can work through, Walmart is able to progressively improve system resiliency while dramatically reducing support costs.</p>
 
-<p>This blog series expands on Vilas’ and Walmart’s techniques by diving deep into the <strong>five</strong> <em>Stages of Resiliency</em>.  Each post examines the necessary components of a stage, describes how those components are evaluated and assembled, and outlines the step-by-step process necessary to move from one stage to the next.  With a bit of adjustment for your own organizational needs, you and your team can implement similar practices to quickly add Chaos Engineering to your own systems with relative ease.  After climbing through all five stages your system and its deployment will be almost entirely automated and will feature significant resiliency testing and robust disaster recovery failover.</p>
+<p>This blog series expands on Vilas’ and Walmart’s techniques by diving deep into the <strong>five</strong> <strong>Stages of Resiliency</strong>.  Each post examines the necessary components of a stage, describes how those components are evaluated and assembled, and outlines the step-by-step process necessary to move from one stage to the next.  With a bit of adjustment for your own organizational needs, you and your team can implement similar practices to quickly add Chaos Engineering to your own systems with relative ease.  After climbing through all five stages your system and its deployment will be almost entirely automated and will feature significant resiliency testing and robust disaster recovery failover.</p>
 
 <p class="notice--tip"><strong>NOTE</strong>: The remainder of this article will use the term <code class="highlighter-rouge">team</code> to indicate a singular group that is responsible for an application that is progressing through the resiliency stages.</p>
 
@@ -367,24 +367,14 @@
 
 <h2 id="implementation-example">Implementation Example</h2>
 
-<p>Web Server: NGINX</p>
+<p class="text-center"><img alt="Stage 1 - Initial" src="/gremlin-blog-posts/assets/chaos-engineering/chaos-engineering-through-staged-resiliency/stage-1/stage-1-initial-de00e7a6d1c134a8bdc5f33820dce31f80b28f552714099309f43c9d688ed56b.png" class="align-center">
+<em>Initial System Configuration</em></p>
 
 <p>(TODO)</p>
 
-<p>AWS
-Nginx
-Database?
-S3?</p>
+<h2 id="stage-1-completion">Stage 1 Completion</h2>
 
-<p>Visio for diagrams</p>
-
-<blockquote>
-  <p>https://aws.amazon.com/getting-started/tutorials/</p>
-</blockquote>
-
-<h2 id="additional-stages">Additional Stages</h2>
-
-<p>This post laid the groundwork for how to implement resilience engineering practices through thoughtfully-designed dependency identification and disaster recovery playbooks.  We also broke down the requirements and steps of <em>Resiliency Stage 1</em>, which empowers your team to begin the journey toward a highly-resilient system.  Stay tuned to the <a href="https://www.gremlin.com/blog/" target="_blank" rel="noopener noreferrer">Gremlin Blog</a> for additional posts that will break down the four remaining <em>Stages of Resiliency</em>!</p>
+<p>This post laid the groundwork for how to implement resilience engineering practices through thoughtfully-designed dependency identification and disaster recovery playbooks.  We also broke down the requirements and steps of <strong>Resiliency Stage 1</strong>, which empowers your team to begin the journey toward a highly-resilient system.  Stay tuned to the <a href="https://www.gremlin.com/blog/" target="_blank" rel="noopener noreferrer">Gremlin Blog</a> for additional posts that will break down the four remaining <strong>Stages of Resiliency</strong>!</p>
 
 
         
@@ -513,7 +503,7 @@ S3?</p>
 
 
 
-  1 minute read
+  2 minute read
 </p>
     
     <p class="archive__item-excerpt" itemprop="description">

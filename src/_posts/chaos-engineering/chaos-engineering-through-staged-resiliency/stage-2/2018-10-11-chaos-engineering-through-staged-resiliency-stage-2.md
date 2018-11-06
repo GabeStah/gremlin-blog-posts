@@ -39,38 +39,36 @@ sources:
       urls:   
 ---
 
-(TODO)
+In [Chaos Engineering Through Staged Resiliency - Stage 1][#stage-1] we explored how engineering teams at Walmart successfully identify and combat unexpected system failure using a series of "resiliency stages."  Completing **Resiliency Stage 1** requires the definition of a disaster recovery failover playbook, dependency failover playbooks, team-wide agreement on said playbooks, and execution of a manual failover exercise.
 
-In [Chaos Engineering Through Staged Resiliency - Stage 1][#stage-1], the first part of this series, we examined the prerequisites
-
-## Prerequisites
-
-- [Disaster Recovery and Dependency Failover Playbooks][#stage-1#prerequisites]
-- Completion of [Resiliency Stage 1][#stage-1]
+In this second part we'll dive into the components of **Resiliency Stage 2**, which focuses on critical dependency failure testing in non-production environments.
 
 ## Resiliency Stage 2: Critical Dependency Failure Testing in Non-Production
 
-### Perform a Critical Dependency Failure Test in Non-Production
+### Prerequisites
 
-#### Manual Testing
+- Creation and agreement on [Disaster Recovery and Dependency Failover Playbooks][#stage-1#prerequisites].
+- Completion of [Resiliency Stage 1][#stage-1].
+
+### Perform Critical Dependency Failure Tests in Non-Production
+
+The most important aspect of **Resiliency Stage 2** is testing the resilience of your systems when critical dependencies fail.  However, this early in the process the system can't be expected to handle such failures in a production environment, so these tests should be performed in a non-production setting.  
+
+#### Manual Testing Is Okay
+
+Eventually, all experiments should be executed automatically, with little to no human intervention required.  However, during **Resiliency Stage 2** the team should feel comfortable performing manual tests.  The goal here isn't to test the _automation_ of the system, but rather to determine the outcome and system-wide impact whenever a critical dependency fails.
 
 ### Publish Test Results
 
-> Level 2 — Manual — critical dependency failures in pre-prod
-> All of level 1 requirements, plus
-> Run a failure test for critical dependencies in a non-prod environment
-> Publish test results to team, stakeholders
-> Manual tests are acceptable
+After every critical dependency failure test is performed the results should be globally published to the entire team.  This allows every team member to closely scrutinize the outcome of a given test.  This encourages feedback and communication, which naturally provides insightful evaluation from the members that are best equipped to analyze the test results.
 
-> level two is it's again edited, all of these levels are edited. it this level to it the only thing that changes is making sure that you can do failure injection test for all of your dependencies for application dependencies. 
+## Implementation Example
 
-{% comment %}
-{% asset '{{ page.asset-path }}'/Drawing1.png alt='RTO & RPO Diagrammed - Courtesy of Wikipedia' %}{: .align-center }
-_RTO & RPO Diagrammed -- Source: [Wikipedia](https://en.wikipedia.org/wiki/File:RPO_RTO_example_converted.png)_
-{: .text-center }
-{% endcomment %}
+(TODO)
 
-## Conclusion
+## Stage 2 Completion
+
+Once all critical dependencies have been failure tested and those test results have been disseminated throughout the team then **Resiliency Stage 2** is complete!  Your system should now have well-defined recovery playbooks and been manually tested for both failover and critical dependency failures.  In [Chaos Engineering Through Staged Resiliency - Stage 3][#stage-3] we'll look at the transition into automating some of these tests and performing them at regular intervals.
 
 {% include          links-global.md %}
 {% include_relative links.md %}
