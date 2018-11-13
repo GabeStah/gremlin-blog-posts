@@ -63,7 +63,11 @@ Performing occasional, manual resiliency testing is useful, but your system must
 
 > level three is where automation starts kicking in. so we are pushing teams to start doing using tools right tools like gremlin we have internal tools which they can use to basically push that either infrastructure or that applications to fail and then see what the response looks like and make sure that they have good playbooks to fix that and reduce the revenue loss over time.
 
-## Conclusion
+## Resiliency Stage 3: Implementation Example
+
+(TODO)
+
+## Resiliency Stage 2 Completion
 
 {% include          links-global.md %}
 {% include_relative links.md %}

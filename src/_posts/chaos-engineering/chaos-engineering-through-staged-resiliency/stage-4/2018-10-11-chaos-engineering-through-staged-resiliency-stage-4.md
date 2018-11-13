@@ -50,7 +50,11 @@ sources:
 
 > level four increases the amount of automation.
 
-## Conclusion
+## Resiliency Stage 4: Implementation Example
+
+(TODO)
+
+## Resiliency Stage 4 Completion
 
 {% include          links-global.md %}
 {% include_relative links.md %}

@@ -51,7 +51,11 @@ sources:
 
 > by the time you are at level five you are completely automated and literally the only support that someone in sre or SiteOps have to give you is a few hours of engineer time to ensure that the right buttons are clicked.
 
-## Conclusion
+## Resiliency Stage 5: Implementation Example
+
+(TODO)
+
+## Resiliency Stage 5 Completion
 
 {% include          links-global.md %}
 {% include_relative links.md %}

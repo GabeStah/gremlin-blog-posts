@@ -15,7 +15,7 @@ var store = [{
         "url": "http://localhost:4000/gremlin-blog-posts/chaos-engineering/chaos-engineering-through-staged-resiliency-stage-1/",
         "teaser":null},{
         "title": "Chaos Engineering Through Staged Resiliency - Stage 2",
-        "excerpt":"In Chaos Engineering Through Staged Resiliency - Stage 1 we explored how engineering teams at Walmart successfully identify and combat unexpected system failure using a series of “resiliency stages.” Completing Resiliency Stage 1 requires the definition of a disaster recovery failover playbook, dependency failover playbooks, team-wide agreement on said playbooks,...","categories": ["chaos-engineering"],
+        "excerpt":"In Chaos Engineering Through Staged Resiliency - Stage 1 we explored how engineering teams at Walmart successfully identify and combat unexpected system failure using a series of “resiliency stages.” We also demonstrated the process of going through Stage 1 for the Bookstore API sample application. We showed that completing Resiliency...","categories": ["chaos-engineering"],
         "tags": ["resiliency","staging"],
         "url": "http://localhost:4000/gremlin-blog-posts/chaos-engineering/chaos-engineering-through-staged-resiliency-stage-2/",
         "teaser":null},{

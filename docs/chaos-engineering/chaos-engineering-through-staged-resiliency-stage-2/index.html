@@ -251,7 +251,7 @@
 
 
 
-  2 minute read
+  13 minute read
 </p>
           
         </header>
@@ -265,26 +265,32 @@
 <i class="fas fa-file-alt"></i> On this page</h4></header>
               <ul class="toc__menu">
   <li>
-<a href="#resiliency-stage-2-critical-dependency-failure-testing-in-non-production">Resiliency Stage 2: Critical Dependency Failure Testing in Non-Production</a>
+<a href="#prerequisites">Prerequisites</a>
     <ul>
-      <li><a href="#prerequisites">Prerequisites</a></li>
       <li><a href="#perform-critical-dependency-failure-tests-in-non-production">Perform Critical Dependency Failure Tests in Non-Production</a></li>
       <li><a href="#publish-test-results">Publish Test Results</a></li>
     </ul>
   </li>
-  <li><a href="#implementation-example">Implementation Example</a></li>
-  <li><a href="#stage-2-completion">Stage 2 Completion</a></li>
+  <li>
+<a href="#resiliency-stage-2-implementation-example">Resiliency Stage 2: Implementation Example</a>
+    <ul>
+      <li><a href="#adding-a-staging-app-environment">Adding a Staging App Environment</a></li>
+      <li><a href="#configuring-multi-az-rds">Configuring Multi-AZ RDS</a></li>
+      <li><a href="#amazon-s3-cross-region-replication">Amazon S3 Cross-Region Replication</a></li>
+      <li><a href="#perform-critical-dependency-failure-tests-in-non-production-1">Perform Critical Dependency Failure Tests in Non-Production</a></li>
+      <li><a href="#publish-test-results-1">Publish Test Results</a></li>
+    </ul>
+  </li>
+  <li><a href="#resiliency-stage-2-completion">Resiliency Stage 2 Completion</a></li>
 </ul>
             </nav>
           </aside>
         
-        <p>In <a href="https://www.gremlin.com/blog/chaos-engineering-through-staged-resiliency-stage-1" target="_blank" rel="noopener noreferrer">Chaos Engineering Through Staged Resiliency - Stage 1</a> we explored how engineering teams at Walmart successfully identify and combat unexpected system failure using a series of “resiliency stages.”  Completing <strong>Resiliency Stage 1</strong> requires the definition of a disaster recovery failover playbook, dependency failover playbooks, team-wide agreement on said playbooks, and execution of a manual failover exercise.</p>
+        <p>In <a href="https://www.gremlin.com/blog/chaos-engineering-through-staged-resiliency-stage-1" target="_blank" rel="noopener noreferrer">Chaos Engineering Through Staged Resiliency - Stage 1</a> we explored how engineering teams at Walmart successfully identify and combat unexpected system failure using a series of “resiliency stages.”  We also demonstrated the process of going through <strong>Stage 1</strong> for the <strong>Bookstore</strong> API sample application.  We showed that completing <strong>Resiliency Stage 1</strong> requires the definition of a disaster recovery failover playbook, dependency failover playbooks, team-wide agreement on said playbooks, and the execution of a manual failover exercise.</p>
 
 <p>In this second part we’ll dive into the components of <strong>Resiliency Stage 2</strong>, which focuses on critical dependency failure testing in non-production environments.</p>
 
-<h2 id="resiliency-stage-2-critical-dependency-failure-testing-in-non-production">Resiliency Stage 2: Critical Dependency Failure Testing in Non-Production</h2>
-
-<h3 id="prerequisites">Prerequisites</h3>
+<h2 id="prerequisites">Prerequisites</h2>
 
 <ul>
   <li>Creation and agreement on <a href="https://www.gremlin.com/blog/chaos-engineering-through-staged-resiliency-stage-1#prerequisites" target="_blank" rel="noopener noreferrer">Disaster Recovery and Dependency Failover Playbooks</a>.</li>
@@ -303,11 +309,485 @@
 
 <p>After every critical dependency failure test is performed the results should be globally published to the entire team.  This allows every team member to closely scrutinize the outcome of a given test.  This encourages feedback and communication, which naturally provides insightful evaluation from the members that are best equipped to analyze the test results.</p>
 
-<h2 id="implementation-example">Implementation Example</h2>
+<h2 id="resiliency-stage-2-implementation-example">Resiliency Stage 2: Implementation Example</h2>
 
-<p>(TODO)</p>
+<p>At present the <strong>Bookstore</strong> sample app has no real concept of failover or resiliency – if the application or a critical dependency fails, the entire system fails along with it.</p>
 
-<h2 id="stage-2-completion">Stage 2 Completion</h2>
+<p class="text-center"><img alt="Bookstore App Architecture" src="/gremlin-blog-posts/assets/chaos-engineering/chaos-engineering-through-staged-resiliency/stage-1/stage-1-architecture-09757f8939b8928a7e67174b1608765bba3acc766990411ec05e28a66d641805.png" class="align-center">
+<em>Bookstore App Architecture</em></p>
+
+<p>Completing <strong>Resiliency Stage 2</strong> requires testing in a non-production environment, so this forces us to improve deployment and system resiliency by moving beyond a single point of failure.  Since we’re taking advantage of AWS we <em>could</em> jump straight into implementing all the safety net features the AWS platform brings with it (e.g. auto scaling, elastic load balancing, traffic manipulation, etc).  However, going through each resiliency stage by meeting the minimal requirements provides more robust examples and lets us learn the intricacies of all components within the system.</p>
+
+<p>Therefore, before we go through this stage we’ll be modifying the <strong>Bookstore</strong> architecture by adding a secondary staging environment.  In fact, this is a good opportunity to use a blue/green deployment strategy.  A blue/green configuration requires creating two parallel production environments.</p>
+
+<p>As an example scenario, the <code class="highlighter-rouge">blue</code> environment is “active” and is handling production traffic.  Meanwhile, the other environment (<code class="highlighter-rouge">green</code>) is used for staging application changes.  Once the <code class="highlighter-rouge">green</code> environment has been fully tested then traffic is routed to the <code class="highlighter-rouge">green</code> environment.  <code class="highlighter-rouge">Green</code> now becomes the live production environment while <code class="highlighter-rouge">blue</code> is unused and ready for the next staging phase.  If something goes wrong during deployment to <code class="highlighter-rouge">green</code>, traffic can be quickly routed back to the still-active <code class="highlighter-rouge">blue</code> environment.</p>
+
+<h3 id="adding-a-staging-app-environment">Adding a Staging App Environment</h3>
+
+<ol>
+  <li>
+    <p>Create a new EC2 instance from the most recent launch template version.  Optionally, we can specify tags such as <code class="highlighter-rouge">Name</code> to help differentiate between the two environments.</p>
+
+    <div class="language-bash highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code> aws ec2 run-instances <span class="nt">--launch-template</span> <span class="nv">LaunchTemplateName</span><span class="o">=</span>bookstore-api-ec2 <span class="se">\</span>
+     <span class="nt">--tag-specifications</span> <span class="s2">"ResourceType=instance,Tags=[{Key=Name,Value=bookstore-api-green}]"</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Verify the instance has been created by finding active instances generated from the same AMI.</p>
+
+    <div class="language-bash highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code> <span class="nv">$ </span>aws ec2 describe-instances <span class="nt">--filters</span> <span class="s2">"Name=image-id,Values=ami-087ff330c90e99ac5,Name=instance-state-code,Values=16"</span> <span class="nt">--query</span> <span class="s2">"Reservations[*].Instances[*].[LaunchTime,PublicDnsName,PublicIpAddress]"</span>
+ 2018-11-09T04:37:32.000Z	ec2-54-188-3-235.us-west-2.compute.amazonaws.com	54.188.3.235
+ 2018-11-09T07:44:38.000Z	ec2-54-191-29-110.us-west-2.compute.amazonaws.com	54.191.29.110
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>SSH into new environment.</p>
+
+    <div class="language-bash highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code> ssh ec2-54-191-29-110.us-west-2.compute.amazonaws.com
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Pull any new application changes and restart application.</p>
+
+    <div class="language-bash highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code> <span class="nv">$ </span><span class="nb">cd</span> ~/apps/bookstore_api <span class="o">&amp;&amp;</span> git pull <span class="o">&amp;&amp;</span> <span class="nb">sudo </span>systemctl restart gunicorn
+ From github.com:GabeStah/bookstore_api
+     0f1b811..ee6f15c  master     -&gt; origin/master
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Verify that each instance environment is serving a different version of the application.</p>
+
+    <ul>
+      <li>
+        <p>Here we check the app version for the current production endpoint.</p>
+
+        <div class="language-bash highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code>  <span class="nv">$ </span>curl bookstore.pingpublications.com/version | jq
+  <span class="o">{</span>
+      <span class="s2">"version"</span>: 3
+  <span class="o">}</span>
+</code></pre></div>        </div>
+      </li>
+      <li>
+        <p>And for the <code class="highlighter-rouge">bookstore-api-green</code> environment.</p>
+
+        <div class="language-bash highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code>  <span class="nv">$ </span>curl ec2-54-191-29-110.us-west-2.compute.amazonaws.com/version | jq
+  <span class="o">{</span>
+      <span class="s2">"version"</span>: 4
+  <span class="o">}</span>
+</code></pre></div>        </div>
+      </li>
+    </ul>
+  </li>
+</ol>
+
+<h3 id="configuring-multi-az-rds">Configuring Multi-AZ RDS</h3>
+
+<p>The PostgreSQL database on Amazon RDS is not resilient – if the single instance fails, the entire application goes down.  RDS provides a <a href="https://aws.amazon.com/rds/details/multi-az/" target="_blank" rel="noopener noreferrer">Multi-AZ Deployment</a> solution, which automatically creates a synchronous database replica on another Availability Zone.  In the event of a primary failure the secondary performs an automatic failover so there is little to no downtime.</p>
+
+<p>Modifying the existing <code class="highlighter-rouge">bookstore-db</code> RDS instance so it uses a Multi-AZ Deployment is fairly simple.</p>
+
+<ol>
+  <li>
+    <p>Confirm the instance is not using Multi-AZ.</p>
+
+    <div class="language-bash highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code> <span class="nv">$ </span>aws rds describe-db-instances <span class="nt">--db-instance-identifier</span> bookstore-db <span class="nt">--query</span> <span class="s2">"DBInstances[*].[AvailabilityZone,MultiAZ]"</span>
+ us-west-2a	False
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Modify the instance by passing the <code class="highlighter-rouge">multi-az</code> flag.  In this case, we always want to apply changes immediately (rather than wait for the next scheduled maintenance window).</p>
+
+    <div class="language-bash highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code> aws rds modify-db-instance <span class="nt">--db-instance-identifier</span> bookstore-db <span class="nt">--multi-az</span> <span class="nt">--apply-immediately</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>It may take a few minutes for the modification to take effect.  We can check the status within the <code class="highlighter-rouge">PendingModifiedValues</code> key structure to confirm <code class="highlighter-rouge">MultiAZ</code> is waiting to be modified.</p>
+
+    <div class="language-bash highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code> <span class="nv">$ </span>aws rds describe-db-instances <span class="nt">--db-instance-identifier</span> bookstore-db <span class="nt">--query</span> <span class="s2">"DBInstances[*].PendingModifiedValues.[MultiAZ]"</span>
+ True
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>After about 10 minutes we can check the status once again to confirm that a Mutli-AZ Deployment is now active.</p>
+
+    <div class="language-bash highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code> <span class="nv">$ </span>aws rds describe-db-instances <span class="nt">--db-instance-identifier</span> bookstore-db <span class="nt">--query</span> <span class="s2">"DBInstances[*].[AvailabilityZone,MultiAZ]"</span>
+ us-west-2a	True
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<h3 id="amazon-s3-cross-region-replication">Amazon S3 Cross-Region Replication</h3>
+
+<p>The last critical dependency for the <strong>Bookstore</strong> app is the CDN, which relies on Amazon S3.  While Amazon S3 is a extremely resilient system and not prone to downtime, there is still some precedent for Amazon S3 failure.  Luckily, the service has the ability to automatically replicate objects between buckets within different AWS regions.</p>
+
+<p>To accomplish this we’re working around a quirk with Amazon S3 bucket naming and DNS routing.  Specifically, a CNAME DNS name must <em>exactly match</em> a referenced Amazon S3 bucket name.  Therefore, we’ll continue using the <code class="highlighter-rouge">cdn.bookstore.pingpublications.com.s3.amazonaws.com</code> Amazon S3 bucket (and Route53 CNAME record), but this bucket is now the <em>secondary</em> CDN.  A new Amazon S3 bucket named <code class="highlighter-rouge">cdn-primary.bookstore.pingpublications.com</code> is now the <em>primary</em> CDN bucket.</p>
+
+<p>We then create a CloudFront endpoint that points to the <code class="highlighter-rouge">cdn-primary</code> bucket, but uses the DNS CNAME <code class="highlighter-rouge">cdn.bookstore.pingpublications.com</code>.  From there, Amazon Route53 failover properly handles requests based on whichever Amazon S3 bucket is available.  This automates the CDN failover process.</p>
+
+<ol>
+  <li>
+    <p>Start by creating an Amazon CloudFront Distribution.  The fields we need to set are as follows.</p>
+
+    <ul>
+      <li>
+<strong>Origin Domain Name</strong>: This must be set the <em>primary</em> Amazon S3 bucket (<code class="highlighter-rouge">cdn-primary.bookstore.pingpublications.com.s3-us-west-2.amazonaws.com</code>).</li>
+      <li>
+<strong>Alternate Domain Names (CNAMEs)</strong>: This should point to the root CDN endpoint (<code class="highlighter-rouge">cdn.bookstore.pingpublications.com</code>).</li>
+    </ul>
+  </li>
+  <li>
+    <p>Create a Amazon Route53 Health Check to check the health of the <em>primary</em> Amazon S3 bucket, which is behind the CloudFront endpoint created above.</p>
+
+    <div class="language-bash highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code> <span class="nv">$ </span>aws route53 create-health-check <span class="nt">--caller-reference</span> BookstoreCloudfront <span class="nt">--output</span> json <span class="se">\</span>
+ <span class="nt">--health-check-config</span> <span class="s1">'{
+     "FullyQualifiedDomainName": "dqno94z16p2mg.cloudfront.net",
+     "ResourcePath": "/static/status.json",
+     "Type": "HTTP"
+ }'</span> <span class="se">\</span>
+ <span class="nt">--query</span> <span class="s2">"{Id: HealthCheck.Id}"</span>
+ <span class="o">{</span>
+     <span class="s2">"Id"</span>: <span class="s2">"352ef27f-213e-4dae-983e-62fd048ea7be"</span>
+ <span class="o">}</span>
+</code></pre></div>    </div>
+
+    <p class="notice--tip"><strong>TIP</strong>: We’ve added a <code class="highlighter-rouge">status.json</code> file to our static asset collection, which we’ll use to confirm the online status of both CDN buckets, as well as determine which bucket is currently serving our content.</p>
+  </li>
+  <li>
+    <p>Create another Amazon Route53 Health Check to check the status of the <em>secondary</em> Amazon S3 bucket (<code class="highlighter-rouge">cdn.bookstore.pingpublications.com.s3.amazonaws.com</code>).</p>
+
+    <div class="language-bash highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code> <span class="nv">$ </span>aws route53 create-health-check <span class="nt">--caller-reference</span> BookstoreS3 <span class="nt">--output</span> json <span class="se">\</span>
+ <span class="nt">--health-check-config</span> <span class="s1">'{
+     "FullyQualifiedDomainName": "cdn.bookstore.pingpublications.com.s3.amazonaws.com",
+     "ResourcePath": "/static/status.json",
+     "Type": "HTTP"
+ }'</span> <span class="se">\</span>
+ <span class="nt">--query</span> <span class="s2">"{Id: HealthCheck.Id}"</span>
+ <span class="o">{</span>
+     <span class="s2">"Id"</span>: <span class="s2">"e7fce91f-c82a-460f-b247-58c35790e39d"</span>
+ <span class="o">}</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Create a third Amazon Route53 Health Check that combines the two previous health checks.  This combined health check is monitored by Amazon Route53 and automatically triggers failover from the primary to secondary CDN when the check fails.  We need to pass the two health check <code class="highlighter-rouge">Ids</code> created above into this combined health check configuration.</p>
+
+    <div class="language-bash highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code> <span class="nv">$ </span>aws route53 create-health-check <span class="nt">--caller-reference</span> BookstoreCDN <span class="nt">--output</span> json <span class="nt">--health-check-config</span> <span class="s1">'{
+     "HealthThreshold": 2,
+     "Type": "CALCULATED",
+     "ChildHealthChecks": [
+         "e7fce91f-c82a-460f-b247-58c35790e39d",
+         "352ef27f-213e-4dae-983e-62fd048ea7be"
+     ]
+ }'</span>
+ <span class="o">{</span>
+     <span class="s2">"HealthCheck"</span>: <span class="o">{</span>
+         <span class="s2">"HealthCheckConfig"</span>: <span class="o">{</span>
+             <span class="s2">"HealthThreshold"</span>: 2,
+             <span class="s2">"Type"</span>: <span class="s2">"CALCULATED"</span>,
+             <span class="s2">"ChildHealthChecks"</span>: <span class="o">[</span>
+                 <span class="s2">"352ef27f-213e-4dae-983e-62fd048ea7be"</span>,
+                 <span class="s2">"e7fce91f-c82a-460f-b247-58c35790e39d"</span>
+             <span class="o">]</span>,
+             <span class="s2">"Inverted"</span>: <span class="nb">false</span>
+         <span class="o">}</span>,
+         <span class="s2">"CallerReference"</span>: <span class="s2">"BookstoreCDN"</span>,
+         <span class="s2">"HealthCheckVersion"</span>: 1,
+         <span class="s2">"Id"</span>: <span class="s2">"99d5b3a0-7709-4553-934f-d0ac7bcd2eb3"</span>
+     <span class="o">}</span>,
+ <span class="o">}</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Finally, verify all CDN endpoints behave correctly and point to the proper Amazon S3 bucket.</p>
+
+    <ul>
+      <li>
+        <p>Start by checking the primary Amazon S3 bucket.</p>
+
+        <div class="language-bash highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code>  <span class="nv">$ </span>curl http://cdn-primary.bookstore.pingpublications.com.s3-us-west-2.amazonaws.com/static/status.json
+  <span class="o">{</span>
+      <span class="s2">"online"</span>: <span class="nb">true</span>,
+      <span class="s2">"cdn"</span>: <span class="s2">"primary"</span>
+  <span class="o">}</span>
+</code></pre></div>        </div>
+      </li>
+      <li>
+        <p>The CloudFront endpoint routes to the primary bucket above.</p>
+
+        <div class="language-bash highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code>  <span class="nv">$ </span>curl http://dqno94z16p2mg.cloudfront.net/static/status.json
+  <span class="o">{</span>
+      <span class="s2">"online"</span>: <span class="nb">true</span>,
+      <span class="s2">"cdn"</span>: <span class="s2">"primary"</span>
+  <span class="o">}</span>
+</code></pre></div>        </div>
+      </li>
+      <li>
+        <p>The last part of the chain is the primary CDN endpoint, which routes to the CloudFront endpoint, and then onto the primary Amazon S3 bucket itself.</p>
+
+        <div class="language-bash highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code>  <span class="nv">$ </span>curl http://cdn.bookstore.pingpublications.com/static/status.json
+  <span class="o">{</span>
+      <span class="s2">"online"</span>: <span class="nb">true</span>,
+      <span class="s2">"cdn"</span>: <span class="s2">"primary"</span>
+  <span class="o">}</span>
+</code></pre></div>        </div>
+      </li>
+      <li>
+        <p>Finally, the secondary Amazon S3 bucket is properly retrieving the secondary static content.</p>
+
+        <div class="language-bash highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code>  <span class="nv">$ </span>curl http://cdn.bookstore.pingpublications.com.s3.amazonaws.com/static/status.json
+  <span class="o">{</span>
+      <span class="s2">"online"</span>: <span class="nb">true</span>,
+      <span class="s2">"cdn"</span>: <span class="s2">"secondary"</span>
+  <span class="o">}</span>
+</code></pre></div>        </div>
+      </li>
+    </ul>
+  </li>
+</ol>
+
+<p>The app is now ready for failure testing.  Here is the updated diagram showing the <strong>Bookstore</strong> app architecture for <strong>Resiliency Stage 2</strong>.</p>
+
+<p class="text-center"><img alt="Stage 2 - Architecture" src="/gremlin-blog-posts/assets/chaos-engineering/chaos-engineering-through-staged-resiliency/stage-2/stage-2-architecture-eeb5feeb193e86e0a7004de150b11cf20e08a802a02a5b1cb1e6172a4b76e5e3.png" class="align-center">
+<em>Bookstore App Architecture</em></p>
+
+<h3 id="perform-critical-dependency-failure-tests-in-non-production-1">Perform Critical Dependency Failure Tests in Non-Production</h3>
+
+<h4 id="database-failure-test">Database Failure Test</h4>
+
+<p>With Multi-AZ configured on the Amazon RDS instance we are now ready to perform a failover test for this critical dependency.</p>
+
+<ol>
+  <li>
+    <p>Confirm the status and current Availability Zone of the <code class="highlighter-rouge">bookstore-db</code> instance with the <code class="highlighter-rouge">describe-db-instances</code> CLI command.</p>
+
+    <div class="language-bash highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code> <span class="nv">$ </span>aws rds describe-db-instances <span class="nt">--db-instance-identifier</span> bookstore-db <span class="nt">--output</span> json <span class="nt">--query</span> <span class="s2">"DBInstances[*].{Id:DBInstanceIdentifier, AZ:AvailabilityZone, SecondaryAZ:SecondaryAvailabilityZone, Endpoint:Endpoint.Address, Status:DBInstanceStatus}"</span>
+ <span class="o">[</span>
+     <span class="o">{</span>
+         <span class="s2">"SecondaryAZ"</span>: <span class="s2">"us-west-2b"</span>,
+         <span class="s2">"Status"</span>: <span class="s2">"available"</span>, 
+         <span class="s2">"AZ"</span>: <span class="s2">"us-west-2a"</span>, 
+         <span class="s2">"Id"</span>: <span class="s2">"bookstore-db"</span>, 
+         <span class="s2">"Endpoint"</span>: <span class="s2">"bookstore-db.cvajeopcjvda.us-west-2.rds.amazonaws.com"</span>
+     <span class="o">}</span>
+ <span class="o">]</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Perform a manual reboot via <code class="highlighter-rouge">reboot-db-instance</code>.  We’re also <strong>forcing</strong> a failover with the <code class="highlighter-rouge">--force-failover</code> flag.</p>
+
+    <div class="language-bash highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code> <span class="nv">$ </span>aws rds reboot-db-instance <span class="nt">--db-instance-identifier</span> bookstore-db <span class="nt">--force-failover</span> <span class="nt">--output</span> json <span class="nt">--query</span> <span class="s2">"DBInstance.{Id:DBInstanceIdentifier, AZ:AvailabilityZone, SecondaryAZ:SecondaryAvailabilityZone, Endpoint:Endpoint.Address, Status:DBInstanceStatus}"</span>
+ <span class="o">{</span>
+     <span class="s2">"SecondaryAZ"</span>: <span class="s2">"us-west-2b"</span>, 
+     <span class="s2">"Status"</span>: <span class="s2">"rebooting"</span>, 
+     <span class="s2">"AZ"</span>: <span class="s2">"us-west-2a"</span>, 
+     <span class="s2">"Id"</span>: <span class="s2">"bookstore-db"</span>, 
+     <span class="s2">"Endpoint"</span>: <span class="s2">"bookstore-db.cvajeopcjvda.us-west-2.rds.amazonaws.com"</span>
+ <span class="o">}</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Even though the primary instance is currently <code class="highlighter-rouge">Status: rebooting</code>, both the production and secondary <strong>Bookstore</strong> environments are able to connect to <code class="highlighter-rouge">db.bookstore.pingpublications.com</code>, which is pointed to the <code class="highlighter-rouge">bookstore-db.cvajeopcjvda.us-west-2.rds.amazonaws.com</code> endpoint.</p>
+
+    <div class="language-bash highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code> <span class="nv">$ </span>curl bookstore.pingpublications.com/books/ | jq
+ <span class="o">[</span>
+     <span class="o">{</span>
+         <span class="s2">"url"</span>: <span class="s2">"http://bookstore.pingpublications.com/books/1/"</span>,
+         <span class="s2">"authors"</span>: <span class="o">[</span>
+             <span class="o">{</span>
+                 <span class="s2">"url"</span>: <span class="s2">"http://bookstore.pingpublications.com/authors/1/"</span>,
+                 <span class="s2">"birth_date"</span>: <span class="s2">"1947-09-21"</span>,
+                 <span class="s2">"first_name"</span>: <span class="s2">"Stephen"</span>,
+                 <span class="s2">"last_name"</span>: <span class="s2">"King"</span>
+             <span class="o">}</span>
+         <span class="o">]</span>,
+         <span class="s2">"publication_date"</span>: <span class="s2">"1978-09-01"</span>,
+         <span class="s2">"title"</span>: <span class="s2">"The Stand"</span>
+     <span class="o">}</span>
+ <span class="o">]</span>
+</code></pre></div>    </div>
+
+    <div class="language-bash highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code> <span class="nv">$ </span>curl ec2-54-191-29-110.us-west-2.compute.amazonaws.com/books/ | jq
+ <span class="o">[</span>
+     <span class="o">{</span>
+         <span class="s2">"url"</span>: <span class="s2">"http://ec2-54-191-29-110.us-west-2.compute.amazonaws.com/books/1/"</span>,
+         <span class="s2">"authors"</span>: <span class="o">[</span>
+             <span class="o">{</span>
+                 <span class="s2">"url"</span>: <span class="s2">"http://ec2-54-191-29-110.us-west-2.compute.amazonaws.com/authors/1/"</span>,
+                 <span class="s2">"birth_date"</span>: <span class="s2">"1947-09-21"</span>,
+                 <span class="s2">"first_name"</span>: <span class="s2">"Stephen"</span>,
+                 <span class="s2">"last_name"</span>: <span class="s2">"King"</span>
+             <span class="o">}</span>
+         <span class="o">]</span>,
+         <span class="s2">"publication_date"</span>: <span class="s2">"1978-09-01"</span>,
+         <span class="s2">"title"</span>: <span class="s2">"The Stand"</span>
+     <span class="o">}</span>
+ <span class="o">]</span>
+</code></pre></div>    </div>
+
+    <p>Amazon RDS Multi-AZ <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_RebootInstance.html" target="_blank" rel="noopener noreferrer">automatically</a> switches to the secondary replica on the other Availability Zone and reroutes the endpoint for us.</p>
+  </li>
+  <li>
+    <p>Once the reboot completes, query the <code class="highlighter-rouge">bookstore-db</code> instance to confirm that it has swapped the active instance to the other Availability Zone.</p>
+
+    <div class="language-bash highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code> <span class="nv">$ </span>aws rds describe-db-instances <span class="nt">--db-instance-identifier</span> bookstore-db <span class="nt">--output</span> json <span class="nt">--query</span> <span class="s2">"DBInstances[*].{Id:DBInstanceIdentifier, AZ:AvailabilityZone, SecondaryAZ:SecondaryAvailabilityZone, Endpoint:Endpoint.Address, Status:DBInstanceStatus}"</span>
+ <span class="o">[</span>
+     <span class="o">{</span>
+         <span class="s2">"SecondaryAZ"</span>: <span class="s2">"us-west-2a"</span>, 
+         <span class="s2">"Status"</span>: <span class="s2">"available"</span>, 
+         <span class="s2">"AZ"</span>: <span class="s2">"us-west-2b"</span>, 
+         <span class="s2">"Id"</span>: <span class="s2">"bookstore-db"</span>, 
+         <span class="s2">"Endpoint"</span>: <span class="s2">"bookstore-db.cvajeopcjvda.us-west-2.rds.amazonaws.com"</span>
+     <span class="o">}</span>
+ <span class="o">]</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Manually confirm the <strong>Bookstore</strong> API remains connected to the <code class="highlighter-rouge">bookstore-db</code> instance replica.</p>
+
+    <div class="language-bash highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code> <span class="nv">$ </span>curl bookstore.pingpublications.com/books/ | jq
+ <span class="o">[</span>
+     <span class="o">{</span>
+         <span class="s2">"url"</span>: <span class="s2">"http://bookstore.pingpublications.com/books/1/"</span>,
+         <span class="s2">"authors"</span>: <span class="o">[</span>
+             <span class="o">{</span>
+                 <span class="s2">"url"</span>: <span class="s2">"http://bookstore.pingpublications.com/authors/1/"</span>,
+                 <span class="s2">"birth_date"</span>: <span class="s2">"1947-09-21"</span>,
+                 <span class="s2">"first_name"</span>: <span class="s2">"Stephen"</span>,
+                 <span class="s2">"last_name"</span>: <span class="s2">"King"</span>
+             <span class="o">}</span>
+         <span class="o">]</span>,
+         <span class="s2">"publication_date"</span>: <span class="s2">"1978-09-01"</span>,
+         <span class="s2">"title"</span>: <span class="s2">"The Stand"</span>
+     <span class="o">}</span>
+ <span class="o">]</span>
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<h4 id="cdn-failure-test">CDN Failure Test</h4>
+
+<p>This test ensures that the primary CDN endpoint (<code class="highlighter-rouge">cdn.bookstore.pingpublications.com</code>) performs an automatic failover to the secondary Amazon S3 bucket when the Route53 Health Check fails.</p>
+
+<ol>
+  <li>
+    <p>Retrieve appropriate Health Check <code class="highlighter-rouge">Ids</code>.</p>
+
+    <div class="language-bash highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code> <span class="nv">$ </span>aws route53 list-health-checks <span class="nt">--output</span> json
+ <span class="o">{</span>
+     <span class="s2">"HealthChecks"</span>: <span class="o">[</span>
+         <span class="o">{</span>
+             <span class="s2">"HealthCheckConfig"</span>: <span class="o">{</span>
+                 <span class="s2">"HealthThreshold"</span>: 2, 
+                 <span class="s2">"Type"</span>: <span class="s2">"CALCULATED"</span>, 
+                 <span class="s2">"ChildHealthChecks"</span>: <span class="o">[</span>
+                     <span class="s2">"57a1606e-df1e-43d0-b6d5-e04bf3d789ff"</span>, 
+                     <span class="s2">"e4a34329-26c3-4dbe-bec7-4afba94bd487"</span>
+                 <span class="o">]</span>, 
+                 <span class="s2">"Inverted"</span>: <span class="nb">false</span>
+             <span class="o">}</span>, 
+             <span class="s2">"HealthCheckVersion"</span>: 2, 
+             <span class="s2">"Id"</span>: <span class="s2">"1b01881d-a658-4d8e-86c9-8d5329d0bfcc"</span>
+         <span class="o">}</span>
+     <span class="o">]</span>
+ <span class="o">}</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Invert the Health Check, so that a normally healthy value is now considered unhealthy.</p>
+
+    <div class="language-bash highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code> <span class="nv">$ </span>aws route53 update-health-check <span class="nt">--output</span> json <span class="nt">--health-check-id</span> 1b01881d-a658-4d8e-86c9-8d5329d0bfcc <span class="nt">--inverted</span>
+ <span class="o">{</span>
+     <span class="s2">"HealthCheck"</span>: <span class="o">{</span>
+         <span class="s2">"HealthCheckConfig"</span>: <span class="o">{</span>
+             <span class="s2">"HealthThreshold"</span>: 2, 
+             <span class="s2">"Type"</span>: <span class="s2">"CALCULATED"</span>, 
+             <span class="s2">"ChildHealthChecks"</span>: <span class="o">[</span>
+                 <span class="s2">"57a1606e-df1e-43d0-b6d5-e04bf3d789ff"</span>, 
+                 <span class="s2">"e4a34329-26c3-4dbe-bec7-4afba94bd487"</span>
+             <span class="o">]</span>, 
+             <span class="s2">"Inverted"</span>: <span class="nb">true</span>
+         <span class="o">}</span>, 
+         <span class="s2">"HealthCheckVersion"</span>: 3, 
+         <span class="s2">"Id"</span>: <span class="s2">"1b01881d-a658-4d8e-86c9-8d5329d0bfcc"</span>
+     <span class="o">}</span>
+ <span class="o">}</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>After a moment for the Health Check status to update, check the primary CDN endpoint to ensure that it has automatically failed over to the secondary CDN Amazon S3 bucket.</p>
+
+    <div class="language-bash highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code> <span class="nv">$ </span>curl http://cdn.bookstore.pingpublications.com/static/status.json
+ <span class="o">{</span>
+     <span class="s2">"online"</span>: <span class="nb">true</span>,
+     <span class="s2">"cdn"</span>: <span class="s2">"secondary"</span>
+ <span class="o">}</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Revert the previous Health Check inversion.</p>
+
+    <div class="language-bash highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code> <span class="nv">$ </span>aws route53 update-health-check <span class="nt">--output</span> json <span class="nt">--health-check-id</span> 1b01881d-a658-4d8e-86c9-8d5329d0bfcc <span class="nt">--no-inverted</span>
+ <span class="o">{</span>
+     <span class="s2">"HealthCheck"</span>: <span class="o">{</span>
+         <span class="s2">"HealthCheckConfig"</span>: <span class="o">{</span>
+             <span class="s2">"HealthThreshold"</span>: 2, 
+             <span class="s2">"Type"</span>: <span class="s2">"CALCULATED"</span>, 
+             <span class="s2">"ChildHealthChecks"</span>: <span class="o">[</span>
+                 <span class="s2">"57a1606e-df1e-43d0-b6d5-e04bf3d789ff"</span>, 
+                 <span class="s2">"e4a34329-26c3-4dbe-bec7-4afba94bd487"</span>
+             <span class="o">]</span>, 
+             <span class="s2">"Inverted"</span>: <span class="nb">false</span>
+         <span class="o">}</span>, 
+         <span class="s2">"HealthCheckVersion"</span>: 4, 
+         <span class="s2">"Id"</span>: <span class="s2">"1b01881d-a658-4d8e-86c9-8d5329d0bfcc"</span>
+     <span class="o">}</span>
+ <span class="o">}</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Verify that the primary CDN endpoint points back to the primary Amazon S3 bucket.</p>
+
+    <div class="language-bash highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code> <span class="nv">$ </span>curl http://cdn.bookstore.pingpublications.com/static/status.json
+ <span class="o">{</span>
+     <span class="s2">"online"</span>: <span class="nb">true</span>,
+     <span class="s2">"cdn"</span>: <span class="s2">"primary"</span>
+ <span class="o">}</span>
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<h3 id="publish-test-results-1">Publish Test Results</h3>
+
+<p>Now that both critical dependencies have been tested we’ll publish the results to the entire team, so everyone can keep tabs on the resiliency progress of the project.</p>
+
+<h2 id="resiliency-stage-2-completion">Resiliency Stage 2 Completion</h2>
 
 <p>Once all critical dependencies have been failure tested and those test results have been disseminated throughout the team then <strong>Resiliency Stage 2</strong> is complete!  Your system should now have well-defined recovery playbooks and been manually tested for both failover and critical dependency failures.  In <a href="https://www.gremlin.com/blog/chaos-engineering-through-staged-resiliency-stage-3" target="_blank" rel="noopener noreferrer">Chaos Engineering Through Staged Resiliency - Stage 3</a> we’ll look at the transition into automating some of these tests and performing them at regular intervals.</p>
 
@@ -465,7 +945,7 @@
 
 
 
-  8 minute read
+  21 minute read
 </p>
     
     <p class="archive__item-excerpt" itemprop="description">

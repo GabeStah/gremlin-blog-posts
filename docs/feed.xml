@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.4">Jekyll</generator><link href="http://localhost:4000/gremlin-blog-posts/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/gremlin-blog-posts/" rel="alternate" type="text/html" /><updated>2018-11-05T21:30:15-08:00</updated><id>http://localhost:4000/gremlin-blog-posts/feed.xml</id><title type="html">Gremlin: Blog Posts</title><subtitle>An amazing website.</subtitle><author><name>Gabe Wyatt</name></author><entry><title type="html">Create a Serverless Twitter Bot with Airbrake and AWS Lambda - Part 1</title><link href="http://localhost:4000/gremlin-blog-posts/serverless-twitter-bot-aws-lambda/" rel="alternate" type="text/html" title="Create a Serverless Twitter Bot with Airbrake and AWS Lambda - Part 1" /><published>2018-10-19T00:00:00-07:00</published><updated>2018-10-19T00:00:00-07:00</updated><id>http://localhost:4000/gremlin-blog-posts/serverless-twitter-bot-aws-lambda</id><content type="html" xml:base="http://localhost:4000/gremlin-blog-posts/serverless-twitter-bot-aws-lambda/">&lt;p&gt;In this series, you’ll learn how to create a fully-automated, NodeJS, serverless Twitter bot that can tweet links to posts from your favorite blog or RSS feed.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.4">Jekyll</generator><link href="http://localhost:4000/gremlin-blog-posts/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/gremlin-blog-posts/" rel="alternate" type="text/html" /><updated>2018-11-12T18:52:47-08:00</updated><id>http://localhost:4000/gremlin-blog-posts/feed.xml</id><title type="html">Gremlin: Blog Posts</title><subtitle>An amazing website.</subtitle><author><name>Gabe Wyatt</name></author><entry><title type="html">Create a Serverless Twitter Bot with Airbrake and AWS Lambda - Part 1</title><link href="http://localhost:4000/gremlin-blog-posts/serverless-twitter-bot-aws-lambda/" rel="alternate" type="text/html" title="Create a Serverless Twitter Bot with Airbrake and AWS Lambda - Part 1" /><published>2018-10-19T00:00:00-07:00</published><updated>2018-10-19T00:00:00-07:00</updated><id>http://localhost:4000/gremlin-blog-posts/serverless-twitter-bot-aws-lambda</id><content type="html" xml:base="http://localhost:4000/gremlin-blog-posts/serverless-twitter-bot-aws-lambda/">&lt;p&gt;In this series, you’ll learn how to create a fully-automated, NodeJS, serverless Twitter bot that can tweet links to posts from your favorite blog or RSS feed.&lt;/p&gt;
 
 &lt;p&gt;In part one of our three-part series, you’ll create a bot and configure it to manually create tweets.  In &lt;a href=&quot;https://airbrake.io/blog/nodejs/serverless-twitter-bot-airbrake-lambda-part-2&quot;&gt;part two&lt;/a&gt; you’ll learn how to add real-time error monitoring by integrating &lt;a class=&quot;js-cta-utm&quot; href=&quot;https://airbrake.io/languages/nodejs-error-monitoring?utm_source=blog&amp;amp;utm_medium=end-post&amp;amp;utm_campaign=airbrake-serverless-twitter-bot&quot;&gt;Airbrake’s Node.js&lt;/a&gt; software.  Finally, &lt;a href=&quot;https://airbrake.io/blog/nodejs/serverless-twitter-bot-airbrake-lambda-part-3&quot;&gt;part three&lt;/a&gt; will walk you through the process of automating your bot by integrating it into the serverless AWS Lambda platform.  Let’s get to it!&lt;/p&gt;
 
@@ -275,13 +275,15 @@ Run at least one resiliency exercise (failure injection) in production environme
   &lt;p&gt;level three is where automation starts kicking in. so we are pushing teams to start doing using tools right tools like gremlin we have internal tools which they can use to basically push that either infrastructure or that applications to fail and then see what the response looks like and make sure that they have good playbooks to fix that and reduce the revenue loss over time.&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;</content><author><name>Gabe Wyatt</name></author><category term="resiliency" /><category term="staging" /></entry><entry><title type="html">Chaos Engineering Through Staged Resiliency - Stage 2</title><link href="http://localhost:4000/gremlin-blog-posts/chaos-engineering/chaos-engineering-through-staged-resiliency-stage-2/" rel="alternate" type="text/html" title="Chaos Engineering Through Staged Resiliency - Stage 2" /><published>2018-10-11T00:00:00-07:00</published><updated>2018-10-11T00:00:00-07:00</updated><id>http://localhost:4000/gremlin-blog-posts/chaos-engineering/chaos-engineering-through-staged-resiliency-stage-2</id><content type="html" xml:base="http://localhost:4000/gremlin-blog-posts/chaos-engineering/chaos-engineering-through-staged-resiliency-stage-2/">&lt;p&gt;In &lt;a href=&quot;https://www.gremlin.com/blog/chaos-engineering-through-staged-resiliency-stage-1&quot;&gt;Chaos Engineering Through Staged Resiliency - Stage 1&lt;/a&gt; we explored how engineering teams at Walmart successfully identify and combat unexpected system failure using a series of “resiliency stages.”  Completing &lt;strong&gt;Resiliency Stage 1&lt;/strong&gt; requires the definition of a disaster recovery failover playbook, dependency failover playbooks, team-wide agreement on said playbooks, and execution of a manual failover exercise.&lt;/p&gt;
+&lt;h2 id=&quot;resiliency-stage-3-implementation-example&quot;&gt;Resiliency Stage 3: Implementation Example&lt;/h2&gt;
+
+&lt;p&gt;(TODO)&lt;/p&gt;
+
+&lt;h2 id=&quot;resiliency-stage-2-completion&quot;&gt;Resiliency Stage 2 Completion&lt;/h2&gt;</content><author><name>Gabe Wyatt</name></author><category term="resiliency" /><category term="staging" /></entry><entry><title type="html">Chaos Engineering Through Staged Resiliency - Stage 2</title><link href="http://localhost:4000/gremlin-blog-posts/chaos-engineering/chaos-engineering-through-staged-resiliency-stage-2/" rel="alternate" type="text/html" title="Chaos Engineering Through Staged Resiliency - Stage 2" /><published>2018-10-11T00:00:00-07:00</published><updated>2018-10-11T00:00:00-07:00</updated><id>http://localhost:4000/gremlin-blog-posts/chaos-engineering/chaos-engineering-through-staged-resiliency-stage-2</id><content type="html" xml:base="http://localhost:4000/gremlin-blog-posts/chaos-engineering/chaos-engineering-through-staged-resiliency-stage-2/">&lt;p&gt;In &lt;a href=&quot;https://www.gremlin.com/blog/chaos-engineering-through-staged-resiliency-stage-1&quot;&gt;Chaos Engineering Through Staged Resiliency - Stage 1&lt;/a&gt; we explored how engineering teams at Walmart successfully identify and combat unexpected system failure using a series of “resiliency stages.”  We also demonstrated the process of going through &lt;strong&gt;Stage 1&lt;/strong&gt; for the &lt;strong&gt;Bookstore&lt;/strong&gt; API sample application.  We showed that completing &lt;strong&gt;Resiliency Stage 1&lt;/strong&gt; requires the definition of a disaster recovery failover playbook, dependency failover playbooks, team-wide agreement on said playbooks, and the execution of a manual failover exercise.&lt;/p&gt;
 
 &lt;p&gt;In this second part we’ll dive into the components of &lt;strong&gt;Resiliency Stage 2&lt;/strong&gt;, which focuses on critical dependency failure testing in non-production environments.&lt;/p&gt;
 
-&lt;h2 id=&quot;resiliency-stage-2-critical-dependency-failure-testing-in-non-production&quot;&gt;Resiliency Stage 2: Critical Dependency Failure Testing in Non-Production&lt;/h2&gt;
-
-&lt;h3 id=&quot;prerequisites&quot;&gt;Prerequisites&lt;/h3&gt;
+&lt;h2 id=&quot;prerequisites&quot;&gt;Prerequisites&lt;/h2&gt;
 
 &lt;ul&gt;
   &lt;li&gt;Creation and agreement on &lt;a href=&quot;https://www.gremlin.com/blog/chaos-engineering-through-staged-resiliency-stage-1#prerequisites&quot;&gt;Disaster Recovery and Dependency Failover Playbooks&lt;/a&gt;.&lt;/li&gt;
@@ -300,17 +302,463 @@ Run at least one resiliency exercise (failure injection) in production environme
 
 &lt;p&gt;After every critical dependency failure test is performed the results should be globally published to the entire team.  This allows every team member to closely scrutinize the outcome of a given test.  This encourages feedback and communication, which naturally provides insightful evaluation from the members that are best equipped to analyze the test results.&lt;/p&gt;
 
-&lt;h2 id=&quot;implementation-example&quot;&gt;Implementation Example&lt;/h2&gt;
+&lt;h2 id=&quot;resiliency-stage-2-implementation-example&quot;&gt;Resiliency Stage 2: Implementation Example&lt;/h2&gt;
 
-&lt;p&gt;(TODO)&lt;/p&gt;
+&lt;p&gt;At present the &lt;strong&gt;Bookstore&lt;/strong&gt; sample app has no real concept of failover or resiliency – if the application or a critical dependency fails, the entire system fails along with it.&lt;/p&gt;
 
-&lt;h2 id=&quot;stage-2-completion&quot;&gt;Stage 2 Completion&lt;/h2&gt;
+&lt;p class=&quot;text-center&quot;&gt;&lt;img alt=&quot;Bookstore App Architecture&quot; src=&quot;/gremlin-blog-posts/assets/chaos-engineering/chaos-engineering-through-staged-resiliency/stage-1/stage-1-architecture-09757f8939b8928a7e67174b1608765bba3acc766990411ec05e28a66d641805.png&quot; class=&quot;align-center&quot; /&gt;
+&lt;em&gt;Bookstore App Architecture&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Completing &lt;strong&gt;Resiliency Stage 2&lt;/strong&gt; requires testing in a non-production environment, so this forces us to improve deployment and system resiliency by moving beyond a single point of failure.  Since we’re taking advantage of AWS we &lt;em&gt;could&lt;/em&gt; jump straight into implementing all the safety net features the AWS platform brings with it (e.g. auto scaling, elastic load balancing, traffic manipulation, etc).  However, going through each resiliency stage by meeting the minimal requirements provides more robust examples and lets us learn the intricacies of all components within the system.&lt;/p&gt;
+
+&lt;p&gt;Therefore, before we go through this stage we’ll be modifying the &lt;strong&gt;Bookstore&lt;/strong&gt; architecture by adding a secondary staging environment.  In fact, this is a good opportunity to use a blue/green deployment strategy.  A blue/green configuration requires creating two parallel production environments.&lt;/p&gt;
+
+&lt;p&gt;As an example scenario, the &lt;code class=&quot;highlighter-rouge&quot;&gt;blue&lt;/code&gt; environment is “active” and is handling production traffic.  Meanwhile, the other environment (&lt;code class=&quot;highlighter-rouge&quot;&gt;green&lt;/code&gt;) is used for staging application changes.  Once the &lt;code class=&quot;highlighter-rouge&quot;&gt;green&lt;/code&gt; environment has been fully tested then traffic is routed to the &lt;code class=&quot;highlighter-rouge&quot;&gt;green&lt;/code&gt; environment.  &lt;code class=&quot;highlighter-rouge&quot;&gt;Green&lt;/code&gt; now becomes the live production environment while &lt;code class=&quot;highlighter-rouge&quot;&gt;blue&lt;/code&gt; is unused and ready for the next staging phase.  If something goes wrong during deployment to &lt;code class=&quot;highlighter-rouge&quot;&gt;green&lt;/code&gt;, traffic can be quickly routed back to the still-active &lt;code class=&quot;highlighter-rouge&quot;&gt;blue&lt;/code&gt; environment.&lt;/p&gt;
+
+&lt;h3 id=&quot;adding-a-staging-app-environment&quot;&gt;Adding a Staging App Environment&lt;/h3&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;Create a new EC2 instance from the most recent launch template version.  Optionally, we can specify tags such as &lt;code class=&quot;highlighter-rouge&quot;&gt;Name&lt;/code&gt; to help differentiate between the two environments.&lt;/p&gt;
+
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; aws ec2 run-instances &lt;span class=&quot;nt&quot;&gt;--launch-template&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;LaunchTemplateName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;bookstore-api-ec2 &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+     &lt;span class=&quot;nt&quot;&gt;--tag-specifications&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;ResourceType=instance,Tags=[{Key=Name,Value=bookstore-api-green}]&quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Verify the instance has been created by finding active instances generated from the same AMI.&lt;/p&gt;
+
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;aws ec2 describe-instances &lt;span class=&quot;nt&quot;&gt;--filters&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Name=image-id,Values=ami-087ff330c90e99ac5,Name=instance-state-code,Values=16&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--query&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Reservations[*].Instances[*].[LaunchTime,PublicDnsName,PublicIpAddress]&quot;&lt;/span&gt;
+ 2018-11-09T04:37:32.000Z	ec2-54-188-3-235.us-west-2.compute.amazonaws.com	54.188.3.235
+ 2018-11-09T07:44:38.000Z	ec2-54-191-29-110.us-west-2.compute.amazonaws.com	54.191.29.110
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;SSH into new environment.&lt;/p&gt;
+
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; ssh ec2-54-191-29-110.us-west-2.compute.amazonaws.com
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Pull any new application changes and restart application.&lt;/p&gt;
+
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; ~/apps/bookstore_api &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; git pull &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl restart gunicorn
+ From github.com:GabeStah/bookstore_api
+     0f1b811..ee6f15c  master     -&amp;gt; origin/master
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Verify that each instance environment is serving a different version of the application.&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;p&gt;Here we check the app version for the current production endpoint.&lt;/p&gt;
+
+        &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;curl bookstore.pingpublications.com/version | jq
+  &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;s2&quot;&gt;&quot;version&quot;&lt;/span&gt;: 3
+  &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;        &lt;/div&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;And for the &lt;code class=&quot;highlighter-rouge&quot;&gt;bookstore-api-green&lt;/code&gt; environment.&lt;/p&gt;
+
+        &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;curl ec2-54-191-29-110.us-west-2.compute.amazonaws.com/version | jq
+  &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;s2&quot;&gt;&quot;version&quot;&lt;/span&gt;: 4
+  &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;        &lt;/div&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;configuring-multi-az-rds&quot;&gt;Configuring Multi-AZ RDS&lt;/h3&gt;
+
+&lt;p&gt;The PostgreSQL database on Amazon RDS is not resilient – if the single instance fails, the entire application goes down.  RDS provides a &lt;a href=&quot;https://aws.amazon.com/rds/details/multi-az/&quot;&gt;Multi-AZ Deployment&lt;/a&gt; solution, which automatically creates a synchronous database replica on another Availability Zone.  In the event of a primary failure the secondary performs an automatic failover so there is little to no downtime.&lt;/p&gt;
+
+&lt;p&gt;Modifying the existing &lt;code class=&quot;highlighter-rouge&quot;&gt;bookstore-db&lt;/code&gt; RDS instance so it uses a Multi-AZ Deployment is fairly simple.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;Confirm the instance is not using Multi-AZ.&lt;/p&gt;
+
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;aws rds describe-db-instances &lt;span class=&quot;nt&quot;&gt;--db-instance-identifier&lt;/span&gt; bookstore-db &lt;span class=&quot;nt&quot;&gt;--query&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;DBInstances[*].[AvailabilityZone,MultiAZ]&quot;&lt;/span&gt;
+ us-west-2a	False
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Modify the instance by passing the &lt;code class=&quot;highlighter-rouge&quot;&gt;multi-az&lt;/code&gt; flag.  In this case, we always want to apply changes immediately (rather than wait for the next scheduled maintenance window).&lt;/p&gt;
+
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; aws rds modify-db-instance &lt;span class=&quot;nt&quot;&gt;--db-instance-identifier&lt;/span&gt; bookstore-db &lt;span class=&quot;nt&quot;&gt;--multi-az&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--apply-immediately&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;It may take a few minutes for the modification to take effect.  We can check the status within the &lt;code class=&quot;highlighter-rouge&quot;&gt;PendingModifiedValues&lt;/code&gt; key structure to confirm &lt;code class=&quot;highlighter-rouge&quot;&gt;MultiAZ&lt;/code&gt; is waiting to be modified.&lt;/p&gt;
+
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;aws rds describe-db-instances &lt;span class=&quot;nt&quot;&gt;--db-instance-identifier&lt;/span&gt; bookstore-db &lt;span class=&quot;nt&quot;&gt;--query&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;DBInstances[*].PendingModifiedValues.[MultiAZ]&quot;&lt;/span&gt;
+ True
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;After about 10 minutes we can check the status once again to confirm that a Mutli-AZ Deployment is now active.&lt;/p&gt;
+
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;aws rds describe-db-instances &lt;span class=&quot;nt&quot;&gt;--db-instance-identifier&lt;/span&gt; bookstore-db &lt;span class=&quot;nt&quot;&gt;--query&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;DBInstances[*].[AvailabilityZone,MultiAZ]&quot;&lt;/span&gt;
+ us-west-2a	True
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;amazon-s3-cross-region-replication&quot;&gt;Amazon S3 Cross-Region Replication&lt;/h3&gt;
+
+&lt;p&gt;The last critical dependency for the &lt;strong&gt;Bookstore&lt;/strong&gt; app is the CDN, which relies on Amazon S3.  While Amazon S3 is a extremely resilient system and not prone to downtime, there is still some precedent for Amazon S3 failure.  Luckily, the service has the ability to automatically replicate objects between buckets within different AWS regions.&lt;/p&gt;
+
+&lt;p&gt;To accomplish this we’re working around a quirk with Amazon S3 bucket naming and DNS routing.  Specifically, a CNAME DNS name must &lt;em&gt;exactly match&lt;/em&gt; a referenced Amazon S3 bucket name.  Therefore, we’ll continue using the &lt;code class=&quot;highlighter-rouge&quot;&gt;cdn.bookstore.pingpublications.com.s3.amazonaws.com&lt;/code&gt; Amazon S3 bucket (and Route53 CNAME record), but this bucket is now the &lt;em&gt;secondary&lt;/em&gt; CDN.  A new Amazon S3 bucket named &lt;code class=&quot;highlighter-rouge&quot;&gt;cdn-primary.bookstore.pingpublications.com&lt;/code&gt; is now the &lt;em&gt;primary&lt;/em&gt; CDN bucket.&lt;/p&gt;
+
+&lt;p&gt;We then create a CloudFront endpoint that points to the &lt;code class=&quot;highlighter-rouge&quot;&gt;cdn-primary&lt;/code&gt; bucket, but uses the DNS CNAME &lt;code class=&quot;highlighter-rouge&quot;&gt;cdn.bookstore.pingpublications.com&lt;/code&gt;.  From there, Amazon Route53 failover properly handles requests based on whichever Amazon S3 bucket is available.  This automates the CDN failover process.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;Start by creating an Amazon CloudFront Distribution.  The fields we need to set are as follows.&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;&lt;strong&gt;Origin Domain Name&lt;/strong&gt;: This must be set the &lt;em&gt;primary&lt;/em&gt; Amazon S3 bucket (&lt;code class=&quot;highlighter-rouge&quot;&gt;cdn-primary.bookstore.pingpublications.com.s3-us-west-2.amazonaws.com&lt;/code&gt;).&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;Alternate Domain Names (CNAMEs)&lt;/strong&gt;: This should point to the root CDN endpoint (&lt;code class=&quot;highlighter-rouge&quot;&gt;cdn.bookstore.pingpublications.com&lt;/code&gt;).&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Create a Amazon Route53 Health Check to check the health of the &lt;em&gt;primary&lt;/em&gt; Amazon S3 bucket, which is behind the CloudFront endpoint created above.&lt;/p&gt;
+
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;aws route53 create-health-check &lt;span class=&quot;nt&quot;&gt;--caller-reference&lt;/span&gt; BookstoreCloudfront &lt;span class=&quot;nt&quot;&gt;--output&lt;/span&gt; json &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+ &lt;span class=&quot;nt&quot;&gt;--health-check-config&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'{
+     &quot;FullyQualifiedDomainName&quot;: &quot;dqno94z16p2mg.cloudfront.net&quot;,
+     &quot;ResourcePath&quot;: &quot;/static/status.json&quot;,
+     &quot;Type&quot;: &quot;HTTP&quot;
+ }'&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+ &lt;span class=&quot;nt&quot;&gt;--query&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;{Id: HealthCheck.Id}&quot;&lt;/span&gt;
+ &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+     &lt;span class=&quot;s2&quot;&gt;&quot;Id&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;352ef27f-213e-4dae-983e-62fd048ea7be&quot;&lt;/span&gt;
+ &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+
+    &lt;p class=&quot;notice--tip&quot;&gt;&lt;strong&gt;TIP&lt;/strong&gt;: We’ve added a &lt;code class=&quot;highlighter-rouge&quot;&gt;status.json&lt;/code&gt; file to our static asset collection, which we’ll use to confirm the online status of both CDN buckets, as well as determine which bucket is currently serving our content.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Create another Amazon Route53 Health Check to check the status of the &lt;em&gt;secondary&lt;/em&gt; Amazon S3 bucket (&lt;code class=&quot;highlighter-rouge&quot;&gt;cdn.bookstore.pingpublications.com.s3.amazonaws.com&lt;/code&gt;).&lt;/p&gt;
+
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;aws route53 create-health-check &lt;span class=&quot;nt&quot;&gt;--caller-reference&lt;/span&gt; BookstoreS3 &lt;span class=&quot;nt&quot;&gt;--output&lt;/span&gt; json &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+ &lt;span class=&quot;nt&quot;&gt;--health-check-config&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'{
+     &quot;FullyQualifiedDomainName&quot;: &quot;cdn.bookstore.pingpublications.com.s3.amazonaws.com&quot;,
+     &quot;ResourcePath&quot;: &quot;/static/status.json&quot;,
+     &quot;Type&quot;: &quot;HTTP&quot;
+ }'&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+ &lt;span class=&quot;nt&quot;&gt;--query&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;{Id: HealthCheck.Id}&quot;&lt;/span&gt;
+ &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+     &lt;span class=&quot;s2&quot;&gt;&quot;Id&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;e7fce91f-c82a-460f-b247-58c35790e39d&quot;&lt;/span&gt;
+ &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Create a third Amazon Route53 Health Check that combines the two previous health checks.  This combined health check is monitored by Amazon Route53 and automatically triggers failover from the primary to secondary CDN when the check fails.  We need to pass the two health check &lt;code class=&quot;highlighter-rouge&quot;&gt;Ids&lt;/code&gt; created above into this combined health check configuration.&lt;/p&gt;
+
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;aws route53 create-health-check &lt;span class=&quot;nt&quot;&gt;--caller-reference&lt;/span&gt; BookstoreCDN &lt;span class=&quot;nt&quot;&gt;--output&lt;/span&gt; json &lt;span class=&quot;nt&quot;&gt;--health-check-config&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'{
+     &quot;HealthThreshold&quot;: 2,
+     &quot;Type&quot;: &quot;CALCULATED&quot;,
+     &quot;ChildHealthChecks&quot;: [
+         &quot;e7fce91f-c82a-460f-b247-58c35790e39d&quot;,
+         &quot;352ef27f-213e-4dae-983e-62fd048ea7be&quot;
+     ]
+ }'&lt;/span&gt;
+ &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+     &lt;span class=&quot;s2&quot;&gt;&quot;HealthCheck&quot;&lt;/span&gt;: &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+         &lt;span class=&quot;s2&quot;&gt;&quot;HealthCheckConfig&quot;&lt;/span&gt;: &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+             &lt;span class=&quot;s2&quot;&gt;&quot;HealthThreshold&quot;&lt;/span&gt;: 2,
+             &lt;span class=&quot;s2&quot;&gt;&quot;Type&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;CALCULATED&quot;&lt;/span&gt;,
+             &lt;span class=&quot;s2&quot;&gt;&quot;ChildHealthChecks&quot;&lt;/span&gt;: &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;
+                 &lt;span class=&quot;s2&quot;&gt;&quot;352ef27f-213e-4dae-983e-62fd048ea7be&quot;&lt;/span&gt;,
+                 &lt;span class=&quot;s2&quot;&gt;&quot;e7fce91f-c82a-460f-b247-58c35790e39d&quot;&lt;/span&gt;
+             &lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;,
+             &lt;span class=&quot;s2&quot;&gt;&quot;Inverted&quot;&lt;/span&gt;: &lt;span class=&quot;nb&quot;&gt;false&lt;/span&gt;
+         &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;,
+         &lt;span class=&quot;s2&quot;&gt;&quot;CallerReference&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;BookstoreCDN&quot;&lt;/span&gt;,
+         &lt;span class=&quot;s2&quot;&gt;&quot;HealthCheckVersion&quot;&lt;/span&gt;: 1,
+         &lt;span class=&quot;s2&quot;&gt;&quot;Id&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;99d5b3a0-7709-4553-934f-d0ac7bcd2eb3&quot;&lt;/span&gt;
+     &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;,
+ &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Finally, verify all CDN endpoints behave correctly and point to the proper Amazon S3 bucket.&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;p&gt;Start by checking the primary Amazon S3 bucket.&lt;/p&gt;
+
+        &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;curl http://cdn-primary.bookstore.pingpublications.com.s3-us-west-2.amazonaws.com/static/status.json
+  &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;s2&quot;&gt;&quot;online&quot;&lt;/span&gt;: &lt;span class=&quot;nb&quot;&gt;true&lt;/span&gt;,
+      &lt;span class=&quot;s2&quot;&gt;&quot;cdn&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;primary&quot;&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;        &lt;/div&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;The CloudFront endpoint routes to the primary bucket above.&lt;/p&gt;
+
+        &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;curl http://dqno94z16p2mg.cloudfront.net/static/status.json
+  &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;s2&quot;&gt;&quot;online&quot;&lt;/span&gt;: &lt;span class=&quot;nb&quot;&gt;true&lt;/span&gt;,
+      &lt;span class=&quot;s2&quot;&gt;&quot;cdn&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;primary&quot;&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;        &lt;/div&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;The last part of the chain is the primary CDN endpoint, which routes to the CloudFront endpoint, and then onto the primary Amazon S3 bucket itself.&lt;/p&gt;
+
+        &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;curl http://cdn.bookstore.pingpublications.com/static/status.json
+  &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;s2&quot;&gt;&quot;online&quot;&lt;/span&gt;: &lt;span class=&quot;nb&quot;&gt;true&lt;/span&gt;,
+      &lt;span class=&quot;s2&quot;&gt;&quot;cdn&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;primary&quot;&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;        &lt;/div&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;Finally, the secondary Amazon S3 bucket is properly retrieving the secondary static content.&lt;/p&gt;
+
+        &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;curl http://cdn.bookstore.pingpublications.com.s3.amazonaws.com/static/status.json
+  &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;s2&quot;&gt;&quot;online&quot;&lt;/span&gt;: &lt;span class=&quot;nb&quot;&gt;true&lt;/span&gt;,
+      &lt;span class=&quot;s2&quot;&gt;&quot;cdn&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;secondary&quot;&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;        &lt;/div&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;The app is now ready for failure testing.  Here is the updated diagram showing the &lt;strong&gt;Bookstore&lt;/strong&gt; app architecture for &lt;strong&gt;Resiliency Stage 2&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p class=&quot;text-center&quot;&gt;&lt;img alt=&quot;Stage 2 - Architecture&quot; src=&quot;/gremlin-blog-posts/assets/chaos-engineering/chaos-engineering-through-staged-resiliency/stage-2/stage-2-architecture-eeb5feeb193e86e0a7004de150b11cf20e08a802a02a5b1cb1e6172a4b76e5e3.png&quot; class=&quot;align-center&quot; /&gt;
+&lt;em&gt;Bookstore App Architecture&lt;/em&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;perform-critical-dependency-failure-tests-in-non-production-1&quot;&gt;Perform Critical Dependency Failure Tests in Non-Production&lt;/h3&gt;
+
+&lt;h4 id=&quot;database-failure-test&quot;&gt;Database Failure Test&lt;/h4&gt;
+
+&lt;p&gt;With Multi-AZ configured on the Amazon RDS instance we are now ready to perform a failover test for this critical dependency.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;Confirm the status and current Availability Zone of the &lt;code class=&quot;highlighter-rouge&quot;&gt;bookstore-db&lt;/code&gt; instance with the &lt;code class=&quot;highlighter-rouge&quot;&gt;describe-db-instances&lt;/code&gt; CLI command.&lt;/p&gt;
+
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;aws rds describe-db-instances &lt;span class=&quot;nt&quot;&gt;--db-instance-identifier&lt;/span&gt; bookstore-db &lt;span class=&quot;nt&quot;&gt;--output&lt;/span&gt; json &lt;span class=&quot;nt&quot;&gt;--query&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;DBInstances[*].{Id:DBInstanceIdentifier, AZ:AvailabilityZone, SecondaryAZ:SecondaryAvailabilityZone, Endpoint:Endpoint.Address, Status:DBInstanceStatus}&quot;&lt;/span&gt;
+ &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;
+     &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+         &lt;span class=&quot;s2&quot;&gt;&quot;SecondaryAZ&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;us-west-2b&quot;&lt;/span&gt;,
+         &lt;span class=&quot;s2&quot;&gt;&quot;Status&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;available&quot;&lt;/span&gt;, 
+         &lt;span class=&quot;s2&quot;&gt;&quot;AZ&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;us-west-2a&quot;&lt;/span&gt;, 
+         &lt;span class=&quot;s2&quot;&gt;&quot;Id&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;bookstore-db&quot;&lt;/span&gt;, 
+         &lt;span class=&quot;s2&quot;&gt;&quot;Endpoint&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;bookstore-db.cvajeopcjvda.us-west-2.rds.amazonaws.com&quot;&lt;/span&gt;
+     &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+ &lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Perform a manual reboot via &lt;code class=&quot;highlighter-rouge&quot;&gt;reboot-db-instance&lt;/code&gt;.  We’re also &lt;strong&gt;forcing&lt;/strong&gt; a failover with the &lt;code class=&quot;highlighter-rouge&quot;&gt;--force-failover&lt;/code&gt; flag.&lt;/p&gt;
+
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;aws rds reboot-db-instance &lt;span class=&quot;nt&quot;&gt;--db-instance-identifier&lt;/span&gt; bookstore-db &lt;span class=&quot;nt&quot;&gt;--force-failover&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--output&lt;/span&gt; json &lt;span class=&quot;nt&quot;&gt;--query&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;DBInstance.{Id:DBInstanceIdentifier, AZ:AvailabilityZone, SecondaryAZ:SecondaryAvailabilityZone, Endpoint:Endpoint.Address, Status:DBInstanceStatus}&quot;&lt;/span&gt;
+ &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+     &lt;span class=&quot;s2&quot;&gt;&quot;SecondaryAZ&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;us-west-2b&quot;&lt;/span&gt;, 
+     &lt;span class=&quot;s2&quot;&gt;&quot;Status&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;rebooting&quot;&lt;/span&gt;, 
+     &lt;span class=&quot;s2&quot;&gt;&quot;AZ&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;us-west-2a&quot;&lt;/span&gt;, 
+     &lt;span class=&quot;s2&quot;&gt;&quot;Id&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;bookstore-db&quot;&lt;/span&gt;, 
+     &lt;span class=&quot;s2&quot;&gt;&quot;Endpoint&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;bookstore-db.cvajeopcjvda.us-west-2.rds.amazonaws.com&quot;&lt;/span&gt;
+ &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Even though the primary instance is currently &lt;code class=&quot;highlighter-rouge&quot;&gt;Status: rebooting&lt;/code&gt;, both the production and secondary &lt;strong&gt;Bookstore&lt;/strong&gt; environments are able to connect to &lt;code class=&quot;highlighter-rouge&quot;&gt;db.bookstore.pingpublications.com&lt;/code&gt;, which is pointed to the &lt;code class=&quot;highlighter-rouge&quot;&gt;bookstore-db.cvajeopcjvda.us-west-2.rds.amazonaws.com&lt;/code&gt; endpoint.&lt;/p&gt;
+
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;curl bookstore.pingpublications.com/books/ | jq
+ &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;
+     &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+         &lt;span class=&quot;s2&quot;&gt;&quot;url&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;http://bookstore.pingpublications.com/books/1/&quot;&lt;/span&gt;,
+         &lt;span class=&quot;s2&quot;&gt;&quot;authors&quot;&lt;/span&gt;: &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;
+             &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+                 &lt;span class=&quot;s2&quot;&gt;&quot;url&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;http://bookstore.pingpublications.com/authors/1/&quot;&lt;/span&gt;,
+                 &lt;span class=&quot;s2&quot;&gt;&quot;birth_date&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;1947-09-21&quot;&lt;/span&gt;,
+                 &lt;span class=&quot;s2&quot;&gt;&quot;first_name&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;Stephen&quot;&lt;/span&gt;,
+                 &lt;span class=&quot;s2&quot;&gt;&quot;last_name&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;King&quot;&lt;/span&gt;
+             &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+         &lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;,
+         &lt;span class=&quot;s2&quot;&gt;&quot;publication_date&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;1978-09-01&quot;&lt;/span&gt;,
+         &lt;span class=&quot;s2&quot;&gt;&quot;title&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;The Stand&quot;&lt;/span&gt;
+     &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+ &lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;curl ec2-54-191-29-110.us-west-2.compute.amazonaws.com/books/ | jq
+ &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;
+     &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+         &lt;span class=&quot;s2&quot;&gt;&quot;url&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;http://ec2-54-191-29-110.us-west-2.compute.amazonaws.com/books/1/&quot;&lt;/span&gt;,
+         &lt;span class=&quot;s2&quot;&gt;&quot;authors&quot;&lt;/span&gt;: &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;
+             &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+                 &lt;span class=&quot;s2&quot;&gt;&quot;url&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;http://ec2-54-191-29-110.us-west-2.compute.amazonaws.com/authors/1/&quot;&lt;/span&gt;,
+                 &lt;span class=&quot;s2&quot;&gt;&quot;birth_date&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;1947-09-21&quot;&lt;/span&gt;,
+                 &lt;span class=&quot;s2&quot;&gt;&quot;first_name&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;Stephen&quot;&lt;/span&gt;,
+                 &lt;span class=&quot;s2&quot;&gt;&quot;last_name&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;King&quot;&lt;/span&gt;
+             &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+         &lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;,
+         &lt;span class=&quot;s2&quot;&gt;&quot;publication_date&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;1978-09-01&quot;&lt;/span&gt;,
+         &lt;span class=&quot;s2&quot;&gt;&quot;title&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;The Stand&quot;&lt;/span&gt;
+     &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+ &lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+
+    &lt;p&gt;Amazon RDS Multi-AZ &lt;a href=&quot;https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_RebootInstance.html&quot;&gt;automatically&lt;/a&gt; switches to the secondary replica on the other Availability Zone and reroutes the endpoint for us.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Once the reboot completes, query the &lt;code class=&quot;highlighter-rouge&quot;&gt;bookstore-db&lt;/code&gt; instance to confirm that it has swapped the active instance to the other Availability Zone.&lt;/p&gt;
+
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;aws rds describe-db-instances &lt;span class=&quot;nt&quot;&gt;--db-instance-identifier&lt;/span&gt; bookstore-db &lt;span class=&quot;nt&quot;&gt;--output&lt;/span&gt; json &lt;span class=&quot;nt&quot;&gt;--query&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;DBInstances[*].{Id:DBInstanceIdentifier, AZ:AvailabilityZone, SecondaryAZ:SecondaryAvailabilityZone, Endpoint:Endpoint.Address, Status:DBInstanceStatus}&quot;&lt;/span&gt;
+ &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;
+     &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+         &lt;span class=&quot;s2&quot;&gt;&quot;SecondaryAZ&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;us-west-2a&quot;&lt;/span&gt;, 
+         &lt;span class=&quot;s2&quot;&gt;&quot;Status&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;available&quot;&lt;/span&gt;, 
+         &lt;span class=&quot;s2&quot;&gt;&quot;AZ&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;us-west-2b&quot;&lt;/span&gt;, 
+         &lt;span class=&quot;s2&quot;&gt;&quot;Id&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;bookstore-db&quot;&lt;/span&gt;, 
+         &lt;span class=&quot;s2&quot;&gt;&quot;Endpoint&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;bookstore-db.cvajeopcjvda.us-west-2.rds.amazonaws.com&quot;&lt;/span&gt;
+     &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+ &lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Manually confirm the &lt;strong&gt;Bookstore&lt;/strong&gt; API remains connected to the &lt;code class=&quot;highlighter-rouge&quot;&gt;bookstore-db&lt;/code&gt; instance replica.&lt;/p&gt;
+
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;curl bookstore.pingpublications.com/books/ | jq
+ &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;
+     &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+         &lt;span class=&quot;s2&quot;&gt;&quot;url&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;http://bookstore.pingpublications.com/books/1/&quot;&lt;/span&gt;,
+         &lt;span class=&quot;s2&quot;&gt;&quot;authors&quot;&lt;/span&gt;: &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;
+             &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+                 &lt;span class=&quot;s2&quot;&gt;&quot;url&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;http://bookstore.pingpublications.com/authors/1/&quot;&lt;/span&gt;,
+                 &lt;span class=&quot;s2&quot;&gt;&quot;birth_date&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;1947-09-21&quot;&lt;/span&gt;,
+                 &lt;span class=&quot;s2&quot;&gt;&quot;first_name&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;Stephen&quot;&lt;/span&gt;,
+                 &lt;span class=&quot;s2&quot;&gt;&quot;last_name&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;King&quot;&lt;/span&gt;
+             &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+         &lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;,
+         &lt;span class=&quot;s2&quot;&gt;&quot;publication_date&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;1978-09-01&quot;&lt;/span&gt;,
+         &lt;span class=&quot;s2&quot;&gt;&quot;title&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;The Stand&quot;&lt;/span&gt;
+     &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+ &lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h4 id=&quot;cdn-failure-test&quot;&gt;CDN Failure Test&lt;/h4&gt;
+
+&lt;p&gt;This test ensures that the primary CDN endpoint (&lt;code class=&quot;highlighter-rouge&quot;&gt;cdn.bookstore.pingpublications.com&lt;/code&gt;) performs an automatic failover to the secondary Amazon S3 bucket when the Route53 Health Check fails.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;Retrieve appropriate Health Check &lt;code class=&quot;highlighter-rouge&quot;&gt;Ids&lt;/code&gt;.&lt;/p&gt;
+
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;aws route53 list-health-checks &lt;span class=&quot;nt&quot;&gt;--output&lt;/span&gt; json
+ &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+     &lt;span class=&quot;s2&quot;&gt;&quot;HealthChecks&quot;&lt;/span&gt;: &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;
+         &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+             &lt;span class=&quot;s2&quot;&gt;&quot;HealthCheckConfig&quot;&lt;/span&gt;: &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+                 &lt;span class=&quot;s2&quot;&gt;&quot;HealthThreshold&quot;&lt;/span&gt;: 2, 
+                 &lt;span class=&quot;s2&quot;&gt;&quot;Type&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;CALCULATED&quot;&lt;/span&gt;, 
+                 &lt;span class=&quot;s2&quot;&gt;&quot;ChildHealthChecks&quot;&lt;/span&gt;: &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;
+                     &lt;span class=&quot;s2&quot;&gt;&quot;57a1606e-df1e-43d0-b6d5-e04bf3d789ff&quot;&lt;/span&gt;, 
+                     &lt;span class=&quot;s2&quot;&gt;&quot;e4a34329-26c3-4dbe-bec7-4afba94bd487&quot;&lt;/span&gt;
+                 &lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;, 
+                 &lt;span class=&quot;s2&quot;&gt;&quot;Inverted&quot;&lt;/span&gt;: &lt;span class=&quot;nb&quot;&gt;false&lt;/span&gt;
+             &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;, 
+             &lt;span class=&quot;s2&quot;&gt;&quot;HealthCheckVersion&quot;&lt;/span&gt;: 2, 
+             &lt;span class=&quot;s2&quot;&gt;&quot;Id&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;1b01881d-a658-4d8e-86c9-8d5329d0bfcc&quot;&lt;/span&gt;
+         &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+     &lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
+ &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Invert the Health Check, so that a normally healthy value is now considered unhealthy.&lt;/p&gt;
+
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;aws route53 update-health-check &lt;span class=&quot;nt&quot;&gt;--output&lt;/span&gt; json &lt;span class=&quot;nt&quot;&gt;--health-check-id&lt;/span&gt; 1b01881d-a658-4d8e-86c9-8d5329d0bfcc &lt;span class=&quot;nt&quot;&gt;--inverted&lt;/span&gt;
+ &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+     &lt;span class=&quot;s2&quot;&gt;&quot;HealthCheck&quot;&lt;/span&gt;: &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+         &lt;span class=&quot;s2&quot;&gt;&quot;HealthCheckConfig&quot;&lt;/span&gt;: &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+             &lt;span class=&quot;s2&quot;&gt;&quot;HealthThreshold&quot;&lt;/span&gt;: 2, 
+             &lt;span class=&quot;s2&quot;&gt;&quot;Type&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;CALCULATED&quot;&lt;/span&gt;, 
+             &lt;span class=&quot;s2&quot;&gt;&quot;ChildHealthChecks&quot;&lt;/span&gt;: &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;
+                 &lt;span class=&quot;s2&quot;&gt;&quot;57a1606e-df1e-43d0-b6d5-e04bf3d789ff&quot;&lt;/span&gt;, 
+                 &lt;span class=&quot;s2&quot;&gt;&quot;e4a34329-26c3-4dbe-bec7-4afba94bd487&quot;&lt;/span&gt;
+             &lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;, 
+             &lt;span class=&quot;s2&quot;&gt;&quot;Inverted&quot;&lt;/span&gt;: &lt;span class=&quot;nb&quot;&gt;true&lt;/span&gt;
+         &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;, 
+         &lt;span class=&quot;s2&quot;&gt;&quot;HealthCheckVersion&quot;&lt;/span&gt;: 3, 
+         &lt;span class=&quot;s2&quot;&gt;&quot;Id&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;1b01881d-a658-4d8e-86c9-8d5329d0bfcc&quot;&lt;/span&gt;
+     &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+ &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;After a moment for the Health Check status to update, check the primary CDN endpoint to ensure that it has automatically failed over to the secondary CDN Amazon S3 bucket.&lt;/p&gt;
+
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;curl http://cdn.bookstore.pingpublications.com/static/status.json
+ &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+     &lt;span class=&quot;s2&quot;&gt;&quot;online&quot;&lt;/span&gt;: &lt;span class=&quot;nb&quot;&gt;true&lt;/span&gt;,
+     &lt;span class=&quot;s2&quot;&gt;&quot;cdn&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;secondary&quot;&lt;/span&gt;
+ &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Revert the previous Health Check inversion.&lt;/p&gt;
+
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;aws route53 update-health-check &lt;span class=&quot;nt&quot;&gt;--output&lt;/span&gt; json &lt;span class=&quot;nt&quot;&gt;--health-check-id&lt;/span&gt; 1b01881d-a658-4d8e-86c9-8d5329d0bfcc &lt;span class=&quot;nt&quot;&gt;--no-inverted&lt;/span&gt;
+ &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+     &lt;span class=&quot;s2&quot;&gt;&quot;HealthCheck&quot;&lt;/span&gt;: &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+         &lt;span class=&quot;s2&quot;&gt;&quot;HealthCheckConfig&quot;&lt;/span&gt;: &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+             &lt;span class=&quot;s2&quot;&gt;&quot;HealthThreshold&quot;&lt;/span&gt;: 2, 
+             &lt;span class=&quot;s2&quot;&gt;&quot;Type&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;CALCULATED&quot;&lt;/span&gt;, 
+             &lt;span class=&quot;s2&quot;&gt;&quot;ChildHealthChecks&quot;&lt;/span&gt;: &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;
+                 &lt;span class=&quot;s2&quot;&gt;&quot;57a1606e-df1e-43d0-b6d5-e04bf3d789ff&quot;&lt;/span&gt;, 
+                 &lt;span class=&quot;s2&quot;&gt;&quot;e4a34329-26c3-4dbe-bec7-4afba94bd487&quot;&lt;/span&gt;
+             &lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;, 
+             &lt;span class=&quot;s2&quot;&gt;&quot;Inverted&quot;&lt;/span&gt;: &lt;span class=&quot;nb&quot;&gt;false&lt;/span&gt;
+         &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;, 
+         &lt;span class=&quot;s2&quot;&gt;&quot;HealthCheckVersion&quot;&lt;/span&gt;: 4, 
+         &lt;span class=&quot;s2&quot;&gt;&quot;Id&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;1b01881d-a658-4d8e-86c9-8d5329d0bfcc&quot;&lt;/span&gt;
+     &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+ &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Verify that the primary CDN endpoint points back to the primary Amazon S3 bucket.&lt;/p&gt;
+
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;curl http://cdn.bookstore.pingpublications.com/static/status.json
+ &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+     &lt;span class=&quot;s2&quot;&gt;&quot;online&quot;&lt;/span&gt;: &lt;span class=&quot;nb&quot;&gt;true&lt;/span&gt;,
+     &lt;span class=&quot;s2&quot;&gt;&quot;cdn&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;primary&quot;&lt;/span&gt;
+ &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;publish-test-results-1&quot;&gt;Publish Test Results&lt;/h3&gt;
+
+&lt;p&gt;Now that both critical dependencies have been tested we’ll publish the results to the entire team, so everyone can keep tabs on the resiliency progress of the project.&lt;/p&gt;
+
+&lt;h2 id=&quot;resiliency-stage-2-completion&quot;&gt;Resiliency Stage 2 Completion&lt;/h2&gt;
 
 &lt;p&gt;Once all critical dependencies have been failure tested and those test results have been disseminated throughout the team then &lt;strong&gt;Resiliency Stage 2&lt;/strong&gt; is complete!  Your system should now have well-defined recovery playbooks and been manually tested for both failover and critical dependency failures.  In &lt;a href=&quot;https://www.gremlin.com/blog/chaos-engineering-through-staged-resiliency-stage-3&quot;&gt;Chaos Engineering Through Staged Resiliency - Stage 3&lt;/a&gt; we’ll look at the transition into automating some of these tests and performing them at regular intervals.&lt;/p&gt;</content><author><name>Gabe Wyatt</name></author><category term="resiliency" /><category term="staging" /></entry><entry><title type="html">Chaos Engineering Through Staged Resiliency - Stage 1</title><link href="http://localhost:4000/gremlin-blog-posts/chaos-engineering/chaos-engineering-through-staged-resiliency-stage-1/" rel="alternate" type="text/html" title="Chaos Engineering Through Staged Resiliency - Stage 1" /><published>2018-10-11T00:00:00-07:00</published><updated>2018-10-11T00:00:00-07:00</updated><id>http://localhost:4000/gremlin-blog-posts/chaos-engineering/chaos-engineering-through-staged-resiliency-stage-1</id><content type="html" xml:base="http://localhost:4000/gremlin-blog-posts/chaos-engineering/chaos-engineering-through-staged-resiliency-stage-1/">&lt;p&gt;In spite of what the name may suggest, Chaos Engineering is a &lt;em&gt;disciplined&lt;/em&gt; approach of identifying potential failures before they become outages.  Ultimately, the goal of Chaos Engineering is to create more stable and &lt;strong&gt;resilient&lt;/strong&gt; systems.  There is some disagreement in the community about proper terminology, but regardless of which side of the &lt;a href=&quot;https://medium.com/@jpaulreed/chaos-engineered-or-otherwise-is-not-enough-ad5792309ecf&quot;&gt;Chaos Engineering&lt;/a&gt; vs &lt;a href=&quot;https://www.linkedin.com/pulse/would-chaos-any-othername-casey-rosenthal/&quot;&gt;Resilience Engineering&lt;/a&gt; debate you come down on, most engineers probably agree that proper implementation is more important than naming semantics.&lt;/p&gt;
 
 &lt;p&gt;Creating resilient software is a fundamental necessity within modern cloud applications and architectures.  As systems become more distributed the potential for unplanned outages and unexpected failure significantly increases.  Thankfully, Chaos and Resilience Engineering techniques are quickly gaining traction within the community.  &lt;a href=&quot;https://coggle.it/diagram/WiKceGDAwgABrmyv/t/chaos-engineering-companies%2C-people%2C-tools-practices&quot;&gt;Many organizations&lt;/a&gt; – both big and small – have embraced Chaos Engineering over the last few years.  In his fascinating &lt;a href=&quot;https://chaosconf.splashthat.com/&quot;&gt;ChaosConf 2018&lt;/a&gt; talk titled &lt;a href=&quot;https://www.youtube.com/watch?v=4Gy_5EQMrB4&quot;&gt;&lt;em&gt;Practicing Chaos Engineering at Walmart&lt;/em&gt;&lt;/a&gt;, Walmart’s Director of Engineering Vilas Veeraraghavan outlines how he and the hundreds of engineering teams at Walmart have implemented Resilience Engineering.  By creating a robust series of “levels” or “stages” that each engineering team can work through, Walmart is able to progressively improve system resiliency while dramatically reducing support costs.&lt;/p&gt;
 
-&lt;p&gt;This blog series expands on Vilas’ and Walmart’s techniques by diving deep into the &lt;strong&gt;five&lt;/strong&gt; &lt;strong&gt;Stages of Resiliency&lt;/strong&gt;.  Each post examines the necessary components of a stage, describes how those components are evaluated and assembled, and outlines the step-by-step process necessary to move from one stage to the next.  With a bit of adjustment for your own organizational needs, you and your team can implement similar practices to quickly add Chaos Engineering to your own systems with relative ease.  After climbing through all five stages your system and its deployment will be almost entirely automated and will feature significant resiliency testing and robust disaster recovery failover.&lt;/p&gt;
+&lt;p&gt;This blog series expands on Vilas’ and Walmart’s techniques by diving deep into the five &lt;strong&gt;Stages of Resiliency&lt;/strong&gt;.  Each post examines the necessary components of a stage, describes how those components are evaluated and assembled, and outlines the step-by-step process necessary to move from one stage to the next.  This series also digs into the specific implementation of each stage by going through the entire process with a real-world (albeit simple) API application hosted on AWS.  We’ll go through everything from defining and executing disaster recovery playbook scenarios to improving system architecture and reducing RTO, RPO, and applicable support costs for this example app.&lt;/p&gt;
+
+&lt;p&gt;With a bit of adjustment for your own organizational needs, you and your team can implement similar practices to quickly add Chaos Engineering to your own systems with relative ease.  After climbing through all five stages your system and its deployment will be almost entirely automated and will feature significant resiliency testing and robust disaster recovery failover.&lt;/p&gt;
 
 &lt;p class=&quot;notice--tip&quot;&gt;&lt;strong&gt;NOTE&lt;/strong&gt;: The remainder of this article will use the term &lt;code class=&quot;highlighter-rouge&quot;&gt;team&lt;/code&gt; to indicate a singular group that is responsible for an application that is progressing through the resiliency stages.&lt;/p&gt;
 
@@ -378,14 +826,573 @@ Run at least one resiliency exercise (failure injection) in production environme
 
 &lt;p class=&quot;notice--warning&quot;&gt;&lt;strong&gt;WARNING&lt;/strong&gt;: If an action or step is not &lt;em&gt;explicitly&lt;/em&gt; documented within a playbook then it should be ignored.  If the exercise fails or cannot be completed this likely indicates that the playbook needs to be updated.&lt;/p&gt;
 
-&lt;h2 id=&quot;implementation-example&quot;&gt;Implementation Example&lt;/h2&gt;
+&lt;h2 id=&quot;resiliency-stage-1-implementation-example&quot;&gt;Resiliency Stage 1: Implementation Example&lt;/h2&gt;
 
-&lt;p class=&quot;text-center&quot;&gt;&lt;img alt=&quot;Stage 1 - Initial&quot; src=&quot;/gremlin-blog-posts/assets/chaos-engineering/chaos-engineering-through-staged-resiliency/stage-1/stage-1-initial-de00e7a6d1c134a8bdc5f33820dce31f80b28f552714099309f43c9d688ed56b.png&quot; class=&quot;align-center&quot; /&gt;
-&lt;em&gt;Initial System Configuration&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Throughout this series we’ll take a simple yet real-world application through the entire staging process to illustrate how a team progresses through all five resiliency stages.  While every application and system architecture is unique, this example illustrates the basics of implementing every step within a stage, to provide you with a jumping off point for staged resiliency within your own system.&lt;/p&gt;
 
-&lt;p&gt;(TODO)&lt;/p&gt;
+&lt;p&gt;The &lt;strong&gt;Bookstore&lt;/strong&gt; example application is a publicly accessible API for a bookstore.  The API includes two primary endpoints: &lt;code class=&quot;highlighter-rouge&quot;&gt;/authors/&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;/books/&lt;/code&gt;, which can be used to add, update, or remove &lt;strong&gt;Authors&lt;/strong&gt; and &lt;strong&gt;Books&lt;/strong&gt;, respectively.&lt;/p&gt;
 
-&lt;h2 id=&quot;stage-1-completion&quot;&gt;Stage 1 Completion&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Bookstore’s&lt;/strong&gt; architecture consists of three components, all housed within Amazon Web Services.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;API&lt;/strong&gt;: The API is created with Django and is hosted on an Amazon EC2 instance running Nginx.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Database&lt;/strong&gt;: A PostgreSQL database handles all data and uses Amazon RDS.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;CDN&lt;/strong&gt;: All static content is pushed to and served from an Amazon S3 bucket.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p class=&quot;text-center&quot;&gt;&lt;img alt=&quot;Stage 1 - Initial&quot; src=&quot;/gremlin-blog-posts/assets/chaos-engineering/chaos-engineering-through-staged-resiliency/stage-1/stage-1-architecture-09757f8939b8928a7e67174b1608765bba3acc766990411ec05e28a66d641805.png&quot; class=&quot;align-center&quot; /&gt;
+&lt;em&gt;Initial System Architecture&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;The web API endpoint is online at &lt;a href=&quot;http://bookstore.pingpublications.com&quot;&gt;http://bookstore.pingpublications.com&lt;/a&gt;.  The web API, database, and CDN endpoints are DNS-routed via Amazon Route 53 to the underlying Amazon EC2, RDS, and Amazon S3 instances/buckets, respectively.&lt;/p&gt;
+
+&lt;p&gt;Here’s a simple request to the &lt;code class=&quot;highlighter-rouge&quot;&gt;/books/&lt;/code&gt; API endpoint.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;curl http://bookstore.pingpublications.com/books/ | jq
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Here’s the returned output.&lt;/p&gt;
+
+&lt;div class=&quot;language-json highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;url&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;http://bookstore.pingpublications.com/books/1/&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;authors&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;url&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;http://bookstore.pingpublications.com/authors/1/&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;birth_date&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;1947-09-21&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;first_name&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Stephen&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;last_name&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;King&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;publication_date&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;1978-09-01&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;title&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;The Stand&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p class=&quot;notice--warning&quot;&gt;&lt;strong&gt;WARNING&lt;/strong&gt;: The initial design and architecture for the &lt;strong&gt;Bookstore&lt;/strong&gt; sample application is &lt;em&gt;intentionally&lt;/em&gt; less resilient than a full production-ready system.  This leaves room for improvement as we progress through the resiliency stages.&lt;/p&gt;
+
+&lt;h3 id=&quot;prerequisites-1&quot;&gt;Prerequisites&lt;/h3&gt;
+
+&lt;h4 id=&quot;0-define-system-architecture&quot;&gt;0. Define System Architecture&lt;/h4&gt;
+
+&lt;p&gt;It may be useful to take a moment to define the basic components of the system, which can then be referenced throughout your playbooks.  Below are the initial services for the &lt;strong&gt;Bookstore&lt;/strong&gt; app.&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Service&lt;/th&gt;
+      &lt;th&gt;Purpose&lt;/th&gt;
+      &lt;th&gt;Supports&lt;/th&gt;
+      &lt;th&gt;Platform&lt;/th&gt;
+      &lt;th&gt;Technologies&lt;/th&gt;
+      &lt;th&gt;Identifier&lt;/th&gt;
+      &lt;th&gt;AZ&lt;/th&gt;
+      &lt;th&gt;VPC&lt;/th&gt;
+      &lt;th&gt;Subnet&lt;/th&gt;
+      &lt;th&gt;Endpoint&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;API&lt;/td&gt;
+      &lt;td&gt;Bookstore API&lt;/td&gt;
+      &lt;td&gt;N/A&lt;/td&gt;
+      &lt;td&gt;Amazon EC2&lt;/td&gt;
+      &lt;td&gt;Django, Nginx&lt;/td&gt;
+      &lt;td&gt;bookstore-api&lt;/td&gt;
+      &lt;td&gt;us-west-2a&lt;/td&gt;
+      &lt;td&gt;bookstore-vpc&lt;/td&gt;
+      &lt;td&gt;bookstore-subnet-2a&lt;/td&gt;
+      &lt;td&gt;bookstore.pingpublications.com&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Database&lt;/td&gt;
+      &lt;td&gt;Application data&lt;/td&gt;
+      &lt;td&gt;Bookstore API&lt;/td&gt;
+      &lt;td&gt;Amazon RDS&lt;/td&gt;
+      &lt;td&gt;PostgreSQL 10.4&lt;/td&gt;
+      &lt;td&gt;bookstore-db&lt;/td&gt;
+      &lt;td&gt;us-west-2a&lt;/td&gt;
+      &lt;td&gt;bookstore-vpc&lt;/td&gt;
+      &lt;td&gt;bookstore-subnet-2a&lt;/td&gt;
+      &lt;td&gt;db.bookstore.pingpublications.com&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;CDN&lt;/td&gt;
+      &lt;td&gt;Static assets&lt;/td&gt;
+      &lt;td&gt;Bookstore API&lt;/td&gt;
+      &lt;td&gt;Amazon S3&lt;/td&gt;
+      &lt;td&gt;Amazon S3&lt;/td&gt;
+      &lt;td&gt;cdn.bookstore.pingpublications.com&lt;/td&gt;
+      &lt;td&gt;N/A&lt;/td&gt;
+      &lt;td&gt;N/A&lt;/td&gt;
+      &lt;td&gt;N/A&lt;/td&gt;
+      &lt;td&gt;cdn.bookstore.pingpublications.com&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h4 id=&quot;1-define-the-critical-dependencies-1&quot;&gt;1. Define the Critical Dependencies&lt;/h4&gt;
+
+&lt;p&gt;Defining the critical dependencies at this early stage is pretty simple: &lt;em&gt;Everything is critical&lt;/em&gt;.&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Dependency&lt;/th&gt;
+      &lt;th&gt;Criticality Period&lt;/th&gt;
+      &lt;th&gt;Manual Workaround&lt;/th&gt;
+      &lt;th&gt;RTO&lt;/th&gt;
+      &lt;th&gt;RPO&lt;/th&gt;
+      &lt;th&gt;Child Dependencies&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;API&lt;/td&gt;
+      &lt;td&gt;Always&lt;/td&gt;
+      &lt;td&gt;Manual Amazon EC2 Instance Restart&lt;/td&gt;
+      &lt;td&gt;12&lt;/td&gt;
+      &lt;td&gt;24&lt;/td&gt;
+      &lt;td&gt;Database, CDN&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Database&lt;/td&gt;
+      &lt;td&gt;Always&lt;/td&gt;
+      &lt;td&gt;Manual Amazon RDS Instance Restart&lt;/td&gt;
+      &lt;td&gt;12&lt;/td&gt;
+      &lt;td&gt;24&lt;/td&gt;
+      &lt;td&gt;N/A&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;CDN&lt;/td&gt;
+      &lt;td&gt;Always&lt;/td&gt;
+      &lt;td&gt;Manual Amazon S3 Bucket Verification&lt;/td&gt;
+      &lt;td&gt;24&lt;/td&gt;
+      &lt;td&gt;24&lt;/td&gt;
+      &lt;td&gt;N/A&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;A &lt;strong&gt;criticality period&lt;/strong&gt; is useful for dependencies that are only considered “critical” during a specific period of time.  For example, a database backup service that runs at 2:00 AM PST every night may have a criticality period of &lt;code class=&quot;highlighter-rouge&quot;&gt;2:00 AM - 3:00 AM PST&lt;/code&gt;.  This is also a good time to evaluate initial acceptable RTO and RPO values.  These values will decrease over time as resiliency improves, but setting a baseline goal provides a target to work toward.&lt;/p&gt;
+
+&lt;h4 id=&quot;2-define-the-non-critical-dependencies-1&quot;&gt;2. Define the Non-Critical Dependencies&lt;/h4&gt;
+
+&lt;p&gt;The &lt;strong&gt;Bookstore&lt;/strong&gt; app is so simple that it doesn’t have any non-critical dependencies – if a service fails, the entire application fails with it.&lt;/p&gt;
+
+&lt;h4 id=&quot;3-create-a-disaster-recovery-failover-playbook-1&quot;&gt;3. Create a Disaster Recovery Failover Playbook&lt;/h4&gt;
+
+&lt;p&gt;The first part of a disaster recovery failover playbook should contain contact information for all relevant team members, including the services those members are related to and their availability.&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Team Member&lt;/th&gt;
+      &lt;th&gt;Position&lt;/th&gt;
+      &lt;th&gt;Relevant Services&lt;/th&gt;
+      &lt;th&gt;Email&lt;/th&gt;
+      &lt;th&gt;Phone&lt;/th&gt;
+      &lt;th&gt;Availability&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Alice&lt;/td&gt;
+      &lt;td&gt;Director of Technology&lt;/td&gt;
+      &lt;td&gt;ALL&lt;/td&gt;
+      &lt;td&gt;alice@example.com&lt;/td&gt;
+      &lt;td&gt;555-555-5550&lt;/td&gt;
+      &lt;td&gt;9 - 5, M - F&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Bob&lt;/td&gt;
+      &lt;td&gt;Lead Developer, Bookstore API&lt;/td&gt;
+      &lt;td&gt;Bookstore API&lt;/td&gt;
+      &lt;td&gt;bob@example.com&lt;/td&gt;
+      &lt;td&gt;555-555-5551&lt;/td&gt;
+      &lt;td&gt;9 - 5, M - F; 10 - 2, S &amp;amp; S&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Christina&lt;/td&gt;
+      &lt;td&gt;Site Reliability Engineer&lt;/td&gt;
+      &lt;td&gt;ALL&lt;/td&gt;
+      &lt;td&gt;christina@example.com&lt;/td&gt;
+      &lt;td&gt;555-555-5552&lt;/td&gt;
+      &lt;td&gt;On-call&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;To define the proper notification procedures it may help to add an organizational chart to the playbook.&lt;/p&gt;
+
+&lt;p class=&quot;text-center&quot;&gt;&lt;img alt=&quot;Stage 1 - Org Chart&quot; src=&quot;/gremlin-blog-posts/assets/chaos-engineering/chaos-engineering-through-staged-resiliency/stage-1/stage-1-org-chart-ee71101491122a21a4ce29b88a4f97826e3805783c96e573e16ebe017595c2f6.png&quot; class=&quot;align-center&quot; /&gt;
+&lt;em&gt;Organizational Chart&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;This can be used in conjunction with the contact information table to determine which team members should be contacted – and in what priority – when a given service fails.&lt;/p&gt;
+
+&lt;p&gt;The final part of the disaster recovery failover playbook is to explicitly document the step-by-step procedures for every failover scenario.  For the &lt;strong&gt;Bookstore&lt;/strong&gt; application we’ll just provide a single failover scenario plan for when the database fails, but this can be expanded as necessary for all other failover scenarios.&lt;/p&gt;
+
+&lt;h5 id=&quot;scenario-bookstore-api-failure&quot;&gt;Scenario: Bookstore API Failure&lt;/h5&gt;
+
+&lt;p&gt;The current architecture of the &lt;strong&gt;Bookstore&lt;/strong&gt; app is limited to a manual &lt;em&gt;Backup &amp;amp; Restore&lt;/em&gt; disaster recovery strategy.&lt;/p&gt;
+
+&lt;h6 id=&quot;disaster-recovery-leads&quot;&gt;Disaster Recovery Leads&lt;/h6&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Primary: Bob, Lead Developer, Bookstore API&lt;/li&gt;
+  &lt;li&gt;Secondary: Alice, Director of Technology&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h6 id=&quot;severity&quot;&gt;Severity&lt;/h6&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Critical&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p class=&quot;notice--tip&quot;&gt;&lt;strong&gt;PURPOSE&lt;/strong&gt;: The severity level of this particular failover.  Severity should be a general indicator of acceptable RTO/RPO metrics, as well as how critically dependent the service is.&lt;/p&gt;
+
+&lt;h6 id=&quot;recovery-procedure-overview&quot;&gt;Recovery Procedure Overview&lt;/h6&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Manually verify if the API server has failed, or if the server is available but the Django API app failed.
+    &lt;ul&gt;
+      &lt;li&gt;If server failure: Manually restart API server.&lt;/li&gt;
+      &lt;li&gt;If Django API app failure: Manually restart Django API app.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;If neither restart solution works, propagate replacement server using prepared backup Amazon Machine Image (AMI).&lt;/li&gt;
+  &lt;li&gt;Verify backup instance is functional.&lt;/li&gt;
+  &lt;li&gt;Update DNS routing.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h6 id=&quot;basic-assumptions&quot;&gt;Basic Assumptions&lt;/h6&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Amazon S3, Amazon RDS, Amazon Route 53, and Amazon EC2 are all online and functional.&lt;/li&gt;
+  &lt;li&gt;Frequent AMI backups are generated for application instance.&lt;/li&gt;
+  &lt;li&gt;Application code can be restored from code repository with minimal manual effort.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p class=&quot;notice--tip&quot;&gt;&lt;strong&gt;PURPOSE&lt;/strong&gt;: Indicates the basic assumptions that can be made during the recovery process.  Assumptions are typically factors outside of your control, such as third-party vendor availability.&lt;/p&gt;
+
+&lt;h6 id=&quot;recovery-time-objective&quot;&gt;Recovery Time Objective&lt;/h6&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;12 Hours&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h6 id=&quot;recovery-point-objective&quot;&gt;Recovery Point Objective&lt;/h6&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;24 Hours&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h6 id=&quot;recovery-platform&quot;&gt;Recovery Platform&lt;/h6&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Amazon EC2 &lt;code class=&quot;highlighter-rouge&quot;&gt;t2.micro&lt;/code&gt; instance on &lt;code class=&quot;highlighter-rouge&quot;&gt;us-west-2a&lt;/code&gt; Availability Zone with Nginx, Python, and Django &lt;strong&gt;Bookstore&lt;/strong&gt; application configured and installed from latest release.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p class=&quot;notice--tip&quot;&gt;&lt;strong&gt;PURPOSE&lt;/strong&gt;: Indicate the specific technologies, platforms, and services that are necessary to complete the recovery procedure.&lt;/p&gt;
+
+&lt;h6 id=&quot;recovery-procedure&quot;&gt;Recovery Procedure&lt;/h6&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;Manually verify the &lt;code class=&quot;highlighter-rouge&quot;&gt;bookstore-api&lt;/code&gt; instance availability on Amazon EC2.&lt;/p&gt;
+
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;curl http://bookstore.pingpublications.com
+ curl: &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;7&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; Failed to connect to bookstore.pingpublications.com port 80: Connection refused
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;p&gt;If &lt;code class=&quot;highlighter-rouge&quot;&gt;bookstore-api&lt;/code&gt; instance is active but &lt;strong&gt;Bookstore&lt;/strong&gt; Django application is failing then manually restart app from terminal.&lt;/p&gt;
+
+        &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl restart gunicorn
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;        &lt;/div&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;If &lt;strong&gt;Bookstore&lt;/strong&gt; Django application remains offline then manually restart instance and recheck application availability.&lt;/p&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;If &lt;code class=&quot;highlighter-rouge&quot;&gt;bookstore-api&lt;/code&gt; EC2 instance has completely failed and must be replaced then propagate a new Amazon EC2 instance from the &lt;code class=&quot;highlighter-rouge&quot;&gt;bookstore-api-ec2-image&lt;/code&gt; AMI backup.&lt;/p&gt;
+
+    &lt;p&gt;Use the pre-defined &lt;code class=&quot;highlighter-rouge&quot;&gt;bookstore-api-ec2&lt;/code&gt; launch template.&lt;/p&gt;
+
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;aws ec2 run-instances &lt;span class=&quot;nt&quot;&gt;--launch-template&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;LaunchTemplateName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;bookstore-api-ec2
+ 532151327118   r-0e57eca4a2e78d479
+ ...
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+
+    &lt;p&gt;Default values can be overriden as seen below.&lt;/p&gt;
+
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; aws ec2 run-instances &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+     &lt;span class=&quot;nt&quot;&gt;--image-id&lt;/span&gt; ami-087ff330c90e99ac5 &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+     &lt;span class=&quot;nt&quot;&gt;--count&lt;/span&gt; 1 &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+     &lt;span class=&quot;nt&quot;&gt;--instance-type&lt;/span&gt; t2.micro &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+     &lt;span class=&quot;nt&quot;&gt;--key-name&lt;/span&gt; gabe-ping-pub &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+     &lt;span class=&quot;nt&quot;&gt;--security-group-ids&lt;/span&gt; sg-25268a50 sg-0f818c22884a88694 &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+     &lt;span class=&quot;nt&quot;&gt;--subnet-id&lt;/span&gt; subnet-47ebaf0c
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Confirm the instance has been launched and retrieve the public DNS and IPv4 address.&lt;/p&gt;
+
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;aws ec2 describe-instances &lt;span class=&quot;nt&quot;&gt;--filters&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Name=image-id,Values=ami-087ff330c90e99ac5,Name=instance-state-code,Values=16&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--query&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Reservations[*].Instances[*].[LaunchTime,PublicDnsName,PublicIpAddress]&quot;&lt;/span&gt;
+ 2018-11-09T04:37:32.000Z	ec2-54-188-3-235.us-west-2.compute.amazonaws.com	54.188.3.235
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+
+    &lt;p class=&quot;notice--tip&quot;&gt;&lt;strong&gt;NOTE&lt;/strong&gt;: The &lt;code class=&quot;highlighter-rouge&quot;&gt;filters&lt;/code&gt; used in the command above searched for &lt;strong&gt;Running&lt;/strong&gt; instances based on the AMI &lt;code class=&quot;highlighter-rouge&quot;&gt;image-id&lt;/code&gt;.  If multiple instances match these filters then the &lt;code class=&quot;highlighter-rouge&quot;&gt;LaunchTime&lt;/code&gt; value retrieved from the query will help determine which instance is the latest launched.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;SSH into new &lt;code class=&quot;highlighter-rouge&quot;&gt;bookstore-api&lt;/code&gt; instance.&lt;/p&gt;
+
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; ssh ec2-54-188-3-235.us-west-2.compute.amazonaws.com
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Pull latest &lt;strong&gt;Bookstore&lt;/strong&gt; application code from repository.&lt;/p&gt;
+
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; ~/apps/bookstore_api &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; git pull
+ Already up to date.
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Restart application via &lt;code class=&quot;highlighter-rouge&quot;&gt;gunicorn&lt;/code&gt;.&lt;/p&gt;
+
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl restart gunicorn
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;On local machine verify backup instance is functional, public IPv4 address is available, and &lt;strong&gt;Bookstore&lt;/strong&gt; app is online.&lt;/p&gt;
+
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;curl ec2-54-188-3-235.us-west-2.compute.amazonaws.com | jq
+ &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+   &lt;span class=&quot;s2&quot;&gt;&quot;authors&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;http://ec2-54-188-3-235.us-west-2.compute.amazonaws.com/authors/&quot;&lt;/span&gt;,
+   &lt;span class=&quot;s2&quot;&gt;&quot;books&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;http://ec2-54-188-3-235.us-west-2.compute.amazonaws.com/books/&quot;&lt;/span&gt;
+ &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Update the Amazon Route 53 DNS &lt;code class=&quot;highlighter-rouge&quot;&gt;A&lt;/code&gt; record to point to the new &lt;code class=&quot;highlighter-rouge&quot;&gt;bookstore-api&lt;/code&gt; EC2 instance IPv4 address.&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Once DNS propagation completes verify the API endpoint is functional.&lt;/p&gt;
+
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;curl bookstore.pingpublications.com | jq
+ &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+   &lt;span class=&quot;s2&quot;&gt;&quot;authors&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;http://bookstore.pingpublications.com/authors/&quot;&lt;/span&gt;,
+   &lt;span class=&quot;s2&quot;&gt;&quot;books&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;http://bookstore.pingpublications.com/books/&quot;&lt;/span&gt;
+ &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h6 id=&quot;test-procedure&quot;&gt;Test Procedure&lt;/h6&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Manually verify that &lt;code class=&quot;highlighter-rouge&quot;&gt;bookstore.pingpublications.com&lt;/code&gt; is accessible and functional.&lt;/li&gt;
+  &lt;li&gt;Confirm that critical dependencies are functional and also connected (database and CDN).&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p class=&quot;notice--tip&quot;&gt;&lt;strong&gt;PURPOSE&lt;/strong&gt;: Indicates the test procedures necessary to ensure the system is functioning normally.&lt;/p&gt;
+
+&lt;h6 id=&quot;resume-procedure&quot;&gt;Resume Procedure&lt;/h6&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Service is now fully restored.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p class=&quot;notice--tip&quot;&gt;&lt;strong&gt;PURPOSE&lt;/strong&gt;: For more complex systems this final procedure should provide steps for resuming normal service.&lt;/p&gt;
+
+&lt;h4 id=&quot;4-create-a-critical-dependency-failover-playbook-1&quot;&gt;4. Create a Critical Dependency Failover Playbook&lt;/h4&gt;
+
+&lt;h5 id=&quot;scenario-database-failure&quot;&gt;Scenario: Database Failure&lt;/h5&gt;
+
+&lt;h6 id=&quot;disaster-recovery-leads-1&quot;&gt;Disaster Recovery Leads&lt;/h6&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Primary: Alice, Director of Technology&lt;/li&gt;
+  &lt;li&gt;Secondary: Bob, Lead Developer, Bookstore API&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h6 id=&quot;severity-1&quot;&gt;Severity&lt;/h6&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Critical&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h6 id=&quot;recovery-procedure-overview-1&quot;&gt;Recovery Procedure Overview&lt;/h6&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Manually verify database availability through Amazon RDS monitoring.&lt;/li&gt;
+  &lt;li&gt;If unavailable, restart.&lt;/li&gt;
+  &lt;li&gt;If still unavailable, manually propagate replica.&lt;/li&gt;
+  &lt;li&gt;If necessary, restore from most recent snapshot.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h6 id=&quot;basic-assumptions-1&quot;&gt;Basic Assumptions&lt;/h6&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Amazon RDS is online and functional.&lt;/li&gt;
+  &lt;li&gt;Database backups are available.&lt;/li&gt;
+  &lt;li&gt;AWS Support contact is available for additional assistance.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h6 id=&quot;recovery-time-objective-1&quot;&gt;Recovery Time Objective&lt;/h6&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;12 Hours&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h6 id=&quot;recovery-point-objective-1&quot;&gt;Recovery Point Objective&lt;/h6&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;24 Hours&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h6 id=&quot;recovery-platform-1&quot;&gt;Recovery Platform&lt;/h6&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;PostgreSQL 10.4 database with identical configuration running on Amazon RDS with minimal &lt;code class=&quot;highlighter-rouge&quot;&gt;us-west-2a&lt;/code&gt; Availability Zone.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h6 id=&quot;recovery-procedure-1&quot;&gt;Recovery Procedure&lt;/h6&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Disaster recovery team member should manually verify database availability through Amazon RDS monitoring.&lt;/li&gt;
+  &lt;li&gt;Manually restart &lt;code class=&quot;highlighter-rouge&quot;&gt;bookstore-db&lt;/code&gt; instance.
+    &lt;ul&gt;
+      &lt;li&gt;If &lt;code class=&quot;highlighter-rouge&quot;&gt;bookstore-db&lt;/code&gt; is back online, proceed to &lt;em&gt;Resume Procedure&lt;/em&gt;.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;If &lt;code class=&quot;highlighter-rouge&quot;&gt;bookstore-db&lt;/code&gt; remains unavailable manual propagate a replica Amazon RDS PostgreSQL 10.4 instance.&lt;/li&gt;
+  &lt;li&gt;If replacement created, update DNS routing on Amazon Route 53 for &lt;code class=&quot;highlighter-rouge&quot;&gt;db.bookstore.pingpublications.com&lt;/code&gt; endpoint.&lt;/li&gt;
+  &lt;li&gt;&lt;em&gt;(Optional)&lt;/em&gt;: Restore data from most recent snapshot within acceptable RPO.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h6 id=&quot;test-procedure-1&quot;&gt;Test Procedure&lt;/h6&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Manually confirm connection to public &lt;code class=&quot;highlighter-rouge&quot;&gt;bookstore-db&lt;/code&gt; endpoint (&lt;code class=&quot;highlighter-rouge&quot;&gt;db.bookstore.pingpublications.com&lt;/code&gt;).&lt;/li&gt;
+  &lt;li&gt;Confirm that &lt;code class=&quot;highlighter-rouge&quot;&gt;bookstore-api&lt;/code&gt; can access the &lt;code class=&quot;highlighter-rouge&quot;&gt;bookstore-db&lt;/code&gt; instance.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h6 id=&quot;resume-procedure-1&quot;&gt;Resume Procedure&lt;/h6&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Service is now fully restored.
+    &lt;ul&gt;
+      &lt;li&gt;If necessary, perform manual data recovery.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h5 id=&quot;scenario-cdn-failure&quot;&gt;Scenario: CDN Failure&lt;/h5&gt;
+
+&lt;h6 id=&quot;disaster-recovery-leads-2&quot;&gt;Disaster Recovery Leads&lt;/h6&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Primary: Alice, Director of Technology&lt;/li&gt;
+  &lt;li&gt;Secondary: Christina, Site Reliability Engineer&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h6 id=&quot;severity-2&quot;&gt;Severity&lt;/h6&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Critical&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h6 id=&quot;recovery-procedure-overview-2&quot;&gt;Recovery Procedure Overview&lt;/h6&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Manual verification of applicable Amazon S3 bucket.&lt;/li&gt;
+  &lt;li&gt;If unavailable, manually recreate bucket and upload backup snapshot of static data.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h6 id=&quot;basic-assumptions-2&quot;&gt;Basic Assumptions&lt;/h6&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Amazon S3 is online and functional.&lt;/li&gt;
+  &lt;li&gt;Static asset backups are available.&lt;/li&gt;
+  &lt;li&gt;Static collection can be performed from remote EC2 &lt;code class=&quot;highlighter-rouge&quot;&gt;bookstore-api&lt;/code&gt; server or locally via Django &lt;code class=&quot;highlighter-rouge&quot;&gt;manage.py collectstatic&lt;/code&gt; command.&lt;/li&gt;
+  &lt;li&gt;AWS Support contact is available for additional assistance.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h6 id=&quot;recovery-time-objective-2&quot;&gt;Recovery Time Objective&lt;/h6&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;24 Hours&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h6 id=&quot;recovery-point-objective-2&quot;&gt;Recovery Point Objective&lt;/h6&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;24 Hours&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h6 id=&quot;recovery-platform-2&quot;&gt;Recovery Platform&lt;/h6&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Amazon S3 &lt;code class=&quot;highlighter-rouge&quot;&gt;private&lt;/code&gt; bucket accessible by administrator AWS account.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h6 id=&quot;recovery-procedure-2&quot;&gt;Recovery Procedure&lt;/h6&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Team member manually verifies Amazon S3 &lt;code class=&quot;highlighter-rouge&quot;&gt;cdn.bookstore.pingpublications.com&lt;/code&gt; bucket exists, is accessible, and contains all static content.&lt;/li&gt;
+  &lt;li&gt;Manually recreate &lt;code class=&quot;highlighter-rouge&quot;&gt;cdn.bookstore.pingpublications.com&lt;/code&gt; bucket.&lt;/li&gt;
+  &lt;li&gt;Manually upload all static content to &lt;code class=&quot;highlighter-rouge&quot;&gt;cdn.bookstore.pingpublications.com&lt;/code&gt; bucket.&lt;/li&gt;
+  &lt;li&gt;If &lt;code class=&quot;highlighter-rouge&quot;&gt;cdn.bookstore.pingpublications.com&lt;/code&gt; bucket exists but is non-functional, manually create the bucket, upload static content, and route system to backup.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h6 id=&quot;test-procedure-2&quot;&gt;Test Procedure&lt;/h6&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Confirm all static content exists in &lt;code class=&quot;highlighter-rouge&quot;&gt;cdn.bookstore.pingpublications.com&lt;/code&gt; Amazon S3 bucket.&lt;/li&gt;
+  &lt;li&gt;Confirm public endpoint (&lt;code class=&quot;highlighter-rouge&quot;&gt;cdn.bookstore.pingpublications.com/static&lt;/code&gt;) is accessible for static content.&lt;/li&gt;
+  &lt;li&gt;Confirm that &lt;code class=&quot;highlighter-rouge&quot;&gt;bookstore-api&lt;/code&gt; can access &lt;code class=&quot;highlighter-rouge&quot;&gt;cdn.bookstore.pingpublications.com&lt;/code&gt; bucket and content.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h6 id=&quot;resume-procedure-2&quot;&gt;Resume Procedure&lt;/h6&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Service is now fully restored.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;5-create-a-non-critical-dependency-failover-playbook-1&quot;&gt;5. Create a Non-Critical Dependency Failover Playbook&lt;/h4&gt;
+
+&lt;p&gt;The &lt;strong&gt;Bookstore&lt;/strong&gt; example app doesn’t has any non-critical dependencies at the moment given its simple architecture (&lt;code class=&quot;highlighter-rouge&quot;&gt;CDN &amp;gt; API Server &amp;lt; Database&lt;/code&gt;).  However, progressing through each resiliency stage will &lt;em&gt;require&lt;/em&gt; additional system and services to maintain failure resilience, which will inherently add non-critical dependencies.&lt;/p&gt;
+
+&lt;h3 id=&quot;complete-and-available-prerequisites-1&quot;&gt;Complete and Available Prerequisites&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Status: &lt;strong&gt;Complete&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;All prerequisites for the &lt;strong&gt;Bookstore&lt;/strong&gt; app have been met and all documentation has been dispersed among every member of the team.&lt;/p&gt;
+
+&lt;h3 id=&quot;team-wide-agreement-on-playbooks-1&quot;&gt;Team-Wide Agreement on Playbooks&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Status: &lt;strong&gt;Complete&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Every team member has agreed on the playbook/scenarios defined above.&lt;/p&gt;
+
+&lt;h3 id=&quot;manually-execute-a-failover-exercise-1&quot;&gt;Manually Execute a Failover Exercise&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Status: &lt;strong&gt;Complete&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;For this stage of the &lt;strong&gt;Bookstore&lt;/strong&gt; app we’ve manually performed the &lt;a href=&quot;#scenario-bookstore-api-failure&quot;&gt;Scenario: Bookstore API Failure&lt;/a&gt; exercise.&lt;/p&gt;
+
+&lt;p&gt;Full manual restoration of the &lt;code class=&quot;highlighter-rouge&quot;&gt;bookstore-api&lt;/code&gt; EC2 instance and the &lt;strong&gt;Bookstore&lt;/strong&gt; app resulted in approximately &lt;code class=&quot;highlighter-rouge&quot;&gt;30 minutes&lt;/code&gt; of downtime.  This is well under the initial RTO/RPO goals so we can reasonably update the playbooks.  However, this manual process is still clunky and prone to errors, so there’s plenty of room for improvement.&lt;/p&gt;
+
+&lt;h2 id=&quot;resiliency-stage-1-completion&quot;&gt;Resiliency Stage 1 Completion&lt;/h2&gt;
 
 &lt;p&gt;This post laid the groundwork for how to implement resilience engineering practices through thoughtfully-designed dependency identification and disaster recovery playbooks.  We also broke down the requirements and steps of &lt;strong&gt;Resiliency Stage 1&lt;/strong&gt;, which empowers your team to begin the journey toward a highly-resilient system.  Stay tuned to the &lt;a href=&quot;https://www.gremlin.com/blog/&quot;&gt;Gremlin Blog&lt;/a&gt; for additional posts that will break down the four remaining &lt;strong&gt;Stages of Resiliency&lt;/strong&gt;!&lt;/p&gt;</content><author><name>Gabe Wyatt</name></author><category term="resiliency" /><category term="staging" /></entry><entry><title type="html">Content Pitches</title><link href="http://localhost:4000/gremlin-blog-posts/gremlin/content-pitches/" rel="alternate" type="text/html" title="Content Pitches" /><published>2018-10-08T00:00:00-07:00</published><updated>2018-10-08T00:00:00-07:00</updated><id>http://localhost:4000/gremlin-blog-posts/gremlin/content-pitches</id><content type="html" xml:base="http://localhost:4000/gremlin-blog-posts/gremlin/content-pitches/">&lt;h2 id=&quot;gremlin-docs-update&quot;&gt;Gremlin Docs Update&lt;/h2&gt;
 

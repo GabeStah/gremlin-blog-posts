@@ -4,6 +4,9 @@ published: false
 
 ## Chaos Engineering Through Staged Resiliency [Series]
 
+https://www.django-rest-framework.org/tutorial/4-authentication-and-permissions/#adding-required-permissions-to-views
+https://www.django-rest-framework.org/api-guide/authentication/
+
 > https://medium.com/walmartlabs/charting-a-path-to-software-resiliency-38148d956f4a
 > 
 > Step 1 — Get a checkup from the resiliency doctor
