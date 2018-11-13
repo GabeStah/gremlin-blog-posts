@@ -485,11 +485,10 @@ Now that both critical dependencies have been tested we'll publish the results t
 
 In this case, both the [Database Failure Test](#database-failure-test) and [CDN Failure Test](#cdn-failure-test) were performed manually within less than 15 minutes.  Therefore, we can safely update some of the playbook information created during the prerequisite phase of [Resiliency Stage 1]() and reduce the critical dependency RTO/RPO targets significantly.  Even a conservative estimate of `1 hour` is a massive improvement to resiliency and reduction to potential support costs, and we're only through the second Stage!
 
-| Dependency | Criticality Period | Manual Workaround                                                       | RTO | RPO | Child Dependencies |
-| ---------- | ------------------ | ----------------------------------------------------------------------- | --- | --- | ------------------ |
-| Database   | Always             | Manual verification of Amazon RDS Multi-AZ secondary instance failover. | 1   | 1   | N/A                |
-| CDN        | Always             | Manual verification of secondary Amazon S3 bucket failover DNS routing. | 1   | 1   | N/A                |
-
+| Dependency | Criticality Period | Manual Workaround                                                       | RTO | RPO |
+| ---------- | ------------------ | ----------------------------------------------------------------------- | --- | --- |
+| Database   | Always             | Manual verification of Amazon RDS Multi-AZ secondary instance failover. | 1   | 1   |
+| CDN        | Always             | Manual verification of secondary Amazon S3 bucket failover DNS routing. | 1   | 1   |
 ## Resiliency Stage 2 Completion
 
 Once all critical dependencies have been failure tested and those test results have been disseminated throughout the team then **Resiliency Stage 2** is complete!  Your system should now have well-defined recovery playbooks and been manually tested for both failover and critical dependency failures.  In [Chaos Engineering Through Staged Resiliency - Stage 3][#stage-3] we'll look at the transition into automating some of these tests and performing them at regular intervals.

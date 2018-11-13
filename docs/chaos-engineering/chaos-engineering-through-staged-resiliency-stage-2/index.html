@@ -800,37 +800,10 @@
 
 <p>In this case, both the <a href="#database-failure-test">Database Failure Test</a> and <a href="#cdn-failure-test">CDN Failure Test</a> were performed manually within less than 15 minutes.  Therefore, we can safely update some of the playbook information created during the prerequisite phase of <a href="">Resiliency Stage 1</a> and reduce the critical dependency RTO/RPO targets significantly.  Even a conservative estimate of <code class="highlighter-rouge">1 hour</code> is a massive improvement to resiliency and reduction to potential support costs, and we’re only through the second Stage!</p>
 
-<table>
-  <thead>
-    <tr>
-      <th>Dependency</th>
-      <th>Criticality Period</th>
-      <th>Manual Workaround</th>
-      <th>RTO</th>
-      <th>RPO</th>
-      <th>Child Dependencies</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Database</td>
-      <td>Always</td>
-      <td>Manual verification of Amazon RDS Multi-AZ secondary instance failover.</td>
-      <td>1</td>
-      <td>1</td>
-      <td>N/A</td>
-    </tr>
-    <tr>
-      <td>CDN</td>
-      <td>Always</td>
-      <td>Manual verification of secondary Amazon S3 bucket failover DNS routing.</td>
-      <td>1</td>
-      <td>1</td>
-      <td>N/A</td>
-    </tr>
-  </tbody>
-</table>
-
+<p>| Dependency | Criticality Period | Manual Workaround                                                       | RTO | RPO |
+| ———- | —————— | ———————————————————————– | — | — |
+| Database   | Always             | Manual verification of Amazon RDS Multi-AZ secondary instance failover. | 1   | 1   |
+| CDN        | Always             | Manual verification of secondary Amazon S3 bucket failover DNS routing. | 1   | 1   |</p>
 <h2 id="resiliency-stage-2-completion">Resiliency Stage 2 Completion</h2>
 
 <p>Once all critical dependencies have been failure tested and those test results have been disseminated throughout the team then <strong>Resiliency Stage 2</strong> is complete!  Your system should now have well-defined recovery playbooks and been manually tested for both failover and critical dependency failures.  In <a href="https://www.gremlin.com/blog/chaos-engineering-through-staged-resiliency-stage-3" target="_blank" rel="noopener noreferrer">Chaos Engineering Through Staged Resiliency - Stage 3</a> we’ll look at the transition into automating some of these tests and performing them at regular intervals.</p>
