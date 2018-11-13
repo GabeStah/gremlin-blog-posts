@@ -97,21 +97,17 @@ Most disaster recovery playbooks define the goals and allotted impact of a given
 _RTO & RPO Diagrammed -- Source: [Wikipedia](https://en.wikipedia.org/wiki/File:RPO_RTO_example_converted.png)_
 {: .text-center }
 
-## Resiliency Stage 1: Prerequisites, Playbook Agreement, and Manual Failover Exercises
-
-It's now time to work through the first of the five resiliency stages by confirming all prerequisite steps have been completed, ensuring the entire team agrees on everything defined in the prerequisites, and manually performing at least one failover exercise.
-
-### Complete and Available Prerequisites
+## Complete and Publish Prerequisites
 
 Ensure that all [Prerequisites][#prerequisites] have been met.  All playbooks, dependency definitions, and other relevant documentation should be placed in a singular, globally accessible location so every single team member has immediate access to that information.  Maintaining a single repository for the information also maintains consistency across the team, so there's never any confusion about the steps in a particular scenario or what is defined as a critical dependency.
 
-### Team-Wide Agreement on Playbooks
+## Team-Wide Agreement on Playbooks
 
 With unfettered access to all documentation, the next step is to ensure the entire team agrees with all documented information as its laid out.  If there is disagreement about the best way to approach a given failover scenario, or about the risk and potential impact of a non-critical dependency failure, this is the best time to suss out those differences of opinion and come to a unanimous "best" solution.  A healthy, active debate provides the team with a deeper understanding of the system and encourages the best ideas and techniques to bubble up to the surface.
 
 While the goal is agreement on the playbooks currently laid out, documentation can (and should) be updated in the future as experiments shed new light on the system.  The team should be encouraged and empowered to challenge the norms in order to create a system that is always adapting and evolving to be as resilient as possible.
 
-### Manually Execute a Failover Exercise
+## Manually Execute a Failover Exercise
 
 The last step is to manually perform a failover exercise.  The goal of this exercise is to verify that the disaster recovery failover playbook works as expected.  Therefore, the step-by-step process defined in the playbook should be followed exactly as documented.
 
