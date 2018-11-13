@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.4">Jekyll</generator><link href="http://localhost:4000/gremlin-blog-posts/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/gremlin-blog-posts/" rel="alternate" type="text/html" /><updated>2018-11-12T23:13:01-08:00</updated><id>http://localhost:4000/gremlin-blog-posts/feed.xml</id><title type="html">Gremlin: Blog Posts</title><subtitle>An amazing website.</subtitle><author><name>Gabe Wyatt</name></author><entry><title type="html">Chaos Engineering Through Staged Resiliency - Stage 3</title><link href="http://localhost:4000/gremlin-blog-posts/chaos-engineering/chaos-engineering-through-staged-resiliency-stage-3/" rel="alternate" type="text/html" title="Chaos Engineering Through Staged Resiliency - Stage 3" /><published>2018-10-11T00:00:00-07:00</published><updated>2018-10-11T00:00:00-07:00</updated><id>http://localhost:4000/gremlin-blog-posts/chaos-engineering/chaos-engineering-through-staged-resiliency-stage-3</id><content type="html" xml:base="http://localhost:4000/gremlin-blog-posts/chaos-engineering/chaos-engineering-through-staged-resiliency-stage-3/">&lt;p&gt;Performing occasional, manual resiliency testing is useful, but your system must be automatically and frequently tested to provide any real sense of stability.  In &lt;a href=&quot;https://www.gremlin.com/blog/chaos-engineering-through-staged-resiliency-stage-2&quot;&gt;Chaos Engineering Through Staged Resiliency - Stage 2&lt;/a&gt; we focused on critical dependency failure testing in non-production environments.  To work through &lt;strong&gt;Resiliency Stage 3&lt;/strong&gt; your team will need to begin automating these test and experiments.  This allows the testing frequency to improve dramatically and reduces the reliance manual processes.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.4">Jekyll</generator><link href="http://localhost:4000/gremlin-blog-posts/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/gremlin-blog-posts/" rel="alternate" type="text/html" /><updated>2018-11-12T23:13:52-08:00</updated><id>http://localhost:4000/gremlin-blog-posts/feed.xml</id><title type="html">Gremlin: Blog Posts</title><subtitle>An amazing website.</subtitle><author><name>Gabe Wyatt</name></author><entry><title type="html">Chaos Engineering Through Staged Resiliency - Stage 3</title><link href="http://localhost:4000/gremlin-blog-posts/chaos-engineering/chaos-engineering-through-staged-resiliency-stage-3/" rel="alternate" type="text/html" title="Chaos Engineering Through Staged Resiliency - Stage 3" /><published>2018-10-11T00:00:00-07:00</published><updated>2018-10-11T00:00:00-07:00</updated><id>http://localhost:4000/gremlin-blog-posts/chaos-engineering/chaos-engineering-through-staged-resiliency-stage-3</id><content type="html" xml:base="http://localhost:4000/gremlin-blog-posts/chaos-engineering/chaos-engineering-through-staged-resiliency-stage-3/">&lt;p&gt;Performing occasional, manual resiliency testing is useful, but your system must be automatically and frequently tested to provide any real sense of stability.  In &lt;a href=&quot;https://www.gremlin.com/blog/chaos-engineering-through-staged-resiliency-stage-2&quot;&gt;Chaos Engineering Through Staged Resiliency - Stage 2&lt;/a&gt; we focused on critical dependency failure testing in non-production environments.  To work through &lt;strong&gt;Resiliency Stage 3&lt;/strong&gt; your team will need to begin automating these test and experiments.  This allows the testing frequency to improve dramatically and reduces the reliance manual processes.&lt;/p&gt;
 
 &lt;h2 id=&quot;prerequisites&quot;&gt;Prerequisites&lt;/h2&gt;
 
@@ -533,10 +533,34 @@ Run at least one resiliency exercise (failure injection) in production environme
 
 &lt;p&gt;In this case, both the &lt;a href=&quot;#database-failure-test&quot;&gt;Database Failure Test&lt;/a&gt; and &lt;a href=&quot;#cdn-failure-test&quot;&gt;CDN Failure Test&lt;/a&gt; were performed manually within less than 15 minutes.  Therefore, we can safely update some of the playbook information created during the prerequisite phase of &lt;a href=&quot;&quot;&gt;Resiliency Stage 1&lt;/a&gt; and reduce the critical dependency RTO/RPO targets significantly.  Even a conservative estimate of &lt;code class=&quot;highlighter-rouge&quot;&gt;1 hour&lt;/code&gt; is a massive improvement to resiliency and reduction to potential support costs, and we’re only through the second Stage!&lt;/p&gt;
 
-&lt;p&gt;| Dependency | Criticality Period | Manual Workaround                                                       | RTO | RPO |
-| ———- | —————— | ———————————————————————– | — | — |
-| Database   | Always             | Manual verification of Amazon RDS Multi-AZ secondary instance failover. | 1   | 1   |
-| CDN        | Always             | Manual verification of secondary Amazon S3 bucket failover DNS routing. | 1   | 1   |&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Dependency&lt;/th&gt;
+      &lt;th&gt;Criticality Period&lt;/th&gt;
+      &lt;th&gt;Manual Workaround&lt;/th&gt;
+      &lt;th&gt;RTO&lt;/th&gt;
+      &lt;th&gt;RPO&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Database&lt;/td&gt;
+      &lt;td&gt;Always&lt;/td&gt;
+      &lt;td&gt;Manual verification of Amazon RDS Multi-AZ secondary instance failover.&lt;/td&gt;
+      &lt;td&gt;1&lt;/td&gt;
+      &lt;td&gt;1&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;CDN&lt;/td&gt;
+      &lt;td&gt;Always&lt;/td&gt;
+      &lt;td&gt;Manual verification of secondary Amazon S3 bucket failover DNS routing.&lt;/td&gt;
+      &lt;td&gt;1&lt;/td&gt;
+      &lt;td&gt;1&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
 &lt;h2 id=&quot;resiliency-stage-2-completion&quot;&gt;Resiliency Stage 2 Completion&lt;/h2&gt;
 
 &lt;p&gt;Once all critical dependencies have been failure tested and those test results have been disseminated throughout the team then &lt;strong&gt;Resiliency Stage 2&lt;/strong&gt; is complete!  Your system should now have well-defined recovery playbooks and been manually tested for both failover and critical dependency failures.  In &lt;a href=&quot;https://www.gremlin.com/blog/chaos-engineering-through-staged-resiliency-stage-3&quot;&gt;Chaos Engineering Through Staged Resiliency - Stage 3&lt;/a&gt; we’ll look at the transition into automating some of these tests and performing them at regular intervals.&lt;/p&gt;</content><author><name>Gabe Wyatt</name></author><category term="resiliency" /><category term="staging" /></entry><entry><title type="html">Chaos Engineering Through Staged Resiliency - Stage 1</title><link href="http://localhost:4000/gremlin-blog-posts/chaos-engineering/chaos-engineering-through-staged-resiliency-stage-1/" rel="alternate" type="text/html" title="Chaos Engineering Through Staged Resiliency - Stage 1" /><published>2018-10-11T00:00:00-07:00</published><updated>2018-10-11T00:00:00-07:00</updated><id>http://localhost:4000/gremlin-blog-posts/chaos-engineering/chaos-engineering-through-staged-resiliency-stage-1</id><content type="html" xml:base="http://localhost:4000/gremlin-blog-posts/chaos-engineering/chaos-engineering-through-staged-resiliency-stage-1/">&lt;p&gt;In spite of what the name may suggest, Chaos Engineering is a &lt;em&gt;disciplined&lt;/em&gt; approach of identifying potential failures before they become outages.  Ultimately, the goal of Chaos Engineering is to create more stable and &lt;strong&gt;resilient&lt;/strong&gt; systems.  There is some disagreement in the community about proper terminology, but regardless of which side of the &lt;a href=&quot;https://medium.com/@jpaulreed/chaos-engineered-or-otherwise-is-not-enough-ad5792309ecf&quot;&gt;Chaos Engineering&lt;/a&gt; vs &lt;a href=&quot;https://www.linkedin.com/pulse/would-chaos-any-othername-casey-rosenthal/&quot;&gt;Resilience Engineering&lt;/a&gt; debate you come down on, most engineers probably agree that proper implementation is more important than naming semantics.&lt;/p&gt;
