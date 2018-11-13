@@ -46,7 +46,9 @@ In spite of what the name may suggest, Chaos Engineering is a _disciplined_ appr
 
 Creating resilient software is a fundamental necessity within modern cloud applications and architectures.  As systems become more distributed the potential for unplanned outages and unexpected failure significantly increases.  Thankfully, Chaos and Resilience Engineering techniques are quickly gaining traction within the community.  [Many organizations](https://coggle.it/diagram/WiKceGDAwgABrmyv/t/chaos-engineering-companies%2C-people%2C-tools-practices) -- both big and small -- have embraced Chaos Engineering over the last few years.  In his fascinating [ChaosConf 2018][#chaosconf-2018] talk titled [_Practicing Chaos Engineering at Walmart_][#youtube-practicing], Walmart's Director of Engineering Vilas Veeraraghavan outlines how he and the hundreds of engineering teams at Walmart have implemented Resilience Engineering.  By creating a robust series of "levels" or "stages" that each engineering team can work through, Walmart is able to progressively improve system resiliency while dramatically reducing support costs.
 
-This blog series expands on Vilas' and Walmart's techniques by diving deep into the five **Stages of Resiliency**.  Each post examines the necessary components of a stage, describes how those components are evaluated and assembled, and outlines the step-by-step process necessary to move from one stage to the next.  This series also digs into the specific implementation of each stage by going through the entire process with a real-world (albeit simple) API application hosted on AWS.  We'll go through everything from defining and executing disaster recovery playbook scenarios to improving system architecture and reducing RTO, RPO, and applicable support costs for this example app.
+This blog series expands on Vilas' and Walmart's techniques by diving deep into the five **Stages of Resiliency**.  Each post examines the necessary components of a stage, describes how those components are evaluated and assembled, and outlines the step-by-step process necessary to move from one stage to the next.
+
+This series also digs into the specific implementation of each stage by progressing through the entire process with a real-world, fully-functional API application hosted on AWS.  We'll go through everything from defining and executing disaster recovery playbook scenarios to improving system architecture and reducing RTO, RPO, and applicable support costs for this example app.
 
 With a bit of adjustment for your own organizational needs, you and your team can implement similar practices to quickly add Chaos Engineering to your own systems with relative ease.  After climbing through all five stages your system and its deployment will be almost entirely automated and will feature significant resiliency testing and robust disaster recovery failover.
 
@@ -88,8 +90,8 @@ The final prerequisite is to determine how non-critical dependency failures will
 
 Most disaster recovery playbooks define the goals and allotted impact of a given failure using two common terms: **Recovery Time Objective** and **Recovery Point Objective**.
 
-- **Recovery Time Objective**: RTO defines the maximum period of time in which the functionality of a failed service should be restored.  For example, if a service with an RTO of twelve hours experiences an outage at 5:00 PM then functionality should be restored to the service by 5:00 AM the next morning.
-- **Recovery Point Objective**: RPO defines the maximum period of time during which data can be lost during a service failure.  For example, if a service with an RPO of two hours experiences an outage at 5:00 PM then _only_ data generated between 3:00 PM and 5:00 PM should be lost -- all existing data prior to 3:00 PM should still be intact.
+- **Recovery Time Objective (RTO)**: The maximum period of time in which the functionality of a failed service should be restored.  For example, if a service with an RTO of twelve hours experiences an outage at 5:00 PM then functionality should be restored to the service by 5:00 AM the next morning.
+- **Recovery Point Objective (RPO)**: The maximum period of time during which data can be lost during a service failure.  For example, if a service with an RPO of two hours experiences an outage at 5:00 PM then _only_ data generated between 3:00 PM and 5:00 PM should be lost -- all existing data prior to 3:00 PM should still be intact.
 
 {% asset '{{ page.asset-path }}'/rto-rpo-example-wikipedia.png alt='RTO & RPO Diagrammed - Courtesy of Wikipedia' %}{: .align-center }
 _RTO & RPO Diagrammed -- Source: [Wikipedia](https://en.wikipedia.org/wiki/File:RPO_RTO_example_converted.png)_
@@ -105,7 +107,7 @@ Ensure that all [Prerequisites][#prerequisites] have been met.  All playbooks, d
 
 ### Team-Wide Agreement on Playbooks
 
-With unfettered access to all documentation, the next step is to ensure the entire team agrees with all documented information as its laid out.  If there is disagreement about the best way to approach a given failover scenario or the risk and potential impact of a non-critical dependency failure, this is the best time to suss out those differences of opinion and come to a unanimous "best" solution.  A healthy, active debate provides the team with a deeper understanding of the system and encourages the best ideas and techniques to bubble up to the surface.
+With unfettered access to all documentation, the next step is to ensure the entire team agrees with all documented information as its laid out.  If there is disagreement about the best way to approach a given failover scenario, or about the risk and potential impact of a non-critical dependency failure, this is the best time to suss out those differences of opinion and come to a unanimous "best" solution.  A healthy, active debate provides the team with a deeper understanding of the system and encourages the best ideas and techniques to bubble up to the surface.
 
 While the goal is agreement on the playbooks currently laid out, documentation can (and should) be updated in the future as experiments shed new light on the system.  The team should be encouraged and empowered to challenge the norms in order to create a system that is always adapting and evolving to be as resilient as possible.
 
@@ -118,31 +120,26 @@ The last step is to manually perform a failover exercise.  The goal of this exer
 
 ## Resiliency Stage 1: Implementation Example
 
-Throughout this series we'll take a simple yet real-world application through the entire staging process to illustrate how a team progresses through all five resiliency stages.  While every application and system architecture is unique, this example illustrates the basics of implementing every step within a stage, to provide you with a jumping off point for staged resiliency within your own system.
+Throughout this series, we'll take a simple yet real-world application through the entire staging process to illustrate how a team might progress their application through all five resiliency stages.  While every application and system architecture is unique, this example illustrates the basics of implementing every step within a stage, to provide you with a jumping off point for staged resiliency within your own system.
 
-The **Bookstore** example application is a publicly accessible API for a bookstore.  The API includes two primary endpoints: `/authors/` and `/books/`, which can be used to add, update, or remove **Authors** and **Books**, respectively.
+The [**Bookstore** example application](https://github.com/GabeStah/bookstore_api) is a publicly accessible API for a virtual bookstore.  The API includes two primary endpoints: `/authors/` and `/books/`, which can be used to add, update, or remove **Authors** and **Books**, respectively.
 
-**Bookstore's** architecture consists of three components, all housed within Amazon Web Services.
+**Bookstore's** architecture consists of three core components, all of which are housed within Amazon Web Services.
 
-- **API**: The API is created with Django and is hosted on an Amazon EC2 instance running Nginx.
+- **API**: The API is created with Django and the [Django REST Framework](https://www.django-rest-framework.org/) and is hosted on an Amazon EC2 instance running NGINX.
 - **Database**: A PostgreSQL database handles all data and uses Amazon RDS.
-- **CDN**: All static content is pushed to and served from an Amazon S3 bucket.
+- **CDN**: All static content is collected in and served from an Amazon S3 bucket.
 
 {% asset '{{ page.asset-path }}'/stage-1-architecture.png alt='Stage 1 - Initial' %}{: .align-center }
 _Initial System Architecture_
 {: .text-center }
 
-The web API endpoint is online at [http://bookstore.pingpublications.com](http://bookstore.pingpublications.com).  The web API, database, and CDN endpoints are DNS-routed via Amazon Route 53 to the underlying Amazon EC2, RDS, and Amazon S3 instances/buckets, respectively.
+The web API is at the publicly accessible [http://bookstore.pingpublications.com](http://bookstore.pingpublications.com) endpoint.  The web API, database, and CDN endpoints are DNS-routed via Amazon Route53 to the underlying Amazon EC2, RDS, and Amazon S3 buckets, respectively.
 
 Here's a simple request to the `/books/` API endpoint.
 
 ```bash
-curl http://bookstore.pingpublications.com/books/ | jq
-```
-
-Here's the returned output.
-
-```json
+$ curl http://bookstore.pingpublications.com/books/ | jq
 [
   {
     "url": "http://bookstore.pingpublications.com/books/1/",
@@ -160,24 +157,26 @@ Here's the returned output.
 ]
 ```
 
-**WARNING**: The initial design and architecture for the **Bookstore** sample application is _intentionally_ less resilient than a full production-ready system.  This leaves room for improvement as we progress through the resiliency stages.
+**WARNING**: The initial design and architecture for the **Bookstore** sample application is _intentionally_ less resilient than a full production-ready system.  This leaves room for improvement as progress is made through the resiliency stages throughout this series.
 {: .notice--warning }
 
 ### Prerequisites
+
+We begin the example implementation by defining all prerequisites for the **Bookstore** app.
 
 #### 0. Define System Architecture
 
 It may be useful to take a moment to define the basic components of the system, which can then be referenced throughout your playbooks.  Below are the initial services for the **Bookstore** app.
 
-| Service  | Purpose          | Supports      | Platform   | Technologies    | Identifier       | AZ         | VPC           | Subnet              | Endpoint                           |
-| -------- | ---------------- | ------------- | ---------- | --------------- | ---------------- | ---------- | ------------- | ------------------- | ---------------------------------- |
-| API      | Bookstore API    | N/A           | Amazon EC2 | Django, Nginx   | bookstore-api    | us-west-2a | bookstore-vpc | bookstore-subnet-2a | bookstore.pingpublications.com     |
-| Database | Application data | Bookstore API | Amazon RDS | PostgreSQL 10.4 | bookstore-db     | us-west-2a | bookstore-vpc | bookstore-subnet-2a | db.bookstore.pingpublications.com  |
-| CDN      | Static assets    | Bookstore API | Amazon S3  | Amazon S3       | cdn.bookstore.pingpublications.com | N/A        | N/A           | N/A                 | cdn.bookstore.pingpublications.com |
+| Service  | Platform   | Technologies    | AZ         | VPC           | Subnet              | Endpoint                           |
+| -------- | ---------- | --------------- | ---------- | ------------- | ------------------- | ---------------------------------- |
+| API      | Amazon EC2 | Django, Nginx   | us-west-2a | bookstore-vpc | bookstore-subnet-2a | bookstore.pingpublications.com     |
+| Database | Amazon RDS | PostgreSQL 10.4 | us-west-2a | bookstore-vpc | bookstore-subnet-2a | db.bookstore.pingpublications.com  |
+| CDN      | Amazon S3  | Amazon S3       | N/A        | N/A           | N/A                 | cdn.bookstore.pingpublications.com |
 
 #### 1. Define the Critical Dependencies
 
-Defining the critical dependencies at this early stage is pretty simple: _Everything is critical_.
+At this early stage of the application _all_ dependencies are critical.
 
 | Dependency | Criticality Period | Manual Workaround                    | RTO | RPO | Child Dependencies |
 | ---------- | ------------------ | ------------------------------------ | --- | --- | ------------------ |
@@ -209,7 +208,7 @@ _Organizational Chart_
 
 This can be used in conjunction with the contact information table to determine which team members should be contacted -- and in what priority -- when a given service fails.
 
-The final part of the disaster recovery failover playbook is to explicitly document the step-by-step procedures for every failover scenario.  For the **Bookstore** application we'll just provide a single failover scenario plan for when the database fails, but this can be expanded as necessary for all other failover scenarios.
+The final part of the disaster recovery failover playbook is to explicitly document the step-by-step procedures for every failover scenario.  For the **Bookstore** application, we'll just provide a single failover scenario plan for when the database fails, but this can be expanded as necessary for all other failover scenarios.
 
 ##### Scenario: Bookstore API Failure
 
@@ -239,7 +238,7 @@ The current architecture of the **Bookstore** app is limited to a manual _Backup
 ###### Basic Assumptions
 
 - Amazon S3, Amazon RDS, Amazon Route 53, and Amazon EC2 are all online and functional.
-- Frequent AMI backups are generated for application instance.
+- Frequent AMI backups are generated for the application instance.
 - Application code can be restored from code repository with minimal manual effort.
 
 **PURPOSE**: Indicates the basic assumptions that can be made during the recovery process.  Assumptions are typically factors outside of your control, such as third-party vendor availability.
@@ -255,7 +254,7 @@ The current architecture of the **Bookstore** app is limited to a manual _Backup
 
 ###### Recovery Platform
 
-- Amazon EC2 `t2.micro` instance on `us-west-2a` Availability Zone with Nginx, Python, and Django **Bookstore** application configured and installed from latest release.
+- Amazon EC2 `t2.micro` instance on `us-west-2a` Availability Zone with NGINX, Python, and Django **Bookstore** application configured and installed from the latest release.
 
 **PURPOSE**: Indicate the specific technologies, platforms, and services that are necessary to complete the recovery procedure.
 {: .notice--tip }
@@ -269,15 +268,15 @@ The current architecture of the **Bookstore** app is limited to a manual _Backup
     curl: (7) Failed to connect to bookstore.pingpublications.com port 80: Connection refused
     ```
 
-    - If `bookstore-api` instance is active but **Bookstore** Django application is failing then manually restart app from terminal.
+    - If the `bookstore-api` instance is active but **Bookstore** Django application is failing then manually restart app from the terminal.
 
         ```bash
         sudo systemctl restart gunicorn
         ```
 
-    - If **Bookstore** Django application remains offline then manually restart instance and recheck application availability.
+    - If **Bookstore** Django application remains offline then manually restart the instance and recheck application availability.
 
-2. If `bookstore-api` EC2 instance has completely failed and must be replaced then propagate a new Amazon EC2 instance from the `bookstore-api-ec2-image` AMI backup.
+2. If the `bookstore-api` EC2 instance has completely failed and must be replaced then propagate a new Amazon EC2 instance from the `bookstore-api-ec2-image` AMI backup.
 
     Use the pre-defined `bookstore-api-ec2` launch template.
 
@@ -287,7 +286,7 @@ The current architecture of the **Bookstore** app is limited to a manual _Backup
     ...
     ```
 
-    Default values can be overriden as seen below.
+    Default values can be overridden as seen below.
 
     ```bash
     aws ec2 run-instances \
@@ -309,13 +308,13 @@ The current architecture of the **Bookstore** app is limited to a manual _Backup
     **NOTE**: The `filters` used in the command above searched for **Running** instances based on the AMI `image-id`.  If multiple instances match these filters then the `LaunchTime` value retrieved from the query will help determine which instance is the latest launched.
     {: .notice--tip }
 
-4. SSH into new `bookstore-api` instance.
+4. SSH into the new `bookstore-api` instance.
 
     ```bash
     ssh ec2-54-188-3-235.us-west-2.compute.amazonaws.com
     ```
 
-5. Pull latest **Bookstore** application code from repository.
+5. Pull latest **Bookstore** application code from the repository.
 
     ```bash
     $ cd ~/apps/bookstore_api && git pull
@@ -328,7 +327,7 @@ The current architecture of the **Bookstore** app is limited to a manual _Backup
     sudo systemctl restart gunicorn
     ```
 
-7. On local machine verify backup instance is functional, public IPv4 address is available, and **Bookstore** app is online.
+7. On a local machine verify backup instance is functional, the public IPv4 address is available, and the **Bookstore** app is online.
 
     ```bash
     $ curl ec2-54-188-3-235.us-west-2.compute.amazonaws.com | jq
@@ -339,7 +338,7 @@ The current architecture of the **Bookstore** app is limited to a manual _Backup
     ```
 
 8. Update the Amazon Route 53 DNS `A` record to point to the new `bookstore-api` EC2 instance IPv4 address.
-9. Once DNS propagation completes verify the API endpoint is functional.
+9. Once DNS propagation completes verify that the API endpoint is functional.
 
     ```bash
     $ curl bookstore.pingpublications.com | jq
@@ -382,7 +381,7 @@ The current architecture of the **Bookstore** app is limited to a manual _Backup
 1. Manually verify database availability through Amazon RDS monitoring.
 2. If unavailable, restart.
 3. If still unavailable, manually propagate replica.
-4. If necessary, restore from most recent snapshot.
+4. If necessary, restore from the most recent snapshot.
 
 ###### Basic Assumptions
 
@@ -405,15 +404,15 @@ The current architecture of the **Bookstore** app is limited to a manual _Backup
 ###### Recovery Procedure
 
 1. Disaster recovery team member should manually verify database availability through Amazon RDS monitoring.
-2. Manually restart `bookstore-db` instance.
+2. Manually restart the `bookstore-db` instance.
     - If `bookstore-db` is back online, proceed to _Resume Procedure_.
 3. If `bookstore-db` remains unavailable manual propagate a replica Amazon RDS PostgreSQL 10.4 instance.
 4. If replacement created, update DNS routing on Amazon Route 53 for `db.bookstore.pingpublications.com` endpoint.
-5. _(Optional)_: Restore data from most recent snapshot within acceptable RPO.
+5. _(Optional)_: Restore data from the most recent snapshot within acceptable RPO.
 
 ###### Test Procedure
 
-1. Manually confirm connection to public `bookstore-db` endpoint (`db.bookstore.pingpublications.com`).
+1. Manually confirm a connection to public `bookstore-db` endpoint (`db.bookstore.pingpublications.com`).
 2. Confirm that `bookstore-api` can access the `bookstore-db` instance.
 
 ###### Resume Procedure
@@ -435,13 +434,13 @@ The current architecture of the **Bookstore** app is limited to a manual _Backup
 ###### Recovery Procedure Overview
 
 1. Manual verification of applicable Amazon S3 bucket.
-2. If unavailable, manually recreate bucket and upload backup snapshot of static data.
+2. If unavailable, manually recreate bucket and upload a backup snapshot of static data.
 
 ###### Basic Assumptions
 
 - Amazon S3 is online and functional.
 - Static asset backups are available.
-- Static collection can be performed from remote EC2 `bookstore-api` server or locally via Django `manage.py collectstatic` command.
+- Static asset collection can be performed remotely from the EC2 `bookstore-api` server or locally via Django `manage.py collectstatic` command.
 - AWS Support contact is available for additional assistance.
 
 ###### Recovery Time Objective
@@ -461,7 +460,7 @@ The current architecture of the **Bookstore** app is limited to a manual _Backup
 1. Team member manually verifies Amazon S3 `cdn.bookstore.pingpublications.com` bucket exists, is accessible, and contains all static content.
 2. Manually recreate `cdn.bookstore.pingpublications.com` bucket.
 3. Manually upload all static content to `cdn.bookstore.pingpublications.com` bucket.
-4. If `cdn.bookstore.pingpublications.com` bucket exists but is non-functional, manually create the bucket, upload static content, and route system to backup.
+4. If `cdn.bookstore.pingpublications.com` bucket exists but is non-functional, manually create the bucket, upload static content, and route the system to backup.
 
 ###### Test Procedure
 
@@ -475,7 +474,7 @@ The current architecture of the **Bookstore** app is limited to a manual _Backup
 
 #### 5. Create a Non-Critical Dependency Failover Playbook
 
-The **Bookstore** example app doesn't has any non-critical dependencies at the moment given its simple architecture (`CDN > API Server < Database`).  However, progressing through each resiliency stage will _require_ additional system and services to maintain failure resilience, which will inherently add non-critical dependencies.
+The **Bookstore** example app doesn't have any non-critical dependencies at the moment given its simple architecture (`CDN > API Server < Database`).  However, progressing through each resiliency stage will _require_ additional systems and services to maintain failure resilience, which will inherently add non-critical dependencies.
 
 ### Complete and Available Prerequisites
 
@@ -493,7 +492,7 @@ Every team member has agreed on the playbook/scenarios defined above.
 
 - Status: **Complete**
 
-For this stage of the **Bookstore** app we've manually performed the [Scenario: Bookstore API Failure](#scenario-bookstore-api-failure) exercise.
+For this stage of the **Bookstore** app, we've manually performed the [Scenario: Bookstore API Failure](#scenario-bookstore-api-failure) exercise.
 
 Full manual restoration of the `bookstore-api` EC2 instance and the **Bookstore** app resulted in approximately `30 minutes` of downtime.  This is well under the initial RTO/RPO goals so we can reasonably update the playbooks.  However, this manual process is still clunky and prone to errors, so there's plenty of room for improvement.
 

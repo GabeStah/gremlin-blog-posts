@@ -39,9 +39,12 @@ sources:
       urls:   
 ---
 
-## Introduction
+## Prerequisites
 
-## Resiliency Stage 4: 
+- Creation and agreement on [Disaster Recovery and Dependency Failover Playbooks][#stage-1#prerequisites].
+- Completion of [Resiliency Stage 1][#stage-1].
+- Completion of [Resiliency Stage 2][#stage-2].
+- Completion of [Resiliency Stage 3][#stage-3].
 
 > Level 4 — Automated — fully automated in pre-prod
 > All of level 3 requirements, plus
@@ -49,6 +52,10 @@ sources:
 > Semi-automated DR failover scripts (minimal human supervision required)
 
 > level four increases the amount of automation.
+
+## Automate Resiliency Testing in Non-Production
+
+## Semi-Automate Disaster Recovery Failover
 
 ## Resiliency Stage 4: Implementation Example
 

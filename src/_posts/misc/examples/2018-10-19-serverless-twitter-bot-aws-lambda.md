@@ -1,7 +1,7 @@
 ---
 title: "Create a Serverless Twitter Bot with Airbrake and AWS Lambda - Part 1"
 excerpt: "How to create a serverless Twitter bot with Airbrake and AWS Lambda."
-published: true
+published: false
 asset-path: misc/examples
 sources:
 ---

@@ -264,26 +264,26 @@
               <header><h4 class="nav__title">
 <i class="fas fa-file-alt"></i> On this page</h4></header>
               <ul class="toc__menu">
+  <li><a href="#prerequisites">Prerequisites</a></li>
+  <li><a href="#perform-frequent-semi-automated-tests">Perform Frequent, Semi-Automated Tests</a></li>
+  <li><a href="#publish-test-results">Publish Test Results</a></li>
+  <li><a href="#execute-a-resiliency-experiment-in-production">Execute a Resiliency Experiment in Production</a></li>
   <li>
-<a href="#resiliency-stage-3-minimal-automation-and-improving-test-frequency">Resiliency Stage 3: Minimal Automation and Improving Test Frequency</a>
+<a href="#resiliency-stage-3-implementation-example">Resiliency Stage 3: Implementation Example</a>
     <ul>
-      <li><a href="#prerequisites">Prerequisites</a></li>
-      <li><a href="#perform-frequent-semi-automated-tests">Perform Frequent, Semi-Automated Tests</a></li>
-      <li><a href="#publish-test-results">Publish Test Results</a></li>
-      <li><a href="#execute-a-resiliency-experiment-in-production">Execute a Resiliency Experiment in Production</a></li>
+      <li><a href="#perform-frequent-semi-automated-tests-1">Perform Frequent, Semi-Automated Tests</a></li>
+      <li><a href="#execute-a-resiliency-experiment-in-production-1">Execute a Resiliency Experiment in Production</a></li>
+      <li><a href="#publish-test-results-and-track-over-time">Publish Test Results and Track Over Time</a></li>
     </ul>
   </li>
-  <li><a href="#resiliency-stage-3-implementation-example">Resiliency Stage 3: Implementation Example</a></li>
-  <li><a href="#resiliency-stage-2-completion">Resiliency Stage 2 Completion</a></li>
+  <li><a href="#resiliency-stage-3-completion">Resiliency Stage 3 Completion</a></li>
 </ul>
             </nav>
           </aside>
         
-        <p>Performing occasional, manual resiliency testing is useful, but your system must be automatically and frequently tested to provide any real sense of stability.  In <a href="https://www.gremlin.com/blog/chaos-engineering-through-staged-resiliency-stage-2" target="_blank" rel="noopener noreferrer">Chaos Engineering Through Staged Resiliency - Stage 2</a> we focused on critical dependency failure testing in non-production environments.  To work through <strong>Resiliency Stage 3</strong> your team will need to begin automating these test and experiments.  This allows the testing frequency to improve dramatically and no longer rely on (quite as much) manual interaction.</p>
+        <p>Performing occasional, manual resiliency testing is useful, but your system must be automatically and frequently tested to provide any real sense of stability.  In <a href="https://www.gremlin.com/blog/chaos-engineering-through-staged-resiliency-stage-2" target="_blank" rel="noopener noreferrer">Chaos Engineering Through Staged Resiliency - Stage 2</a> we focused on critical dependency failure testing in non-production environments.  To work through <strong>Resiliency Stage 3</strong> your team will need to begin automating these test and experiments.  This allows the testing frequency to improve dramatically and reduces the reliance manual processes.</p>
 
-<h2 id="resiliency-stage-3-minimal-automation-and-improving-test-frequency">Resiliency Stage 3: Minimal Automation and Improving Test Frequency</h2>
-
-<h3 id="prerequisites">Prerequisites</h3>
+<h2 id="prerequisites">Prerequisites</h2>
 
 <ul>
   <li>Creation and agreement on [Disaster Recovery and Dependency Failover Playbooks][#stage-1#prerequisites].</li>
@@ -291,11 +291,17 @@
   <li>Completion of <a href="https://www.gremlin.com/blog/chaos-engineering-through-staged-resiliency-stage-2" target="_blank" rel="noopener noreferrer">Resiliency Stage 2</a>.</li>
 </ul>
 
-<h3 id="perform-frequent-semi-automated-tests">Perform Frequent, Semi-Automated Tests</h3>
+<h2 id="perform-frequent-semi-automated-tests">Perform Frequent, Semi-Automated Tests</h2>
 
-<h3 id="publish-test-results">Publish Test Results</h3>
+<p>There’s no more putting it off – if you haven’t already done so, this resiliency stage is where you begin integrating automation into your testing procedures.</p>
 
-<h3 id="execute-a-resiliency-experiment-in-production">Execute a Resiliency Experiment in Production</h3>
+<blockquote>
+  <p>Use Gremlin or similar Chaos Engineering tools.</p>
+</blockquote>
+
+<h2 id="publish-test-results">Publish Test Results</h2>
+
+<h2 id="execute-a-resiliency-experiment-in-production">Execute a Resiliency Experiment in Production</h2>
 
 <blockquote>
   <p>Level 3 — manual + automated — Regular exercises
@@ -311,9 +317,28 @@ Run at least one resiliency exercise (failure injection) in production environme
 
 <h2 id="resiliency-stage-3-implementation-example">Resiliency Stage 3: Implementation Example</h2>
 
-<p>(TODO)</p>
+<h3 id="perform-frequent-semi-automated-tests-1">Perform Frequent, Semi-Automated Tests</h3>
 
-<h2 id="resiliency-stage-2-completion">Resiliency Stage 2 Completion</h2>
+<ul>
+  <li>Status: <strong>Complete</strong>
+</li>
+</ul>
+
+<h3 id="execute-a-resiliency-experiment-in-production-1">Execute a Resiliency Experiment in Production</h3>
+
+<ul>
+  <li>Status: <strong>Complete</strong>
+</li>
+</ul>
+
+<h3 id="publish-test-results-and-track-over-time">Publish Test Results and Track Over Time</h3>
+
+<ul>
+  <li>Status: <strong>Complete</strong>
+</li>
+</ul>
+
+<h2 id="resiliency-stage-3-completion">Resiliency Stage 3 Completion</h2>
 
 
         
@@ -380,8 +405,7 @@ Run at least one resiliency exercise (failure injection) in production environme
 ">Previous</a>
     
     
-      <a href="/gremlin-blog-posts/serverless-twitter-bot-aws-lambda/" class="pagination--pager" title="Create a Serverless Twitter Bot with Airbrake and AWS Lambda - Part 1
-">Next</a>
+      <a href="#" class="pagination--pager disabled">Next</a>
     
   </nav>
 
@@ -405,33 +429,6 @@ Run at least one resiliency exercise (failure injection) in production environme
     
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="/gremlin-blog-posts/serverless-twitter-bot-aws-lambda/" rel="permalink">Create a Serverless Twitter Bot with Airbrake and AWS Lambda - Part 1
-</a>
-      
-    </h2>
-    
-      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
-
-
-
-
-  7 minute read
-</p>
-    
-    <p class="archive__item-excerpt" itemprop="description">How to create a serverless Twitter bot with Airbrake and AWS Lambda.
-</p>
-  </article>
-</div>
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title" itemprop="headline">
-      
         <a href="/gremlin-blog-posts/chaos-engineering/chaos-engineering-through-staged-resiliency-stage-2/" rel="permalink">Chaos Engineering Through Staged Resiliency - Stage 2
 </a>
       
@@ -442,7 +439,7 @@ Run at least one resiliency exercise (failure injection) in production environme
 
 
 
-  13 minute read
+  14 minute read
 </p>
     
     <p class="archive__item-excerpt" itemprop="description">
@@ -500,6 +497,33 @@ Run at least one resiliency exercise (failure injection) in production environme
 </p>
     
     <p class="archive__item-excerpt" itemprop="description">Content pitches and ideas for Gremlin.
+</p>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/gremlin-blog-posts/chaos-engineering/migrating-cloud-chaotic-embrace/" rel="permalink">Migrating to the Cloud Is Chaotic. Embrace It.
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  24 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">Why organizations planning to migrate to the cloud should embrace Chaos Engineering as a thoughtful strategy to avoid pain down the road.
 </p>
   </article>
 </div>

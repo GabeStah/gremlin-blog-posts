@@ -39,21 +39,23 @@ sources:
       urls:   
 ---
 
-Performing occasional, manual resiliency testing is useful, but your system must be automatically and frequently tested to provide any real sense of stability.  In [Chaos Engineering Through Staged Resiliency - Stage 2][#stage-2] we focused on critical dependency failure testing in non-production environments.  To work through **Resiliency Stage 3** your team will need to begin automating these test and experiments.  This allows the testing frequency to improve dramatically and no longer rely on (quite as much) manual interaction.
+Performing occasional, manual resiliency testing is useful, but your system must be automatically and frequently tested to provide any real sense of stability.  In [Chaos Engineering Through Staged Resiliency - Stage 2][#stage-2] we focused on critical dependency failure testing in non-production environments.  To work through **Resiliency Stage 3** your team will need to begin automating these test and experiments.  This allows the testing frequency to improve dramatically and reduces the reliance manual processes.
 
-## Resiliency Stage 3: Minimal Automation and Improving Test Frequency
-
-### Prerequisites
+## Prerequisites
 
 - Creation and agreement on [Disaster Recovery and Dependency Failover Playbooks][#stage-1#prerequisites].
 - Completion of [Resiliency Stage 1][#stage-1].
 - Completion of [Resiliency Stage 2][#stage-2].
 
-### Perform Frequent, Semi-Automated Tests
+## Perform Frequent, Semi-Automated Tests
 
-### Publish Test Results
+There's no more putting it off -- if you haven't already done so, this resiliency stage is where you begin integrating automation into your testing procedures.
 
-### Execute a Resiliency Experiment in Production
+> Use Gremlin or similar Chaos Engineering tools.
+
+## Publish Test Results
+
+## Execute a Resiliency Experiment in Production
 
 > Level 3 — manual + automated — Regular exercises
 > All of level 2 requirements, plus
@@ -65,9 +67,19 @@ Performing occasional, manual resiliency testing is useful, but your system must
 
 ## Resiliency Stage 3: Implementation Example
 
-(TODO)
+### Perform Frequent, Semi-Automated Tests
 
-## Resiliency Stage 2 Completion
+- Status: **Complete**
+
+### Execute a Resiliency Experiment in Production
+
+- Status: **Complete**
+
+### Publish Test Results and Track Over Time
+
+- Status: **Complete**
+
+## Resiliency Stage 3 Completion
 
 {% include          links-global.md %}
 {% include_relative links.md %}

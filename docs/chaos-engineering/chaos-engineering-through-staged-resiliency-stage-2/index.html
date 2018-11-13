@@ -251,7 +251,7 @@
 
 
 
-  13 minute read
+  14 minute read
 </p>
           
         </header>
@@ -264,13 +264,14 @@
               <header><h4 class="nav__title">
 <i class="fas fa-file-alt"></i> On this page</h4></header>
               <ul class="toc__menu">
+  <li><a href="#prerequisites">Prerequisites</a></li>
   <li>
-<a href="#prerequisites">Prerequisites</a>
+<a href="#perform-critical-dependency-failure-tests-in-non-production">Perform Critical Dependency Failure Tests in Non-Production</a>
     <ul>
-      <li><a href="#perform-critical-dependency-failure-tests-in-non-production">Perform Critical Dependency Failure Tests in Non-Production</a></li>
-      <li><a href="#publish-test-results">Publish Test Results</a></li>
+      <li><a href="#manual-testing-is-okay">Manual Testing Is Okay</a></li>
     </ul>
   </li>
+  <li><a href="#publish-test-results">Publish Test Results</a></li>
   <li>
 <a href="#resiliency-stage-2-implementation-example">Resiliency Stage 2: Implementation Example</a>
     <ul>
@@ -297,15 +298,15 @@
   <li>Completion of <a href="https://www.gremlin.com/blog/chaos-engineering-through-staged-resiliency-stage-1" target="_blank" rel="noopener noreferrer">Resiliency Stage 1</a>.</li>
 </ul>
 
-<h3 id="perform-critical-dependency-failure-tests-in-non-production">Perform Critical Dependency Failure Tests in Non-Production</h3>
+<h2 id="perform-critical-dependency-failure-tests-in-non-production">Perform Critical Dependency Failure Tests in Non-Production</h2>
 
 <p>The most important aspect of <strong>Resiliency Stage 2</strong> is testing the resilience of your systems when critical dependencies fail.  However, this early in the process the system can’t be expected to handle such failures in a production environment, so these tests should be performed in a non-production setting.</p>
 
-<h4 id="manual-testing-is-okay">Manual Testing Is Okay</h4>
+<h3 id="manual-testing-is-okay">Manual Testing Is Okay</h3>
 
 <p>Eventually, all experiments should be executed automatically, with little to no human intervention required.  However, during <strong>Resiliency Stage 2</strong> the team should feel comfortable performing manual tests.  The goal here isn’t to test the <em>automation</em> of the system, but rather to determine the outcome and system-wide impact whenever a critical dependency fails.</p>
 
-<h3 id="publish-test-results">Publish Test Results</h3>
+<h2 id="publish-test-results">Publish Test Results</h2>
 
 <p>After every critical dependency failure test is performed the results should be globally published to the entire team.  This allows every team member to closely scrutinize the outcome of a given test.  This encourages feedback and communication, which naturally provides insightful evaluation from the members that are best equipped to analyze the test results.</p>
 
@@ -568,6 +569,11 @@
 
 <h3 id="perform-critical-dependency-failure-tests-in-non-production-1">Perform Critical Dependency Failure Tests in Non-Production</h3>
 
+<ul>
+  <li>Status: <strong>Complete</strong>
+</li>
+</ul>
+
 <h4 id="database-failure-test">Database Failure Test</h4>
 
 <p>With Multi-AZ configured on the Amazon RDS instance we are now ready to perform a failover test for this critical dependency.</p>
@@ -785,7 +791,45 @@
 
 <h3 id="publish-test-results-1">Publish Test Results</h3>
 
+<ul>
+  <li>Status: <strong>Complete</strong>
+</li>
+</ul>
+
 <p>Now that both critical dependencies have been tested we’ll publish the results to the entire team, so everyone can keep tabs on the resiliency progress of the project.</p>
+
+<p>In this case, both the <a href="#database-failure-test">Database Failure Test</a> and <a href="#cdn-failure-test">CDN Failure Test</a> were performed manually within less than 15 minutes.  Therefore, we can safely update some of the playbook information created during the prerequisite phase of <a href="">Resiliency Stage 1</a> and reduce the critical dependency RTO/RPO targets significantly.  Even a conservative estimate of <code class="highlighter-rouge">1 hour</code> is a massive improvement to resiliency and reduction to potential support costs, and we’re only through the second Stage!</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Dependency</th>
+      <th>Criticality Period</th>
+      <th>Manual Workaround</th>
+      <th>RTO</th>
+      <th>RPO</th>
+      <th>Child Dependencies</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Database</td>
+      <td>Always</td>
+      <td>Manual verification of Amazon RDS Multi-AZ secondary instance failover.</td>
+      <td>1</td>
+      <td>1</td>
+      <td>N/A</td>
+    </tr>
+    <tr>
+      <td>CDN</td>
+      <td>Always</td>
+      <td>Manual verification of secondary Amazon S3 bucket failover DNS routing.</td>
+      <td>1</td>
+      <td>1</td>
+      <td>N/A</td>
+    </tr>
+  </tbody>
+</table>
 
 <h2 id="resiliency-stage-2-completion">Resiliency Stage 2 Completion</h2>
 
@@ -881,33 +925,6 @@
     
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="/gremlin-blog-posts/serverless-twitter-bot-aws-lambda/" rel="permalink">Create a Serverless Twitter Bot with Airbrake and AWS Lambda - Part 1
-</a>
-      
-    </h2>
-    
-      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
-
-
-
-
-  7 minute read
-</p>
-    
-    <p class="archive__item-excerpt" itemprop="description">How to create a serverless Twitter bot with Airbrake and AWS Lambda.
-</p>
-  </article>
-</div>
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title" itemprop="headline">
-      
         <a href="/gremlin-blog-posts/chaos-engineering/chaos-engineering-through-staged-resiliency-stage-3/" rel="permalink">Chaos Engineering Through Staged Resiliency - Stage 3
 </a>
       
@@ -918,7 +935,7 @@
 
 
 
-  1 minute read
+  2 minute read
 </p>
     
     <p class="archive__item-excerpt" itemprop="description">
@@ -976,6 +993,33 @@
 </p>
     
     <p class="archive__item-excerpt" itemprop="description">Content pitches and ideas for Gremlin.
+</p>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/gremlin-blog-posts/chaos-engineering/migrating-cloud-chaotic-embrace/" rel="permalink">Migrating to the Cloud Is Chaotic. Embrace It.
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  24 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">Why organizations planning to migrate to the cloud should embrace Chaos Engineering as a thoughtful strategy to avoid pain down the road.
 </p>
   </article>
 </div>

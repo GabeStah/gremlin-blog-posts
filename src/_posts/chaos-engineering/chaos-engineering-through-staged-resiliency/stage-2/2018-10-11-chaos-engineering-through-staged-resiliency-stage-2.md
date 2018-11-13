@@ -41,15 +41,15 @@ In this second part we'll dive into the components of **Resiliency Stage 2**, wh
 - Creation and agreement on [Disaster Recovery and Dependency Failover Playbooks][#stage-1#prerequisites].
 - Completion of [Resiliency Stage 1][#stage-1].
 
-### Perform Critical Dependency Failure Tests in Non-Production
+## Perform Critical Dependency Failure Tests in Non-Production
 
 The most important aspect of **Resiliency Stage 2** is testing the resilience of your systems when critical dependencies fail.  However, this early in the process the system can't be expected to handle such failures in a production environment, so these tests should be performed in a non-production setting.  
 
-#### Manual Testing Is Okay
+### Manual Testing Is Okay
 
 Eventually, all experiments should be executed automatically, with little to no human intervention required.  However, during **Resiliency Stage 2** the team should feel comfortable performing manual tests.  The goal here isn't to test the _automation_ of the system, but rather to determine the outcome and system-wide impact whenever a critical dependency fails.
 
-### Publish Test Results
+## Publish Test Results
 
 After every critical dependency failure test is performed the results should be globally published to the entire team.  This allows every team member to closely scrutinize the outcome of a given test.  This encourages feedback and communication, which naturally provides insightful evaluation from the members that are best equipped to analyze the test results.
 
@@ -276,6 +276,8 @@ _Bookstore App Architecture_
 
 ### Perform Critical Dependency Failure Tests in Non-Production
 
+- Status: **Complete**
+
 #### Database Failure Test
 
 With Multi-AZ configured on the Amazon RDS instance we are now ready to perform a failover test for this critical dependency.
@@ -477,7 +479,16 @@ This test ensures that the primary CDN endpoint (`cdn.bookstore.pingpublications
 
 ### Publish Test Results
 
+- Status: **Complete**
+
 Now that both critical dependencies have been tested we'll publish the results to the entire team, so everyone can keep tabs on the resiliency progress of the project.
+
+In this case, both the [Database Failure Test](#database-failure-test) and [CDN Failure Test](#cdn-failure-test) were performed manually within less than 15 minutes.  Therefore, we can safely update some of the playbook information created during the prerequisite phase of [Resiliency Stage 1]() and reduce the critical dependency RTO/RPO targets significantly.  Even a conservative estimate of `1 hour` is a massive improvement to resiliency and reduction to potential support costs, and we're only through the second Stage!
+
+| Dependency | Criticality Period | Manual Workaround                                                       | RTO | RPO | Child Dependencies |
+| ---------- | ------------------ | ----------------------------------------------------------------------- | --- | --- | ------------------ |
+| Database   | Always             | Manual verification of Amazon RDS Multi-AZ secondary instance failover. | 1   | 1   | N/A                |
+| CDN        | Always             | Manual verification of secondary Amazon S3 bucket failover DNS routing. | 1   | 1   | N/A                |
 
 ## Resiliency Stage 2 Completion
 

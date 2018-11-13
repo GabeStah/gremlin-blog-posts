@@ -39,9 +39,13 @@ sources:
       urls:   
 ---
 
-## Introduction
+## Prerequisites
 
-## Resiliency Stage 5: 
+- Creation and agreement on [Disaster Recovery and Dependency Failover Playbooks][#stage-1#prerequisites].
+- Completion of [Resiliency Stage 1][#stage-1].
+- Completion of [Resiliency Stage 2][#stage-2].
+- Completion of [Resiliency Stage 3][#stage-3].
+- Completion of [Resiliency Stage 4][#stage-4].
 
 > Level 5 — Full automation
 > All of level 4 requirements, plus
@@ -50,6 +54,10 @@ sources:
 > Automated resiliency testing and DR failover testing enabled in production environment
 
 > by the time you are at level five you are completely automated and literally the only support that someone in sre or SiteOps have to give you is a few hours of engineer time to ensure that the right buttons are clicked.
+
+## Integrate Automatic Resiliency Testing in CI/CD
+
+## Automate Resiliency and Disaster Recovery Failover Testing in Production
 
 ## Resiliency Stage 5: Implementation Example
 

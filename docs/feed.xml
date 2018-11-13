@@ -1,255 +1,6 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.4">Jekyll</generator><link href="http://localhost:4000/gremlin-blog-posts/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/gremlin-blog-posts/" rel="alternate" type="text/html" /><updated>2018-11-12T18:52:47-08:00</updated><id>http://localhost:4000/gremlin-blog-posts/feed.xml</id><title type="html">Gremlin: Blog Posts</title><subtitle>An amazing website.</subtitle><author><name>Gabe Wyatt</name></author><entry><title type="html">Create a Serverless Twitter Bot with Airbrake and AWS Lambda - Part 1</title><link href="http://localhost:4000/gremlin-blog-posts/serverless-twitter-bot-aws-lambda/" rel="alternate" type="text/html" title="Create a Serverless Twitter Bot with Airbrake and AWS Lambda - Part 1" /><published>2018-10-19T00:00:00-07:00</published><updated>2018-10-19T00:00:00-07:00</updated><id>http://localhost:4000/gremlin-blog-posts/serverless-twitter-bot-aws-lambda</id><content type="html" xml:base="http://localhost:4000/gremlin-blog-posts/serverless-twitter-bot-aws-lambda/">&lt;p&gt;In this series, you’ll learn how to create a fully-automated, NodeJS, serverless Twitter bot that can tweet links to posts from your favorite blog or RSS feed.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.4">Jekyll</generator><link href="http://localhost:4000/gremlin-blog-posts/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/gremlin-blog-posts/" rel="alternate" type="text/html" /><updated>2018-11-12T23:10:18-08:00</updated><id>http://localhost:4000/gremlin-blog-posts/feed.xml</id><title type="html">Gremlin: Blog Posts</title><subtitle>An amazing website.</subtitle><author><name>Gabe Wyatt</name></author><entry><title type="html">Chaos Engineering Through Staged Resiliency - Stage 3</title><link href="http://localhost:4000/gremlin-blog-posts/chaos-engineering/chaos-engineering-through-staged-resiliency-stage-3/" rel="alternate" type="text/html" title="Chaos Engineering Through Staged Resiliency - Stage 3" /><published>2018-10-11T00:00:00-07:00</published><updated>2018-10-11T00:00:00-07:00</updated><id>http://localhost:4000/gremlin-blog-posts/chaos-engineering/chaos-engineering-through-staged-resiliency-stage-3</id><content type="html" xml:base="http://localhost:4000/gremlin-blog-posts/chaos-engineering/chaos-engineering-through-staged-resiliency-stage-3/">&lt;p&gt;Performing occasional, manual resiliency testing is useful, but your system must be automatically and frequently tested to provide any real sense of stability.  In &lt;a href=&quot;https://www.gremlin.com/blog/chaos-engineering-through-staged-resiliency-stage-2&quot;&gt;Chaos Engineering Through Staged Resiliency - Stage 2&lt;/a&gt; we focused on critical dependency failure testing in non-production environments.  To work through &lt;strong&gt;Resiliency Stage 3&lt;/strong&gt; your team will need to begin automating these test and experiments.  This allows the testing frequency to improve dramatically and reduces the reliance manual processes.&lt;/p&gt;
 
-&lt;p&gt;In part one of our three-part series, you’ll create a bot and configure it to manually create tweets.  In &lt;a href=&quot;https://airbrake.io/blog/nodejs/serverless-twitter-bot-airbrake-lambda-part-2&quot;&gt;part two&lt;/a&gt; you’ll learn how to add real-time error monitoring by integrating &lt;a class=&quot;js-cta-utm&quot; href=&quot;https://airbrake.io/languages/nodejs-error-monitoring?utm_source=blog&amp;amp;utm_medium=end-post&amp;amp;utm_campaign=airbrake-serverless-twitter-bot&quot;&gt;Airbrake’s Node.js&lt;/a&gt; software.  Finally, &lt;a href=&quot;https://airbrake.io/blog/nodejs/serverless-twitter-bot-airbrake-lambda-part-3&quot;&gt;part three&lt;/a&gt; will walk you through the process of automating your bot by integrating it into the serverless AWS Lambda platform.  Let’s get to it!&lt;/p&gt;
-
-&lt;h2 id=&quot;initialize-your-project&quot;&gt;Initialize Your Project&lt;/h2&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;Create a new Node project.&lt;/p&gt;
-
-    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; npm init
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Install the &lt;a href=&quot;https://www.npmjs.com/package/twitter&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;twitter&lt;/code&gt;&lt;/a&gt; NPM package, which will simplify communication with the Twitter API.&lt;/p&gt;
-
-    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; npm &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;twitter &lt;span class=&quot;nt&quot;&gt;--save&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&quot;working-with-secret-api-credentials&quot;&gt;Working with Secret API Credentials&lt;/h2&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;To obtain a set of Twitter API credentials log into your Twitter account and navigate to &lt;a href=&quot;https://apps.twitter.com/&quot;&gt;https://apps.twitter.com/&lt;/a&gt;.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Click &lt;code class=&quot;highlighter-rouge&quot;&gt;Create New App&lt;/code&gt; then fill out the form.  For example:&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Name&lt;/code&gt;: AirbrakeArticles&lt;/li&gt;
-      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Description&lt;/code&gt;: Tweeting random Airbrake.io articles!&lt;/li&gt;
-      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Website&lt;/code&gt;: https://github.com/GabeStah/twitter-bot&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Agree to the terms of use to create your app.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Click on the &lt;code class=&quot;highlighter-rouge&quot;&gt;Keys and Access Tokens&lt;/code&gt; tab at the top, then click &lt;code class=&quot;highlighter-rouge&quot;&gt;Create my access token&lt;/code&gt; at the bottom.  Per the &lt;a href=&quot;https://www.npmjs.com/package/twitter&quot;&gt;Twitter NPM&lt;/a&gt; documentation, you’ll need the &lt;code class=&quot;highlighter-rouge&quot;&gt;consumer_key&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;consumer_secret&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;access_token_key&lt;/code&gt;, and &lt;code class=&quot;highlighter-rouge&quot;&gt;access_token_secret&lt;/code&gt; values from Twitter.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Open the &lt;code class=&quot;highlighter-rouge&quot;&gt;twitter-api-credentials.js&lt;/code&gt; and paste the following template into it, adding your own credentials into each field.&lt;/p&gt;
-
-    &lt;div class=&quot;language-js highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;c1&quot;&gt;// twitter-api-credentials.js&lt;/span&gt;
- &lt;span class=&quot;nx&quot;&gt;module&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;exports&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-     &lt;span class=&quot;na&quot;&gt;consumer_key&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-     &lt;span class=&quot;na&quot;&gt;consumer_secret&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-     &lt;span class=&quot;na&quot;&gt;access_token_key&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-     &lt;span class=&quot;na&quot;&gt;access_token_secret&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&quot;&lt;/span&gt;
- &lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Finally, to avoid publicly exposing your Twitter authentication API keys, add the &lt;code class=&quot;highlighter-rouge&quot;&gt;twitter-api-credentials.js&lt;/code&gt; file to your &lt;a href=&quot;https://git-scm.com/docs/gitignore&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;.gitignore&lt;/code&gt;&lt;/a&gt; file.&lt;/p&gt;
-
-    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;twitter-api-credentials.js&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;gt;&lt;/span&gt; .gitignore
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&quot;creating-a-basic-app&quot;&gt;Creating a Basic App&lt;/h2&gt;
-
-&lt;p&gt;The next step to properly test your application logic is to ensure that the Twitter API connection can be established.&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;Start by creating the base &lt;code class=&quot;highlighter-rouge&quot;&gt;index.js&lt;/code&gt; application file for your Node project.&lt;/p&gt;
-
-    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;nb&quot;&gt;touch &lt;/span&gt;index.js
- nano index.js
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Require&lt;/code&gt; the &lt;code class=&quot;highlighter-rouge&quot;&gt;twitter-api-credentials.js&lt;/code&gt; credentials file, along with the &lt;code class=&quot;highlighter-rouge&quot;&gt;twitter&lt;/code&gt; NPM module.  Additionally, instantiate a new &lt;code class=&quot;highlighter-rouge&quot;&gt;Twitter&lt;/code&gt; object and pass the generated credentials.&lt;/p&gt;
-
-    &lt;div class=&quot;language-js highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;c1&quot;&gt;// index.js&lt;/span&gt;
- &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;twitter_credentials&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'./twitter-api-credentials'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
- &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Twitter&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'twitter'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-
- &lt;span class=&quot;c1&quot;&gt;// Use exported secret credentials.&lt;/span&gt;
- &lt;span class=&quot;kd&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;twitter&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Twitter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;twitter_credentials&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-
-    &lt;p class=&quot;notice--tip&quot;&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;twitter&lt;/code&gt; NPM module provides convenience methods for sending &lt;code class=&quot;highlighter-rouge&quot;&gt;GET&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;POST&lt;/code&gt; HTTP method requests to the &lt;a href=&quot;https://developer.twitter.com/en/docs&quot;&gt;Twitter API&lt;/a&gt;.  For example, if you wish to post a tweet you must send a &lt;code class=&quot;highlighter-rouge&quot;&gt;POST&lt;/code&gt; request to the &lt;code class=&quot;highlighter-rouge&quot;&gt;statuses/update&lt;/code&gt; API endpoint, as shown in the &lt;a href=&quot;https://developer.twitter.com/en/docs/tweets/post-and-engage/api-reference/post-statuses-update&quot;&gt;official documentation&lt;/a&gt;.  Check out &lt;a href=&quot;https://developer.twitter.com/en/docs/basics/getting-started&quot;&gt;Twitter API Getting Started&lt;/a&gt; for more details.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;To perform a simple test tweet of &lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;Am I a robot?&quot;&lt;/code&gt; add the following to &lt;code class=&quot;highlighter-rouge&quot;&gt;index.js&lt;/code&gt;.&lt;/p&gt;
-
-    &lt;div class=&quot;language-js highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;c1&quot;&gt;// Perform a test tweet.&lt;/span&gt;
- &lt;span class=&quot;nx&quot;&gt;twitter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;post&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
-     &lt;span class=&quot;s1&quot;&gt;'statuses/update'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-     &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-         &lt;span class=&quot;na&quot;&gt;status&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'Am I a robot?'&lt;/span&gt;
-     &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
-     &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;error&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;tweet&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;response&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-         &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;error&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-             &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;error&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-             &lt;span class=&quot;k&quot;&gt;throw&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;error&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-         &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-         &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'---- TWEET ----'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-         &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;tweet&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-         &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'---- RESPONSE ----'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-         &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;response&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-     &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
- &lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Verify that your Node app works as expected.  If everything was setup correctly you’ll see the output in the console log to confirm it works.  You can also refresh your Twitter account page to see the new &lt;a href=&quot;https://twitter.com/AirbrakeArticle/status/946880037424209921&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;Am I a robot?&quot;&lt;/code&gt; tweet&lt;/a&gt;.&lt;/p&gt;
-
-    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;node index.js
- &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; created_at: &lt;span class=&quot;s1&quot;&gt;'Fri Dec 29 23:12:53 +0000 2017'&lt;/span&gt;,
- &lt;span class=&quot;nb&quot;&gt;id&lt;/span&gt;: 946881740039057400,
- id_str: &lt;span class=&quot;s1&quot;&gt;'946881740039057408'&lt;/span&gt;,
- text: &lt;span class=&quot;s1&quot;&gt;'Am I a robot?'&lt;/span&gt;,
- truncated: &lt;span class=&quot;nb&quot;&gt;false&lt;/span&gt;,
- ...
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&quot;making-your-bot-more-interesting&quot;&gt;Making Your Bot More Interesting&lt;/h2&gt;
-
-&lt;p&gt;Alright, you’ve got a working shell of a bot, but it doesn’t do anything very exciting.  In this section, you’ll configure the bot to tweet links to random posts obtained from an RSS, Atom, or RDF feed.  The example bot uses the &lt;a href=&quot;https://airbrake.io/blog/feed/atom&quot;&gt;https://airbrake.io/blog/feed/atom&lt;/a&gt; feed, but you may use any valid feed URL.&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;Start by installing the &lt;a href=&quot;https://www.npmjs.com/package/feedparser&quot;&gt;feedparser&lt;/a&gt; NPM module, which simplifies the process of retrieving the latest feed data.&lt;/p&gt;
-
-    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; npm &lt;span class=&quot;nb&quot;&gt;install&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--save&lt;/span&gt; feedparser
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Modify &lt;code class=&quot;highlighter-rouge&quot;&gt;index.js&lt;/code&gt; to &lt;code class=&quot;highlighter-rouge&quot;&gt;require&lt;/code&gt; the &lt;code class=&quot;highlighter-rouge&quot;&gt;feedparser&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;request&lt;/code&gt; modules.  The &lt;code class=&quot;highlighter-rouge&quot;&gt;index.js&lt;/code&gt; file should look something like this, with the URL to your desired Atom feed.&lt;/p&gt;
-
-    &lt;div class=&quot;language-js highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;c1&quot;&gt;// index.js&lt;/span&gt;
- &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;FeedParser&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'feedparser'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
- &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;request&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'request'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
- &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;twitter_credentials&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'./twitter-api-credentials'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
- &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Twitter&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'twitter'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-
- &lt;span class=&quot;kd&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;feedparser&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;FeedParser&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
- &lt;span class=&quot;kd&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;feed&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;request&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'https://airbrake.io/blog/feed/atom'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-
- &lt;span class=&quot;c1&quot;&gt;// Use exported secret credentials.&lt;/span&gt;
- &lt;span class=&quot;kd&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;twitter&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Twitter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;twitter_credentials&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-
- &lt;span class=&quot;c1&quot;&gt;// Article collection.&lt;/span&gt;
- &lt;span class=&quot;kd&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;articles&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[];&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Because the request is asynchronous the bot needs to respond to a few different events to process the incoming feed request, so append the following to &lt;code class=&quot;highlighter-rouge&quot;&gt;index.js&lt;/code&gt;.&lt;/p&gt;
-
-    &lt;div class=&quot;language-js highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;cm&quot;&gt;/**
- * Fires when feed request receives a response from server.
- */&lt;/span&gt;
- &lt;span class=&quot;nx&quot;&gt;feed&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;on&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'response'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;response&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-     &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;response&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;statusCode&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!==&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;200&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-         &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;emit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'error'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Error&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'Bad status code'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;
-     &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-         &lt;span class=&quot;c1&quot;&gt;// Pipes request to feedparser for processing.&lt;/span&gt;
-         &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;pipe&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;feedparser&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-     &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
- &lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
-
- &lt;span class=&quot;cm&quot;&gt;/**
- * Invoked when feedparser completes processing request.
- */&lt;/span&gt;
- &lt;span class=&quot;nx&quot;&gt;feedparser&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;on&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'end'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-     &lt;span class=&quot;nx&quot;&gt;tweetRandomArticle&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;articles&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
- &lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
-
- &lt;span class=&quot;cm&quot;&gt;/**
- * Executes when feedparser contains readable stream data.
- */&lt;/span&gt;
- &lt;span class=&quot;nx&quot;&gt;feedparser&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;on&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'readable'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-     &lt;span class=&quot;kd&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;article&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-     &lt;span class=&quot;c1&quot;&gt;// Iterate through all items in stream.&lt;/span&gt;
-     &lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;article&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;read&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-         &lt;span class=&quot;c1&quot;&gt;// Output each Article to console.&lt;/span&gt;
-         &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;`Gathered '&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;article&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;' published &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;article&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;date&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-         &lt;span class=&quot;c1&quot;&gt;// Add Article to collection.&lt;/span&gt;
-         &lt;span class=&quot;nx&quot;&gt;articles&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;push&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;article&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-     &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
- &lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;tweetArticle(article)&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;tweetRandomArticle()&lt;/code&gt; helper functions act as simple wrappers for calling &lt;code class=&quot;highlighter-rouge&quot;&gt;twitter&lt;/code&gt; module methods to send a &lt;code class=&quot;highlighter-rouge&quot;&gt;POST&lt;/code&gt; request to the &lt;code class=&quot;highlighter-rouge&quot;&gt;statuses/update&lt;/code&gt; API endpoint.&lt;/p&gt;
-
-    &lt;div class=&quot;language-js highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;cm&quot;&gt;/**
- * Tweet the passed Article object.
- *
- * @param article Article to be tweeted.
- */&lt;/span&gt;
- &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;tweetArticle&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;article&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-     &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;article&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-     &lt;span class=&quot;nx&quot;&gt;twitter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;post&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
-         &lt;span class=&quot;s1&quot;&gt;'statuses/update'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-         &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-             &lt;span class=&quot;na&quot;&gt;status&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;article&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;article&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;link&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;`&lt;/span&gt;
-         &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
-         &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;error&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;tweet&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;response&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-             &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;error&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-                 &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;error&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-                 &lt;span class=&quot;k&quot;&gt;throw&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;error&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-             &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-             &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'---- TWEETED ARTICLE ----'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-             &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;tweet&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-         &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-     &lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
- &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
- &lt;span class=&quot;cm&quot;&gt;/**
- * Tweet a random Article.
- */&lt;/span&gt;
- &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;tweetRandomArticle&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-     &lt;span class=&quot;c1&quot;&gt;// Tweet a random article.&lt;/span&gt;
-     &lt;span class=&quot;nx&quot;&gt;tweetArticle&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;articles&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;Math&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;floor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;Math&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;random&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;articles&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)])&lt;/span&gt;
- &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;Everything is now setup, so it’s time to run your application and see it in action.&lt;/p&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;node index.js
-Gathered &lt;span class=&quot;s1&quot;&gt;'410 Gone Error: What It Is and How to Fix It'&lt;/span&gt; published Thu Dec 28 2017 19:09:32 GMT-0800 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;PST&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-Gathered &lt;span class=&quot;s1&quot;&gt;'Python Exception Handling &amp;amp;#8211; EOFError'&lt;/span&gt; published Wed Dec 27 2017 19:21:25 GMT-0800 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;PST&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-Gathered &lt;span class=&quot;s1&quot;&gt;'Techniques for Preventing Software Bugs'&lt;/span&gt; published Tue Dec 26 2017 14:23:52 GMT-0800 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;PST&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-...
-&lt;span class=&quot;nt&quot;&gt;----&lt;/span&gt; TWEETED ARTICLE &lt;span class=&quot;nt&quot;&gt;----&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; created_at: &lt;span class=&quot;s1&quot;&gt;'Sat Dec 30 00:10:26 +0000 2017'&lt;/span&gt;,
-  &lt;span class=&quot;nb&quot;&gt;id&lt;/span&gt;: 946896220181561300,
-  id_str: &lt;span class=&quot;s1&quot;&gt;'946896220181561344'&lt;/span&gt;,
-  text: &lt;span class=&quot;s1&quot;&gt;'303 See Other: What It Is and How to Fix It https://t.co/UaIf0uYeUS'&lt;/span&gt;,
-...
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Awesome!  The bot parsed the feed, captured the latest posts, selected a random post, and automatically tweeted the post title and URL (e.g. &lt;a href=&quot;https://twitter.com/AirbrakeArticle/status/946896220181561344&quot;&gt;AirbrakeArticle&lt;/a&gt;).&lt;/p&gt;
-
-&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
-
-&lt;p&gt;You now have a basic Twitter bot up and running.  Next week’s post will show you how to refine your bot and make it better suited to the real-world by implementing real-time error monitoring via &lt;a class=&quot;js-cta-utm&quot; href=&quot;https://airbrake.io/languages/nodejs-error-monitoring?utm_source=blog&amp;amp;utm_medium=end-post&amp;amp;utm_campaign=airbrake-serverless-twitter-bot&quot;&gt;Airbrake’s NodeJS&lt;/a&gt; package.  After that, you’ll setup AWS Lambda so your bot can run automatically and serverlessly.  Stay tuned!&lt;/p&gt;</content><author><name>Gabe Wyatt</name></author><summary type="html">How to create a serverless Twitter bot with Airbrake and AWS Lambda.</summary></entry><entry><title type="html">Chaos Engineering Through Staged Resiliency - Stage 3</title><link href="http://localhost:4000/gremlin-blog-posts/chaos-engineering/chaos-engineering-through-staged-resiliency-stage-3/" rel="alternate" type="text/html" title="Chaos Engineering Through Staged Resiliency - Stage 3" /><published>2018-10-11T00:00:00-07:00</published><updated>2018-10-11T00:00:00-07:00</updated><id>http://localhost:4000/gremlin-blog-posts/chaos-engineering/chaos-engineering-through-staged-resiliency-stage-3</id><content type="html" xml:base="http://localhost:4000/gremlin-blog-posts/chaos-engineering/chaos-engineering-through-staged-resiliency-stage-3/">&lt;p&gt;Performing occasional, manual resiliency testing is useful, but your system must be automatically and frequently tested to provide any real sense of stability.  In &lt;a href=&quot;https://www.gremlin.com/blog/chaos-engineering-through-staged-resiliency-stage-2&quot;&gt;Chaos Engineering Through Staged Resiliency - Stage 2&lt;/a&gt; we focused on critical dependency failure testing in non-production environments.  To work through &lt;strong&gt;Resiliency Stage 3&lt;/strong&gt; your team will need to begin automating these test and experiments.  This allows the testing frequency to improve dramatically and no longer rely on (quite as much) manual interaction.&lt;/p&gt;
-
-&lt;h2 id=&quot;resiliency-stage-3-minimal-automation-and-improving-test-frequency&quot;&gt;Resiliency Stage 3: Minimal Automation and Improving Test Frequency&lt;/h2&gt;
-
-&lt;h3 id=&quot;prerequisites&quot;&gt;Prerequisites&lt;/h3&gt;
+&lt;h2 id=&quot;prerequisites&quot;&gt;Prerequisites&lt;/h2&gt;
 
 &lt;ul&gt;
   &lt;li&gt;Creation and agreement on [Disaster Recovery and Dependency Failover Playbooks][#stage-1#prerequisites].&lt;/li&gt;
@@ -257,11 +8,17 @@ Gathered &lt;span class=&quot;s1&quot;&gt;'Techniques for Preventing Software Bu
   &lt;li&gt;Completion of &lt;a href=&quot;https://www.gremlin.com/blog/chaos-engineering-through-staged-resiliency-stage-2&quot;&gt;Resiliency Stage 2&lt;/a&gt;.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h3 id=&quot;perform-frequent-semi-automated-tests&quot;&gt;Perform Frequent, Semi-Automated Tests&lt;/h3&gt;
+&lt;h2 id=&quot;perform-frequent-semi-automated-tests&quot;&gt;Perform Frequent, Semi-Automated Tests&lt;/h2&gt;
 
-&lt;h3 id=&quot;publish-test-results&quot;&gt;Publish Test Results&lt;/h3&gt;
+&lt;p&gt;There’s no more putting it off – if you haven’t already done so, this resiliency stage is where you begin integrating automation into your testing procedures.&lt;/p&gt;
 
-&lt;h3 id=&quot;execute-a-resiliency-experiment-in-production&quot;&gt;Execute a Resiliency Experiment in Production&lt;/h3&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;Use Gremlin or similar Chaos Engineering tools.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;publish-test-results&quot;&gt;Publish Test Results&lt;/h2&gt;
+
+&lt;h2 id=&quot;execute-a-resiliency-experiment-in-production&quot;&gt;Execute a Resiliency Experiment in Production&lt;/h2&gt;
 
 &lt;blockquote&gt;
   &lt;p&gt;Level 3 — manual + automated — Regular exercises
@@ -277,9 +34,25 @@ Run at least one resiliency exercise (failure injection) in production environme
 
 &lt;h2 id=&quot;resiliency-stage-3-implementation-example&quot;&gt;Resiliency Stage 3: Implementation Example&lt;/h2&gt;
 
-&lt;p&gt;(TODO)&lt;/p&gt;
+&lt;h3 id=&quot;perform-frequent-semi-automated-tests-1&quot;&gt;Perform Frequent, Semi-Automated Tests&lt;/h3&gt;
 
-&lt;h2 id=&quot;resiliency-stage-2-completion&quot;&gt;Resiliency Stage 2 Completion&lt;/h2&gt;</content><author><name>Gabe Wyatt</name></author><category term="resiliency" /><category term="staging" /></entry><entry><title type="html">Chaos Engineering Through Staged Resiliency - Stage 2</title><link href="http://localhost:4000/gremlin-blog-posts/chaos-engineering/chaos-engineering-through-staged-resiliency-stage-2/" rel="alternate" type="text/html" title="Chaos Engineering Through Staged Resiliency - Stage 2" /><published>2018-10-11T00:00:00-07:00</published><updated>2018-10-11T00:00:00-07:00</updated><id>http://localhost:4000/gremlin-blog-posts/chaos-engineering/chaos-engineering-through-staged-resiliency-stage-2</id><content type="html" xml:base="http://localhost:4000/gremlin-blog-posts/chaos-engineering/chaos-engineering-through-staged-resiliency-stage-2/">&lt;p&gt;In &lt;a href=&quot;https://www.gremlin.com/blog/chaos-engineering-through-staged-resiliency-stage-1&quot;&gt;Chaos Engineering Through Staged Resiliency - Stage 1&lt;/a&gt; we explored how engineering teams at Walmart successfully identify and combat unexpected system failure using a series of “resiliency stages.”  We also demonstrated the process of going through &lt;strong&gt;Stage 1&lt;/strong&gt; for the &lt;strong&gt;Bookstore&lt;/strong&gt; API sample application.  We showed that completing &lt;strong&gt;Resiliency Stage 1&lt;/strong&gt; requires the definition of a disaster recovery failover playbook, dependency failover playbooks, team-wide agreement on said playbooks, and the execution of a manual failover exercise.&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Status: &lt;strong&gt;Complete&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;execute-a-resiliency-experiment-in-production-1&quot;&gt;Execute a Resiliency Experiment in Production&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Status: &lt;strong&gt;Complete&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;publish-test-results-and-track-over-time&quot;&gt;Publish Test Results and Track Over Time&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Status: &lt;strong&gt;Complete&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;resiliency-stage-3-completion&quot;&gt;Resiliency Stage 3 Completion&lt;/h2&gt;</content><author><name>Gabe Wyatt</name></author><category term="resiliency" /><category term="staging" /></entry><entry><title type="html">Chaos Engineering Through Staged Resiliency - Stage 2</title><link href="http://localhost:4000/gremlin-blog-posts/chaos-engineering/chaos-engineering-through-staged-resiliency-stage-2/" rel="alternate" type="text/html" title="Chaos Engineering Through Staged Resiliency - Stage 2" /><published>2018-10-11T00:00:00-07:00</published><updated>2018-10-11T00:00:00-07:00</updated><id>http://localhost:4000/gremlin-blog-posts/chaos-engineering/chaos-engineering-through-staged-resiliency-stage-2</id><content type="html" xml:base="http://localhost:4000/gremlin-blog-posts/chaos-engineering/chaos-engineering-through-staged-resiliency-stage-2/">&lt;p&gt;In &lt;a href=&quot;https://www.gremlin.com/blog/chaos-engineering-through-staged-resiliency-stage-1&quot;&gt;Chaos Engineering Through Staged Resiliency - Stage 1&lt;/a&gt; we explored how engineering teams at Walmart successfully identify and combat unexpected system failure using a series of “resiliency stages.”  We also demonstrated the process of going through &lt;strong&gt;Stage 1&lt;/strong&gt; for the &lt;strong&gt;Bookstore&lt;/strong&gt; API sample application.  We showed that completing &lt;strong&gt;Resiliency Stage 1&lt;/strong&gt; requires the definition of a disaster recovery failover playbook, dependency failover playbooks, team-wide agreement on said playbooks, and the execution of a manual failover exercise.&lt;/p&gt;
 
 &lt;p&gt;In this second part we’ll dive into the components of &lt;strong&gt;Resiliency Stage 2&lt;/strong&gt;, which focuses on critical dependency failure testing in non-production environments.&lt;/p&gt;
 
@@ -290,15 +63,15 @@ Run at least one resiliency exercise (failure injection) in production environme
   &lt;li&gt;Completion of &lt;a href=&quot;https://www.gremlin.com/blog/chaos-engineering-through-staged-resiliency-stage-1&quot;&gt;Resiliency Stage 1&lt;/a&gt;.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h3 id=&quot;perform-critical-dependency-failure-tests-in-non-production&quot;&gt;Perform Critical Dependency Failure Tests in Non-Production&lt;/h3&gt;
+&lt;h2 id=&quot;perform-critical-dependency-failure-tests-in-non-production&quot;&gt;Perform Critical Dependency Failure Tests in Non-Production&lt;/h2&gt;
 
 &lt;p&gt;The most important aspect of &lt;strong&gt;Resiliency Stage 2&lt;/strong&gt; is testing the resilience of your systems when critical dependencies fail.  However, this early in the process the system can’t be expected to handle such failures in a production environment, so these tests should be performed in a non-production setting.&lt;/p&gt;
 
-&lt;h4 id=&quot;manual-testing-is-okay&quot;&gt;Manual Testing Is Okay&lt;/h4&gt;
+&lt;h3 id=&quot;manual-testing-is-okay&quot;&gt;Manual Testing Is Okay&lt;/h3&gt;
 
 &lt;p&gt;Eventually, all experiments should be executed automatically, with little to no human intervention required.  However, during &lt;strong&gt;Resiliency Stage 2&lt;/strong&gt; the team should feel comfortable performing manual tests.  The goal here isn’t to test the &lt;em&gt;automation&lt;/em&gt; of the system, but rather to determine the outcome and system-wide impact whenever a critical dependency fails.&lt;/p&gt;
 
-&lt;h3 id=&quot;publish-test-results&quot;&gt;Publish Test Results&lt;/h3&gt;
+&lt;h2 id=&quot;publish-test-results&quot;&gt;Publish Test Results&lt;/h2&gt;
 
 &lt;p&gt;After every critical dependency failure test is performed the results should be globally published to the entire team.  This allows every team member to closely scrutinize the outcome of a given test.  This encourages feedback and communication, which naturally provides insightful evaluation from the members that are best equipped to analyze the test results.&lt;/p&gt;
 
@@ -542,6 +315,10 @@ Run at least one resiliency exercise (failure injection) in production environme
 
 &lt;h3 id=&quot;perform-critical-dependency-failure-tests-in-non-production-1&quot;&gt;Perform Critical Dependency Failure Tests in Non-Production&lt;/h3&gt;
 
+&lt;ul&gt;
+  &lt;li&gt;Status: &lt;strong&gt;Complete&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
 &lt;h4 id=&quot;database-failure-test&quot;&gt;Database Failure Test&lt;/h4&gt;
 
 &lt;p&gt;With Multi-AZ configured on the Amazon RDS instance we are now ready to perform a failover test for this critical dependency.&lt;/p&gt;
@@ -748,7 +525,44 @@ Run at least one resiliency exercise (failure injection) in production environme
 
 &lt;h3 id=&quot;publish-test-results-1&quot;&gt;Publish Test Results&lt;/h3&gt;
 
+&lt;ul&gt;
+  &lt;li&gt;Status: &lt;strong&gt;Complete&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
 &lt;p&gt;Now that both critical dependencies have been tested we’ll publish the results to the entire team, so everyone can keep tabs on the resiliency progress of the project.&lt;/p&gt;
+
+&lt;p&gt;In this case, both the &lt;a href=&quot;#database-failure-test&quot;&gt;Database Failure Test&lt;/a&gt; and &lt;a href=&quot;#cdn-failure-test&quot;&gt;CDN Failure Test&lt;/a&gt; were performed manually within less than 15 minutes.  Therefore, we can safely update some of the playbook information created during the prerequisite phase of &lt;a href=&quot;&quot;&gt;Resiliency Stage 1&lt;/a&gt; and reduce the critical dependency RTO/RPO targets significantly.  Even a conservative estimate of &lt;code class=&quot;highlighter-rouge&quot;&gt;1 hour&lt;/code&gt; is a massive improvement to resiliency and reduction to potential support costs, and we’re only through the second Stage!&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Dependency&lt;/th&gt;
+      &lt;th&gt;Criticality Period&lt;/th&gt;
+      &lt;th&gt;Manual Workaround&lt;/th&gt;
+      &lt;th&gt;RTO&lt;/th&gt;
+      &lt;th&gt;RPO&lt;/th&gt;
+      &lt;th&gt;Child Dependencies&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Database&lt;/td&gt;
+      &lt;td&gt;Always&lt;/td&gt;
+      &lt;td&gt;Manual verification of Amazon RDS Multi-AZ secondary instance failover.&lt;/td&gt;
+      &lt;td&gt;1&lt;/td&gt;
+      &lt;td&gt;1&lt;/td&gt;
+      &lt;td&gt;N/A&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;CDN&lt;/td&gt;
+      &lt;td&gt;Always&lt;/td&gt;
+      &lt;td&gt;Manual verification of secondary Amazon S3 bucket failover DNS routing.&lt;/td&gt;
+      &lt;td&gt;1&lt;/td&gt;
+      &lt;td&gt;1&lt;/td&gt;
+      &lt;td&gt;N/A&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
 
 &lt;h2 id=&quot;resiliency-stage-2-completion&quot;&gt;Resiliency Stage 2 Completion&lt;/h2&gt;
 
@@ -756,7 +570,9 @@ Run at least one resiliency exercise (failure injection) in production environme
 
 &lt;p&gt;Creating resilient software is a fundamental necessity within modern cloud applications and architectures.  As systems become more distributed the potential for unplanned outages and unexpected failure significantly increases.  Thankfully, Chaos and Resilience Engineering techniques are quickly gaining traction within the community.  &lt;a href=&quot;https://coggle.it/diagram/WiKceGDAwgABrmyv/t/chaos-engineering-companies%2C-people%2C-tools-practices&quot;&gt;Many organizations&lt;/a&gt; – both big and small – have embraced Chaos Engineering over the last few years.  In his fascinating &lt;a href=&quot;https://chaosconf.splashthat.com/&quot;&gt;ChaosConf 2018&lt;/a&gt; talk titled &lt;a href=&quot;https://www.youtube.com/watch?v=4Gy_5EQMrB4&quot;&gt;&lt;em&gt;Practicing Chaos Engineering at Walmart&lt;/em&gt;&lt;/a&gt;, Walmart’s Director of Engineering Vilas Veeraraghavan outlines how he and the hundreds of engineering teams at Walmart have implemented Resilience Engineering.  By creating a robust series of “levels” or “stages” that each engineering team can work through, Walmart is able to progressively improve system resiliency while dramatically reducing support costs.&lt;/p&gt;
 
-&lt;p&gt;This blog series expands on Vilas’ and Walmart’s techniques by diving deep into the five &lt;strong&gt;Stages of Resiliency&lt;/strong&gt;.  Each post examines the necessary components of a stage, describes how those components are evaluated and assembled, and outlines the step-by-step process necessary to move from one stage to the next.  This series also digs into the specific implementation of each stage by going through the entire process with a real-world (albeit simple) API application hosted on AWS.  We’ll go through everything from defining and executing disaster recovery playbook scenarios to improving system architecture and reducing RTO, RPO, and applicable support costs for this example app.&lt;/p&gt;
+&lt;p&gt;This blog series expands on Vilas’ and Walmart’s techniques by diving deep into the five &lt;strong&gt;Stages of Resiliency&lt;/strong&gt;.  Each post examines the necessary components of a stage, describes how those components are evaluated and assembled, and outlines the step-by-step process necessary to move from one stage to the next.&lt;/p&gt;
+
+&lt;p&gt;This series also digs into the specific implementation of each stage by progressing through the entire process with a real-world, fully-functional API application hosted on AWS.  We’ll go through everything from defining and executing disaster recovery playbook scenarios to improving system architecture and reducing RTO, RPO, and applicable support costs for this example app.&lt;/p&gt;
 
 &lt;p&gt;With a bit of adjustment for your own organizational needs, you and your team can implement similar practices to quickly add Chaos Engineering to your own systems with relative ease.  After climbing through all five stages your system and its deployment will be almost entirely automated and will feature significant resiliency testing and robust disaster recovery failover.&lt;/p&gt;
 
@@ -799,8 +615,8 @@ Run at least one resiliency exercise (failure injection) in production environme
 &lt;p&gt;Most disaster recovery playbooks define the goals and allotted impact of a given failure using two common terms: &lt;strong&gt;Recovery Time Objective&lt;/strong&gt; and &lt;strong&gt;Recovery Point Objective&lt;/strong&gt;.&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;Recovery Time Objective&lt;/strong&gt;: RTO defines the maximum period of time in which the functionality of a failed service should be restored.  For example, if a service with an RTO of twelve hours experiences an outage at 5:00 PM then functionality should be restored to the service by 5:00 AM the next morning.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Recovery Point Objective&lt;/strong&gt;: RPO defines the maximum period of time during which data can be lost during a service failure.  For example, if a service with an RPO of two hours experiences an outage at 5:00 PM then &lt;em&gt;only&lt;/em&gt; data generated between 3:00 PM and 5:00 PM should be lost – all existing data prior to 3:00 PM should still be intact.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Recovery Time Objective (RTO)&lt;/strong&gt;: The maximum period of time in which the functionality of a failed service should be restored.  For example, if a service with an RTO of twelve hours experiences an outage at 5:00 PM then functionality should be restored to the service by 5:00 AM the next morning.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Recovery Point Objective (RPO)&lt;/strong&gt;: The maximum period of time during which data can be lost during a service failure.  For example, if a service with an RPO of two hours experiences an outage at 5:00 PM then &lt;em&gt;only&lt;/em&gt; data generated between 3:00 PM and 5:00 PM should be lost – all existing data prior to 3:00 PM should still be intact.&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p class=&quot;text-center&quot;&gt;&lt;img alt=&quot;RTO &amp;amp; RPO Diagrammed - Courtesy of Wikipedia&quot; src=&quot;/gremlin-blog-posts/assets/chaos-engineering/chaos-engineering-through-staged-resiliency/stage-1/rto-rpo-example-wikipedia-2294d0f2a372d637a46304bc07fa57dd380b7cae63a3b16d1c79788378750ef7.png&quot; class=&quot;align-center&quot; /&gt;
@@ -816,7 +632,7 @@ Run at least one resiliency exercise (failure injection) in production environme
 
 &lt;h3 id=&quot;team-wide-agreement-on-playbooks&quot;&gt;Team-Wide Agreement on Playbooks&lt;/h3&gt;
 
-&lt;p&gt;With unfettered access to all documentation, the next step is to ensure the entire team agrees with all documented information as its laid out.  If there is disagreement about the best way to approach a given failover scenario or the risk and potential impact of a non-critical dependency failure, this is the best time to suss out those differences of opinion and come to a unanimous “best” solution.  A healthy, active debate provides the team with a deeper understanding of the system and encourages the best ideas and techniques to bubble up to the surface.&lt;/p&gt;
+&lt;p&gt;With unfettered access to all documentation, the next step is to ensure the entire team agrees with all documented information as its laid out.  If there is disagreement about the best way to approach a given failover scenario, or about the risk and potential impact of a non-critical dependency failure, this is the best time to suss out those differences of opinion and come to a unanimous “best” solution.  A healthy, active debate provides the team with a deeper understanding of the system and encourages the best ideas and techniques to bubble up to the surface.&lt;/p&gt;
 
 &lt;p&gt;While the goal is agreement on the playbooks currently laid out, documentation can (and should) be updated in the future as experiments shed new light on the system.  The team should be encouraged and empowered to challenge the norms in order to create a system that is always adapting and evolving to be as resilient as possible.&lt;/p&gt;
 
@@ -828,50 +644,48 @@ Run at least one resiliency exercise (failure injection) in production environme
 
 &lt;h2 id=&quot;resiliency-stage-1-implementation-example&quot;&gt;Resiliency Stage 1: Implementation Example&lt;/h2&gt;
 
-&lt;p&gt;Throughout this series we’ll take a simple yet real-world application through the entire staging process to illustrate how a team progresses through all five resiliency stages.  While every application and system architecture is unique, this example illustrates the basics of implementing every step within a stage, to provide you with a jumping off point for staged resiliency within your own system.&lt;/p&gt;
+&lt;p&gt;Throughout this series, we’ll take a simple yet real-world application through the entire staging process to illustrate how a team might progress their application through all five resiliency stages.  While every application and system architecture is unique, this example illustrates the basics of implementing every step within a stage, to provide you with a jumping off point for staged resiliency within your own system.&lt;/p&gt;
 
-&lt;p&gt;The &lt;strong&gt;Bookstore&lt;/strong&gt; example application is a publicly accessible API for a bookstore.  The API includes two primary endpoints: &lt;code class=&quot;highlighter-rouge&quot;&gt;/authors/&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;/books/&lt;/code&gt;, which can be used to add, update, or remove &lt;strong&gt;Authors&lt;/strong&gt; and &lt;strong&gt;Books&lt;/strong&gt;, respectively.&lt;/p&gt;
+&lt;p&gt;The &lt;a href=&quot;https://github.com/GabeStah/bookstore_api&quot;&gt;&lt;strong&gt;Bookstore&lt;/strong&gt; example application&lt;/a&gt; is a publicly accessible API for a virtual bookstore.  The API includes two primary endpoints: &lt;code class=&quot;highlighter-rouge&quot;&gt;/authors/&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;/books/&lt;/code&gt;, which can be used to add, update, or remove &lt;strong&gt;Authors&lt;/strong&gt; and &lt;strong&gt;Books&lt;/strong&gt;, respectively.&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;Bookstore’s&lt;/strong&gt; architecture consists of three components, all housed within Amazon Web Services.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Bookstore’s&lt;/strong&gt; architecture consists of three core components, all of which are housed within Amazon Web Services.&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;API&lt;/strong&gt;: The API is created with Django and is hosted on an Amazon EC2 instance running Nginx.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;API&lt;/strong&gt;: The API is created with Django and the &lt;a href=&quot;https://www.django-rest-framework.org/&quot;&gt;Django REST Framework&lt;/a&gt; and is hosted on an Amazon EC2 instance running NGINX.&lt;/li&gt;
   &lt;li&gt;&lt;strong&gt;Database&lt;/strong&gt;: A PostgreSQL database handles all data and uses Amazon RDS.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;CDN&lt;/strong&gt;: All static content is pushed to and served from an Amazon S3 bucket.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;CDN&lt;/strong&gt;: All static content is collected in and served from an Amazon S3 bucket.&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p class=&quot;text-center&quot;&gt;&lt;img alt=&quot;Stage 1 - Initial&quot; src=&quot;/gremlin-blog-posts/assets/chaos-engineering/chaos-engineering-through-staged-resiliency/stage-1/stage-1-architecture-09757f8939b8928a7e67174b1608765bba3acc766990411ec05e28a66d641805.png&quot; class=&quot;align-center&quot; /&gt;
 &lt;em&gt;Initial System Architecture&lt;/em&gt;&lt;/p&gt;
 
-&lt;p&gt;The web API endpoint is online at &lt;a href=&quot;http://bookstore.pingpublications.com&quot;&gt;http://bookstore.pingpublications.com&lt;/a&gt;.  The web API, database, and CDN endpoints are DNS-routed via Amazon Route 53 to the underlying Amazon EC2, RDS, and Amazon S3 instances/buckets, respectively.&lt;/p&gt;
+&lt;p&gt;The web API is at the publicly accessible &lt;a href=&quot;http://bookstore.pingpublications.com&quot;&gt;http://bookstore.pingpublications.com&lt;/a&gt; endpoint.  The web API, database, and CDN endpoints are DNS-routed via Amazon Route53 to the underlying Amazon EC2, RDS, and Amazon S3 buckets, respectively.&lt;/p&gt;
 
 &lt;p&gt;Here’s a simple request to the &lt;code class=&quot;highlighter-rouge&quot;&gt;/books/&lt;/code&gt; API endpoint.&lt;/p&gt;
 
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;curl http://bookstore.pingpublications.com/books/ | jq
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;curl http://bookstore.pingpublications.com/books/ | jq
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;s2&quot;&gt;&quot;url&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;http://bookstore.pingpublications.com/books/1/&quot;&lt;/span&gt;,
+    &lt;span class=&quot;s2&quot;&gt;&quot;authors&quot;&lt;/span&gt;: &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;
+      &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;s2&quot;&gt;&quot;url&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;http://bookstore.pingpublications.com/authors/1/&quot;&lt;/span&gt;,
+        &lt;span class=&quot;s2&quot;&gt;&quot;birth_date&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;1947-09-21&quot;&lt;/span&gt;,
+        &lt;span class=&quot;s2&quot;&gt;&quot;first_name&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;Stephen&quot;&lt;/span&gt;,
+        &lt;span class=&quot;s2&quot;&gt;&quot;last_name&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;King&quot;&lt;/span&gt;
+      &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;,
+    &lt;span class=&quot;s2&quot;&gt;&quot;publication_date&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;1978-09-01&quot;&lt;/span&gt;,
+    &lt;span class=&quot;s2&quot;&gt;&quot;title&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;The Stand&quot;&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;Here’s the returned output.&lt;/p&gt;
-
-&lt;div class=&quot;language-json highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-  &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-    &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;url&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;http://bookstore.pingpublications.com/books/1/&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-    &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;authors&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-      &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-        &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;url&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;http://bookstore.pingpublications.com/authors/1/&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-        &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;birth_date&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;1947-09-21&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-        &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;first_name&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Stephen&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-        &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;last_name&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;King&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-      &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-    &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;publication_date&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;1978-09-01&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-    &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;title&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;The Stand&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-  &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p class=&quot;notice--warning&quot;&gt;&lt;strong&gt;WARNING&lt;/strong&gt;: The initial design and architecture for the &lt;strong&gt;Bookstore&lt;/strong&gt; sample application is &lt;em&gt;intentionally&lt;/em&gt; less resilient than a full production-ready system.  This leaves room for improvement as we progress through the resiliency stages.&lt;/p&gt;
+&lt;p class=&quot;notice--warning&quot;&gt;&lt;strong&gt;WARNING&lt;/strong&gt;: The initial design and architecture for the &lt;strong&gt;Bookstore&lt;/strong&gt; sample application is &lt;em&gt;intentionally&lt;/em&gt; less resilient than a full production-ready system.  This leaves room for improvement as progress is made through the resiliency stages throughout this series.&lt;/p&gt;
 
 &lt;h3 id=&quot;prerequisites-1&quot;&gt;Prerequisites&lt;/h3&gt;
+
+&lt;p&gt;We begin the example implementation by defining all prerequisites for the &lt;strong&gt;Bookstore&lt;/strong&gt; app.&lt;/p&gt;
 
 &lt;h4 id=&quot;0-define-system-architecture&quot;&gt;0. Define System Architecture&lt;/h4&gt;
 
@@ -881,11 +695,8 @@ Run at least one resiliency exercise (failure injection) in production environme
   &lt;thead&gt;
     &lt;tr&gt;
       &lt;th&gt;Service&lt;/th&gt;
-      &lt;th&gt;Purpose&lt;/th&gt;
-      &lt;th&gt;Supports&lt;/th&gt;
       &lt;th&gt;Platform&lt;/th&gt;
       &lt;th&gt;Technologies&lt;/th&gt;
-      &lt;th&gt;Identifier&lt;/th&gt;
       &lt;th&gt;AZ&lt;/th&gt;
       &lt;th&gt;VPC&lt;/th&gt;
       &lt;th&gt;Subnet&lt;/th&gt;
@@ -895,11 +706,8 @@ Run at least one resiliency exercise (failure injection) in production environme
   &lt;tbody&gt;
     &lt;tr&gt;
       &lt;td&gt;API&lt;/td&gt;
-      &lt;td&gt;Bookstore API&lt;/td&gt;
-      &lt;td&gt;N/A&lt;/td&gt;
       &lt;td&gt;Amazon EC2&lt;/td&gt;
       &lt;td&gt;Django, Nginx&lt;/td&gt;
-      &lt;td&gt;bookstore-api&lt;/td&gt;
       &lt;td&gt;us-west-2a&lt;/td&gt;
       &lt;td&gt;bookstore-vpc&lt;/td&gt;
       &lt;td&gt;bookstore-subnet-2a&lt;/td&gt;
@@ -907,11 +715,8 @@ Run at least one resiliency exercise (failure injection) in production environme
     &lt;/tr&gt;
     &lt;tr&gt;
       &lt;td&gt;Database&lt;/td&gt;
-      &lt;td&gt;Application data&lt;/td&gt;
-      &lt;td&gt;Bookstore API&lt;/td&gt;
       &lt;td&gt;Amazon RDS&lt;/td&gt;
       &lt;td&gt;PostgreSQL 10.4&lt;/td&gt;
-      &lt;td&gt;bookstore-db&lt;/td&gt;
       &lt;td&gt;us-west-2a&lt;/td&gt;
       &lt;td&gt;bookstore-vpc&lt;/td&gt;
       &lt;td&gt;bookstore-subnet-2a&lt;/td&gt;
@@ -919,11 +724,8 @@ Run at least one resiliency exercise (failure injection) in production environme
     &lt;/tr&gt;
     &lt;tr&gt;
       &lt;td&gt;CDN&lt;/td&gt;
-      &lt;td&gt;Static assets&lt;/td&gt;
-      &lt;td&gt;Bookstore API&lt;/td&gt;
       &lt;td&gt;Amazon S3&lt;/td&gt;
       &lt;td&gt;Amazon S3&lt;/td&gt;
-      &lt;td&gt;cdn.bookstore.pingpublications.com&lt;/td&gt;
       &lt;td&gt;N/A&lt;/td&gt;
       &lt;td&gt;N/A&lt;/td&gt;
       &lt;td&gt;N/A&lt;/td&gt;
@@ -934,7 +736,7 @@ Run at least one resiliency exercise (failure injection) in production environme
 
 &lt;h4 id=&quot;1-define-the-critical-dependencies-1&quot;&gt;1. Define the Critical Dependencies&lt;/h4&gt;
 
-&lt;p&gt;Defining the critical dependencies at this early stage is pretty simple: &lt;em&gt;Everything is critical&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;At this early stage of the application &lt;em&gt;all&lt;/em&gt; dependencies are critical.&lt;/p&gt;
 
 &lt;table&gt;
   &lt;thead&gt;
@@ -1031,7 +833,7 @@ Run at least one resiliency exercise (failure injection) in production environme
 
 &lt;p&gt;This can be used in conjunction with the contact information table to determine which team members should be contacted – and in what priority – when a given service fails.&lt;/p&gt;
 
-&lt;p&gt;The final part of the disaster recovery failover playbook is to explicitly document the step-by-step procedures for every failover scenario.  For the &lt;strong&gt;Bookstore&lt;/strong&gt; application we’ll just provide a single failover scenario plan for when the database fails, but this can be expanded as necessary for all other failover scenarios.&lt;/p&gt;
+&lt;p&gt;The final part of the disaster recovery failover playbook is to explicitly document the step-by-step procedures for every failover scenario.  For the &lt;strong&gt;Bookstore&lt;/strong&gt; application, we’ll just provide a single failover scenario plan for when the database fails, but this can be expanded as necessary for all other failover scenarios.&lt;/p&gt;
 
 &lt;h5 id=&quot;scenario-bookstore-api-failure&quot;&gt;Scenario: Bookstore API Failure&lt;/h5&gt;
 
@@ -1070,7 +872,7 @@ Run at least one resiliency exercise (failure injection) in production environme
 
 &lt;ul&gt;
   &lt;li&gt;Amazon S3, Amazon RDS, Amazon Route 53, and Amazon EC2 are all online and functional.&lt;/li&gt;
-  &lt;li&gt;Frequent AMI backups are generated for application instance.&lt;/li&gt;
+  &lt;li&gt;Frequent AMI backups are generated for the application instance.&lt;/li&gt;
   &lt;li&gt;Application code can be restored from code repository with minimal manual effort.&lt;/li&gt;
 &lt;/ul&gt;
 
@@ -1091,7 +893,7 @@ Run at least one resiliency exercise (failure injection) in production environme
 &lt;h6 id=&quot;recovery-platform&quot;&gt;Recovery Platform&lt;/h6&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;Amazon EC2 &lt;code class=&quot;highlighter-rouge&quot;&gt;t2.micro&lt;/code&gt; instance on &lt;code class=&quot;highlighter-rouge&quot;&gt;us-west-2a&lt;/code&gt; Availability Zone with Nginx, Python, and Django &lt;strong&gt;Bookstore&lt;/strong&gt; application configured and installed from latest release.&lt;/li&gt;
+  &lt;li&gt;Amazon EC2 &lt;code class=&quot;highlighter-rouge&quot;&gt;t2.micro&lt;/code&gt; instance on &lt;code class=&quot;highlighter-rouge&quot;&gt;us-west-2a&lt;/code&gt; Availability Zone with NGINX, Python, and Django &lt;strong&gt;Bookstore&lt;/strong&gt; application configured and installed from the latest release.&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p class=&quot;notice--tip&quot;&gt;&lt;strong&gt;PURPOSE&lt;/strong&gt;: Indicate the specific technologies, platforms, and services that are necessary to complete the recovery procedure.&lt;/p&gt;
@@ -1108,18 +910,18 @@ Run at least one resiliency exercise (failure injection) in production environme
 
     &lt;ul&gt;
       &lt;li&gt;
-        &lt;p&gt;If &lt;code class=&quot;highlighter-rouge&quot;&gt;bookstore-api&lt;/code&gt; instance is active but &lt;strong&gt;Bookstore&lt;/strong&gt; Django application is failing then manually restart app from terminal.&lt;/p&gt;
+        &lt;p&gt;If the &lt;code class=&quot;highlighter-rouge&quot;&gt;bookstore-api&lt;/code&gt; instance is active but &lt;strong&gt;Bookstore&lt;/strong&gt; Django application is failing then manually restart app from the terminal.&lt;/p&gt;
 
         &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl restart gunicorn
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;        &lt;/div&gt;
       &lt;/li&gt;
       &lt;li&gt;
-        &lt;p&gt;If &lt;strong&gt;Bookstore&lt;/strong&gt; Django application remains offline then manually restart instance and recheck application availability.&lt;/p&gt;
+        &lt;p&gt;If &lt;strong&gt;Bookstore&lt;/strong&gt; Django application remains offline then manually restart the instance and recheck application availability.&lt;/p&gt;
       &lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;If &lt;code class=&quot;highlighter-rouge&quot;&gt;bookstore-api&lt;/code&gt; EC2 instance has completely failed and must be replaced then propagate a new Amazon EC2 instance from the &lt;code class=&quot;highlighter-rouge&quot;&gt;bookstore-api-ec2-image&lt;/code&gt; AMI backup.&lt;/p&gt;
+    &lt;p&gt;If the &lt;code class=&quot;highlighter-rouge&quot;&gt;bookstore-api&lt;/code&gt; EC2 instance has completely failed and must be replaced then propagate a new Amazon EC2 instance from the &lt;code class=&quot;highlighter-rouge&quot;&gt;bookstore-api-ec2-image&lt;/code&gt; AMI backup.&lt;/p&gt;
 
     &lt;p&gt;Use the pre-defined &lt;code class=&quot;highlighter-rouge&quot;&gt;bookstore-api-ec2&lt;/code&gt; launch template.&lt;/p&gt;
 
@@ -1128,7 +930,7 @@ Run at least one resiliency exercise (failure injection) in production environme
  ...
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
 
-    &lt;p&gt;Default values can be overriden as seen below.&lt;/p&gt;
+    &lt;p&gt;Default values can be overridden as seen below.&lt;/p&gt;
 
     &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; aws ec2 run-instances &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
      &lt;span class=&quot;nt&quot;&gt;--image-id&lt;/span&gt; ami-087ff330c90e99ac5 &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
@@ -1149,13 +951,13 @@ Run at least one resiliency exercise (failure injection) in production environme
     &lt;p class=&quot;notice--tip&quot;&gt;&lt;strong&gt;NOTE&lt;/strong&gt;: The &lt;code class=&quot;highlighter-rouge&quot;&gt;filters&lt;/code&gt; used in the command above searched for &lt;strong&gt;Running&lt;/strong&gt; instances based on the AMI &lt;code class=&quot;highlighter-rouge&quot;&gt;image-id&lt;/code&gt;.  If multiple instances match these filters then the &lt;code class=&quot;highlighter-rouge&quot;&gt;LaunchTime&lt;/code&gt; value retrieved from the query will help determine which instance is the latest launched.&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;SSH into new &lt;code class=&quot;highlighter-rouge&quot;&gt;bookstore-api&lt;/code&gt; instance.&lt;/p&gt;
+    &lt;p&gt;SSH into the new &lt;code class=&quot;highlighter-rouge&quot;&gt;bookstore-api&lt;/code&gt; instance.&lt;/p&gt;
 
     &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; ssh ec2-54-188-3-235.us-west-2.compute.amazonaws.com
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;Pull latest &lt;strong&gt;Bookstore&lt;/strong&gt; application code from repository.&lt;/p&gt;
+    &lt;p&gt;Pull latest &lt;strong&gt;Bookstore&lt;/strong&gt; application code from the repository.&lt;/p&gt;
 
     &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; ~/apps/bookstore_api &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; git pull
  Already up to date.
@@ -1168,7 +970,7 @@ Run at least one resiliency exercise (failure injection) in production environme
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;On local machine verify backup instance is functional, public IPv4 address is available, and &lt;strong&gt;Bookstore&lt;/strong&gt; app is online.&lt;/p&gt;
+    &lt;p&gt;On a local machine verify backup instance is functional, the public IPv4 address is available, and the &lt;strong&gt;Bookstore&lt;/strong&gt; app is online.&lt;/p&gt;
 
     &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;curl ec2-54-188-3-235.us-west-2.compute.amazonaws.com | jq
  &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
@@ -1179,7 +981,7 @@ Run at least one resiliency exercise (failure injection) in production environme
   &lt;/li&gt;
   &lt;li&gt;Update the Amazon Route 53 DNS &lt;code class=&quot;highlighter-rouge&quot;&gt;A&lt;/code&gt; record to point to the new &lt;code class=&quot;highlighter-rouge&quot;&gt;bookstore-api&lt;/code&gt; EC2 instance IPv4 address.&lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;Once DNS propagation completes verify the API endpoint is functional.&lt;/p&gt;
+    &lt;p&gt;Once DNS propagation completes verify that the API endpoint is functional.&lt;/p&gt;
 
     &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;curl bookstore.pingpublications.com | jq
  &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
@@ -1230,7 +1032,7 @@ Run at least one resiliency exercise (failure injection) in production environme
   &lt;li&gt;Manually verify database availability through Amazon RDS monitoring.&lt;/li&gt;
   &lt;li&gt;If unavailable, restart.&lt;/li&gt;
   &lt;li&gt;If still unavailable, manually propagate replica.&lt;/li&gt;
-  &lt;li&gt;If necessary, restore from most recent snapshot.&lt;/li&gt;
+  &lt;li&gt;If necessary, restore from the most recent snapshot.&lt;/li&gt;
 &lt;/ol&gt;
 
 &lt;h6 id=&quot;basic-assumptions-1&quot;&gt;Basic Assumptions&lt;/h6&gt;
@@ -1263,20 +1065,20 @@ Run at least one resiliency exercise (failure injection) in production environme
 
 &lt;ol&gt;
   &lt;li&gt;Disaster recovery team member should manually verify database availability through Amazon RDS monitoring.&lt;/li&gt;
-  &lt;li&gt;Manually restart &lt;code class=&quot;highlighter-rouge&quot;&gt;bookstore-db&lt;/code&gt; instance.
+  &lt;li&gt;Manually restart the &lt;code class=&quot;highlighter-rouge&quot;&gt;bookstore-db&lt;/code&gt; instance.
     &lt;ul&gt;
       &lt;li&gt;If &lt;code class=&quot;highlighter-rouge&quot;&gt;bookstore-db&lt;/code&gt; is back online, proceed to &lt;em&gt;Resume Procedure&lt;/em&gt;.&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
   &lt;li&gt;If &lt;code class=&quot;highlighter-rouge&quot;&gt;bookstore-db&lt;/code&gt; remains unavailable manual propagate a replica Amazon RDS PostgreSQL 10.4 instance.&lt;/li&gt;
   &lt;li&gt;If replacement created, update DNS routing on Amazon Route 53 for &lt;code class=&quot;highlighter-rouge&quot;&gt;db.bookstore.pingpublications.com&lt;/code&gt; endpoint.&lt;/li&gt;
-  &lt;li&gt;&lt;em&gt;(Optional)&lt;/em&gt;: Restore data from most recent snapshot within acceptable RPO.&lt;/li&gt;
+  &lt;li&gt;&lt;em&gt;(Optional)&lt;/em&gt;: Restore data from the most recent snapshot within acceptable RPO.&lt;/li&gt;
 &lt;/ol&gt;
 
 &lt;h6 id=&quot;test-procedure-1&quot;&gt;Test Procedure&lt;/h6&gt;
 
 &lt;ol&gt;
-  &lt;li&gt;Manually confirm connection to public &lt;code class=&quot;highlighter-rouge&quot;&gt;bookstore-db&lt;/code&gt; endpoint (&lt;code class=&quot;highlighter-rouge&quot;&gt;db.bookstore.pingpublications.com&lt;/code&gt;).&lt;/li&gt;
+  &lt;li&gt;Manually confirm a connection to public &lt;code class=&quot;highlighter-rouge&quot;&gt;bookstore-db&lt;/code&gt; endpoint (&lt;code class=&quot;highlighter-rouge&quot;&gt;db.bookstore.pingpublications.com&lt;/code&gt;).&lt;/li&gt;
   &lt;li&gt;Confirm that &lt;code class=&quot;highlighter-rouge&quot;&gt;bookstore-api&lt;/code&gt; can access the &lt;code class=&quot;highlighter-rouge&quot;&gt;bookstore-db&lt;/code&gt; instance.&lt;/li&gt;
 &lt;/ol&gt;
 
@@ -1309,7 +1111,7 @@ Run at least one resiliency exercise (failure injection) in production environme
 
 &lt;ol&gt;
   &lt;li&gt;Manual verification of applicable Amazon S3 bucket.&lt;/li&gt;
-  &lt;li&gt;If unavailable, manually recreate bucket and upload backup snapshot of static data.&lt;/li&gt;
+  &lt;li&gt;If unavailable, manually recreate bucket and upload a backup snapshot of static data.&lt;/li&gt;
 &lt;/ol&gt;
 
 &lt;h6 id=&quot;basic-assumptions-2&quot;&gt;Basic Assumptions&lt;/h6&gt;
@@ -1317,7 +1119,7 @@ Run at least one resiliency exercise (failure injection) in production environme
 &lt;ul&gt;
   &lt;li&gt;Amazon S3 is online and functional.&lt;/li&gt;
   &lt;li&gt;Static asset backups are available.&lt;/li&gt;
-  &lt;li&gt;Static collection can be performed from remote EC2 &lt;code class=&quot;highlighter-rouge&quot;&gt;bookstore-api&lt;/code&gt; server or locally via Django &lt;code class=&quot;highlighter-rouge&quot;&gt;manage.py collectstatic&lt;/code&gt; command.&lt;/li&gt;
+  &lt;li&gt;Static asset collection can be performed remotely from the EC2 &lt;code class=&quot;highlighter-rouge&quot;&gt;bookstore-api&lt;/code&gt; server or locally via Django &lt;code class=&quot;highlighter-rouge&quot;&gt;manage.py collectstatic&lt;/code&gt; command.&lt;/li&gt;
   &lt;li&gt;AWS Support contact is available for additional assistance.&lt;/li&gt;
 &lt;/ul&gt;
 
@@ -1345,7 +1147,7 @@ Run at least one resiliency exercise (failure injection) in production environme
   &lt;li&gt;Team member manually verifies Amazon S3 &lt;code class=&quot;highlighter-rouge&quot;&gt;cdn.bookstore.pingpublications.com&lt;/code&gt; bucket exists, is accessible, and contains all static content.&lt;/li&gt;
   &lt;li&gt;Manually recreate &lt;code class=&quot;highlighter-rouge&quot;&gt;cdn.bookstore.pingpublications.com&lt;/code&gt; bucket.&lt;/li&gt;
   &lt;li&gt;Manually upload all static content to &lt;code class=&quot;highlighter-rouge&quot;&gt;cdn.bookstore.pingpublications.com&lt;/code&gt; bucket.&lt;/li&gt;
-  &lt;li&gt;If &lt;code class=&quot;highlighter-rouge&quot;&gt;cdn.bookstore.pingpublications.com&lt;/code&gt; bucket exists but is non-functional, manually create the bucket, upload static content, and route system to backup.&lt;/li&gt;
+  &lt;li&gt;If &lt;code class=&quot;highlighter-rouge&quot;&gt;cdn.bookstore.pingpublications.com&lt;/code&gt; bucket exists but is non-functional, manually create the bucket, upload static content, and route the system to backup.&lt;/li&gt;
 &lt;/ol&gt;
 
 &lt;h6 id=&quot;test-procedure-2&quot;&gt;Test Procedure&lt;/h6&gt;
@@ -1364,7 +1166,7 @@ Run at least one resiliency exercise (failure injection) in production environme
 
 &lt;h4 id=&quot;5-create-a-non-critical-dependency-failover-playbook-1&quot;&gt;5. Create a Non-Critical Dependency Failover Playbook&lt;/h4&gt;
 
-&lt;p&gt;The &lt;strong&gt;Bookstore&lt;/strong&gt; example app doesn’t has any non-critical dependencies at the moment given its simple architecture (&lt;code class=&quot;highlighter-rouge&quot;&gt;CDN &amp;gt; API Server &amp;lt; Database&lt;/code&gt;).  However, progressing through each resiliency stage will &lt;em&gt;require&lt;/em&gt; additional system and services to maintain failure resilience, which will inherently add non-critical dependencies.&lt;/p&gt;
+&lt;p&gt;The &lt;strong&gt;Bookstore&lt;/strong&gt; example app doesn’t have any non-critical dependencies at the moment given its simple architecture (&lt;code class=&quot;highlighter-rouge&quot;&gt;CDN &amp;gt; API Server &amp;lt; Database&lt;/code&gt;).  However, progressing through each resiliency stage will &lt;em&gt;require&lt;/em&gt; additional systems and services to maintain failure resilience, which will inherently add non-critical dependencies.&lt;/p&gt;
 
 &lt;h3 id=&quot;complete-and-available-prerequisites-1&quot;&gt;Complete and Available Prerequisites&lt;/h3&gt;
 
@@ -1388,7 +1190,7 @@ Run at least one resiliency exercise (failure injection) in production environme
   &lt;li&gt;Status: &lt;strong&gt;Complete&lt;/strong&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;For this stage of the &lt;strong&gt;Bookstore&lt;/strong&gt; app we’ve manually performed the &lt;a href=&quot;#scenario-bookstore-api-failure&quot;&gt;Scenario: Bookstore API Failure&lt;/a&gt; exercise.&lt;/p&gt;
+&lt;p&gt;For this stage of the &lt;strong&gt;Bookstore&lt;/strong&gt; app, we’ve manually performed the &lt;a href=&quot;#scenario-bookstore-api-failure&quot;&gt;Scenario: Bookstore API Failure&lt;/a&gt; exercise.&lt;/p&gt;
 
 &lt;p&gt;Full manual restoration of the &lt;code class=&quot;highlighter-rouge&quot;&gt;bookstore-api&lt;/code&gt; EC2 instance and the &lt;strong&gt;Bookstore&lt;/strong&gt; app resulted in approximately &lt;code class=&quot;highlighter-rouge&quot;&gt;30 minutes&lt;/code&gt; of downtime.  This is well under the initial RTO/RPO goals so we can reasonably update the playbooks.  However, this manual process is still clunky and prone to errors, so there’s plenty of room for improvement.&lt;/p&gt;
 

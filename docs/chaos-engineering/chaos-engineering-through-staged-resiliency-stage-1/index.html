@@ -300,7 +300,9 @@
 
 <p>Creating resilient software is a fundamental necessity within modern cloud applications and architectures.  As systems become more distributed the potential for unplanned outages and unexpected failure significantly increases.  Thankfully, Chaos and Resilience Engineering techniques are quickly gaining traction within the community.  <a href="https://coggle.it/diagram/WiKceGDAwgABrmyv/t/chaos-engineering-companies%2C-people%2C-tools-practices" target="_blank" rel="noopener noreferrer">Many organizations</a> – both big and small – have embraced Chaos Engineering over the last few years.  In his fascinating <a href="https://chaosconf.splashthat.com/" target="_blank" rel="noopener noreferrer">ChaosConf 2018</a> talk titled <a href="https://www.youtube.com/watch?v=4Gy_5EQMrB4" target="_blank" rel="noopener noreferrer"><em>Practicing Chaos Engineering at Walmart</em></a>, Walmart’s Director of Engineering Vilas Veeraraghavan outlines how he and the hundreds of engineering teams at Walmart have implemented Resilience Engineering.  By creating a robust series of “levels” or “stages” that each engineering team can work through, Walmart is able to progressively improve system resiliency while dramatically reducing support costs.</p>
 
-<p>This blog series expands on Vilas’ and Walmart’s techniques by diving deep into the five <strong>Stages of Resiliency</strong>.  Each post examines the necessary components of a stage, describes how those components are evaluated and assembled, and outlines the step-by-step process necessary to move from one stage to the next.  This series also digs into the specific implementation of each stage by going through the entire process with a real-world (albeit simple) API application hosted on AWS.  We’ll go through everything from defining and executing disaster recovery playbook scenarios to improving system architecture and reducing RTO, RPO, and applicable support costs for this example app.</p>
+<p>This blog series expands on Vilas’ and Walmart’s techniques by diving deep into the five <strong>Stages of Resiliency</strong>.  Each post examines the necessary components of a stage, describes how those components are evaluated and assembled, and outlines the step-by-step process necessary to move from one stage to the next.</p>
+
+<p>This series also digs into the specific implementation of each stage by progressing through the entire process with a real-world, fully-functional API application hosted on AWS.  We’ll go through everything from defining and executing disaster recovery playbook scenarios to improving system architecture and reducing RTO, RPO, and applicable support costs for this example app.</p>
 
 <p>With a bit of adjustment for your own organizational needs, you and your team can implement similar practices to quickly add Chaos Engineering to your own systems with relative ease.  After climbing through all five stages your system and its deployment will be almost entirely automated and will feature significant resiliency testing and robust disaster recovery failover.</p>
 
@@ -347,9 +349,9 @@
 
 <ul>
   <li>
-<strong>Recovery Time Objective</strong>: RTO defines the maximum period of time in which the functionality of a failed service should be restored.  For example, if a service with an RTO of twelve hours experiences an outage at 5:00 PM then functionality should be restored to the service by 5:00 AM the next morning.</li>
+<strong>Recovery Time Objective (RTO)</strong>: The maximum period of time in which the functionality of a failed service should be restored.  For example, if a service with an RTO of twelve hours experiences an outage at 5:00 PM then functionality should be restored to the service by 5:00 AM the next morning.</li>
   <li>
-<strong>Recovery Point Objective</strong>: RPO defines the maximum period of time during which data can be lost during a service failure.  For example, if a service with an RPO of two hours experiences an outage at 5:00 PM then <em>only</em> data generated between 3:00 PM and 5:00 PM should be lost – all existing data prior to 3:00 PM should still be intact.</li>
+<strong>Recovery Point Objective (RPO)</strong>: The maximum period of time during which data can be lost during a service failure.  For example, if a service with an RPO of two hours experiences an outage at 5:00 PM then <em>only</em> data generated between 3:00 PM and 5:00 PM should be lost – all existing data prior to 3:00 PM should still be intact.</li>
 </ul>
 
 <p class="text-center"><img alt="RTO &amp; RPO Diagrammed - Courtesy of Wikipedia" src="/gremlin-blog-posts/assets/chaos-engineering/chaos-engineering-through-staged-resiliency/stage-1/rto-rpo-example-wikipedia-2294d0f2a372d637a46304bc07fa57dd380b7cae63a3b16d1c79788378750ef7.png" class="align-center">
@@ -365,7 +367,7 @@
 
 <h3 id="team-wide-agreement-on-playbooks">Team-Wide Agreement on Playbooks</h3>
 
-<p>With unfettered access to all documentation, the next step is to ensure the entire team agrees with all documented information as its laid out.  If there is disagreement about the best way to approach a given failover scenario or the risk and potential impact of a non-critical dependency failure, this is the best time to suss out those differences of opinion and come to a unanimous “best” solution.  A healthy, active debate provides the team with a deeper understanding of the system and encourages the best ideas and techniques to bubble up to the surface.</p>
+<p>With unfettered access to all documentation, the next step is to ensure the entire team agrees with all documented information as its laid out.  If there is disagreement about the best way to approach a given failover scenario, or about the risk and potential impact of a non-critical dependency failure, this is the best time to suss out those differences of opinion and come to a unanimous “best” solution.  A healthy, active debate provides the team with a deeper understanding of the system and encourages the best ideas and techniques to bubble up to the surface.</p>
 
 <p>While the goal is agreement on the playbooks currently laid out, documentation can (and should) be updated in the future as experiments shed new light on the system.  The team should be encouraged and empowered to challenge the norms in order to create a system that is always adapting and evolving to be as resilient as possible.</p>
 
@@ -377,53 +379,51 @@
 
 <h2 id="resiliency-stage-1-implementation-example">Resiliency Stage 1: Implementation Example</h2>
 
-<p>Throughout this series we’ll take a simple yet real-world application through the entire staging process to illustrate how a team progresses through all five resiliency stages.  While every application and system architecture is unique, this example illustrates the basics of implementing every step within a stage, to provide you with a jumping off point for staged resiliency within your own system.</p>
+<p>Throughout this series, we’ll take a simple yet real-world application through the entire staging process to illustrate how a team might progress their application through all five resiliency stages.  While every application and system architecture is unique, this example illustrates the basics of implementing every step within a stage, to provide you with a jumping off point for staged resiliency within your own system.</p>
 
-<p>The <strong>Bookstore</strong> example application is a publicly accessible API for a bookstore.  The API includes two primary endpoints: <code class="highlighter-rouge">/authors/</code> and <code class="highlighter-rouge">/books/</code>, which can be used to add, update, or remove <strong>Authors</strong> and <strong>Books</strong>, respectively.</p>
+<p>The <a href="https://github.com/GabeStah/bookstore_api" target="_blank" rel="noopener noreferrer"><strong>Bookstore</strong> example application</a> is a publicly accessible API for a virtual bookstore.  The API includes two primary endpoints: <code class="highlighter-rouge">/authors/</code> and <code class="highlighter-rouge">/books/</code>, which can be used to add, update, or remove <strong>Authors</strong> and <strong>Books</strong>, respectively.</p>
 
-<p><strong>Bookstore’s</strong> architecture consists of three components, all housed within Amazon Web Services.</p>
+<p><strong>Bookstore’s</strong> architecture consists of three core components, all of which are housed within Amazon Web Services.</p>
 
 <ul>
   <li>
-<strong>API</strong>: The API is created with Django and is hosted on an Amazon EC2 instance running Nginx.</li>
+<strong>API</strong>: The API is created with Django and the <a href="https://www.django-rest-framework.org/" target="_blank" rel="noopener noreferrer">Django REST Framework</a> and is hosted on an Amazon EC2 instance running NGINX.</li>
   <li>
 <strong>Database</strong>: A PostgreSQL database handles all data and uses Amazon RDS.</li>
   <li>
-<strong>CDN</strong>: All static content is pushed to and served from an Amazon S3 bucket.</li>
+<strong>CDN</strong>: All static content is collected in and served from an Amazon S3 bucket.</li>
 </ul>
 
 <p class="text-center"><img alt="Stage 1 - Initial" src="/gremlin-blog-posts/assets/chaos-engineering/chaos-engineering-through-staged-resiliency/stage-1/stage-1-architecture-09757f8939b8928a7e67174b1608765bba3acc766990411ec05e28a66d641805.png" class="align-center">
 <em>Initial System Architecture</em></p>
 
-<p>The web API endpoint is online at <a href="http://bookstore.pingpublications.com" target="_blank" rel="noopener noreferrer">http://bookstore.pingpublications.com</a>.  The web API, database, and CDN endpoints are DNS-routed via Amazon Route 53 to the underlying Amazon EC2, RDS, and Amazon S3 instances/buckets, respectively.</p>
+<p>The web API is at the publicly accessible <a href="http://bookstore.pingpublications.com" target="_blank" rel="noopener noreferrer">http://bookstore.pingpublications.com</a> endpoint.  The web API, database, and CDN endpoints are DNS-routed via Amazon Route53 to the underlying Amazon EC2, RDS, and Amazon S3 buckets, respectively.</p>
 
 <p>Here’s a simple request to the <code class="highlighter-rouge">/books/</code> API endpoint.</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl http://bookstore.pingpublications.com/books/ | jq
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>curl http://bookstore.pingpublications.com/books/ | jq
+<span class="o">[</span>
+  <span class="o">{</span>
+    <span class="s2">"url"</span>: <span class="s2">"http://bookstore.pingpublications.com/books/1/"</span>,
+    <span class="s2">"authors"</span>: <span class="o">[</span>
+      <span class="o">{</span>
+        <span class="s2">"url"</span>: <span class="s2">"http://bookstore.pingpublications.com/authors/1/"</span>,
+        <span class="s2">"birth_date"</span>: <span class="s2">"1947-09-21"</span>,
+        <span class="s2">"first_name"</span>: <span class="s2">"Stephen"</span>,
+        <span class="s2">"last_name"</span>: <span class="s2">"King"</span>
+      <span class="o">}</span>
+    <span class="o">]</span>,
+    <span class="s2">"publication_date"</span>: <span class="s2">"1978-09-01"</span>,
+    <span class="s2">"title"</span>: <span class="s2">"The Stand"</span>
+  <span class="o">}</span>
+<span class="o">]</span>
 </code></pre></div></div>
 
-<p>Here’s the returned output.</p>
-
-<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://bookstore.pingpublications.com/books/1/"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"authors"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-      </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://bookstore.pingpublications.com/authors/1/"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"birth_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1947-09-21"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Stephen"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"King"</span><span class="w">
-      </span><span class="p">}</span><span class="w">
-    </span><span class="p">],</span><span class="w">
-    </span><span class="s2">"publication_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1978-09-01"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The Stand"</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">]</span><span class="w">
-</span></code></pre></div></div>
-
-<p class="notice--warning"><strong>WARNING</strong>: The initial design and architecture for the <strong>Bookstore</strong> sample application is <em>intentionally</em> less resilient than a full production-ready system.  This leaves room for improvement as we progress through the resiliency stages.</p>
+<p class="notice--warning"><strong>WARNING</strong>: The initial design and architecture for the <strong>Bookstore</strong> sample application is <em>intentionally</em> less resilient than a full production-ready system.  This leaves room for improvement as progress is made through the resiliency stages throughout this series.</p>
 
 <h3 id="prerequisites-1">Prerequisites</h3>
+
+<p>We begin the example implementation by defining all prerequisites for the <strong>Bookstore</strong> app.</p>
 
 <h4 id="0-define-system-architecture">0. Define System Architecture</h4>
 
@@ -433,11 +433,8 @@
   <thead>
     <tr>
       <th>Service</th>
-      <th>Purpose</th>
-      <th>Supports</th>
       <th>Platform</th>
       <th>Technologies</th>
-      <th>Identifier</th>
       <th>AZ</th>
       <th>VPC</th>
       <th>Subnet</th>
@@ -447,11 +444,8 @@
   <tbody>
     <tr>
       <td>API</td>
-      <td>Bookstore API</td>
-      <td>N/A</td>
       <td>Amazon EC2</td>
       <td>Django, Nginx</td>
-      <td>bookstore-api</td>
       <td>us-west-2a</td>
       <td>bookstore-vpc</td>
       <td>bookstore-subnet-2a</td>
@@ -459,11 +453,8 @@
     </tr>
     <tr>
       <td>Database</td>
-      <td>Application data</td>
-      <td>Bookstore API</td>
       <td>Amazon RDS</td>
       <td>PostgreSQL 10.4</td>
-      <td>bookstore-db</td>
       <td>us-west-2a</td>
       <td>bookstore-vpc</td>
       <td>bookstore-subnet-2a</td>
@@ -471,11 +462,8 @@
     </tr>
     <tr>
       <td>CDN</td>
-      <td>Static assets</td>
-      <td>Bookstore API</td>
       <td>Amazon S3</td>
       <td>Amazon S3</td>
-      <td>cdn.bookstore.pingpublications.com</td>
       <td>N/A</td>
       <td>N/A</td>
       <td>N/A</td>
@@ -486,7 +474,7 @@
 
 <h4 id="1-define-the-critical-dependencies-1">1. Define the Critical Dependencies</h4>
 
-<p>Defining the critical dependencies at this early stage is pretty simple: <em>Everything is critical</em>.</p>
+<p>At this early stage of the application <em>all</em> dependencies are critical.</p>
 
 <table>
   <thead>
@@ -583,7 +571,7 @@
 
 <p>This can be used in conjunction with the contact information table to determine which team members should be contacted – and in what priority – when a given service fails.</p>
 
-<p>The final part of the disaster recovery failover playbook is to explicitly document the step-by-step procedures for every failover scenario.  For the <strong>Bookstore</strong> application we’ll just provide a single failover scenario plan for when the database fails, but this can be expanded as necessary for all other failover scenarios.</p>
+<p>The final part of the disaster recovery failover playbook is to explicitly document the step-by-step procedures for every failover scenario.  For the <strong>Bookstore</strong> application, we’ll just provide a single failover scenario plan for when the database fails, but this can be expanded as necessary for all other failover scenarios.</p>
 
 <h5 id="scenario-bookstore-api-failure">Scenario: Bookstore API Failure</h5>
 
@@ -622,7 +610,7 @@
 
 <ul>
   <li>Amazon S3, Amazon RDS, Amazon Route 53, and Amazon EC2 are all online and functional.</li>
-  <li>Frequent AMI backups are generated for application instance.</li>
+  <li>Frequent AMI backups are generated for the application instance.</li>
   <li>Application code can be restored from code repository with minimal manual effort.</li>
 </ul>
 
@@ -643,7 +631,7 @@
 <h6 id="recovery-platform">Recovery Platform</h6>
 
 <ul>
-  <li>Amazon EC2 <code class="highlighter-rouge">t2.micro</code> instance on <code class="highlighter-rouge">us-west-2a</code> Availability Zone with Nginx, Python, and Django <strong>Bookstore</strong> application configured and installed from latest release.</li>
+  <li>Amazon EC2 <code class="highlighter-rouge">t2.micro</code> instance on <code class="highlighter-rouge">us-west-2a</code> Availability Zone with NGINX, Python, and Django <strong>Bookstore</strong> application configured and installed from the latest release.</li>
 </ul>
 
 <p class="notice--tip"><strong>PURPOSE</strong>: Indicate the specific technologies, platforms, and services that are necessary to complete the recovery procedure.</p>
@@ -661,19 +649,19 @@
 
     <ul>
       <li>
-        <p>If <code class="highlighter-rouge">bookstore-api</code> instance is active but <strong>Bookstore</strong> Django application is failing then manually restart app from terminal.</p>
+        <p>If the <code class="highlighter-rouge">bookstore-api</code> instance is active but <strong>Bookstore</strong> Django application is failing then manually restart app from the terminal.</p>
 
         <div class="language-bash highlighter-rouge">
 <div class="highlight"><pre class="highlight"><code>  <span class="nb">sudo </span>systemctl restart gunicorn
 </code></pre></div>        </div>
       </li>
       <li>
-        <p>If <strong>Bookstore</strong> Django application remains offline then manually restart instance and recheck application availability.</p>
+        <p>If <strong>Bookstore</strong> Django application remains offline then manually restart the instance and recheck application availability.</p>
       </li>
     </ul>
   </li>
   <li>
-    <p>If <code class="highlighter-rouge">bookstore-api</code> EC2 instance has completely failed and must be replaced then propagate a new Amazon EC2 instance from the <code class="highlighter-rouge">bookstore-api-ec2-image</code> AMI backup.</p>
+    <p>If the <code class="highlighter-rouge">bookstore-api</code> EC2 instance has completely failed and must be replaced then propagate a new Amazon EC2 instance from the <code class="highlighter-rouge">bookstore-api-ec2-image</code> AMI backup.</p>
 
     <p>Use the pre-defined <code class="highlighter-rouge">bookstore-api-ec2</code> launch template.</p>
 
@@ -683,7 +671,7 @@
  ...
 </code></pre></div>    </div>
 
-    <p>Default values can be overriden as seen below.</p>
+    <p>Default values can be overridden as seen below.</p>
 
     <div class="language-bash highlighter-rouge">
 <div class="highlight"><pre class="highlight"><code> aws ec2 run-instances <span class="se">\</span>
@@ -706,14 +694,14 @@
     <p class="notice--tip"><strong>NOTE</strong>: The <code class="highlighter-rouge">filters</code> used in the command above searched for <strong>Running</strong> instances based on the AMI <code class="highlighter-rouge">image-id</code>.  If multiple instances match these filters then the <code class="highlighter-rouge">LaunchTime</code> value retrieved from the query will help determine which instance is the latest launched.</p>
   </li>
   <li>
-    <p>SSH into new <code class="highlighter-rouge">bookstore-api</code> instance.</p>
+    <p>SSH into the new <code class="highlighter-rouge">bookstore-api</code> instance.</p>
 
     <div class="language-bash highlighter-rouge">
 <div class="highlight"><pre class="highlight"><code> ssh ec2-54-188-3-235.us-west-2.compute.amazonaws.com
 </code></pre></div>    </div>
   </li>
   <li>
-    <p>Pull latest <strong>Bookstore</strong> application code from repository.</p>
+    <p>Pull latest <strong>Bookstore</strong> application code from the repository.</p>
 
     <div class="language-bash highlighter-rouge">
 <div class="highlight"><pre class="highlight"><code> <span class="nv">$ </span><span class="nb">cd</span> ~/apps/bookstore_api <span class="o">&amp;&amp;</span> git pull
@@ -728,7 +716,7 @@
 </code></pre></div>    </div>
   </li>
   <li>
-    <p>On local machine verify backup instance is functional, public IPv4 address is available, and <strong>Bookstore</strong> app is online.</p>
+    <p>On a local machine verify backup instance is functional, the public IPv4 address is available, and the <strong>Bookstore</strong> app is online.</p>
 
     <div class="language-bash highlighter-rouge">
 <div class="highlight"><pre class="highlight"><code> <span class="nv">$ </span>curl ec2-54-188-3-235.us-west-2.compute.amazonaws.com | jq
@@ -740,7 +728,7 @@
   </li>
   <li>Update the Amazon Route 53 DNS <code class="highlighter-rouge">A</code> record to point to the new <code class="highlighter-rouge">bookstore-api</code> EC2 instance IPv4 address.</li>
   <li>
-    <p>Once DNS propagation completes verify the API endpoint is functional.</p>
+    <p>Once DNS propagation completes verify that the API endpoint is functional.</p>
 
     <div class="language-bash highlighter-rouge">
 <div class="highlight"><pre class="highlight"><code> <span class="nv">$ </span>curl bookstore.pingpublications.com | jq
@@ -792,7 +780,7 @@
   <li>Manually verify database availability through Amazon RDS monitoring.</li>
   <li>If unavailable, restart.</li>
   <li>If still unavailable, manually propagate replica.</li>
-  <li>If necessary, restore from most recent snapshot.</li>
+  <li>If necessary, restore from the most recent snapshot.</li>
 </ol>
 
 <h6 id="basic-assumptions-1">Basic Assumptions</h6>
@@ -825,7 +813,7 @@
 
 <ol>
   <li>Disaster recovery team member should manually verify database availability through Amazon RDS monitoring.</li>
-  <li>Manually restart <code class="highlighter-rouge">bookstore-db</code> instance.
+  <li>Manually restart the <code class="highlighter-rouge">bookstore-db</code> instance.
     <ul>
       <li>If <code class="highlighter-rouge">bookstore-db</code> is back online, proceed to <em>Resume Procedure</em>.</li>
     </ul>
@@ -833,13 +821,13 @@
   <li>If <code class="highlighter-rouge">bookstore-db</code> remains unavailable manual propagate a replica Amazon RDS PostgreSQL 10.4 instance.</li>
   <li>If replacement created, update DNS routing on Amazon Route 53 for <code class="highlighter-rouge">db.bookstore.pingpublications.com</code> endpoint.</li>
   <li>
-<em>(Optional)</em>: Restore data from most recent snapshot within acceptable RPO.</li>
+<em>(Optional)</em>: Restore data from the most recent snapshot within acceptable RPO.</li>
 </ol>
 
 <h6 id="test-procedure-1">Test Procedure</h6>
 
 <ol>
-  <li>Manually confirm connection to public <code class="highlighter-rouge">bookstore-db</code> endpoint (<code class="highlighter-rouge">db.bookstore.pingpublications.com</code>).</li>
+  <li>Manually confirm a connection to public <code class="highlighter-rouge">bookstore-db</code> endpoint (<code class="highlighter-rouge">db.bookstore.pingpublications.com</code>).</li>
   <li>Confirm that <code class="highlighter-rouge">bookstore-api</code> can access the <code class="highlighter-rouge">bookstore-db</code> instance.</li>
 </ol>
 
@@ -872,7 +860,7 @@
 
 <ol>
   <li>Manual verification of applicable Amazon S3 bucket.</li>
-  <li>If unavailable, manually recreate bucket and upload backup snapshot of static data.</li>
+  <li>If unavailable, manually recreate bucket and upload a backup snapshot of static data.</li>
 </ol>
 
 <h6 id="basic-assumptions-2">Basic Assumptions</h6>
@@ -880,7 +868,7 @@
 <ul>
   <li>Amazon S3 is online and functional.</li>
   <li>Static asset backups are available.</li>
-  <li>Static collection can be performed from remote EC2 <code class="highlighter-rouge">bookstore-api</code> server or locally via Django <code class="highlighter-rouge">manage.py collectstatic</code> command.</li>
+  <li>Static asset collection can be performed remotely from the EC2 <code class="highlighter-rouge">bookstore-api</code> server or locally via Django <code class="highlighter-rouge">manage.py collectstatic</code> command.</li>
   <li>AWS Support contact is available for additional assistance.</li>
 </ul>
 
@@ -908,7 +896,7 @@
   <li>Team member manually verifies Amazon S3 <code class="highlighter-rouge">cdn.bookstore.pingpublications.com</code> bucket exists, is accessible, and contains all static content.</li>
   <li>Manually recreate <code class="highlighter-rouge">cdn.bookstore.pingpublications.com</code> bucket.</li>
   <li>Manually upload all static content to <code class="highlighter-rouge">cdn.bookstore.pingpublications.com</code> bucket.</li>
-  <li>If <code class="highlighter-rouge">cdn.bookstore.pingpublications.com</code> bucket exists but is non-functional, manually create the bucket, upload static content, and route system to backup.</li>
+  <li>If <code class="highlighter-rouge">cdn.bookstore.pingpublications.com</code> bucket exists but is non-functional, manually create the bucket, upload static content, and route the system to backup.</li>
 </ol>
 
 <h6 id="test-procedure-2">Test Procedure</h6>
@@ -927,7 +915,7 @@
 
 <h4 id="5-create-a-non-critical-dependency-failover-playbook-1">5. Create a Non-Critical Dependency Failover Playbook</h4>
 
-<p>The <strong>Bookstore</strong> example app doesn’t has any non-critical dependencies at the moment given its simple architecture (<code class="highlighter-rouge">CDN &gt; API Server &lt; Database</code>).  However, progressing through each resiliency stage will <em>require</em> additional system and services to maintain failure resilience, which will inherently add non-critical dependencies.</p>
+<p>The <strong>Bookstore</strong> example app doesn’t have any non-critical dependencies at the moment given its simple architecture (<code class="highlighter-rouge">CDN &gt; API Server &lt; Database</code>).  However, progressing through each resiliency stage will <em>require</em> additional systems and services to maintain failure resilience, which will inherently add non-critical dependencies.</p>
 
 <h3 id="complete-and-available-prerequisites-1">Complete and Available Prerequisites</h3>
 
@@ -954,7 +942,7 @@
 </li>
 </ul>
 
-<p>For this stage of the <strong>Bookstore</strong> app we’ve manually performed the <a href="#scenario-bookstore-api-failure">Scenario: Bookstore API Failure</a> exercise.</p>
+<p>For this stage of the <strong>Bookstore</strong> app, we’ve manually performed the <a href="#scenario-bookstore-api-failure">Scenario: Bookstore API Failure</a> exercise.</p>
 
 <p>Full manual restoration of the <code class="highlighter-rouge">bookstore-api</code> EC2 instance and the <strong>Bookstore</strong> app resulted in approximately <code class="highlighter-rouge">30 minutes</code> of downtime.  This is well under the initial RTO/RPO goals so we can reasonably update the playbooks.  However, this manual process is still clunky and prone to errors, so there’s plenty of room for improvement.</p>
 
@@ -1052,33 +1040,6 @@
     
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="/gremlin-blog-posts/serverless-twitter-bot-aws-lambda/" rel="permalink">Create a Serverless Twitter Bot with Airbrake and AWS Lambda - Part 1
-</a>
-      
-    </h2>
-    
-      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
-
-
-
-
-  7 minute read
-</p>
-    
-    <p class="archive__item-excerpt" itemprop="description">How to create a serverless Twitter bot with Airbrake and AWS Lambda.
-</p>
-  </article>
-</div>
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title" itemprop="headline">
-      
         <a href="/gremlin-blog-posts/chaos-engineering/chaos-engineering-through-staged-resiliency-stage-3/" rel="permalink">Chaos Engineering Through Staged Resiliency - Stage 3
 </a>
       
@@ -1089,7 +1050,7 @@
 
 
 
-  1 minute read
+  2 minute read
 </p>
     
     <p class="archive__item-excerpt" itemprop="description">
@@ -1116,7 +1077,7 @@
 
 
 
-  14 minute read
+  15 minute read
 </p>
     
     <p class="archive__item-excerpt" itemprop="description">
@@ -1147,6 +1108,33 @@
 </p>
     
     <p class="archive__item-excerpt" itemprop="description">Content pitches and ideas for Gremlin.
+</p>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/gremlin-blog-posts/chaos-engineering/migrating-cloud-chaotic-embrace/" rel="permalink">Migrating to the Cloud Is Chaotic. Embrace It.
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  24 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">Why organizations planning to migrate to the cloud should embrace Chaos Engineering as a thoughtful strategy to avoid pain down the road.
 </p>
   </article>
 </div>
