@@ -251,7 +251,7 @@
 
 
 
-  1 minute read
+  3 minute read
 </p>
           
         </header>
@@ -266,8 +266,8 @@
               <ul class="toc__menu">
   <li><a href="#prerequisites">Prerequisites</a></li>
   <li><a href="#perform-frequent-semi-automated-tests">Perform Frequent, Semi-Automated Tests</a></li>
-  <li><a href="#publish-test-results">Publish Test Results</a></li>
   <li><a href="#execute-a-resiliency-experiment-in-production">Execute a Resiliency Experiment in Production</a></li>
+  <li><a href="#publish-test-results">Publish Test Results</a></li>
   <li>
 <a href="#resiliency-stage-3-implementation-example">Resiliency Stage 3: Implementation Example</a>
     <ul>
@@ -293,15 +293,17 @@
 
 <h2 id="perform-frequent-semi-automated-tests">Perform Frequent, Semi-Automated Tests</h2>
 
-<p>There’s no more putting it off – if you haven’t already done so, this resiliency stage is where you begin integrating automation into your testing procedures.</p>
+<p>There’s no more putting it off – it’s time to begin automating your testing procedures.  During this third <strong>Resiliency Stage</strong> the team should aim to automate as much of the resiliency testing process as reasonably possible.  The overall goal of this stage isn’t to finalize automation, but to work toward a regular cadence of testing.  The frequency of each test is up to the team, but once established it’s critical that the schedule is maintained and automation handles at least <em>some</em> of the testing process.</p>
+
+<p>If the team isn’t already doing so, this is a prime opportunity to introduce Chaos Engineering tools.  These tools empower the team to intelligently create controlled experiments that can be executed precisely when necessary.  For example, Gremlin attacks can be <a href="https://help.gremlin.com/attacks/#how-to-schedule-attacks-with-gremlin" target="_blank" rel="noopener noreferrer">scheduled</a> to execute on certain days of the week and within a specified window of time.</p>
+
+<h2 id="execute-a-resiliency-experiment-in-production">Execute a Resiliency Experiment in Production</h2>
 
 <blockquote>
-  <p>Use Gremlin or similar Chaos Engineering tools.</p>
+  <p>Configure Gremlin: https://help.gremlin.com/configuration/</p>
 </blockquote>
 
 <h2 id="publish-test-results">Publish Test Results</h2>
-
-<h2 id="execute-a-resiliency-experiment-in-production">Execute a Resiliency Experiment in Production</h2>
 
 <blockquote>
   <p>Level 3 — manual + automated — Regular exercises
@@ -324,12 +326,58 @@ Run at least one resiliency exercise (failure injection) in production environme
 </li>
 </ul>
 
+<h4 id="ec2-instance-failure-test">EC2 Instance Failure Test</h4>
+
+<blockquote>
+  <p>Use Gremlin attack.</p>
+</blockquote>
+
+<blockquote>
+  <p>Lambda perhaps? https://aws.amazon.com/premiumsupport/knowledge-center/start-stop-lambda-cloudwatch/</p>
+</blockquote>
+
+<h4 id="cdn-failure-test">CDN Failure Test</h4>
+
+<blockquote>
+  <p>(TODO) CloudWatch Agent: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Install-CloudWatch-Agent.html
+Monitor Scripts: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/mon-scripts.html</p>
+</blockquote>
+
+<blockquote>
+  <ol>
+    <li>Create AWS CloudWatch Alarm/metric.</li>
+    <li>Automate AWS alarm trigger from <code class="highlighter-rouge">AWS CLI</code>
+</li>
+    <li>Failover CDN.</li>
+  </ol>
+</blockquote>
+
+<h4 id="db-failure-test">DB Failure Test</h4>
+
+<blockquote>
+  <p>(TODO) CloudWatch Agent: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Install-CloudWatch-Agent.html
+Monitor Scripts: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/mon-scripts.html</p>
+</blockquote>
+
+<blockquote>
+  <ol>
+    <li>Create AWS CloudWatch Alarm/metric.</li>
+    <li>Automate AWS alarm trigger from <code class="highlighter-rouge">AWS CLI</code>
+</li>
+    <li>Failover CDN.</li>
+  </ol>
+</blockquote>
+
 <h3 id="execute-a-resiliency-experiment-in-production-1">Execute a Resiliency Experiment in Production</h3>
 
 <ul>
   <li>Status: <strong>Complete</strong>
 </li>
 </ul>
+
+<blockquote>
+  <p>Use Gremlin or similar Chaos Engineering tools.</p>
+</blockquote>
 
 <h3 id="publish-test-results-and-track-over-time">Publish Test Results and Track Over Time</h3>
 
@@ -520,7 +568,7 @@ Run at least one resiliency exercise (failure injection) in production environme
 
 
 
-  24 minute read
+  22 minute read
 </p>
     
     <p class="archive__item-excerpt" itemprop="description">Why organizations planning to migrate to the cloud should embrace Chaos Engineering as a thoughtful strategy to avoid pain down the road.

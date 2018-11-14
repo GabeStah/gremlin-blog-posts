@@ -483,7 +483,7 @@ This test ensures that the primary CDN endpoint (`cdn.bookstore.pingpublications
 
 Now that both critical dependencies have been tested we'll publish the results to the entire team, so everyone can keep tabs on the resiliency progress of the project.
 
-In this case, both the [Database Failure Test](#database-failure-test) and [CDN Failure Test](#cdn-failure-test) were performed manually within less than 15 minutes.  Therefore, we can safely update some of the playbook information created during the prerequisite phase of [Resiliency Stage 1]() and reduce the critical dependency RTO/RPO targets significantly.  Even a conservative estimate of `1 hour` is a massive improvement to resiliency and reduction to potential support costs, and we're only through the second Stage!
+In this case, both the [Database Failure Test](#database-failure-test) and [CDN Failure Test](#cdn-failure-test) were performed manually within less than 15 minutes.  Therefore, we can safely update some of the playbook information created during the prerequisite phase of [Resiliency Stage 1][#stage-1] and reduce the critical dependency RTO/RPO targets significantly.  Even a conservative estimate of `1 hour` is a massive improvement to resiliency and reduction to potential support costs, and we're only through the second Stage!
 
 | Dependency | Criticality Period | Manual Workaround                                                       | RTO | RPO |
 | ---------- | ------------------ | ----------------------------------------------------------------------- | --- | --- |

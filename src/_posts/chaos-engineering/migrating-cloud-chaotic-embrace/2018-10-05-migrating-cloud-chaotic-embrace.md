@@ -85,67 +85,6 @@ Microsoft reported that the firmware update "failed [...] in an unexpected way,"
 
 Without additional details on the root cause and the specific impacts, we can only speculate, but a temperature spike points toward a dramatic spike in CPU load for some servers within the datacenter.  In this particular instance, it's possible that pre-emptive Chaos Engineering may have allowed engineers to simulate similar heavy CPU load scenarios.
 
-### Obtaining a Gremlin API Token
-
-All the examples throughout this article use the Gremlin API to perform Chaos Experiments.  If you prefer a graphical interface all examples can also be created within the [Gremlin Attacks Web UI][gremlin#app/attacks].
-
-To use the Gremlin API you'll first need your organization's API access token.  This can be obtained by authenticating with the appropriate API endpoint.
-
-1. Retrieve your Gremlin API token by passing your `email`, `password`, and `companyName`.
-    - For non-MFA authentication use the `https://api.gremlin.com/v1/users/auth` endpoint.
-
-        ```bash
-        curl -X POST --header 'Content-Type: application/x-www-form-urlencoded' \
-            --data-urlencode 'email=you@example.com' \
-            --data-urlencode 'password=password' \
-            --data-urlencode 'companyName=Company Name' \
-            'https://api.gremlin.com/v1/users/auth'
-        ```
-
-    - For MFA authentication you'll also need to include the MFA `token` value and pass it to the `https://api.gremlin.com/v1/users/auth/mfa/auth` endpoint.
-
-        ```bash
-        curl -X POST --header 'Content-Type: application/x-www-form-urlencoded' \
-            --data-urlencode 'email=you@example.com' \
-            --data-urlencode 'password=password' \
-            --data-urlencode 'companyName=Company Name' \
-            --data-urlencode 'token=123456' \
-            'https://api.gremlin.com/v1/users/auth/mfa/auth'
-        ```
-
-2. The response JSON object will include your API token within the `header` field.
-
-    ```json
-    [
-        {
-            "company_id": "82708afe-80d0-5859-90bc-8d2e0d475454",
-            "company_name": "Company Name",
-            "company_is_alfi_enabled": true,
-            "expires_at": "2018-10-09T04:46:52.484Z",
-            "header": "Bearer NzE3NWFjYTktODBkMC01ODU5LTkwYmMtOGQyZTBkNDc1NDU0OmdhYmVAZ2FiZXd5YXR0LmNvbTpjMjA5YzA5OTgtYjhmZi0wMjQyNTI2NDdmZjY=",
-            "identifier": "you@example.com",
-            "org_id": "82708afe-80d0-5859-90bc-8d2e0d475454",
-            "org_name": "Company Name",
-            "renew_token": "8784ca0e-03aa-4753-93ca-0e03aa775336",
-            "role": "SUPER",
-            "token": "c209c098-cb19-11e8-b8ff-784513247988"
-        }
-    ]
-    ```
-
-3. Export the API token found in the returned `header` value.
-
-    ```bash
-    export GREMLIN_API_TOKEN="Bearer NzE3NWFjYTktODBkMC01ODU5LTkwYmMtOGQyZTBkNDc1NDU0OmdhYmVAZ2FiZXd5YXR0LmNvbTpjMjA5YzA5OTgtYjhmZi0wMjQyNTI2NDdmZjY="
-    ```
-
-    For simplicity you may `export` the `GREMLIN_API_TOKEN` within your `.bashrc` or `.bash_profile` file to retain token access between terminal sessions.
-    {: .notice--info }
-
-#### Next Steps
-
-With your `GREMLIN_API_TOKEN` in hand, you're ready to begin Chaos Engineering with Gremlin.  Check out [Performing a CPU Attack with Gremlin][#cpu-gremlin], [Handling Storage Disk Limitations][#disk], [Evaluating Network Resiliency][#network], [Proper Memory Management][#memory], and [Troubleshooting IO Bottlenecks][#io].
-
 ### Performing a CPU Attack with Gremlin
 
 A Gremlin **CPU Attack** consumes 100% of the specified CPU cores on the target system.  The **CPU Attack** is a great way to test the stability of the targeted machine -- along with its critical dependencies -- when the CPU is overloaded.

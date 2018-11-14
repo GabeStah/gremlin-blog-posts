@@ -251,7 +251,7 @@
 
 
 
-  24 minute read
+  22 minute read
 </p>
           
         </header>
@@ -268,7 +268,6 @@
 <a href="#managing-heavy-cpu-load">Managing Heavy CPU Load</a>
     <ul>
       <li><a href="#why-it-matters-hotmail--outlook-2013">Why It Matters: Hotmail &amp; Outlook (2013)</a></li>
-      <li><a href="#obtaining-a-gremlin-api-token">Obtaining a Gremlin API Token</a></li>
       <li><a href="#performing-a-cpu-attack-with-gremlin">Performing a CPU Attack with Gremlin</a></li>
     </ul>
   </li>
@@ -329,76 +328,6 @@
 
 <p>Without additional details on the root cause and the specific impacts, we can only speculate, but a temperature spike points toward a dramatic spike in CPU load for some servers within the datacenter.  In this particular instance, it’s possible that pre-emptive Chaos Engineering may have allowed engineers to simulate similar heavy CPU load scenarios.</p>
 
-<h3 id="obtaining-a-gremlin-api-token">Obtaining a Gremlin API Token</h3>
-
-<p>All the examples throughout this article use the Gremlin API to perform Chaos Experiments.  If you prefer a graphical interface all examples can also be created within the <a href="https://app.gremlin.com/attacks" target="_blank" rel="noopener noreferrer">Gremlin Attacks Web UI</a>.</p>
-
-<p>To use the Gremlin API you’ll first need your organization’s API access token.  This can be obtained by authenticating with the appropriate API endpoint.</p>
-
-<ol>
-  <li>Retrieve your Gremlin API token by passing your <code class="highlighter-rouge">email</code>, <code class="highlighter-rouge">password</code>, and <code class="highlighter-rouge">companyName</code>.
-    <ul>
-      <li>
-        <p>For non-MFA authentication use the <code class="highlighter-rouge">https://api.gremlin.com/v1/users/auth</code> endpoint.</p>
-
-        <div class="language-bash highlighter-rouge">
-<div class="highlight"><pre class="highlight"><code>  curl <span class="nt">-X</span> POST <span class="nt">--header</span> <span class="s1">'Content-Type: application/x-www-form-urlencoded'</span> <span class="se">\</span>
-      <span class="nt">--data-urlencode</span> <span class="s1">'email=you@example.com'</span> <span class="se">\</span>
-      <span class="nt">--data-urlencode</span> <span class="s1">'password=password'</span> <span class="se">\</span>
-      <span class="nt">--data-urlencode</span> <span class="s1">'companyName=Company Name'</span> <span class="se">\</span>
-      <span class="s1">'https://api.gremlin.com/v1/users/auth'</span>
-</code></pre></div>        </div>
-      </li>
-      <li>
-        <p>For MFA authentication you’ll also need to include the MFA <code class="highlighter-rouge">token</code> value and pass it to the <code class="highlighter-rouge">https://api.gremlin.com/v1/users/auth/mfa/auth</code> endpoint.</p>
-
-        <div class="language-bash highlighter-rouge">
-<div class="highlight"><pre class="highlight"><code>  curl <span class="nt">-X</span> POST <span class="nt">--header</span> <span class="s1">'Content-Type: application/x-www-form-urlencoded'</span> <span class="se">\</span>
-      <span class="nt">--data-urlencode</span> <span class="s1">'email=you@example.com'</span> <span class="se">\</span>
-      <span class="nt">--data-urlencode</span> <span class="s1">'password=password'</span> <span class="se">\</span>
-      <span class="nt">--data-urlencode</span> <span class="s1">'companyName=Company Name'</span> <span class="se">\</span>
-      <span class="nt">--data-urlencode</span> <span class="s1">'token=123456'</span> <span class="se">\</span>
-      <span class="s1">'https://api.gremlin.com/v1/users/auth/mfa/auth'</span>
-</code></pre></div>        </div>
-      </li>
-    </ul>
-  </li>
-  <li>
-    <p>The response JSON object will include your API token within the <code class="highlighter-rouge">header</code> field.</p>
-
-    <div class="language-json highlighter-rouge">
-<div class="highlight"><pre class="highlight"><code><span class="w"> </span><span class="p">[</span><span class="w">
-     </span><span class="p">{</span><span class="w">
-         </span><span class="s2">"company_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"82708afe-80d0-5859-90bc-8d2e0d475454"</span><span class="p">,</span><span class="w">
-         </span><span class="s2">"company_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Company Name"</span><span class="p">,</span><span class="w">
-         </span><span class="s2">"company_is_alfi_enabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-         </span><span class="s2">"expires_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-10-09T04:46:52.484Z"</span><span class="p">,</span><span class="w">
-         </span><span class="s2">"header"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bearer NzE3NWFjYTktODBkMC01ODU5LTkwYmMtOGQyZTBkNDc1NDU0OmdhYmVAZ2FiZXd5YXR0LmNvbTpjMjA5YzA5OTgtYjhmZi0wMjQyNTI2NDdmZjY="</span><span class="p">,</span><span class="w">
-         </span><span class="s2">"identifier"</span><span class="p">:</span><span class="w"> </span><span class="s2">"you@example.com"</span><span class="p">,</span><span class="w">
-         </span><span class="s2">"org_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"82708afe-80d0-5859-90bc-8d2e0d475454"</span><span class="p">,</span><span class="w">
-         </span><span class="s2">"org_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Company Name"</span><span class="p">,</span><span class="w">
-         </span><span class="s2">"renew_token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"8784ca0e-03aa-4753-93ca-0e03aa775336"</span><span class="p">,</span><span class="w">
-         </span><span class="s2">"role"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SUPER"</span><span class="p">,</span><span class="w">
-         </span><span class="s2">"token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"c209c098-cb19-11e8-b8ff-784513247988"</span><span class="w">
-     </span><span class="p">}</span><span class="w">
- </span><span class="p">]</span><span class="w">
-</span></code></pre></div>    </div>
-  </li>
-  <li>
-    <p>Export the API token found in the returned <code class="highlighter-rouge">header</code> value.</p>
-
-    <div class="language-bash highlighter-rouge">
-<div class="highlight"><pre class="highlight"><code> <span class="nb">export </span><span class="nv">GREMLIN_API_TOKEN</span><span class="o">=</span><span class="s2">"Bearer NzE3NWFjYTktODBkMC01ODU5LTkwYmMtOGQyZTBkNDc1NDU0OmdhYmVAZ2FiZXd5YXR0LmNvbTpjMjA5YzA5OTgtYjhmZi0wMjQyNTI2NDdmZjY="</span>
-</code></pre></div>    </div>
-
-    <p class="notice--info">For simplicity you may <code class="highlighter-rouge">export</code> the <code class="highlighter-rouge">GREMLIN_API_TOKEN</code> within your <code class="highlighter-rouge">.bashrc</code> or <code class="highlighter-rouge">.bash_profile</code> file to retain token access between terminal sessions.</p>
-  </li>
-</ol>
-
-<h4 id="next-steps">Next Steps</h4>
-
-<p>With your <code class="highlighter-rouge">GREMLIN_API_TOKEN</code> in hand, you’re ready to begin Chaos Engineering with Gremlin.  Check out <a href="#performing-a-cpu-attack-with-gremlin">Performing a CPU Attack with Gremlin</a>, <a href="#handling-storage-disk-limitations">Handling Storage Disk Limitations</a>, <a href="#evaluating-network-resiliency">Evaluating Network Resiliency</a>, <a href="#proper-memory-management">Proper Memory Management</a>, and <a href="#troubleshooting-io-bottlenecks">Troubleshooting IO Bottlenecks</a>.</p>
-
 <h3 id="performing-a-cpu-attack-with-gremlin">Performing a CPU Attack with Gremlin</h3>
 
 <p>A Gremlin <strong>CPU Attack</strong> consumes 100% of the specified CPU cores on the target system.  The <strong>CPU Attack</strong> is a great way to test the stability of the targeted machine – along with its critical dependencies – when the CPU is overloaded.</p>
@@ -408,7 +337,7 @@
 <ul>
   <li>
 <a href="https://help.gremlin.com/installation/" target="_blank" rel="noopener noreferrer">Install Gremlin</a> on the target machine.</li>
-  <li>Retrieve your <a href="#obtaining-a-gremlin-api-token">Gremlin API Token</a>.</li>
+  <li>Retrieve your <a href="https://help.gremlin.com/api/" target="_blank" rel="noopener noreferrer">Gremlin API Token</a>.</li>
 </ul>
 
 <p>A <a href="https://help.gremlin.com/api/" target="_blank" rel="noopener noreferrer">Gremlin API</a> <strong>CPU Attack</strong> accepts the following arguments.</p>
@@ -511,7 +440,7 @@
 <ul>
   <li>
 <a href="https://help.gremlin.com/installation/" target="_blank" rel="noopener noreferrer">Install Gremlin</a> on the target machine.</li>
-  <li>Retrieve your <a href="#obtaining-a-gremlin-api-token">Gremlin API Token</a>.</li>
+  <li>Retrieve your <a href="https://help.gremlin.com/api/" target="_blank" rel="noopener noreferrer">Gremlin API Token</a>.</li>
 </ul>
 
 <p>A <a href="https://help.gremlin.com/api/" target="_blank" rel="noopener noreferrer">Gremlin API</a> <strong>Disk Attack</strong> accepts the following arguments.</p>
@@ -624,7 +553,7 @@ Lessons from Hundreds of Service Outages</a> study found that network problems a
 <ul>
   <li>
 <a href="https://help.gremlin.com/installation/" target="_blank" rel="noopener noreferrer">Install Gremlin</a> on the target machine.</li>
-  <li>Retrieve your <a href="#obtaining-a-gremlin-api-token">Gremlin API Token</a>.</li>
+  <li>Retrieve your <a href="https://help.gremlin.com/api/" target="_blank" rel="noopener noreferrer">Gremlin API Token</a>.</li>
 </ul>
 
 <p>A <a href="https://help.gremlin.com/api/" target="_blank" rel="noopener noreferrer">Gremlin API</a> <strong>Black Hole Attack</strong> accepts the following arguments.</p>
@@ -752,7 +681,7 @@ Lessons from Hundreds of Service Outages</a> study found that network problems a
 <ul>
   <li>
 <a href="https://help.gremlin.com/installation/" target="_blank" rel="noopener noreferrer">Install Gremlin</a> on the target machine.</li>
-  <li>Retrieve your <a href="#obtaining-a-gremlin-api-token">Gremlin API Token</a>.</li>
+  <li>Retrieve your <a href="https://help.gremlin.com/api/" target="_blank" rel="noopener noreferrer">Gremlin API Token</a>.</li>
 </ul>
 
 <p>A <a href="https://help.gremlin.com/api/" target="_blank" rel="noopener noreferrer">Gremlin API</a> <strong>Memory Attack</strong> accepts the following arguments.</p>
@@ -860,7 +789,7 @@ Lessons from Hundreds of Service Outages</a> study found that network problems a
 <ul>
   <li>
 <a href="https://help.gremlin.com/installation/" target="_blank" rel="noopener noreferrer">Install Gremlin</a> on the target machine.</li>
-  <li>Retrieve your <a href="#obtaining-a-gremlin-api-token">Gremlin API Token</a>.</li>
+  <li>Retrieve your <a href="https://help.gremlin.com/api/" target="_blank" rel="noopener noreferrer">Gremlin API Token</a>.</li>
 </ul>
 
 <p>A <a href="https://help.gremlin.com/api/" target="_blank" rel="noopener noreferrer">Gremlin API</a> <strong>IO Attack</strong> accepts the following arguments.</p>
@@ -1060,7 +989,7 @@ Lessons from Hundreds of Service Outages</a> study found that network problems a
 
 
 
-  2 minute read
+  3 minute read
 </p>
     
     <p class="archive__item-excerpt" itemprop="description">

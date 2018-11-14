@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.4">Jekyll</generator><link href="http://localhost:4000/gremlin-blog-posts/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/gremlin-blog-posts/" rel="alternate" type="text/html" /><updated>2018-11-12T23:15:32-08:00</updated><id>http://localhost:4000/gremlin-blog-posts/feed.xml</id><title type="html">Gremlin: Blog Posts</title><subtitle>An amazing website.</subtitle><author><name>Gabe Wyatt</name></author><entry><title type="html">Chaos Engineering Through Staged Resiliency - Stage 3</title><link href="http://localhost:4000/gremlin-blog-posts/chaos-engineering/chaos-engineering-through-staged-resiliency-stage-3/" rel="alternate" type="text/html" title="Chaos Engineering Through Staged Resiliency - Stage 3" /><published>2018-10-11T00:00:00-07:00</published><updated>2018-10-11T00:00:00-07:00</updated><id>http://localhost:4000/gremlin-blog-posts/chaos-engineering/chaos-engineering-through-staged-resiliency-stage-3</id><content type="html" xml:base="http://localhost:4000/gremlin-blog-posts/chaos-engineering/chaos-engineering-through-staged-resiliency-stage-3/">&lt;p&gt;Performing occasional, manual resiliency testing is useful, but your system must be automatically and frequently tested to provide any real sense of stability.  In &lt;a href=&quot;https://www.gremlin.com/blog/chaos-engineering-through-staged-resiliency-stage-2&quot;&gt;Chaos Engineering Through Staged Resiliency - Stage 2&lt;/a&gt; we focused on critical dependency failure testing in non-production environments.  To work through &lt;strong&gt;Resiliency Stage 3&lt;/strong&gt; your team will need to begin automating these test and experiments.  This allows the testing frequency to improve dramatically and reduces the reliance manual processes.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.4">Jekyll</generator><link href="http://localhost:4000/gremlin-blog-posts/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/gremlin-blog-posts/" rel="alternate" type="text/html" /><updated>2018-11-14T12:46:46-08:00</updated><id>http://localhost:4000/gremlin-blog-posts/feed.xml</id><title type="html">Gremlin: Blog Posts</title><subtitle>An amazing website.</subtitle><author><name>Gabe Wyatt</name></author><entry><title type="html">Chaos Engineering Through Staged Resiliency - Stage 3</title><link href="http://localhost:4000/gremlin-blog-posts/chaos-engineering/chaos-engineering-through-staged-resiliency-stage-3/" rel="alternate" type="text/html" title="Chaos Engineering Through Staged Resiliency - Stage 3" /><published>2018-10-11T00:00:00-07:00</published><updated>2018-10-11T00:00:00-07:00</updated><id>http://localhost:4000/gremlin-blog-posts/chaos-engineering/chaos-engineering-through-staged-resiliency-stage-3</id><content type="html" xml:base="http://localhost:4000/gremlin-blog-posts/chaos-engineering/chaos-engineering-through-staged-resiliency-stage-3/">&lt;p&gt;Performing occasional, manual resiliency testing is useful, but your system must be automatically and frequently tested to provide any real sense of stability.  In &lt;a href=&quot;https://www.gremlin.com/blog/chaos-engineering-through-staged-resiliency-stage-2&quot;&gt;Chaos Engineering Through Staged Resiliency - Stage 2&lt;/a&gt; we focused on critical dependency failure testing in non-production environments.  To work through &lt;strong&gt;Resiliency Stage 3&lt;/strong&gt; your team will need to begin automating these test and experiments.  This allows the testing frequency to improve dramatically and reduces the reliance manual processes.&lt;/p&gt;
 
 &lt;h2 id=&quot;prerequisites&quot;&gt;Prerequisites&lt;/h2&gt;
 
@@ -10,15 +10,17 @@
 
 &lt;h2 id=&quot;perform-frequent-semi-automated-tests&quot;&gt;Perform Frequent, Semi-Automated Tests&lt;/h2&gt;
 
-&lt;p&gt;There’s no more putting it off – if you haven’t already done so, this resiliency stage is where you begin integrating automation into your testing procedures.&lt;/p&gt;
+&lt;p&gt;There’s no more putting it off – it’s time to begin automating your testing procedures.  During this third &lt;strong&gt;Resiliency Stage&lt;/strong&gt; the team should aim to automate as much of the resiliency testing process as reasonably possible.  The overall goal of this stage isn’t to finalize automation, but to work toward a regular cadence of testing.  The frequency of each test is up to the team, but once established it’s critical that the schedule is maintained and automation handles at least &lt;em&gt;some&lt;/em&gt; of the testing process.&lt;/p&gt;
+
+&lt;p&gt;If the team isn’t already doing so, this is a prime opportunity to introduce Chaos Engineering tools.  These tools empower the team to intelligently create controlled experiments that can be executed precisely when necessary.  For example, Gremlin attacks can be &lt;a href=&quot;https://help.gremlin.com/attacks/#how-to-schedule-attacks-with-gremlin&quot;&gt;scheduled&lt;/a&gt; to execute on certain days of the week and within a specified window of time.&lt;/p&gt;
+
+&lt;h2 id=&quot;execute-a-resiliency-experiment-in-production&quot;&gt;Execute a Resiliency Experiment in Production&lt;/h2&gt;
 
 &lt;blockquote&gt;
-  &lt;p&gt;Use Gremlin or similar Chaos Engineering tools.&lt;/p&gt;
+  &lt;p&gt;Configure Gremlin: https://help.gremlin.com/configuration/&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;h2 id=&quot;publish-test-results&quot;&gt;Publish Test Results&lt;/h2&gt;
-
-&lt;h2 id=&quot;execute-a-resiliency-experiment-in-production&quot;&gt;Execute a Resiliency Experiment in Production&lt;/h2&gt;
 
 &lt;blockquote&gt;
   &lt;p&gt;Level 3 — manual + automated — Regular exercises
@@ -40,11 +42,55 @@ Run at least one resiliency exercise (failure injection) in production environme
   &lt;li&gt;Status: &lt;strong&gt;Complete&lt;/strong&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
+&lt;h4 id=&quot;ec2-instance-failure-test&quot;&gt;EC2 Instance Failure Test&lt;/h4&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Use Gremlin attack.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Lambda perhaps? https://aws.amazon.com/premiumsupport/knowledge-center/start-stop-lambda-cloudwatch/&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h4 id=&quot;cdn-failure-test&quot;&gt;CDN Failure Test&lt;/h4&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;(TODO) CloudWatch Agent: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Install-CloudWatch-Agent.html
+Monitor Scripts: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/mon-scripts.html&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;ol&gt;
+    &lt;li&gt;Create AWS CloudWatch Alarm/metric.&lt;/li&gt;
+    &lt;li&gt;Automate AWS alarm trigger from &lt;code class=&quot;highlighter-rouge&quot;&gt;AWS CLI&lt;/code&gt;&lt;/li&gt;
+    &lt;li&gt;Failover CDN.&lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/blockquote&gt;
+
+&lt;h4 id=&quot;db-failure-test&quot;&gt;DB Failure Test&lt;/h4&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;(TODO) CloudWatch Agent: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Install-CloudWatch-Agent.html
+Monitor Scripts: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/mon-scripts.html&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;ol&gt;
+    &lt;li&gt;Create AWS CloudWatch Alarm/metric.&lt;/li&gt;
+    &lt;li&gt;Automate AWS alarm trigger from &lt;code class=&quot;highlighter-rouge&quot;&gt;AWS CLI&lt;/code&gt;&lt;/li&gt;
+    &lt;li&gt;Failover CDN.&lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/blockquote&gt;
+
 &lt;h3 id=&quot;execute-a-resiliency-experiment-in-production-1&quot;&gt;Execute a Resiliency Experiment in Production&lt;/h3&gt;
 
 &lt;ul&gt;
   &lt;li&gt;Status: &lt;strong&gt;Complete&lt;/strong&gt;&lt;/li&gt;
 &lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Use Gremlin or similar Chaos Engineering tools.&lt;/p&gt;
+&lt;/blockquote&gt;
 
 &lt;h3 id=&quot;publish-test-results-and-track-over-time&quot;&gt;Publish Test Results and Track Over Time&lt;/h3&gt;
 
@@ -531,7 +577,7 @@ Run at least one resiliency exercise (failure injection) in production environme
 
 &lt;p&gt;Now that both critical dependencies have been tested we’ll publish the results to the entire team, so everyone can keep tabs on the resiliency progress of the project.&lt;/p&gt;
 
-&lt;p&gt;In this case, both the &lt;a href=&quot;#database-failure-test&quot;&gt;Database Failure Test&lt;/a&gt; and &lt;a href=&quot;#cdn-failure-test&quot;&gt;CDN Failure Test&lt;/a&gt; were performed manually within less than 15 minutes.  Therefore, we can safely update some of the playbook information created during the prerequisite phase of &lt;a href=&quot;&quot;&gt;Resiliency Stage 1&lt;/a&gt; and reduce the critical dependency RTO/RPO targets significantly.  Even a conservative estimate of &lt;code class=&quot;highlighter-rouge&quot;&gt;1 hour&lt;/code&gt; is a massive improvement to resiliency and reduction to potential support costs, and we’re only through the second Stage!&lt;/p&gt;
+&lt;p&gt;In this case, both the &lt;a href=&quot;#database-failure-test&quot;&gt;Database Failure Test&lt;/a&gt; and &lt;a href=&quot;#cdn-failure-test&quot;&gt;CDN Failure Test&lt;/a&gt; were performed manually within less than 15 minutes.  Therefore, we can safely update some of the playbook information created during the prerequisite phase of &lt;a href=&quot;https://www.gremlin.com/blog/chaos-engineering-through-staged-resiliency-stage-1&quot;&gt;Resiliency Stage 1&lt;/a&gt; and reduce the critical dependency RTO/RPO targets significantly.  Even a conservative estimate of &lt;code class=&quot;highlighter-rouge&quot;&gt;1 hour&lt;/code&gt; is a massive improvement to resiliency and reduction to potential support costs, and we’re only through the second Stage!&lt;/p&gt;
 
 &lt;table&gt;
   &lt;thead&gt;
@@ -1461,72 +1507,6 @@ Take SRE actions across your infrastructure. Schedule orchestration jobs, build 
 
 &lt;p&gt;Without additional details on the root cause and the specific impacts, we can only speculate, but a temperature spike points toward a dramatic spike in CPU load for some servers within the datacenter.  In this particular instance, it’s possible that pre-emptive Chaos Engineering may have allowed engineers to simulate similar heavy CPU load scenarios.&lt;/p&gt;
 
-&lt;h3 id=&quot;obtaining-a-gremlin-api-token&quot;&gt;Obtaining a Gremlin API Token&lt;/h3&gt;
-
-&lt;p&gt;All the examples throughout this article use the Gremlin API to perform Chaos Experiments.  If you prefer a graphical interface all examples can also be created within the &lt;a href=&quot;https://app.gremlin.com/attacks&quot;&gt;Gremlin Attacks Web UI&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;To use the Gremlin API you’ll first need your organization’s API access token.  This can be obtained by authenticating with the appropriate API endpoint.&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;Retrieve your Gremlin API token by passing your &lt;code class=&quot;highlighter-rouge&quot;&gt;email&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;password&lt;/code&gt;, and &lt;code class=&quot;highlighter-rouge&quot;&gt;companyName&lt;/code&gt;.
-    &lt;ul&gt;
-      &lt;li&gt;
-        &lt;p&gt;For non-MFA authentication use the &lt;code class=&quot;highlighter-rouge&quot;&gt;https://api.gremlin.com/v1/users/auth&lt;/code&gt; endpoint.&lt;/p&gt;
-
-        &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  curl &lt;span class=&quot;nt&quot;&gt;-X&lt;/span&gt; POST &lt;span class=&quot;nt&quot;&gt;--header&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'Content-Type: application/x-www-form-urlencoded'&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
-      &lt;span class=&quot;nt&quot;&gt;--data-urlencode&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'email=you@example.com'&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
-      &lt;span class=&quot;nt&quot;&gt;--data-urlencode&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'password=password'&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
-      &lt;span class=&quot;nt&quot;&gt;--data-urlencode&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'companyName=Company Name'&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
-      &lt;span class=&quot;s1&quot;&gt;'https://api.gremlin.com/v1/users/auth'&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;        &lt;/div&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;For MFA authentication you’ll also need to include the MFA &lt;code class=&quot;highlighter-rouge&quot;&gt;token&lt;/code&gt; value and pass it to the &lt;code class=&quot;highlighter-rouge&quot;&gt;https://api.gremlin.com/v1/users/auth/mfa/auth&lt;/code&gt; endpoint.&lt;/p&gt;
-
-        &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  curl &lt;span class=&quot;nt&quot;&gt;-X&lt;/span&gt; POST &lt;span class=&quot;nt&quot;&gt;--header&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'Content-Type: application/x-www-form-urlencoded'&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
-      &lt;span class=&quot;nt&quot;&gt;--data-urlencode&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'email=you@example.com'&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
-      &lt;span class=&quot;nt&quot;&gt;--data-urlencode&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'password=password'&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
-      &lt;span class=&quot;nt&quot;&gt;--data-urlencode&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'companyName=Company Name'&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
-      &lt;span class=&quot;nt&quot;&gt;--data-urlencode&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'token=123456'&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
-      &lt;span class=&quot;s1&quot;&gt;'https://api.gremlin.com/v1/users/auth/mfa/auth'&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;        &lt;/div&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;The response JSON object will include your API token within the &lt;code class=&quot;highlighter-rouge&quot;&gt;header&lt;/code&gt; field.&lt;/p&gt;
-
-    &lt;div class=&quot;language-json highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-     &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-         &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;company_id&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;82708afe-80d0-5859-90bc-8d2e0d475454&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-         &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;company_name&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Company Name&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-         &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;company_is_alfi_enabled&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-         &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;expires_at&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;2018-10-09T04:46:52.484Z&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-         &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;header&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Bearer NzE3NWFjYTktODBkMC01ODU5LTkwYmMtOGQyZTBkNDc1NDU0OmdhYmVAZ2FiZXd5YXR0LmNvbTpjMjA5YzA5OTgtYjhmZi0wMjQyNTI2NDdmZjY=&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-         &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;identifier&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;you@example.com&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-         &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;org_id&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;82708afe-80d0-5859-90bc-8d2e0d475454&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-         &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;org_name&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Company Name&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-         &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;renew_token&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;8784ca0e-03aa-4753-93ca-0e03aa775336&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-         &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;role&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;SUPER&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-         &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;token&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;c209c098-cb19-11e8-b8ff-784513247988&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-     &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
- &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Export the API token found in the returned &lt;code class=&quot;highlighter-rouge&quot;&gt;header&lt;/code&gt; value.&lt;/p&gt;
-
-    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;GREMLIN_API_TOKEN&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Bearer NzE3NWFjYTktODBkMC01ODU5LTkwYmMtOGQyZTBkNDc1NDU0OmdhYmVAZ2FiZXd5YXR0LmNvbTpjMjA5YzA5OTgtYjhmZi0wMjQyNTI2NDdmZjY=&quot;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-
-    &lt;p class=&quot;notice--info&quot;&gt;For simplicity you may &lt;code class=&quot;highlighter-rouge&quot;&gt;export&lt;/code&gt; the &lt;code class=&quot;highlighter-rouge&quot;&gt;GREMLIN_API_TOKEN&lt;/code&gt; within your &lt;code class=&quot;highlighter-rouge&quot;&gt;.bashrc&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;.bash_profile&lt;/code&gt; file to retain token access between terminal sessions.&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h4 id=&quot;next-steps&quot;&gt;Next Steps&lt;/h4&gt;
-
-&lt;p&gt;With your &lt;code class=&quot;highlighter-rouge&quot;&gt;GREMLIN_API_TOKEN&lt;/code&gt; in hand, you’re ready to begin Chaos Engineering with Gremlin.  Check out &lt;a href=&quot;#performing-a-cpu-attack-with-gremlin&quot;&gt;Performing a CPU Attack with Gremlin&lt;/a&gt;, &lt;a href=&quot;#handling-storage-disk-limitations&quot;&gt;Handling Storage Disk Limitations&lt;/a&gt;, &lt;a href=&quot;#evaluating-network-resiliency&quot;&gt;Evaluating Network Resiliency&lt;/a&gt;, &lt;a href=&quot;#proper-memory-management&quot;&gt;Proper Memory Management&lt;/a&gt;, and &lt;a href=&quot;#troubleshooting-io-bottlenecks&quot;&gt;Troubleshooting IO Bottlenecks&lt;/a&gt;.&lt;/p&gt;
-
 &lt;h3 id=&quot;performing-a-cpu-attack-with-gremlin&quot;&gt;Performing a CPU Attack with Gremlin&lt;/h3&gt;
 
 &lt;p&gt;A Gremlin &lt;strong&gt;CPU Attack&lt;/strong&gt; consumes 100% of the specified CPU cores on the target system.  The &lt;strong&gt;CPU Attack&lt;/strong&gt; is a great way to test the stability of the targeted machine – along with its critical dependencies – when the CPU is overloaded.&lt;/p&gt;
@@ -1535,7 +1515,7 @@ Take SRE actions across your infrastructure. Schedule orchestration jobs, build 
 
 &lt;ul&gt;
   &lt;li&gt;&lt;a href=&quot;https://help.gremlin.com/installation/&quot;&gt;Install Gremlin&lt;/a&gt; on the target machine.&lt;/li&gt;
-  &lt;li&gt;Retrieve your &lt;a href=&quot;#obtaining-a-gremlin-api-token&quot;&gt;Gremlin API Token&lt;/a&gt;.&lt;/li&gt;
+  &lt;li&gt;Retrieve your &lt;a href=&quot;https://help.gremlin.com/api/&quot;&gt;Gremlin API Token&lt;/a&gt;.&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;A &lt;a href=&quot;https://help.gremlin.com/api/&quot;&gt;Gremlin API&lt;/a&gt; &lt;strong&gt;CPU Attack&lt;/strong&gt; accepts the following arguments.&lt;/p&gt;
@@ -1634,7 +1614,7 @@ Take SRE actions across your infrastructure. Schedule orchestration jobs, build 
 
 &lt;ul&gt;
   &lt;li&gt;&lt;a href=&quot;https://help.gremlin.com/installation/&quot;&gt;Install Gremlin&lt;/a&gt; on the target machine.&lt;/li&gt;
-  &lt;li&gt;Retrieve your &lt;a href=&quot;#obtaining-a-gremlin-api-token&quot;&gt;Gremlin API Token&lt;/a&gt;.&lt;/li&gt;
+  &lt;li&gt;Retrieve your &lt;a href=&quot;https://help.gremlin.com/api/&quot;&gt;Gremlin API Token&lt;/a&gt;.&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;A &lt;a href=&quot;https://help.gremlin.com/api/&quot;&gt;Gremlin API&lt;/a&gt; &lt;strong&gt;Disk Attack&lt;/strong&gt; accepts the following arguments.&lt;/p&gt;
@@ -1742,7 +1722,7 @@ Lessons from Hundreds of Service Outages&lt;/a&gt; study found that network prob
 
 &lt;ul&gt;
   &lt;li&gt;&lt;a href=&quot;https://help.gremlin.com/installation/&quot;&gt;Install Gremlin&lt;/a&gt; on the target machine.&lt;/li&gt;
-  &lt;li&gt;Retrieve your &lt;a href=&quot;#obtaining-a-gremlin-api-token&quot;&gt;Gremlin API Token&lt;/a&gt;.&lt;/li&gt;
+  &lt;li&gt;Retrieve your &lt;a href=&quot;https://help.gremlin.com/api/&quot;&gt;Gremlin API Token&lt;/a&gt;.&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;A &lt;a href=&quot;https://help.gremlin.com/api/&quot;&gt;Gremlin API&lt;/a&gt; &lt;strong&gt;Black Hole Attack&lt;/strong&gt; accepts the following arguments.&lt;/p&gt;
@@ -1865,7 +1845,7 @@ Lessons from Hundreds of Service Outages&lt;/a&gt; study found that network prob
 
 &lt;ul&gt;
   &lt;li&gt;&lt;a href=&quot;https://help.gremlin.com/installation/&quot;&gt;Install Gremlin&lt;/a&gt; on the target machine.&lt;/li&gt;
-  &lt;li&gt;Retrieve your &lt;a href=&quot;#obtaining-a-gremlin-api-token&quot;&gt;Gremlin API Token&lt;/a&gt;.&lt;/li&gt;
+  &lt;li&gt;Retrieve your &lt;a href=&quot;https://help.gremlin.com/api/&quot;&gt;Gremlin API Token&lt;/a&gt;.&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;A &lt;a href=&quot;https://help.gremlin.com/api/&quot;&gt;Gremlin API&lt;/a&gt; &lt;strong&gt;Memory Attack&lt;/strong&gt; accepts the following arguments.&lt;/p&gt;
@@ -1968,7 +1948,7 @@ Lessons from Hundreds of Service Outages&lt;/a&gt; study found that network prob
 
 &lt;ul&gt;
   &lt;li&gt;&lt;a href=&quot;https://help.gremlin.com/installation/&quot;&gt;Install Gremlin&lt;/a&gt; on the target machine.&lt;/li&gt;
-  &lt;li&gt;Retrieve your &lt;a href=&quot;#obtaining-a-gremlin-api-token&quot;&gt;Gremlin API Token&lt;/a&gt;.&lt;/li&gt;
+  &lt;li&gt;Retrieve your &lt;a href=&quot;https://help.gremlin.com/api/&quot;&gt;Gremlin API Token&lt;/a&gt;.&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;A &lt;a href=&quot;https://help.gremlin.com/api/&quot;&gt;Gremlin API&lt;/a&gt; &lt;strong&gt;IO Attack&lt;/strong&gt; accepts the following arguments.&lt;/p&gt;

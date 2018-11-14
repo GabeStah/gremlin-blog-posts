@@ -15,8 +15,8 @@ sources:
       urls: https://www.youtube.com/watch?v=4Gy_5EQMrB4&index=5&list=PLLIx5ktghjqKtZdfDDyuJrlhC-ICfhVAN&t=0s
     - tags: [chaosconf 2018, resiliency, sre, interview]
       urls: https://www.infoq.com/articles/chaos-engineering-conf
-    - tags: []
-      urls: 
+    - tags: [blue/green, aws]
+      urls: https://aws.amazon.com/blogs/startups/upgrades-without-tears-part-2-bluegreen-deployment-step-by-step-on-aws/
     - tags: []
       urls: 
     - tags: []
@@ -49,13 +49,15 @@ Performing occasional, manual resiliency testing is useful, but your system must
 
 ## Perform Frequent, Semi-Automated Tests
 
-There's no more putting it off -- if you haven't already done so, this resiliency stage is where you begin integrating automation into your testing procedures.
+There's no more putting it off -- it's time to begin automating your testing procedures.  During this third **Resiliency Stage** the team should aim to automate as much of the resiliency testing process as reasonably possible.  The overall goal of this stage isn't to finalize automation, but to work toward a regular cadence of testing.  The frequency of each test is up to the team, but once established it's critical that the schedule is maintained and automation handles at least _some_ of the testing process.
 
-> Use Gremlin or similar Chaos Engineering tools.
-
-## Publish Test Results
+If the team isn't already doing so, this is a prime opportunity to introduce Chaos Engineering tools.  These tools empower the team to intelligently create controlled experiments that can be executed precisely when necessary.  For example, Gremlin attacks can be [scheduled](https://help.gremlin.com/attacks/#how-to-schedule-attacks-with-gremlin) to execute on certain days of the week and within a specified window of time.
 
 ## Execute a Resiliency Experiment in Production
+
+> Configure Gremlin: https://help.gremlin.com/configuration/
+
+## Publish Test Results
 
 > Level 3 — manual + automated — Regular exercises
 > All of level 2 requirements, plus
@@ -71,9 +73,35 @@ There's no more putting it off -- if you haven't already done so, this resilienc
 
 - Status: **Complete**
 
+#### EC2 Instance Failure Test
+
+> Use Gremlin attack.
+
+> Lambda perhaps? https://aws.amazon.com/premiumsupport/knowledge-center/start-stop-lambda-cloudwatch/
+
+#### CDN Failure Test
+
+> (TODO) CloudWatch Agent: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Install-CloudWatch-Agent.html
+> Monitor Scripts: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/mon-scripts.html
+
+> 1. Create AWS CloudWatch Alarm/metric.
+> 2. Automate AWS alarm trigger from `AWS CLI`
+> 3. Failover CDN.
+
+#### DB Failure Test
+
+> (TODO) CloudWatch Agent: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Install-CloudWatch-Agent.html
+> Monitor Scripts: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/mon-scripts.html
+
+> 1. Create AWS CloudWatch Alarm/metric.
+> 2. Automate AWS alarm trigger from `AWS CLI`
+> 3. Failover CDN.
+
 ### Execute a Resiliency Experiment in Production
 
 - Status: **Complete**
+
+> Use Gremlin or similar Chaos Engineering tools.
 
 ### Publish Test Results and Track Over Time
 
