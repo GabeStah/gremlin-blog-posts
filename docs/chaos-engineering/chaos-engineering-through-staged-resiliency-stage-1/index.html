@@ -251,7 +251,7 @@
 
 
 
-  21 minute read
+  22 minute read
 </p>
           
         </header>
@@ -267,11 +267,12 @@
   <li>
 <a href="#prerequisites">Prerequisites</a>
     <ul>
-      <li><a href="#1-define-the-critical-dependencies">1. Define the Critical Dependencies</a></li>
-      <li><a href="#2-define-the-non-critical-dependencies">2. Define the Non-Critical Dependencies</a></li>
-      <li><a href="#3-create-a-disaster-recovery-failover-playbook">3. Create a Disaster Recovery Failover Playbook</a></li>
-      <li><a href="#4-create-a-critical-dependency-failover-playbook">4. Create a Critical Dependency Failover Playbook</a></li>
-      <li><a href="#5-create-a-non-critical-dependency-failover-playbook">5. Create a Non-Critical Dependency Failover Playbook</a></li>
+      <li><a href="#1-establish-high-observability">1. Establish High Observability</a></li>
+      <li><a href="#2-define-the-critical-dependencies">2. Define the Critical Dependencies</a></li>
+      <li><a href="#3-define-the-non-critical-dependencies">3. Define the Non-Critical Dependencies</a></li>
+      <li><a href="#4-create-a-disaster-recovery-failover-playbook">4. Create a Disaster Recovery Failover Playbook</a></li>
+      <li><a href="#5-create-a-critical-dependency-failover-playbook">5. Create a Critical Dependency Failover Playbook</a></li>
+      <li><a href="#6-create-a-non-critical-dependency-failover-playbook">6. Create a Non-Critical Dependency Failover Playbook</a></li>
     </ul>
   </li>
   <li><a href="#complete-and-publish-prerequisites">Complete and Publish Prerequisites</a></li>
@@ -307,15 +308,32 @@
 
 <p>Before you can begin moving through the resiliency stages there are a few prerequisite steps you’ll need to complete.  Most of these requirements are standard fare for a well-designed system, but ensuring each and every unique application team is fully prepared for the unknown is paramount to developing resilient systems.</p>
 
-<h3 id="1-define-the-critical-dependencies">1. Define the Critical Dependencies</h3>
+<h3 id="1-establish-high-observability">1. Establish High Observability</h3>
+
+<p>(TODO)</p>
+
+<p>Microservice and clustered architectures favor the scalability and cost-efficiency of distributed computing, but also require a deep understanding of system behavior across a large pool of services and machines.  Robust observability is a necessity for most modern software, which tend to be comprised of these complex distributed systems.</p>
+
+<ul>
+  <li>
+<strong>Monitoring</strong>: The act of collecting, processing, aggregating, and displaying quantitative data about a system.  These data may be anything from query counts/types and error counts/types to processing times and server lifetimes.  Monitoring is a smaller subset of overall measure of observability.</li>
+  <li>
+<strong>Observability</strong>: A measure of the ability to accurately infer what is happening internally within a system based solely on external information.</li>
+</ul>
+
+<p>A properly observable system is one that allows your team to answer new questions about the internals of the system <em>without</em> the need to deploy a new build.  Continuous monitoring is critical to catch unexpected behavior that is difficult to reproduce, but monitoring largely focuses on measuring “known unknowns.”  By contrast, a highly-distributed system presents the need to track down and understand a multitude of “unknown unknowns” – an obscure issue that has never happened before, and may never happen again.</p>
+
+<p>Most importantly, high observability is critically important when implementing Chaos Engineering techniques.  As <a href="https://twitter.com/mipsytipsy" target="_blank" rel="noopener noreferrer">Charity Majors</a>, CEO of <a href="https://www.honeycomb.io/" target="_blank" rel="noopener noreferrer">Honeycomb</a>, puts it, “Without observability, you don’t have ‘chaos engineering’.  You just have chaos.”</p>
+
+<h3 id="2-define-the-critical-dependencies">2. Define the Critical Dependencies</h3>
 
 <p>Start by documenting every application dependency that is <em>required</em> for the application to function at all.  This type of dependency is referred to as a <strong>critical dependency</strong>.</p>
 
-<h3 id="2-define-the-non-critical-dependencies">2. Define the Non-Critical Dependencies</h3>
+<h3 id="3-define-the-non-critical-dependencies">3. Define the Non-Critical Dependencies</h3>
 
 <p>Once all critical dependencies are identified then all remaining dependencies should be <strong>non-critical dependencies</strong>.  If the core application can still function – even in a degraded state – when a dependency is missing, then that dependency is considered non-critical.</p>
 
-<h3 id="3-create-a-disaster-recovery-failover-playbook">3. Create a Disaster Recovery Failover Playbook</h3>
+<h3 id="4-create-a-disaster-recovery-failover-playbook">4. Create a Disaster Recovery Failover Playbook</h3>
 
 <p>Your team should create a disaster recovery plan specific to <strong>failover</strong>.  A <strong>disaster recovery failover playbook</strong> should include the following information, at a minimum:</p>
 
@@ -330,11 +348,11 @@
 
 <p class="notice--tip"><strong>TIP</strong>: Not sure which failover scenarios to expect or plan for?  Unable to determine if a dependency is critical vs non-critical?  Consider running a GameDay to better prepare for and test specific scenarios in a controlled manner.  Check out <a href="https://www.gremlin.com/community/tutorials/how-to-run-a-gameday/" target="_blank" rel="noopener noreferrer">How to Run a GameDay</a> for more info.</p>
 
-<h3 id="4-create-a-critical-dependency-failover-playbook">4. Create a Critical Dependency Failover Playbook</h3>
+<h3 id="5-create-a-critical-dependency-failover-playbook">5. Create a Critical Dependency Failover Playbook</h3>
 
 <p>A <strong>critical dependency failover playbook</strong> is a subset of the disaster recovery failover playbook and it should detail the step-by-step procedures for handling the potential failover scenarios for each critical dependency.</p>
 
-<h3 id="5-create-a-non-critical-dependency-failover-playbook">5. Create a Non-Critical Dependency Failover Playbook</h3>
+<h3 id="6-create-a-non-critical-dependency-failover-playbook">6. Create a Non-Critical Dependency Failover Playbook</h3>
 
 <p>The final prerequisite is to determine how non-critical dependency failures will impact the system.  Your team may not <em>necessarily</em> have failover procedures in place for non-critical dependencies, so this process can be as simple as testing and documenting what happens when each non-critical dependency is unavailable.  Be sure to gauge the <strong>severity</strong> of the failure impact on the core application, which will provide the team with a better understanding of the system and its interactions (see <a href="#recovery-objectives">Recovery Objectives</a>).</p>
 
@@ -463,7 +481,7 @@
   </tbody>
 </table>
 
-<h4 id="1-define-the-critical-dependencies-1">1. Define the Critical Dependencies</h4>
+<h4 id="1-define-the-critical-dependencies">1. Define the Critical Dependencies</h4>
 
 <p>At this early stage of the application <em>all</em> dependencies are critical.</p>
 
@@ -508,11 +526,11 @@
 
 <p>A <strong>criticality period</strong> is useful for dependencies that are only considered “critical” during a specific period of time.  For example, a database backup service that runs at 2:00 AM PST every night may have a criticality period of <code class="highlighter-rouge">2:00 AM - 3:00 AM PST</code>.  This is also a good time to evaluate initial acceptable RTO and RPO values.  These values will decrease over time as resiliency improves, but setting a baseline goal provides a target to work toward.</p>
 
-<h4 id="2-define-the-non-critical-dependencies-1">2. Define the Non-Critical Dependencies</h4>
+<h4 id="2-define-the-non-critical-dependencies">2. Define the Non-Critical Dependencies</h4>
 
 <p>The <strong>Bookstore</strong> app is so simple that it doesn’t have any non-critical dependencies – if a service fails, the entire application fails with it.</p>
 
-<h4 id="3-create-a-disaster-recovery-failover-playbook-1">3. Create a Disaster Recovery Failover Playbook</h4>
+<h4 id="3-create-a-disaster-recovery-failover-playbook">3. Create a Disaster Recovery Failover Playbook</h4>
 
 <p>The first part of a disaster recovery failover playbook should contain contact information for all relevant team members, including the services those members are related to and their availability.</p>
 
@@ -748,7 +766,7 @@
 
 <p class="notice--tip"><strong>PURPOSE</strong>: For more complex systems this final procedure should provide steps for resuming normal service.</p>
 
-<h4 id="4-create-a-critical-dependency-failover-playbook-1">4. Create a Critical Dependency Failover Playbook</h4>
+<h4 id="4-create-a-critical-dependency-failover-playbook">4. Create a Critical Dependency Failover Playbook</h4>
 
 <h5 id="scenario-database-failure">Scenario: Database Failure</h5>
 
@@ -904,7 +922,7 @@
   <li>Service is now fully restored.</li>
 </ul>
 
-<h4 id="5-create-a-non-critical-dependency-failover-playbook-1">5. Create a Non-Critical Dependency Failover Playbook</h4>
+<h4 id="5-create-a-non-critical-dependency-failover-playbook">5. Create a Non-Critical Dependency Failover Playbook</h4>
 
 <p>The <strong>Bookstore</strong> example app doesn’t have any non-critical dependencies at the moment given its simple architecture (<code class="highlighter-rouge">CDN &gt; API Server &lt; Database</code>).  However, progressing through each resiliency stage will <em>require</em> additional systems and services to maintain failure resilience, which will inherently add non-critical dependencies.</p>
 
@@ -1041,7 +1059,7 @@
 
 
 
-  3 minute read
+  14 minute read
 </p>
     
     <p class="archive__item-excerpt" itemprop="description">

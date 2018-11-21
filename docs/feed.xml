@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.4">Jekyll</generator><link href="http://localhost:4000/gremlin-blog-posts/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/gremlin-blog-posts/" rel="alternate" type="text/html" /><updated>2018-11-14T12:46:46-08:00</updated><id>http://localhost:4000/gremlin-blog-posts/feed.xml</id><title type="html">Gremlin: Blog Posts</title><subtitle>An amazing website.</subtitle><author><name>Gabe Wyatt</name></author><entry><title type="html">Chaos Engineering Through Staged Resiliency - Stage 3</title><link href="http://localhost:4000/gremlin-blog-posts/chaos-engineering/chaos-engineering-through-staged-resiliency-stage-3/" rel="alternate" type="text/html" title="Chaos Engineering Through Staged Resiliency - Stage 3" /><published>2018-10-11T00:00:00-07:00</published><updated>2018-10-11T00:00:00-07:00</updated><id>http://localhost:4000/gremlin-blog-posts/chaos-engineering/chaos-engineering-through-staged-resiliency-stage-3</id><content type="html" xml:base="http://localhost:4000/gremlin-blog-posts/chaos-engineering/chaos-engineering-through-staged-resiliency-stage-3/">&lt;p&gt;Performing occasional, manual resiliency testing is useful, but your system must be automatically and frequently tested to provide any real sense of stability.  In &lt;a href=&quot;https://www.gremlin.com/blog/chaos-engineering-through-staged-resiliency-stage-2&quot;&gt;Chaos Engineering Through Staged Resiliency - Stage 2&lt;/a&gt; we focused on critical dependency failure testing in non-production environments.  To work through &lt;strong&gt;Resiliency Stage 3&lt;/strong&gt; your team will need to begin automating these test and experiments.  This allows the testing frequency to improve dramatically and reduces the reliance manual processes.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.4">Jekyll</generator><link href="http://localhost:4000/gremlin-blog-posts/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/gremlin-blog-posts/" rel="alternate" type="text/html" /><updated>2018-11-20T20:59:30-08:00</updated><id>http://localhost:4000/gremlin-blog-posts/feed.xml</id><title type="html">Gremlin: Blog Posts</title><subtitle>An amazing website.</subtitle><author><name>Gabe Wyatt</name></author><entry><title type="html">Chaos Engineering Through Staged Resiliency - Stage 3</title><link href="http://localhost:4000/gremlin-blog-posts/chaos-engineering/chaos-engineering-through-staged-resiliency-stage-3/" rel="alternate" type="text/html" title="Chaos Engineering Through Staged Resiliency - Stage 3" /><published>2018-10-11T00:00:00-07:00</published><updated>2018-10-11T00:00:00-07:00</updated><id>http://localhost:4000/gremlin-blog-posts/chaos-engineering/chaos-engineering-through-staged-resiliency-stage-3</id><content type="html" xml:base="http://localhost:4000/gremlin-blog-posts/chaos-engineering/chaos-engineering-through-staged-resiliency-stage-3/">&lt;p&gt;Performing occasional, manual resiliency testing is useful, but your system must be automatically and frequently tested to provide any real sense of stability.  In &lt;a href=&quot;https://www.gremlin.com/blog/chaos-engineering-through-staged-resiliency-stage-2&quot;&gt;Chaos Engineering Through Staged Resiliency - Stage 2&lt;/a&gt; we focused on critical dependency failure testing in non-production environments.  To work through &lt;strong&gt;Resiliency Stage 3&lt;/strong&gt; your team will need to begin automating these test and experiments.  This allows the testing frequency to improve dramatically and reduces the reliance manual processes.&lt;/p&gt;
 
 &lt;h2 id=&quot;prerequisites&quot;&gt;Prerequisites&lt;/h2&gt;
 
@@ -42,55 +42,459 @@ Run at least one resiliency exercise (failure injection) in production environme
   &lt;li&gt;Status: &lt;strong&gt;Complete&lt;/strong&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h4 id=&quot;ec2-instance-failure-test&quot;&gt;EC2 Instance Failure Test&lt;/h4&gt;
+&lt;h4 id=&quot;automating-bluegreen-instance-failover&quot;&gt;Automating Blue/Green Instance Failover&lt;/h4&gt;
 
-&lt;blockquote&gt;
-  &lt;p&gt;Use Gremlin attack.&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;We have a blue/green deployment for the &lt;strong&gt;Bookstore&lt;/strong&gt; application service that provides two identical production environment instances of the system.  However, if the currently active instance fails we still have to manually swap DNS records from blue to green (or vice versa).  Since this process should be automated in order to work through these final &lt;strong&gt;Resiliency Stages&lt;/strong&gt;, we’ll take some time to create a failover configuration for the &lt;code class=&quot;highlighter-rouge&quot;&gt;bookstore-api&lt;/code&gt; instances.&lt;/p&gt;
 
-&lt;blockquote&gt;
-  &lt;p&gt;Lambda perhaps? https://aws.amazon.com/premiumsupport/knowledge-center/start-stop-lambda-cloudwatch/&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;Create a metric alarm within Amazon CloudWatch.&lt;/p&gt;
 
-&lt;h4 id=&quot;cdn-failure-test&quot;&gt;CDN Failure Test&lt;/h4&gt;
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;aws cloudwatch put-metric-alarm &lt;span class=&quot;nt&quot;&gt;--output&lt;/span&gt; json &lt;span class=&quot;nt&quot;&gt;--cli-input-json&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'{
+     &quot;ActionsEnabled&quot;: true,
+     &quot;AlarmActions&quot;: [
+         &quot;arn:aws:sns:us-west-2:532151327118:PingPublicationsSNS&quot;
+     ],
+     &quot;AlarmDescription&quot;: &quot;Bookstore API (Blue) instance failure.&quot;,
+     &quot;AlarmName&quot;: &quot;bookstore-api-blue-StatusCheckFailed&quot;,
+     &quot;ComparisonOperator&quot;: &quot;GreaterThanOrEqualToThreshold&quot;,
+     &quot;DatapointsToAlarm&quot;: 1,
+     &quot;Dimensions&quot;: [
+         {
+             &quot;Name&quot;: &quot;InstanceId&quot;,
+             &quot;Value&quot;: &quot;i-0ab55a49288f1da24&quot;
+         }
+     ],
+     &quot;EvaluationPeriods&quot;: 1,
+     &quot;MetricName&quot;: &quot;StatusCheckFailed&quot;,
+     &quot;Namespace&quot;: &quot;AWS/EC2&quot;,
+     &quot;Period&quot;: 60,
+     &quot;Statistic&quot;: &quot;Maximum&quot;,
+     &quot;Threshold&quot;: 1.0,
+     &quot;TreatMissingData&quot;: &quot;breaching&quot;
+ }'&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
 
-&lt;blockquote&gt;
-  &lt;p&gt;(TODO) CloudWatch Agent: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Install-CloudWatch-Agent.html
-Monitor Scripts: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/mon-scripts.html&lt;/p&gt;
-&lt;/blockquote&gt;
+    &lt;p&gt;The above configuration checks the &lt;code class=&quot;highlighter-rouge&quot;&gt;StatusCheckFailed&lt;/code&gt; metric once a minute, which determines if &lt;em&gt;either&lt;/em&gt; the Amazon EC2 system or the specific EC2 instance has failed.  We have to set &lt;code class=&quot;highlighter-rouge&quot;&gt;TreatMissingData&lt;/code&gt; to &lt;code class=&quot;highlighter-rouge&quot;&gt;breaching&lt;/code&gt; so that the &lt;em&gt;absence&lt;/em&gt; of data will trigger an &lt;code class=&quot;highlighter-rouge&quot;&gt;ALARM&lt;/code&gt; state (otherwise, the instance can be &lt;code class=&quot;highlighter-rouge&quot;&gt;stopped&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;terminated&lt;/code&gt;, but the &lt;code class=&quot;highlighter-rouge&quot;&gt;StatusCheck&lt;/code&gt; will succeed).&lt;/p&gt;
 
-&lt;blockquote&gt;
-  &lt;ol&gt;
-    &lt;li&gt;Create AWS CloudWatch Alarm/metric.&lt;/li&gt;
-    &lt;li&gt;Automate AWS alarm trigger from &lt;code class=&quot;highlighter-rouge&quot;&gt;AWS CLI&lt;/code&gt;&lt;/li&gt;
-    &lt;li&gt;Failover CDN.&lt;/li&gt;
-  &lt;/ol&gt;
-&lt;/blockquote&gt;
+    &lt;p&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;Dimensions&lt;/code&gt; array ensures this &lt;code class=&quot;highlighter-rouge&quot;&gt;bookstore-api-blue-StatusCheckFailed&lt;/code&gt; alarm only checks against the &lt;code class=&quot;highlighter-rouge&quot;&gt;bookstore-api-blue&lt;/code&gt; instance, and the &lt;code class=&quot;highlighter-rouge&quot;&gt;AlarmActions&lt;/code&gt; specifies an Amazon SNS ARN to push an alert to when the alarm is triggered.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Next, create an Amazon Route53 Health Check that uses the &lt;code class=&quot;highlighter-rouge&quot;&gt;bookstore-api-blue-StatusCheckFailed&lt;/code&gt; Amazon CloudWatch alarm for its &lt;code class=&quot;highlighter-rouge&quot;&gt;healthy/unhealthy&lt;/code&gt; determination.&lt;/p&gt;
 
-&lt;h4 id=&quot;db-failure-test&quot;&gt;DB Failure Test&lt;/h4&gt;
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;aws route53 create-health-check &lt;span class=&quot;nt&quot;&gt;--caller-reference&lt;/span&gt; bookstore-api-blue-health-check &lt;span class=&quot;nt&quot;&gt;--output&lt;/span&gt; json &lt;span class=&quot;nt&quot;&gt;--health-check-config&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'{
+     &quot;InsufficientDataHealthStatus&quot;: &quot;Unhealthy&quot;, 
+     &quot;Type&quot;: &quot;CLOUDWATCH_METRIC&quot;, 
+     &quot;AlarmIdentifier&quot;: {
+         &quot;Region&quot;: &quot;us-west-2&quot;, 
+         &quot;Name&quot;: &quot;bookstore-api-blue-StatusCheckFailed&quot;
+     }, 
+     &quot;Inverted&quot;: false
+ }'&lt;/span&gt;
+ &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+     &lt;span class=&quot;s2&quot;&gt;&quot;HealthCheck&quot;&lt;/span&gt;: &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+         &lt;span class=&quot;s2&quot;&gt;&quot;HealthCheckConfig&quot;&lt;/span&gt;: &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+             &lt;span class=&quot;s2&quot;&gt;&quot;InsufficientDataHealthStatus&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;Unhealthy&quot;&lt;/span&gt;, 
+             &lt;span class=&quot;s2&quot;&gt;&quot;Type&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;CLOUDWATCH_METRIC&quot;&lt;/span&gt;, 
+             &lt;span class=&quot;s2&quot;&gt;&quot;AlarmIdentifier&quot;&lt;/span&gt;: &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+                 &lt;span class=&quot;s2&quot;&gt;&quot;Region&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;us-west-2&quot;&lt;/span&gt;, 
+                 &lt;span class=&quot;s2&quot;&gt;&quot;Name&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;bookstore-api-blue-StatusCheckFailed&quot;&lt;/span&gt;
+             &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;, 
+             &lt;span class=&quot;s2&quot;&gt;&quot;Inverted&quot;&lt;/span&gt;: &lt;span class=&quot;nb&quot;&gt;false&lt;/span&gt;
+         &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;, 
+         &lt;span class=&quot;s2&quot;&gt;&quot;CallerReference&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;bookstore-api-blue-health-check&quot;&lt;/span&gt;, 
+         &lt;span class=&quot;s2&quot;&gt;&quot;HealthCheckVersion&quot;&lt;/span&gt;: 1, 
+         &lt;span class=&quot;s2&quot;&gt;&quot;Id&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;119e6884-3685-4e5a-9520-44cebae6c734&quot;&lt;/span&gt;, 
+         &lt;span class=&quot;s2&quot;&gt;&quot;CloudWatchAlarmConfiguration&quot;&lt;/span&gt;: &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+             &lt;span class=&quot;s2&quot;&gt;&quot;EvaluationPeriods&quot;&lt;/span&gt;: 1, 
+             &lt;span class=&quot;s2&quot;&gt;&quot;Dimensions&quot;&lt;/span&gt;: &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;
+                 &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+                     &lt;span class=&quot;s2&quot;&gt;&quot;Name&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;InstanceId&quot;&lt;/span&gt;, 
+                     &lt;span class=&quot;s2&quot;&gt;&quot;Value&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;i-0ab55a49288f1da24&quot;&lt;/span&gt;
+                 &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+             &lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;, 
+             &lt;span class=&quot;s2&quot;&gt;&quot;Namespace&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;AWS/EC2&quot;&lt;/span&gt;, 
+             &lt;span class=&quot;s2&quot;&gt;&quot;Period&quot;&lt;/span&gt;: 60, 
+             &lt;span class=&quot;s2&quot;&gt;&quot;ComparisonOperator&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;GreaterThanOrEqualToThreshold&quot;&lt;/span&gt;, 
+             &lt;span class=&quot;s2&quot;&gt;&quot;Statistic&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;Maximum&quot;&lt;/span&gt;, 
+             &lt;span class=&quot;s2&quot;&gt;&quot;Threshold&quot;&lt;/span&gt;: 1.0, 
+             &lt;span class=&quot;s2&quot;&gt;&quot;MetricName&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;StatusCheckFailed&quot;&lt;/span&gt;
+         &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+     &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;, 
+     &lt;span class=&quot;s2&quot;&gt;&quot;Location&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;https://route53.amazonaws.com/2013-04-01/healthcheck/119e6884-3685-4e5a-9520-44cebae6c734&quot;&lt;/span&gt;
+ &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
 
-&lt;blockquote&gt;
-  &lt;p&gt;(TODO) CloudWatch Agent: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Install-CloudWatch-Agent.html
-Monitor Scripts: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/mon-scripts.html&lt;/p&gt;
-&lt;/blockquote&gt;
+    &lt;p class=&quot;notice--tip&quot;&gt;&lt;strong&gt;TIP&lt;/strong&gt;: To reduce AWS costs we’re using a 60-second metric evaluation interval here, but in a more demanding application this &lt;code class=&quot;highlighter-rouge&quot;&gt;Period&lt;/code&gt; should be significantly shorter.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Retrieve the &lt;code class=&quot;highlighter-rouge&quot;&gt;Id&lt;/code&gt; for the &lt;code class=&quot;highlighter-rouge&quot;&gt;pingpublications.com&lt;/code&gt; Amazon Route53 hosted zone.&lt;/p&gt;
 
-&lt;blockquote&gt;
-  &lt;ol&gt;
-    &lt;li&gt;Create AWS CloudWatch Alarm/metric.&lt;/li&gt;
-    &lt;li&gt;Automate AWS alarm trigger from &lt;code class=&quot;highlighter-rouge&quot;&gt;AWS CLI&lt;/code&gt;&lt;/li&gt;
-    &lt;li&gt;Failover CDN.&lt;/li&gt;
-  &lt;/ol&gt;
-&lt;/blockquote&gt;
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;aws route53 list-hosted-zones &lt;span class=&quot;nt&quot;&gt;--output&lt;/span&gt; json
+ &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+     &lt;span class=&quot;s2&quot;&gt;&quot;HostedZones&quot;&lt;/span&gt;: &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;
+         &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+             &lt;span class=&quot;s2&quot;&gt;&quot;ResourceRecordSetCount&quot;&lt;/span&gt;: 5, 
+             &lt;span class=&quot;s2&quot;&gt;&quot;CallerReference&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;303EC092-EDA3-C2B7-822E-5E609CA718A3&quot;&lt;/span&gt;, 
+             &lt;span class=&quot;s2&quot;&gt;&quot;Config&quot;&lt;/span&gt;: &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+                 &lt;span class=&quot;s2&quot;&gt;&quot;PrivateZone&quot;&lt;/span&gt;: &lt;span class=&quot;nb&quot;&gt;false&lt;/span&gt;
+             &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;, 
+             &lt;span class=&quot;s2&quot;&gt;&quot;Id&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;/hostedzone/Z2EHK3FAEUNRMI&quot;&lt;/span&gt;, 
+             &lt;span class=&quot;s2&quot;&gt;&quot;Name&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;pingpublications.com.&quot;&lt;/span&gt;
+         &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+     &lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
+ &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Create a pair of Amazon Route53 &lt;code class=&quot;highlighter-rouge&quot;&gt;Type: A&lt;/code&gt; DNS record sets that will perform a &lt;code class=&quot;highlighter-rouge&quot;&gt;Failover&lt;/code&gt; routing policy from the &lt;code class=&quot;highlighter-rouge&quot;&gt;bookstore-api-blue&lt;/code&gt; to the &lt;code class=&quot;highlighter-rouge&quot;&gt;bookstore-api-green&lt;/code&gt; production environment.  Therefore, even in the event that the blue instance fails the above health check, the &lt;code class=&quot;highlighter-rouge&quot;&gt;bookstore.pingpublications.com&lt;/code&gt; endpoint will always point to an active production instance.&lt;/p&gt;
+
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;aws route53 change-resource-record-sets &lt;span class=&quot;nt&quot;&gt;--hosted-zone-id&lt;/span&gt; /hostedzone/Z2EHK3FAEUNRMI &lt;span class=&quot;nt&quot;&gt;--output&lt;/span&gt; json &lt;span class=&quot;nt&quot;&gt;--change-batch&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'{
+     &quot;Comment&quot;: &quot;Adding bookstore.pingpublications.com failover.&quot;,
+     &quot;Changes&quot;: [
+         {
+             &quot;Action&quot;: &quot;CREATE&quot;,
+             &quot;ResourceRecordSet&quot;: {
+                 &quot;Name&quot;: &quot;bookstore.pingpublications.com.&quot;,
+                 &quot;Type&quot;: &quot;A&quot;,
+                 &quot;SetIdentifier&quot;: &quot;bookstore-Primary&quot;,
+                 &quot;Failover&quot;: &quot;PRIMARY&quot;,
+                 &quot;TTL&quot;: 60,
+                 &quot;ResourceRecords&quot;: [
+                     {
+                         &quot;Value&quot;: &quot;54.213.54.171&quot;
+                     }
+                 ],
+                 &quot;HealthCheckId&quot;: &quot;119e6884-3685-4e5a-9520-44cebae6c734&quot;
+             }
+         },
+         {
+             &quot;Action&quot;: &quot;CREATE&quot;,
+             &quot;ResourceRecordSet&quot;: {
+                 &quot;Name&quot;: &quot;bookstore.pingpublications.com.&quot;,
+                 &quot;Type&quot;: &quot;A&quot;,
+                 &quot;SetIdentifier&quot;: &quot;bookstore-Secondary&quot;,
+                 &quot;Failover&quot;: &quot;SECONDARY&quot;,
+                 &quot;TTL&quot;: 60,
+                 &quot;ResourceRecords&quot;: [
+                     {
+                         &quot;Value&quot;: &quot;52.11.79.9&quot;
+                     }
+                 ]
+             }
+         }
+     ]
+ }'&lt;/span&gt;
+ &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+     &lt;span class=&quot;s2&quot;&gt;&quot;ChangeInfo&quot;&lt;/span&gt;: &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+         &lt;span class=&quot;s2&quot;&gt;&quot;Status&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;PENDING&quot;&lt;/span&gt;, 
+         &lt;span class=&quot;s2&quot;&gt;&quot;Comment&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;Adding bookstore.pingpublications.com failover.&quot;&lt;/span&gt;, 
+         &lt;span class=&quot;s2&quot;&gt;&quot;SubmittedAt&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;2018-11-15T01:54:15.785Z&quot;&lt;/span&gt;, 
+         &lt;span class=&quot;s2&quot;&gt;&quot;Id&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;/change/C1XJ0G2FTPLYDO&quot;&lt;/span&gt;
+     &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+ &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Double-check that the two failover record sets have been created.&lt;/p&gt;
+
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;aws route53 list-resource-record-sets &lt;span class=&quot;nt&quot;&gt;--hosted-zone-id&lt;/span&gt; /hostedzone/Z2EHK3FAEUNRMI &lt;span class=&quot;nt&quot;&gt;--output&lt;/span&gt; json
+ &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+     &lt;span class=&quot;s2&quot;&gt;&quot;ResourceRecordSets&quot;&lt;/span&gt;: &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;
+         &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+             &lt;span class=&quot;s2&quot;&gt;&quot;HealthCheckId&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;119e6884-3685-4e5a-9520-44cebae6c734&quot;&lt;/span&gt;, 
+             &lt;span class=&quot;s2&quot;&gt;&quot;Name&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;bookstore.pingpublications.com.&quot;&lt;/span&gt;, 
+             &lt;span class=&quot;s2&quot;&gt;&quot;Type&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;A&quot;&lt;/span&gt;, 
+             &lt;span class=&quot;s2&quot;&gt;&quot;Failover&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;PRIMARY&quot;&lt;/span&gt;, 
+             &lt;span class=&quot;s2&quot;&gt;&quot;ResourceRecords&quot;&lt;/span&gt;: &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;
+                 &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+                     &lt;span class=&quot;s2&quot;&gt;&quot;Value&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;54.213.54.171&quot;&lt;/span&gt;
+                 &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+             &lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;, 
+             &lt;span class=&quot;s2&quot;&gt;&quot;TTL&quot;&lt;/span&gt;: 60, 
+             &lt;span class=&quot;s2&quot;&gt;&quot;SetIdentifier&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;bookstore-Primary&quot;&lt;/span&gt;
+         &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;, 
+         &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+             &lt;span class=&quot;s2&quot;&gt;&quot;Name&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;bookstore.pingpublications.com.&quot;&lt;/span&gt;, 
+             &lt;span class=&quot;s2&quot;&gt;&quot;Type&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;A&quot;&lt;/span&gt;, 
+             &lt;span class=&quot;s2&quot;&gt;&quot;Failover&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;SECONDARY&quot;&lt;/span&gt;, 
+             &lt;span class=&quot;s2&quot;&gt;&quot;ResourceRecords&quot;&lt;/span&gt;: &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;
+                 &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+                     &lt;span class=&quot;s2&quot;&gt;&quot;Value&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;52.11.79.9&quot;&lt;/span&gt;
+                 &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+             &lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;, 
+             &lt;span class=&quot;s2&quot;&gt;&quot;TTL&quot;&lt;/span&gt;: 60, 
+             &lt;span class=&quot;s2&quot;&gt;&quot;SetIdentifier&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;bookstore-Secondary&quot;&lt;/span&gt;
+         &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+     &lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
+ &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h4 id=&quot;automated-instance-failover-verification&quot;&gt;Automated Instance Failover Verification&lt;/h4&gt;
+
+&lt;p&gt;To test the failover process for the &lt;strong&gt;Bookstore&lt;/strong&gt; API application instances we’ll use a Gremlin &lt;a href=&quot;https://help.gremlin.com/attack-params-ref/#shutdown&quot;&gt;Shutdown Attack&lt;/a&gt;.  This attack will temporarily shutdown the &lt;code class=&quot;highlighter-rouge&quot;&gt;bookstore-api-blue&lt;/code&gt; Amazon EC2 instance for us.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;Verify the current status of the &lt;strong&gt;Bookstore&lt;/strong&gt; API by checking the &lt;code class=&quot;highlighter-rouge&quot;&gt;bookstore.pingpublications.com/version/&lt;/code&gt; endpoint.&lt;/p&gt;
+
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;curl bookstore.pingpublications.com/version/ | jq
+ &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+     &lt;span class=&quot;s2&quot;&gt;&quot;environment&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;bookstore-api-blue&quot;&lt;/span&gt;,
+     &lt;span class=&quot;s2&quot;&gt;&quot;version&quot;&lt;/span&gt;: 7
+ &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+
+    &lt;p&gt;This shows what app version is running and confirms that the endpoint is pointing to the &lt;code class=&quot;highlighter-rouge&quot;&gt;bookstore-api-blue&lt;/code&gt; Amazon EC2 instance.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Run a Gremlin Shutdown Attack targeting the &lt;code class=&quot;highlighter-rouge&quot;&gt;bookstore-api-blue&lt;/code&gt; Client.  Check out the &lt;a href=&quot;https://help.gremlin.com/&quot;&gt;Gremlin Help&lt;/a&gt; documentation for more details on creating attacks with Gremlin’s Chaos Engineering tools.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;After a moment the Amazon CloudWatch &lt;code class=&quot;highlighter-rouge&quot;&gt;bookstore-api-blue-StatusCheckFailed&lt;/code&gt; Alarm triggers, thereby causing the &lt;code class=&quot;highlighter-rouge&quot;&gt;bookstore-api-blue-healthy&lt;/code&gt; Amazon Route53 health check to fail.  This automatically triggers the DNS failover created previously, which points the primary &lt;code class=&quot;highlighter-rouge&quot;&gt;bookstore.pingpublications.com&lt;/code&gt; endpoint to the &lt;code class=&quot;highlighter-rouge&quot;&gt;green&lt;/code&gt; EC2 production environment.  Verify this failover has automatically propagated by checking the &lt;code class=&quot;highlighter-rouge&quot;&gt;/version/&lt;/code&gt; endpoint once again.&lt;/p&gt;
+
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;curl bookstore.pingpublications.com/version/ | jq
+ &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+     &lt;span class=&quot;s2&quot;&gt;&quot;environment&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;bookstore-api-green&quot;&lt;/span&gt;,
+     &lt;span class=&quot;s2&quot;&gt;&quot;version&quot;&lt;/span&gt;: 7
+ &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h4 id=&quot;generating-custom-aws-metrics&quot;&gt;Generating Custom AWS Metrics&lt;/h4&gt;
+
+&lt;p&gt;To properly automate our critical dependency failure tests we need a way to &lt;em&gt;simulate&lt;/em&gt; the failure of our CDN and database services.  Tools like Gremlin can help with this task.  Running a Gremlin &lt;strong&gt;Blackhole Attack&lt;/strong&gt; on the &lt;strong&gt;Bookstore&lt;/strong&gt; API environment can prevent all network communication between the API instance and the CDN and/or database endpoints.  However, AWS EC2 instances don’t have any built-in capability to monitor the connectivity between said instance and another arbitrary endpoint.  Therefore, the solution is to create some &lt;em&gt;custom&lt;/em&gt; metrics that will effectively measure the “health” of the connection between the &lt;strong&gt;Bookstore&lt;/strong&gt; API instance and its critical dependencies.&lt;/p&gt;
+
+&lt;p&gt;While AWS provides tons of built-in metrics, creating a &lt;a href=&quot;https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/publishingMetrics.html&quot;&gt;custom metrics&lt;/a&gt; requires that you generate &lt;em&gt;all&lt;/em&gt; the relevant data for said metric.  For this reason, a custom metric is little more than a combination of a metric &lt;code class=&quot;highlighter-rouge&quot;&gt;name&lt;/code&gt; and list of &lt;code class=&quot;highlighter-rouge&quot;&gt;dimensions&lt;/code&gt;, which are used as &lt;code class=&quot;highlighter-rouge&quot;&gt;key/value&lt;/code&gt; pairs to distinguish and categorize metrics.  We’re creating simple metrics that act as a health monitor for each critical dependency.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;We start by creating a couple bash scripts within our application code repository.  These scripts are executed from the &lt;strong&gt;Bookstore&lt;/strong&gt; API instances.&lt;/p&gt;
+
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;c&quot;&gt;#!/bin/bash&lt;/span&gt;
+ &lt;span class=&quot;c&quot;&gt;# ~/apps/bookstore_api/metrics/db-connectivity.sh&lt;/span&gt;
+ &lt;span class=&quot;nv&quot;&gt;INSTANCE_ID&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;$(&lt;/span&gt;ec2metadata &lt;span class=&quot;nt&quot;&gt;--instance-id&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
+ &lt;span class=&quot;nv&quot;&gt;TAG_NAME&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;$(&lt;/span&gt;/home/ubuntu/.local/bin/aws ec2 describe-tags &lt;span class=&quot;nt&quot;&gt;--filter&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Name=resource-id,Values=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$INSTANCE_ID&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Name=key,Values=Name&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--query&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Tags[*].Value&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--output&lt;/span&gt; text&lt;span class=&quot;k&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
+
+ &lt;span class=&quot;k&quot;&gt;while &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sleep &lt;/span&gt;10
+ &lt;span class=&quot;k&quot;&gt;do
+     if &lt;/span&gt;nc &lt;span class=&quot;nt&quot;&gt;-zv&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-w&lt;/span&gt; 5 db.bookstore.pingpublications.com 5432 2&amp;gt;&amp;amp;1 | &lt;span class=&quot;nb&quot;&gt;grep&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--line-buffered&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-i&lt;/span&gt; succeeded&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;then&lt;/span&gt;
+         /home/ubuntu/.local/bin/aws cloudwatch put-metric-data &lt;span class=&quot;nt&quot;&gt;--metric-name&lt;/span&gt; db-connectivity &lt;span class=&quot;nt&quot;&gt;--namespace&lt;/span&gt; Bookstore &lt;span class=&quot;nt&quot;&gt;--dimensions&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Host&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$TAG_NAME&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--value&lt;/span&gt; 1
+     &lt;span class=&quot;k&quot;&gt;else
+         &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Connection to db.bookstore.pingpublications.com 5432 port [tcp/postgresql] failed!&quot;&lt;/span&gt;
+         /home/ubuntu/.local/bin/aws cloudwatch put-metric-data &lt;span class=&quot;nt&quot;&gt;--metric-name&lt;/span&gt; db-connectivity &lt;span class=&quot;nt&quot;&gt;--namespace&lt;/span&gt; Bookstore &lt;span class=&quot;nt&quot;&gt;--dimensions&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Host&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$TAG_NAME&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--value&lt;/span&gt; 0
+     &lt;span class=&quot;k&quot;&gt;fi
+ done&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;c&quot;&gt;#!/bin/bash&lt;/span&gt;
+ &lt;span class=&quot;c&quot;&gt;# ~/apps/bookstore_api/metrics/cdn-connectivity.sh&lt;/span&gt;
+ &lt;span class=&quot;nv&quot;&gt;INSTANCE_ID&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;$(&lt;/span&gt;ec2metadata &lt;span class=&quot;nt&quot;&gt;--instance-id&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
+ &lt;span class=&quot;nv&quot;&gt;TAG_NAME&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;$(&lt;/span&gt;/home/ubuntu/.local/bin/aws ec2 describe-tags &lt;span class=&quot;nt&quot;&gt;--filter&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Name=resource-id,Values=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$INSTANCE_ID&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Name=key,Values=Name&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--query&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Tags[*].Value&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--output&lt;/span&gt; text&lt;span class=&quot;k&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
+
+ &lt;span class=&quot;k&quot;&gt;while &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sleep &lt;/span&gt;10
+ &lt;span class=&quot;k&quot;&gt;do
+     if &lt;/span&gt;nc &lt;span class=&quot;nt&quot;&gt;-zv&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-w&lt;/span&gt; 5 cdn.bookstore.pingpublications.com 80 2&amp;gt;&amp;amp;1 | &lt;span class=&quot;nb&quot;&gt;grep&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--line-buffered&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-i&lt;/span&gt; succeeded&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;then&lt;/span&gt;
+         /home/ubuntu/.local/bin/aws cloudwatch put-metric-data &lt;span class=&quot;nt&quot;&gt;--metric-name&lt;/span&gt; cdn-connectivity &lt;span class=&quot;nt&quot;&gt;--namespace&lt;/span&gt; Bookstore &lt;span class=&quot;nt&quot;&gt;--dimensions&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Host&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$TAG_NAME&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--value&lt;/span&gt; 1
+     &lt;span class=&quot;k&quot;&gt;else
+         &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Connection to cdn.bookstore.pingpublications.com 80 port [tcp/http] failed!&quot;&lt;/span&gt;
+         /home/ubuntu/.local/bin/aws cloudwatch put-metric-data &lt;span class=&quot;nt&quot;&gt;--metric-name&lt;/span&gt; cdn-connectivity &lt;span class=&quot;nt&quot;&gt;--namespace&lt;/span&gt; Bookstore &lt;span class=&quot;nt&quot;&gt;--dimensions&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Host&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$TAG_NAME&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--value&lt;/span&gt; 0
+     &lt;span class=&quot;k&quot;&gt;fi
+ done&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+
+    &lt;p&gt;To check the connectivity for the database or CDN endpoint we first retrieve the Amazon EC2 instance Id and, from that, get the &lt;code class=&quot;highlighter-rouge&quot;&gt;Name&lt;/code&gt; tag value, which we use as the &lt;code class=&quot;highlighter-rouge&quot;&gt;Host&lt;/code&gt; dimension when creating our metric.  This &lt;code class=&quot;highlighter-rouge&quot;&gt;Host&lt;/code&gt; value specifies which environment (blue or green) is being measured.&lt;/p&gt;
+
+    &lt;p&gt;The purpose of the script is to perform a network connectivity check (using &lt;code class=&quot;highlighter-rouge&quot;&gt;netcat&lt;/code&gt;) to the dependency endpoint every few seconds.  It then uses the AWS CLI to generate metric data for the &lt;code class=&quot;highlighter-rouge&quot;&gt;db-connectivity&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;cdn-connectivity&lt;/code&gt; metric, passing a value of &lt;code class=&quot;highlighter-rouge&quot;&gt;1&lt;/code&gt; if the connection succeeded and &lt;code class=&quot;highlighter-rouge&quot;&gt;0&lt;/code&gt; for a failure.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Create &lt;code class=&quot;highlighter-rouge&quot;&gt;systemd&lt;/code&gt; service configuration files so the bash scripts will be executed and remain active.&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;p&gt;Start by creating the &lt;code class=&quot;highlighter-rouge&quot;&gt;bookstore-db-connectivity&lt;/code&gt; service and pointing the &lt;code class=&quot;highlighter-rouge&quot;&gt;ExecStart&lt;/code&gt; command to the &lt;code class=&quot;highlighter-rouge&quot;&gt;db-connectivity.sh&lt;/code&gt; file.&lt;/p&gt;
+
+        &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;nano /etc/systemd/system/bookstore-db-connectivity.service
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;        &lt;/div&gt;
+
+        &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;Unit]
+  &lt;span class=&quot;nv&quot;&gt;Description&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;Bookstore Database Connectivity Service
+  &lt;span class=&quot;nv&quot;&gt;After&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;network.target
+
+  &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;Service]
+  &lt;span class=&quot;nv&quot;&gt;Type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;simple
+  &lt;span class=&quot;nv&quot;&gt;User&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;ubuntu
+  &lt;span class=&quot;nv&quot;&gt;WorkingDirectory&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/home/ubuntu
+  &lt;span class=&quot;nv&quot;&gt;ExecStart&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/home/ubuntu/apps/bookstore_api/metrics/db-connectivity.sh
+  &lt;span class=&quot;nv&quot;&gt;Restart&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;on-failure
+
+  &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;Install]
+  &lt;span class=&quot;nv&quot;&gt;WantedBy&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;multi-user.target
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;        &lt;/div&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;Do the same for the CDN.&lt;/p&gt;
+
+        &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;nano /etc/systemd/system/bookstore-cdn-connectivity.service
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;        &lt;/div&gt;
+
+        &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;Unit]
+  &lt;span class=&quot;nv&quot;&gt;Description&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;Bookstore CDN Connectivity Service
+  &lt;span class=&quot;nv&quot;&gt;After&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;network.target
+
+  &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;Service]
+  &lt;span class=&quot;nv&quot;&gt;Type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;simple
+  &lt;span class=&quot;nv&quot;&gt;User&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;ubuntu
+  &lt;span class=&quot;nv&quot;&gt;WorkingDirectory&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/home/ubuntu
+  &lt;span class=&quot;nv&quot;&gt;ExecStart&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/home/ubuntu/apps/bookstore_api/metrics/cdn-connectivity.sh
+  &lt;span class=&quot;nv&quot;&gt;Restart&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;on-failure
+
+  &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;Install]
+  &lt;span class=&quot;nv&quot;&gt;WantedBy&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;multi-user.target
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;        &lt;/div&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Set permissions such that both service target scripts are executable.&lt;/p&gt;
+
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;nb&quot;&gt;chmod&lt;/span&gt; +x /home/ubuntu/apps/bookstore_api/metrics/db-connectivity.sh &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;chmod&lt;/span&gt; +x /home/ubuntu/apps/bookstore_api/metrics/cdn-connectivity.sh
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Initially, we’ll need to manually start both monitoring services.&lt;/p&gt;
+
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl start bookstore-db-connectivity &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl start bookstore-cdn-connectivity
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Verify that both services are active.&lt;/p&gt;
+
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl status bookstore-db-connectivity.service 
+ Loaded: loaded &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;/etc/systemd/system/bookstore-db-connectivity.service&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; disabled&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; vendor preset: enabled&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+ Active: active &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;running&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; since Mon 2018-11-17 12:02:19 UTC&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; 2min 3s ago
+
+ Nov 17 12:02:42 bookstore-api-green systemd[1]: Started Bookstore Database Connectivity Service.
+ Nov 17 12:02:42 bookstore-api-green db-connectivity.sh[24683]: Connection to db.bookstore.pingpublications.com 5432 port &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;tcp/postgresql] succeeded!
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl status bookstore-cdn-connectivity
+ Loaded: loaded &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;/etc/systemd/system/bookstore-cdn-connectivity.service&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; disabled&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; vendor preset: enabled&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+ Active: active &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;running&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; since Mon 2018-11-17 12:02:19 UTC&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; 20s ago
+
+ Nov 17 12:02:19 bookstore-api-green systemd[1]: Started Bookstore CDN Connectivity Service.
+ Nov 17 12:02:31 bookstore-api-green cdn-connectivity.sh[24695]: Connection to cdn.bookstore.pingpublications.com 80 port &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;tcp/http] succeeded!
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Create Amazon CloudWatch Alarms based on the four generated metrics.  These alarms check for a connectivity failure within the last two minutes.&lt;/p&gt;
+
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; aws cloudwatch put-metric-alarm &lt;span class=&quot;nt&quot;&gt;--output&lt;/span&gt; json &lt;span class=&quot;nt&quot;&gt;--cli-input-json&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'{
+     &quot;ActionsEnabled&quot;: true,
+     &quot;AlarmActions&quot;: [
+         &quot;arn:aws:sns:us-west-2:532151327118:PingPublicationsSNS&quot;
+     ],
+     &quot;AlarmDescription&quot;: &quot;Database Connectivity failure for Bookstore API (Blue).&quot;,
+     &quot;AlarmName&quot;: &quot;bookstore-api-blue-db-connectivity-failed&quot;,
+     &quot;ComparisonOperator&quot;: &quot;LessThanThreshold&quot;,
+     &quot;DatapointsToAlarm&quot;: 2,
+     &quot;Dimensions&quot;: [
+         {
+             &quot;Name&quot;: &quot;Host&quot;,
+             &quot;Value&quot;: &quot;bookstore-api-blue&quot;
+         }
+     ],
+     &quot;EvaluationPeriods&quot;: 2,
+     &quot;MetricName&quot;: &quot;db-connectivity&quot;,
+     &quot;Namespace&quot;: &quot;Bookstore&quot;,
+     &quot;Period&quot;: 60,
+     &quot;Statistic&quot;: &quot;Average&quot;,
+     &quot;Threshold&quot;: 1.0
+ }'&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; aws cloudwatch put-metric-alarm &lt;span class=&quot;nt&quot;&gt;--output&lt;/span&gt; json &lt;span class=&quot;nt&quot;&gt;--cli-input-json&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'{
+     &quot;ActionsEnabled&quot;: true,
+     &quot;AlarmActions&quot;: [
+         &quot;arn:aws:sns:us-west-2:532151327118:PingPublicationsSNS&quot;
+     ],
+     &quot;AlarmDescription&quot;: &quot;CDN Connectivity failure for Bookstore API (Blue).&quot;,
+     &quot;AlarmName&quot;: &quot;bookstore-api-blue-cdn-connectivity-failed&quot;,
+     &quot;ComparisonOperator&quot;: &quot;LessThanThreshold&quot;,
+     &quot;DatapointsToAlarm&quot;: 2,
+     &quot;Dimensions&quot;: [
+         {
+             &quot;Name&quot;: &quot;Host&quot;,
+             &quot;Value&quot;: &quot;bookstore-api-blue&quot;
+         }
+     ],
+     &quot;EvaluationPeriods&quot;: 2,
+     &quot;MetricName&quot;: &quot;cdn-connectivity&quot;,
+     &quot;Namespace&quot;: &quot;Bookstore&quot;,
+     &quot;Period&quot;: 60,
+     &quot;Statistic&quot;: &quot;Average&quot;,
+     &quot;Threshold&quot;: 1.0
+ }'&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; aws cloudwatch put-metric-alarm &lt;span class=&quot;nt&quot;&gt;--output&lt;/span&gt; json &lt;span class=&quot;nt&quot;&gt;--cli-input-json&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'{
+     &quot;ActionsEnabled&quot;: true,
+     &quot;AlarmActions&quot;: [
+         &quot;arn:aws:sns:us-west-2:532151327118:PingPublicationsSNS&quot;
+     ],
+     &quot;AlarmDescription&quot;: &quot;Database Connectivity failure for Bookstore API (Green).&quot;,
+     &quot;AlarmName&quot;: &quot;bookstore-api-green-db-connectivity-failed&quot;,
+     &quot;ComparisonOperator&quot;: &quot;LessThanThreshold&quot;,
+     &quot;DatapointsToAlarm&quot;: 2,
+     &quot;Dimensions&quot;: [
+         {
+             &quot;Name&quot;: &quot;Host&quot;,
+             &quot;Value&quot;: &quot;bookstore-api-green&quot;
+         }
+     ],
+     &quot;EvaluationPeriods&quot;: 2,
+     &quot;MetricName&quot;: &quot;db-connectivity&quot;,
+     &quot;Namespace&quot;: &quot;Bookstore&quot;,
+     &quot;Period&quot;: 60,
+     &quot;Statistic&quot;: &quot;Average&quot;,
+     &quot;Threshold&quot;: 1.0
+ }'&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; aws cloudwatch put-metric-alarm &lt;span class=&quot;nt&quot;&gt;--output&lt;/span&gt; json &lt;span class=&quot;nt&quot;&gt;--cli-input-json&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'{
+     &quot;ActionsEnabled&quot;: true,
+     &quot;AlarmActions&quot;: [
+         &quot;arn:aws:sns:us-west-2:532151327118:PingPublicationsSNS&quot;
+     ],
+     &quot;AlarmDescription&quot;: &quot;CDN Connectivity failure for Bookstore API (Green).&quot;,
+     &quot;AlarmName&quot;: &quot;bookstore-api-green-cdn-connectivity-failed&quot;,
+     &quot;ComparisonOperator&quot;: &quot;LessThanThreshold&quot;,
+     &quot;DatapointsToAlarm&quot;: 2,
+     &quot;Dimensions&quot;: [
+         {
+             &quot;Name&quot;: &quot;Host&quot;,
+             &quot;Value&quot;: &quot;bookstore-api-green&quot;
+         }
+     ],
+     &quot;EvaluationPeriods&quot;: 2,
+     &quot;MetricName&quot;: &quot;cdn-connectivity&quot;,
+     &quot;Namespace&quot;: &quot;Bookstore&quot;,
+     &quot;Period&quot;: 60,
+     &quot;Statistic&quot;: &quot;Average&quot;,
+     &quot;Threshold&quot;: 1.0
+ }'&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
 
 &lt;h3 id=&quot;execute-a-resiliency-experiment-in-production-1&quot;&gt;Execute a Resiliency Experiment in Production&lt;/h3&gt;
 
 &lt;ul&gt;
   &lt;li&gt;Status: &lt;strong&gt;Complete&lt;/strong&gt;&lt;/li&gt;
 &lt;/ul&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;Use Gremlin or similar Chaos Engineering tools.&lt;/p&gt;
-&lt;/blockquote&gt;
 
 &lt;h3 id=&quot;publish-test-results-and-track-over-time&quot;&gt;Publish Test Results and Track Over Time&lt;/h3&gt;
 
@@ -625,15 +1029,30 @@ Monitor Scripts: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/mon-scripts
 
 &lt;p&gt;Before you can begin moving through the resiliency stages there are a few prerequisite steps you’ll need to complete.  Most of these requirements are standard fare for a well-designed system, but ensuring each and every unique application team is fully prepared for the unknown is paramount to developing resilient systems.&lt;/p&gt;
 
-&lt;h3 id=&quot;1-define-the-critical-dependencies&quot;&gt;1. Define the Critical Dependencies&lt;/h3&gt;
+&lt;h3 id=&quot;1-establish-high-observability&quot;&gt;1. Establish High Observability&lt;/h3&gt;
+
+&lt;p&gt;(TODO)&lt;/p&gt;
+
+&lt;p&gt;Microservice and clustered architectures favor the scalability and cost-efficiency of distributed computing, but also require a deep understanding of system behavior across a large pool of services and machines.  Robust observability is a necessity for most modern software, which tend to be comprised of these complex distributed systems.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Monitoring&lt;/strong&gt;: The act of collecting, processing, aggregating, and displaying quantitative data about a system.  These data may be anything from query counts/types and error counts/types to processing times and server lifetimes.  Monitoring is a smaller subset of overall measure of observability.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Observability&lt;/strong&gt;: A measure of the ability to accurately infer what is happening internally within a system based solely on external information.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;A properly observable system is one that allows your team to answer new questions about the internals of the system &lt;em&gt;without&lt;/em&gt; the need to deploy a new build.  Continuous monitoring is critical to catch unexpected behavior that is difficult to reproduce, but monitoring largely focuses on measuring “known unknowns.”  By contrast, a highly-distributed system presents the need to track down and understand a multitude of “unknown unknowns” – an obscure issue that has never happened before, and may never happen again.&lt;/p&gt;
+
+&lt;p&gt;Most importantly, high observability is critically important when implementing Chaos Engineering techniques.  As &lt;a href=&quot;https://twitter.com/mipsytipsy&quot;&gt;Charity Majors&lt;/a&gt;, CEO of &lt;a href=&quot;https://www.honeycomb.io/&quot;&gt;Honeycomb&lt;/a&gt;, puts it, “Without observability, you don’t have ‘chaos engineering’.  You just have chaos.”&lt;/p&gt;
+
+&lt;h3 id=&quot;2-define-the-critical-dependencies&quot;&gt;2. Define the Critical Dependencies&lt;/h3&gt;
 
 &lt;p&gt;Start by documenting every application dependency that is &lt;em&gt;required&lt;/em&gt; for the application to function at all.  This type of dependency is referred to as a &lt;strong&gt;critical dependency&lt;/strong&gt;.&lt;/p&gt;
 
-&lt;h3 id=&quot;2-define-the-non-critical-dependencies&quot;&gt;2. Define the Non-Critical Dependencies&lt;/h3&gt;
+&lt;h3 id=&quot;3-define-the-non-critical-dependencies&quot;&gt;3. Define the Non-Critical Dependencies&lt;/h3&gt;
 
 &lt;p&gt;Once all critical dependencies are identified then all remaining dependencies should be &lt;strong&gt;non-critical dependencies&lt;/strong&gt;.  If the core application can still function – even in a degraded state – when a dependency is missing, then that dependency is considered non-critical.&lt;/p&gt;
 
-&lt;h3 id=&quot;3-create-a-disaster-recovery-failover-playbook&quot;&gt;3. Create a Disaster Recovery Failover Playbook&lt;/h3&gt;
+&lt;h3 id=&quot;4-create-a-disaster-recovery-failover-playbook&quot;&gt;4. Create a Disaster Recovery Failover Playbook&lt;/h3&gt;
 
 &lt;p&gt;Your team should create a disaster recovery plan specific to &lt;strong&gt;failover&lt;/strong&gt;.  A &lt;strong&gt;disaster recovery failover playbook&lt;/strong&gt; should include the following information, at a minimum:&lt;/p&gt;
 
@@ -645,11 +1064,11 @@ Monitor Scripts: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/mon-scripts
 
 &lt;p class=&quot;notice--tip&quot;&gt;&lt;strong&gt;TIP&lt;/strong&gt;: Not sure which failover scenarios to expect or plan for?  Unable to determine if a dependency is critical vs non-critical?  Consider running a GameDay to better prepare for and test specific scenarios in a controlled manner.  Check out &lt;a href=&quot;https://www.gremlin.com/community/tutorials/how-to-run-a-gameday/&quot;&gt;How to Run a GameDay&lt;/a&gt; for more info.&lt;/p&gt;
 
-&lt;h3 id=&quot;4-create-a-critical-dependency-failover-playbook&quot;&gt;4. Create a Critical Dependency Failover Playbook&lt;/h3&gt;
+&lt;h3 id=&quot;5-create-a-critical-dependency-failover-playbook&quot;&gt;5. Create a Critical Dependency Failover Playbook&lt;/h3&gt;
 
 &lt;p&gt;A &lt;strong&gt;critical dependency failover playbook&lt;/strong&gt; is a subset of the disaster recovery failover playbook and it should detail the step-by-step procedures for handling the potential failover scenarios for each critical dependency.&lt;/p&gt;
 
-&lt;h3 id=&quot;5-create-a-non-critical-dependency-failover-playbook&quot;&gt;5. Create a Non-Critical Dependency Failover Playbook&lt;/h3&gt;
+&lt;h3 id=&quot;6-create-a-non-critical-dependency-failover-playbook&quot;&gt;6. Create a Non-Critical Dependency Failover Playbook&lt;/h3&gt;
 
 &lt;p&gt;The final prerequisite is to determine how non-critical dependency failures will impact the system.  Your team may not &lt;em&gt;necessarily&lt;/em&gt; have failover procedures in place for non-critical dependencies, so this process can be as simple as testing and documenting what happens when each non-critical dependency is unavailable.  Be sure to gauge the &lt;strong&gt;severity&lt;/strong&gt; of the failure impact on the core application, which will provide the team with a better understanding of the system and its interactions (see &lt;a href=&quot;#recovery-objectives&quot;&gt;Recovery Objectives&lt;/a&gt;).&lt;/p&gt;
 
@@ -773,7 +1192,7 @@ Monitor Scripts: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/mon-scripts
   &lt;/tbody&gt;
 &lt;/table&gt;
 
-&lt;h4 id=&quot;1-define-the-critical-dependencies-1&quot;&gt;1. Define the Critical Dependencies&lt;/h4&gt;
+&lt;h4 id=&quot;1-define-the-critical-dependencies&quot;&gt;1. Define the Critical Dependencies&lt;/h4&gt;
 
 &lt;p&gt;At this early stage of the application &lt;em&gt;all&lt;/em&gt; dependencies are critical.&lt;/p&gt;
 
@@ -818,11 +1237,11 @@ Monitor Scripts: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/mon-scripts
 
 &lt;p&gt;A &lt;strong&gt;criticality period&lt;/strong&gt; is useful for dependencies that are only considered “critical” during a specific period of time.  For example, a database backup service that runs at 2:00 AM PST every night may have a criticality period of &lt;code class=&quot;highlighter-rouge&quot;&gt;2:00 AM - 3:00 AM PST&lt;/code&gt;.  This is also a good time to evaluate initial acceptable RTO and RPO values.  These values will decrease over time as resiliency improves, but setting a baseline goal provides a target to work toward.&lt;/p&gt;
 
-&lt;h4 id=&quot;2-define-the-non-critical-dependencies-1&quot;&gt;2. Define the Non-Critical Dependencies&lt;/h4&gt;
+&lt;h4 id=&quot;2-define-the-non-critical-dependencies&quot;&gt;2. Define the Non-Critical Dependencies&lt;/h4&gt;
 
 &lt;p&gt;The &lt;strong&gt;Bookstore&lt;/strong&gt; app is so simple that it doesn’t have any non-critical dependencies – if a service fails, the entire application fails with it.&lt;/p&gt;
 
-&lt;h4 id=&quot;3-create-a-disaster-recovery-failover-playbook-1&quot;&gt;3. Create a Disaster Recovery Failover Playbook&lt;/h4&gt;
+&lt;h4 id=&quot;3-create-a-disaster-recovery-failover-playbook&quot;&gt;3. Create a Disaster Recovery Failover Playbook&lt;/h4&gt;
 
 &lt;p&gt;The first part of a disaster recovery failover playbook should contain contact information for all relevant team members, including the services those members are related to and their availability.&lt;/p&gt;
 
@@ -1048,7 +1467,7 @@ Monitor Scripts: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/mon-scripts
 
 &lt;p class=&quot;notice--tip&quot;&gt;&lt;strong&gt;PURPOSE&lt;/strong&gt;: For more complex systems this final procedure should provide steps for resuming normal service.&lt;/p&gt;
 
-&lt;h4 id=&quot;4-create-a-critical-dependency-failover-playbook-1&quot;&gt;4. Create a Critical Dependency Failover Playbook&lt;/h4&gt;
+&lt;h4 id=&quot;4-create-a-critical-dependency-failover-playbook&quot;&gt;4. Create a Critical Dependency Failover Playbook&lt;/h4&gt;
 
 &lt;h5 id=&quot;scenario-database-failure&quot;&gt;Scenario: Database Failure&lt;/h5&gt;
 
@@ -1203,7 +1622,7 @@ Monitor Scripts: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/mon-scripts
   &lt;li&gt;Service is now fully restored.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h4 id=&quot;5-create-a-non-critical-dependency-failover-playbook-1&quot;&gt;5. Create a Non-Critical Dependency Failover Playbook&lt;/h4&gt;
+&lt;h4 id=&quot;5-create-a-non-critical-dependency-failover-playbook&quot;&gt;5. Create a Non-Critical Dependency Failover Playbook&lt;/h4&gt;
 
 &lt;p&gt;The &lt;strong&gt;Bookstore&lt;/strong&gt; example app doesn’t have any non-critical dependencies at the moment given its simple architecture (&lt;code class=&quot;highlighter-rouge&quot;&gt;CDN &amp;gt; API Server &amp;lt; Database&lt;/code&gt;).  However, progressing through each resiliency stage will &lt;em&gt;require&lt;/em&gt; additional systems and services to maintain failure resilience, which will inherently add non-critical dependencies.&lt;/p&gt;
 

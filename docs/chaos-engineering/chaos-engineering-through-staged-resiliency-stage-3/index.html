@@ -251,7 +251,7 @@
 
 
 
-  3 minute read
+  13 minute read
 </p>
           
         </header>
@@ -326,47 +326,474 @@ Run at least one resiliency exercise (failure injection) in production environme
 </li>
 </ul>
 
-<h4 id="ec2-instance-failure-test">EC2 Instance Failure Test</h4>
+<h4 id="automating-bluegreen-instance-failover">Automating Blue/Green Instance Failover</h4>
 
-<blockquote>
-  <p>Use Gremlin attack.</p>
-</blockquote>
+<p>We have a blue/green deployment for the <strong>Bookstore</strong> application service that provides two identical production environment instances of the system.  However, if the currently active instance fails we still have to manually swap DNS records from blue to green (or vice versa).  Since this process should be automated in order to work through these final <strong>Resiliency Stages</strong>, we’ll take some time to create a failover configuration for the <code class="highlighter-rouge">bookstore-api</code> instances.</p>
 
-<blockquote>
-  <p>Lambda perhaps? https://aws.amazon.com/premiumsupport/knowledge-center/start-stop-lambda-cloudwatch/</p>
-</blockquote>
+<ol>
+  <li>
+    <p>Create a metric alarm within Amazon CloudWatch.</p>
 
-<h4 id="cdn-failure-test">CDN Failure Test</h4>
+    <div class="language-bash highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code> <span class="nv">$ </span>aws cloudwatch put-metric-alarm <span class="nt">--output</span> json <span class="nt">--cli-input-json</span> <span class="s1">'{
+     "ActionsEnabled": true,
+     "AlarmActions": [
+         "arn:aws:sns:us-west-2:532151327118:PingPublicationsSNS"
+     ],
+     "AlarmDescription": "Bookstore API (Blue) instance failure.",
+     "AlarmName": "bookstore-api-blue-StatusCheckFailed",
+     "ComparisonOperator": "GreaterThanOrEqualToThreshold",
+     "DatapointsToAlarm": 1,
+     "Dimensions": [
+         {
+             "Name": "InstanceId",
+             "Value": "i-0ab55a49288f1da24"
+         }
+     ],
+     "EvaluationPeriods": 1,
+     "MetricName": "StatusCheckFailed",
+     "Namespace": "AWS/EC2",
+     "Period": 60,
+     "Statistic": "Maximum",
+     "Threshold": 1.0,
+     "TreatMissingData": "breaching"
+ }'</span>
+</code></pre></div>    </div>
 
-<blockquote>
-  <p>(TODO) CloudWatch Agent: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Install-CloudWatch-Agent.html
-Monitor Scripts: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/mon-scripts.html</p>
-</blockquote>
+    <p>The above configuration checks the <code class="highlighter-rouge">StatusCheckFailed</code> metric once a minute, which determines if <em>either</em> the Amazon EC2 system or the specific EC2 instance has failed.  We have to set <code class="highlighter-rouge">TreatMissingData</code> to <code class="highlighter-rouge">breaching</code> so that the <em>absence</em> of data will trigger an <code class="highlighter-rouge">ALARM</code> state (otherwise, the instance can be <code class="highlighter-rouge">stopped</code> or <code class="highlighter-rouge">terminated</code>, but the <code class="highlighter-rouge">StatusCheck</code> will succeed).</p>
 
-<blockquote>
-  <ol>
-    <li>Create AWS CloudWatch Alarm/metric.</li>
-    <li>Automate AWS alarm trigger from <code class="highlighter-rouge">AWS CLI</code>
-</li>
-    <li>Failover CDN.</li>
-  </ol>
-</blockquote>
+    <p>The <code class="highlighter-rouge">Dimensions</code> array ensures this <code class="highlighter-rouge">bookstore-api-blue-StatusCheckFailed</code> alarm only checks against the <code class="highlighter-rouge">bookstore-api-blue</code> instance, and the <code class="highlighter-rouge">AlarmActions</code> specifies an Amazon SNS ARN to push an alert to when the alarm is triggered.</p>
+  </li>
+  <li>
+    <p>Next, create an Amazon Route53 Health Check that uses the <code class="highlighter-rouge">bookstore-api-blue-StatusCheckFailed</code> Amazon CloudWatch alarm for its <code class="highlighter-rouge">healthy/unhealthy</code> determination.</p>
 
-<h4 id="db-failure-test">DB Failure Test</h4>
+    <div class="language-bash highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code> <span class="nv">$ </span>aws route53 create-health-check <span class="nt">--caller-reference</span> bookstore-api-blue-health-check <span class="nt">--output</span> json <span class="nt">--health-check-config</span> <span class="s1">'{
+     "InsufficientDataHealthStatus": "Unhealthy", 
+     "Type": "CLOUDWATCH_METRIC", 
+     "AlarmIdentifier": {
+         "Region": "us-west-2", 
+         "Name": "bookstore-api-blue-StatusCheckFailed"
+     }, 
+     "Inverted": false
+ }'</span>
+ <span class="o">{</span>
+     <span class="s2">"HealthCheck"</span>: <span class="o">{</span>
+         <span class="s2">"HealthCheckConfig"</span>: <span class="o">{</span>
+             <span class="s2">"InsufficientDataHealthStatus"</span>: <span class="s2">"Unhealthy"</span>, 
+             <span class="s2">"Type"</span>: <span class="s2">"CLOUDWATCH_METRIC"</span>, 
+             <span class="s2">"AlarmIdentifier"</span>: <span class="o">{</span>
+                 <span class="s2">"Region"</span>: <span class="s2">"us-west-2"</span>, 
+                 <span class="s2">"Name"</span>: <span class="s2">"bookstore-api-blue-StatusCheckFailed"</span>
+             <span class="o">}</span>, 
+             <span class="s2">"Inverted"</span>: <span class="nb">false</span>
+         <span class="o">}</span>, 
+         <span class="s2">"CallerReference"</span>: <span class="s2">"bookstore-api-blue-health-check"</span>, 
+         <span class="s2">"HealthCheckVersion"</span>: 1, 
+         <span class="s2">"Id"</span>: <span class="s2">"119e6884-3685-4e5a-9520-44cebae6c734"</span>, 
+         <span class="s2">"CloudWatchAlarmConfiguration"</span>: <span class="o">{</span>
+             <span class="s2">"EvaluationPeriods"</span>: 1, 
+             <span class="s2">"Dimensions"</span>: <span class="o">[</span>
+                 <span class="o">{</span>
+                     <span class="s2">"Name"</span>: <span class="s2">"InstanceId"</span>, 
+                     <span class="s2">"Value"</span>: <span class="s2">"i-0ab55a49288f1da24"</span>
+                 <span class="o">}</span>
+             <span class="o">]</span>, 
+             <span class="s2">"Namespace"</span>: <span class="s2">"AWS/EC2"</span>, 
+             <span class="s2">"Period"</span>: 60, 
+             <span class="s2">"ComparisonOperator"</span>: <span class="s2">"GreaterThanOrEqualToThreshold"</span>, 
+             <span class="s2">"Statistic"</span>: <span class="s2">"Maximum"</span>, 
+             <span class="s2">"Threshold"</span>: 1.0, 
+             <span class="s2">"MetricName"</span>: <span class="s2">"StatusCheckFailed"</span>
+         <span class="o">}</span>
+     <span class="o">}</span>, 
+     <span class="s2">"Location"</span>: <span class="s2">"https://route53.amazonaws.com/2013-04-01/healthcheck/119e6884-3685-4e5a-9520-44cebae6c734"</span>
+ <span class="o">}</span>
+</code></pre></div>    </div>
 
-<blockquote>
-  <p>(TODO) CloudWatch Agent: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Install-CloudWatch-Agent.html
-Monitor Scripts: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/mon-scripts.html</p>
-</blockquote>
+    <p class="notice--tip"><strong>TIP</strong>: To reduce AWS costs we’re using a 60-second metric evaluation interval here, but in a more demanding application this <code class="highlighter-rouge">Period</code> should be significantly shorter.</p>
+  </li>
+  <li>
+    <p>Retrieve the <code class="highlighter-rouge">Id</code> for the <code class="highlighter-rouge">pingpublications.com</code> Amazon Route53 hosted zone.</p>
 
-<blockquote>
-  <ol>
-    <li>Create AWS CloudWatch Alarm/metric.</li>
-    <li>Automate AWS alarm trigger from <code class="highlighter-rouge">AWS CLI</code>
-</li>
-    <li>Failover CDN.</li>
-  </ol>
-</blockquote>
+    <div class="language-bash highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code> <span class="nv">$ </span>aws route53 list-hosted-zones <span class="nt">--output</span> json
+ <span class="o">{</span>
+     <span class="s2">"HostedZones"</span>: <span class="o">[</span>
+         <span class="o">{</span>
+             <span class="s2">"ResourceRecordSetCount"</span>: 5, 
+             <span class="s2">"CallerReference"</span>: <span class="s2">"303EC092-EDA3-C2B7-822E-5E609CA718A3"</span>, 
+             <span class="s2">"Config"</span>: <span class="o">{</span>
+                 <span class="s2">"PrivateZone"</span>: <span class="nb">false</span>
+             <span class="o">}</span>, 
+             <span class="s2">"Id"</span>: <span class="s2">"/hostedzone/Z2EHK3FAEUNRMI"</span>, 
+             <span class="s2">"Name"</span>: <span class="s2">"pingpublications.com."</span>
+         <span class="o">}</span>
+     <span class="o">]</span>
+ <span class="o">}</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Create a pair of Amazon Route53 <code class="highlighter-rouge">Type: A</code> DNS record sets that will perform a <code class="highlighter-rouge">Failover</code> routing policy from the <code class="highlighter-rouge">bookstore-api-blue</code> to the <code class="highlighter-rouge">bookstore-api-green</code> production environment.  Therefore, even in the event that the blue instance fails the above health check, the <code class="highlighter-rouge">bookstore.pingpublications.com</code> endpoint will always point to an active production instance.</p>
+
+    <div class="language-bash highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code> <span class="nv">$ </span>aws route53 change-resource-record-sets <span class="nt">--hosted-zone-id</span> /hostedzone/Z2EHK3FAEUNRMI <span class="nt">--output</span> json <span class="nt">--change-batch</span> <span class="s1">'{
+     "Comment": "Adding bookstore.pingpublications.com failover.",
+     "Changes": [
+         {
+             "Action": "CREATE",
+             "ResourceRecordSet": {
+                 "Name": "bookstore.pingpublications.com.",
+                 "Type": "A",
+                 "SetIdentifier": "bookstore-Primary",
+                 "Failover": "PRIMARY",
+                 "TTL": 60,
+                 "ResourceRecords": [
+                     {
+                         "Value": "54.213.54.171"
+                     }
+                 ],
+                 "HealthCheckId": "119e6884-3685-4e5a-9520-44cebae6c734"
+             }
+         },
+         {
+             "Action": "CREATE",
+             "ResourceRecordSet": {
+                 "Name": "bookstore.pingpublications.com.",
+                 "Type": "A",
+                 "SetIdentifier": "bookstore-Secondary",
+                 "Failover": "SECONDARY",
+                 "TTL": 60,
+                 "ResourceRecords": [
+                     {
+                         "Value": "52.11.79.9"
+                     }
+                 ]
+             }
+         }
+     ]
+ }'</span>
+ <span class="o">{</span>
+     <span class="s2">"ChangeInfo"</span>: <span class="o">{</span>
+         <span class="s2">"Status"</span>: <span class="s2">"PENDING"</span>, 
+         <span class="s2">"Comment"</span>: <span class="s2">"Adding bookstore.pingpublications.com failover."</span>, 
+         <span class="s2">"SubmittedAt"</span>: <span class="s2">"2018-11-15T01:54:15.785Z"</span>, 
+         <span class="s2">"Id"</span>: <span class="s2">"/change/C1XJ0G2FTPLYDO"</span>
+     <span class="o">}</span>
+ <span class="o">}</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Double-check that the two failover record sets have been created.</p>
+
+    <div class="language-bash highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code> <span class="nv">$ </span>aws route53 list-resource-record-sets <span class="nt">--hosted-zone-id</span> /hostedzone/Z2EHK3FAEUNRMI <span class="nt">--output</span> json
+ <span class="o">{</span>
+     <span class="s2">"ResourceRecordSets"</span>: <span class="o">[</span>
+         <span class="o">{</span>
+             <span class="s2">"HealthCheckId"</span>: <span class="s2">"119e6884-3685-4e5a-9520-44cebae6c734"</span>, 
+             <span class="s2">"Name"</span>: <span class="s2">"bookstore.pingpublications.com."</span>, 
+             <span class="s2">"Type"</span>: <span class="s2">"A"</span>, 
+             <span class="s2">"Failover"</span>: <span class="s2">"PRIMARY"</span>, 
+             <span class="s2">"ResourceRecords"</span>: <span class="o">[</span>
+                 <span class="o">{</span>
+                     <span class="s2">"Value"</span>: <span class="s2">"54.213.54.171"</span>
+                 <span class="o">}</span>
+             <span class="o">]</span>, 
+             <span class="s2">"TTL"</span>: 60, 
+             <span class="s2">"SetIdentifier"</span>: <span class="s2">"bookstore-Primary"</span>
+         <span class="o">}</span>, 
+         <span class="o">{</span>
+             <span class="s2">"Name"</span>: <span class="s2">"bookstore.pingpublications.com."</span>, 
+             <span class="s2">"Type"</span>: <span class="s2">"A"</span>, 
+             <span class="s2">"Failover"</span>: <span class="s2">"SECONDARY"</span>, 
+             <span class="s2">"ResourceRecords"</span>: <span class="o">[</span>
+                 <span class="o">{</span>
+                     <span class="s2">"Value"</span>: <span class="s2">"52.11.79.9"</span>
+                 <span class="o">}</span>
+             <span class="o">]</span>, 
+             <span class="s2">"TTL"</span>: 60, 
+             <span class="s2">"SetIdentifier"</span>: <span class="s2">"bookstore-Secondary"</span>
+         <span class="o">}</span>
+     <span class="o">]</span>
+ <span class="o">}</span>
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<h4 id="automated-instance-failover-verification">Automated Instance Failover Verification</h4>
+
+<p>To test the failover process for the <strong>Bookstore</strong> API application instances we’ll use a Gremlin <a href="https://help.gremlin.com/attack-params-ref/#shutdown" target="_blank" rel="noopener noreferrer">Shutdown Attack</a>.  This attack will temporarily shutdown the <code class="highlighter-rouge">bookstore-api-blue</code> Amazon EC2 instance for us.</p>
+
+<ol>
+  <li>
+    <p>Verify the current status of the <strong>Bookstore</strong> API by checking the <code class="highlighter-rouge">bookstore.pingpublications.com/version/</code> endpoint.</p>
+
+    <div class="language-bash highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code> <span class="nv">$ </span>curl bookstore.pingpublications.com/version/ | jq
+ <span class="o">{</span>
+     <span class="s2">"environment"</span>: <span class="s2">"bookstore-api-blue"</span>,
+     <span class="s2">"version"</span>: 7
+ <span class="o">}</span>
+</code></pre></div>    </div>
+
+    <p>This shows what app version is running and confirms that the endpoint is pointing to the <code class="highlighter-rouge">bookstore-api-blue</code> Amazon EC2 instance.</p>
+  </li>
+  <li>
+    <p>Run a Gremlin Shutdown Attack targeting the <code class="highlighter-rouge">bookstore-api-blue</code> Client.  Check out the <a href="https://help.gremlin.com/" target="_blank" rel="noopener noreferrer">Gremlin Help</a> documentation for more details on creating attacks with Gremlin’s Chaos Engineering tools.</p>
+  </li>
+  <li>
+    <p>After a moment the Amazon CloudWatch <code class="highlighter-rouge">bookstore-api-blue-StatusCheckFailed</code> Alarm triggers, thereby causing the <code class="highlighter-rouge">bookstore-api-blue-healthy</code> Amazon Route53 health check to fail.  This automatically triggers the DNS failover created previously, which points the primary <code class="highlighter-rouge">bookstore.pingpublications.com</code> endpoint to the <code class="highlighter-rouge">green</code> EC2 production environment.  Verify this failover has automatically propagated by checking the <code class="highlighter-rouge">/version/</code> endpoint once again.</p>
+
+    <div class="language-bash highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code> <span class="nv">$ </span>curl bookstore.pingpublications.com/version/ | jq
+ <span class="o">{</span>
+     <span class="s2">"environment"</span>: <span class="s2">"bookstore-api-green"</span>,
+     <span class="s2">"version"</span>: 7
+ <span class="o">}</span>
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<h4 id="generating-custom-aws-metrics">Generating Custom AWS Metrics</h4>
+
+<p>To properly automate our critical dependency failure tests we need a way to <em>simulate</em> the failure of our CDN and database services.  Tools like Gremlin can help with this task.  Running a Gremlin <strong>Blackhole Attack</strong> on the <strong>Bookstore</strong> API environment can prevent all network communication between the API instance and the CDN and/or database endpoints.  However, AWS EC2 instances don’t have any built-in capability to monitor the connectivity between said instance and another arbitrary endpoint.  Therefore, the solution is to create some <em>custom</em> metrics that will effectively measure the “health” of the connection between the <strong>Bookstore</strong> API instance and its critical dependencies.</p>
+
+<p>While AWS provides tons of built-in metrics, creating a <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/publishingMetrics.html" target="_blank" rel="noopener noreferrer">custom metrics</a> requires that you generate <em>all</em> the relevant data for said metric.  For this reason, a custom metric is little more than a combination of a metric <code class="highlighter-rouge">name</code> and list of <code class="highlighter-rouge">dimensions</code>, which are used as <code class="highlighter-rouge">key/value</code> pairs to distinguish and categorize metrics.  We’re creating simple metrics that act as a health monitor for each critical dependency.</p>
+
+<ol>
+  <li>
+    <p>We start by creating a couple bash scripts within our application code repository.  These scripts are executed from the <strong>Bookstore</strong> API instances.</p>
+
+    <div class="language-bash highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code> <span class="c">#!/bin/bash</span>
+ <span class="c"># ~/apps/bookstore_api/metrics/db-connectivity.sh</span>
+ <span class="nv">INSTANCE_ID</span><span class="o">=</span><span class="s2">"</span><span class="k">$(</span>ec2metadata <span class="nt">--instance-id</span><span class="k">)</span><span class="s2">"</span>
+ <span class="nv">TAG_NAME</span><span class="o">=</span><span class="s2">"</span><span class="k">$(</span>/home/ubuntu/.local/bin/aws ec2 describe-tags <span class="nt">--filter</span> <span class="s2">"Name=resource-id,Values=</span><span class="nv">$INSTANCE_ID</span><span class="s2">"</span> <span class="s2">"Name=key,Values=Name"</span> <span class="nt">--query</span> <span class="s2">"Tags[*].Value"</span> <span class="nt">--output</span> text<span class="k">)</span><span class="s2">"</span>
+
+ <span class="k">while </span><span class="nb">sleep </span>10
+ <span class="k">do
+     if </span>nc <span class="nt">-zv</span> <span class="nt">-w</span> 5 db.bookstore.pingpublications.com 5432 2&gt;&amp;1 | <span class="nb">grep</span> <span class="nt">--line-buffered</span> <span class="nt">-i</span> succeeded<span class="p">;</span> <span class="k">then</span>
+         /home/ubuntu/.local/bin/aws cloudwatch put-metric-data <span class="nt">--metric-name</span> db-connectivity <span class="nt">--namespace</span> Bookstore <span class="nt">--dimensions</span> <span class="nv">Host</span><span class="o">=</span><span class="nv">$TAG_NAME</span> <span class="nt">--value</span> 1
+     <span class="k">else
+         </span><span class="nb">echo</span> <span class="s2">"Connection to db.bookstore.pingpublications.com 5432 port [tcp/postgresql] failed!"</span>
+         /home/ubuntu/.local/bin/aws cloudwatch put-metric-data <span class="nt">--metric-name</span> db-connectivity <span class="nt">--namespace</span> Bookstore <span class="nt">--dimensions</span> <span class="nv">Host</span><span class="o">=</span><span class="nv">$TAG_NAME</span> <span class="nt">--value</span> 0
+     <span class="k">fi
+ done</span>
+</code></pre></div>    </div>
+
+    <div class="language-bash highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code> <span class="c">#!/bin/bash</span>
+ <span class="c"># ~/apps/bookstore_api/metrics/cdn-connectivity.sh</span>
+ <span class="nv">INSTANCE_ID</span><span class="o">=</span><span class="s2">"</span><span class="k">$(</span>ec2metadata <span class="nt">--instance-id</span><span class="k">)</span><span class="s2">"</span>
+ <span class="nv">TAG_NAME</span><span class="o">=</span><span class="s2">"</span><span class="k">$(</span>/home/ubuntu/.local/bin/aws ec2 describe-tags <span class="nt">--filter</span> <span class="s2">"Name=resource-id,Values=</span><span class="nv">$INSTANCE_ID</span><span class="s2">"</span> <span class="s2">"Name=key,Values=Name"</span> <span class="nt">--query</span> <span class="s2">"Tags[*].Value"</span> <span class="nt">--output</span> text<span class="k">)</span><span class="s2">"</span>
+
+ <span class="k">while </span><span class="nb">sleep </span>10
+ <span class="k">do
+     if </span>nc <span class="nt">-zv</span> <span class="nt">-w</span> 5 cdn.bookstore.pingpublications.com 80 2&gt;&amp;1 | <span class="nb">grep</span> <span class="nt">--line-buffered</span> <span class="nt">-i</span> succeeded<span class="p">;</span> <span class="k">then</span>
+         /home/ubuntu/.local/bin/aws cloudwatch put-metric-data <span class="nt">--metric-name</span> cdn-connectivity <span class="nt">--namespace</span> Bookstore <span class="nt">--dimensions</span> <span class="nv">Host</span><span class="o">=</span><span class="nv">$TAG_NAME</span> <span class="nt">--value</span> 1
+     <span class="k">else
+         </span><span class="nb">echo</span> <span class="s2">"Connection to cdn.bookstore.pingpublications.com 80 port [tcp/http] failed!"</span>
+         /home/ubuntu/.local/bin/aws cloudwatch put-metric-data <span class="nt">--metric-name</span> cdn-connectivity <span class="nt">--namespace</span> Bookstore <span class="nt">--dimensions</span> <span class="nv">Host</span><span class="o">=</span><span class="nv">$TAG_NAME</span> <span class="nt">--value</span> 0
+     <span class="k">fi
+ done</span>
+</code></pre></div>    </div>
+
+    <p>To check the connectivity for the database or CDN endpoint we first retrieve the Amazon EC2 instance Id and, from that, get the <code class="highlighter-rouge">Name</code> tag value, which we use as the <code class="highlighter-rouge">Host</code> dimension when creating our metric.  This <code class="highlighter-rouge">Host</code> value specifies which environment (blue or green) is being measured.</p>
+
+    <p>The purpose of the script is to perform a network connectivity check (using <code class="highlighter-rouge">netcat</code>) to the dependency endpoint every few seconds.  It then uses the AWS CLI to generate metric data for the <code class="highlighter-rouge">db-connectivity</code> or <code class="highlighter-rouge">cdn-connectivity</code> metric, passing a value of <code class="highlighter-rouge">1</code> if the connection succeeded and <code class="highlighter-rouge">0</code> for a failure.</p>
+  </li>
+  <li>
+    <p>Create <code class="highlighter-rouge">systemd</code> service configuration files so the bash scripts will be executed and remain active.</p>
+
+    <ul>
+      <li>
+        <p>Start by creating the <code class="highlighter-rouge">bookstore-db-connectivity</code> service and pointing the <code class="highlighter-rouge">ExecStart</code> command to the <code class="highlighter-rouge">db-connectivity.sh</code> file.</p>
+
+        <div class="language-bash highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code>  <span class="nb">sudo </span>nano /etc/systemd/system/bookstore-db-connectivity.service
+</code></pre></div>        </div>
+
+        <div class="language-bash highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code>  <span class="o">[</span>Unit]
+  <span class="nv">Description</span><span class="o">=</span>Bookstore Database Connectivity Service
+  <span class="nv">After</span><span class="o">=</span>network.target
+
+  <span class="o">[</span>Service]
+  <span class="nv">Type</span><span class="o">=</span>simple
+  <span class="nv">User</span><span class="o">=</span>ubuntu
+  <span class="nv">WorkingDirectory</span><span class="o">=</span>/home/ubuntu
+  <span class="nv">ExecStart</span><span class="o">=</span>/home/ubuntu/apps/bookstore_api/metrics/db-connectivity.sh
+  <span class="nv">Restart</span><span class="o">=</span>on-failure
+
+  <span class="o">[</span>Install]
+  <span class="nv">WantedBy</span><span class="o">=</span>multi-user.target
+</code></pre></div>        </div>
+      </li>
+      <li>
+        <p>Do the same for the CDN.</p>
+
+        <div class="language-bash highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code>  <span class="nb">sudo </span>nano /etc/systemd/system/bookstore-cdn-connectivity.service
+</code></pre></div>        </div>
+
+        <div class="language-bash highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code>  <span class="o">[</span>Unit]
+  <span class="nv">Description</span><span class="o">=</span>Bookstore CDN Connectivity Service
+  <span class="nv">After</span><span class="o">=</span>network.target
+
+  <span class="o">[</span>Service]
+  <span class="nv">Type</span><span class="o">=</span>simple
+  <span class="nv">User</span><span class="o">=</span>ubuntu
+  <span class="nv">WorkingDirectory</span><span class="o">=</span>/home/ubuntu
+  <span class="nv">ExecStart</span><span class="o">=</span>/home/ubuntu/apps/bookstore_api/metrics/cdn-connectivity.sh
+  <span class="nv">Restart</span><span class="o">=</span>on-failure
+
+  <span class="o">[</span>Install]
+  <span class="nv">WantedBy</span><span class="o">=</span>multi-user.target
+</code></pre></div>        </div>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>Set permissions such that both service target scripts are executable.</p>
+
+    <div class="language-bash highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code> <span class="nb">chmod</span> +x /home/ubuntu/apps/bookstore_api/metrics/db-connectivity.sh <span class="o">&amp;&amp;</span> <span class="nb">chmod</span> +x /home/ubuntu/apps/bookstore_api/metrics/cdn-connectivity.sh
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Initially, we’ll need to manually start both monitoring services.</p>
+
+    <div class="language-bash highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code> <span class="nb">sudo </span>systemctl start bookstore-db-connectivity <span class="o">&amp;&amp;</span> <span class="nb">sudo </span>systemctl start bookstore-cdn-connectivity
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Verify that both services are active.</p>
+
+    <div class="language-bash highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code> <span class="nv">$ </span><span class="nb">sudo </span>systemctl status bookstore-db-connectivity.service 
+ Loaded: loaded <span class="o">(</span>/etc/systemd/system/bookstore-db-connectivity.service<span class="p">;</span> disabled<span class="p">;</span> vendor preset: enabled<span class="o">)</span>
+ Active: active <span class="o">(</span>running<span class="o">)</span> since Mon 2018-11-17 12:02:19 UTC<span class="p">;</span> 2min 3s ago
+
+ Nov 17 12:02:42 bookstore-api-green systemd[1]: Started Bookstore Database Connectivity Service.
+ Nov 17 12:02:42 bookstore-api-green db-connectivity.sh[24683]: Connection to db.bookstore.pingpublications.com 5432 port <span class="o">[</span>tcp/postgresql] succeeded!
+</code></pre></div>    </div>
+
+    <div class="language-bash highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code> <span class="nv">$ </span><span class="nb">sudo </span>systemctl status bookstore-cdn-connectivity
+ Loaded: loaded <span class="o">(</span>/etc/systemd/system/bookstore-cdn-connectivity.service<span class="p">;</span> disabled<span class="p">;</span> vendor preset: enabled<span class="o">)</span>
+ Active: active <span class="o">(</span>running<span class="o">)</span> since Mon 2018-11-17 12:02:19 UTC<span class="p">;</span> 20s ago
+
+ Nov 17 12:02:19 bookstore-api-green systemd[1]: Started Bookstore CDN Connectivity Service.
+ Nov 17 12:02:31 bookstore-api-green cdn-connectivity.sh[24695]: Connection to cdn.bookstore.pingpublications.com 80 port <span class="o">[</span>tcp/http] succeeded!
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Create Amazon CloudWatch Alarms based on the four generated metrics.  These alarms check for a connectivity failure within the last two minutes.</p>
+
+    <div class="language-bash highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code> aws cloudwatch put-metric-alarm <span class="nt">--output</span> json <span class="nt">--cli-input-json</span> <span class="s1">'{
+     "ActionsEnabled": true,
+     "AlarmActions": [
+         "arn:aws:sns:us-west-2:532151327118:PingPublicationsSNS"
+     ],
+     "AlarmDescription": "Database Connectivity failure for Bookstore API (Blue).",
+     "AlarmName": "bookstore-api-blue-db-connectivity-failed",
+     "ComparisonOperator": "LessThanThreshold",
+     "DatapointsToAlarm": 2,
+     "Dimensions": [
+         {
+             "Name": "Host",
+             "Value": "bookstore-api-blue"
+         }
+     ],
+     "EvaluationPeriods": 2,
+     "MetricName": "db-connectivity",
+     "Namespace": "Bookstore",
+     "Period": 60,
+     "Statistic": "Average",
+     "Threshold": 1.0
+ }'</span>
+</code></pre></div>    </div>
+
+    <div class="language-bash highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code> aws cloudwatch put-metric-alarm <span class="nt">--output</span> json <span class="nt">--cli-input-json</span> <span class="s1">'{
+     "ActionsEnabled": true,
+     "AlarmActions": [
+         "arn:aws:sns:us-west-2:532151327118:PingPublicationsSNS"
+     ],
+     "AlarmDescription": "CDN Connectivity failure for Bookstore API (Blue).",
+     "AlarmName": "bookstore-api-blue-cdn-connectivity-failed",
+     "ComparisonOperator": "LessThanThreshold",
+     "DatapointsToAlarm": 2,
+     "Dimensions": [
+         {
+             "Name": "Host",
+             "Value": "bookstore-api-blue"
+         }
+     ],
+     "EvaluationPeriods": 2,
+     "MetricName": "cdn-connectivity",
+     "Namespace": "Bookstore",
+     "Period": 60,
+     "Statistic": "Average",
+     "Threshold": 1.0
+ }'</span>
+</code></pre></div>    </div>
+
+    <div class="language-bash highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code> aws cloudwatch put-metric-alarm <span class="nt">--output</span> json <span class="nt">--cli-input-json</span> <span class="s1">'{
+     "ActionsEnabled": true,
+     "AlarmActions": [
+         "arn:aws:sns:us-west-2:532151327118:PingPublicationsSNS"
+     ],
+     "AlarmDescription": "Database Connectivity failure for Bookstore API (Green).",
+     "AlarmName": "bookstore-api-green-db-connectivity-failed",
+     "ComparisonOperator": "LessThanThreshold",
+     "DatapointsToAlarm": 2,
+     "Dimensions": [
+         {
+             "Name": "Host",
+             "Value": "bookstore-api-green"
+         }
+     ],
+     "EvaluationPeriods": 2,
+     "MetricName": "db-connectivity",
+     "Namespace": "Bookstore",
+     "Period": 60,
+     "Statistic": "Average",
+     "Threshold": 1.0
+ }'</span>
+</code></pre></div>    </div>
+
+    <div class="language-bash highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code> aws cloudwatch put-metric-alarm <span class="nt">--output</span> json <span class="nt">--cli-input-json</span> <span class="s1">'{
+     "ActionsEnabled": true,
+     "AlarmActions": [
+         "arn:aws:sns:us-west-2:532151327118:PingPublicationsSNS"
+     ],
+     "AlarmDescription": "CDN Connectivity failure for Bookstore API (Green).",
+     "AlarmName": "bookstore-api-green-cdn-connectivity-failed",
+     "ComparisonOperator": "LessThanThreshold",
+     "DatapointsToAlarm": 2,
+     "Dimensions": [
+         {
+             "Name": "Host",
+             "Value": "bookstore-api-green"
+         }
+     ],
+     "EvaluationPeriods": 2,
+     "MetricName": "cdn-connectivity",
+     "Namespace": "Bookstore",
+     "Period": 60,
+     "Statistic": "Average",
+     "Threshold": 1.0
+ }'</span>
+</code></pre></div>    </div>
+  </li>
+</ol>
 
 <h3 id="execute-a-resiliency-experiment-in-production-1">Execute a Resiliency Experiment in Production</h3>
 
@@ -374,10 +801,6 @@ Monitor Scripts: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/mon-scripts
   <li>Status: <strong>Complete</strong>
 </li>
 </ul>
-
-<blockquote>
-  <p>Use Gremlin or similar Chaos Engineering tools.</p>
-</blockquote>
 
 <h3 id="publish-test-results-and-track-over-time">Publish Test Results and Track Over Time</h3>
 
@@ -514,7 +937,7 @@ Monitor Scripts: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/mon-scripts
 
 
 
-  21 minute read
+  22 minute read
 </p>
     
     <p class="archive__item-excerpt" itemprop="description">

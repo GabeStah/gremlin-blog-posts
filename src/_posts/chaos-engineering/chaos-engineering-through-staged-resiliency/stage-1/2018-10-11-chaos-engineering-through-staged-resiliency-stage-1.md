@@ -38,8 +38,13 @@ sources:
         - https://en.wikipedia.org/wiki/Recovery_point_objective
     - tags: []
       urls: 
-    - tags: []
-      urls:   
+    - tags: [observability, tracing, monitoring]
+      urls:
+        - https://landing.google.com/sre/sre-book/toc/
+        - https://ai.google/research/pubs/pub36356
+        - https://blog.twitter.com/engineering/en_us/a/2016/observability-at-twitter-technical-overview-part-i.html
+        - https://blog.twitter.com/engineering/en_us/a/2016/observability-at-twitter-technical-overview-part-ii.html
+        - https://www.honeycomb.io/wp-content/uploads/2018/08/Honeycomb-Guide-Achieving-Observability-v1_1.pdf
 ---
 
 In spite of what the name may suggest, Chaos Engineering is a _disciplined_ approach of identifying potential failures before they become outages.  Ultimately, the goal of Chaos Engineering is to create more stable and **resilient** systems.  There is some disagreement in the community about proper terminology, but regardless of which side of the [Chaos Engineering](https://medium.com/@jpaulreed/chaos-engineered-or-otherwise-is-not-enough-ad5792309ecf) vs [Resilience Engineering](https://www.linkedin.com/pulse/would-chaos-any-othername-casey-rosenthal/) debate you come down on, most engineers probably agree that proper implementation is more important than naming semantics.
@@ -57,17 +62,61 @@ With a bit of adjustment for your own organizational needs, you and your team ca
 
 ## Prerequisites
 
+{% comment %}
+
+(TODO) ### Verify Observability
+
+> Re, stage 1 of the maturity model. Any reason it’s missing observability and monitoring?
+> Surprisingly enough, that’s a huge chunk that people miss
+> It’s a critical part
+> **And having a definition for observability, monitoring, and tracing will be helpful**
+> Lots of people have no monitoring, et al, or they aren’t confident their monitoring is working properly
+> Means we can’t sell them anything cause you can’t see the impact of an experiment without monitoring
+> OR sometimes we literally run experiments to test their monitoring out
+> At Walmart, they literally send out of band metrics to on call folks during an outage via slack and it’s automated
+> So you get paged, and you immediately get data to ground you in context
+> **Observability is making monitoring digestible and accessible and meaningful**
+> I have some bigger ideas for how this will pan out as a content experience, so I may have more ideas incoming over the next few days
+
+> https://blog.twitter.com/engineering/en_us/a/2016/observability-at-twitter-technical-overview-part-i.html
+> https://blog.twitter.com/engineering/en_us/a/2016/observability-at-twitter-technical-overview-part-ii.html
+> https://medium.com/@copyconstruct/monitoring-and-observability-8417d1952e1c
+
+{% endcomment %}
+
 Before you can begin moving through the resiliency stages there are a few prerequisite steps you'll need to complete.  Most of these requirements are standard fare for a well-designed system, but ensuring each and every unique application team is fully prepared for the unknown is paramount to developing resilient systems.
 
-### 1. Define the Critical Dependencies
+### 1. Establish High Observability
+
+(TODO)
+
+Microservice and clustered architectures favor the scalability and cost-efficiency of distributed computing, but also require a deep understanding of system behavior across a large pool of services and machines.  Robust observability is a necessity for most modern software, which tend to be comprised of these complex distributed systems.  
+
+- **Monitoring**: The act of collecting, processing, aggregating, and displaying quantitative data about a system.  These data may be anything from query counts/types and error counts/types to processing times and server lifetimes.  Monitoring is a smaller subset of overall measure of observability.
+- **Observability**: A measure of the ability to accurately infer what is happening internally within a system based solely on external information.
+
+A properly observable system is one that allows your team to answer new questions about the internals of the system _without_ the need to deploy a new build.  Continuous monitoring is critical to catch unexpected behavior that is difficult to reproduce, but monitoring largely focuses on measuring "known unknowns."  By contrast, a highly-distributed system presents the need to track down and understand a multitude of "unknown unknowns" -- an obscure issue that has never happened before, and may never happen again.
+
+Most importantly, high observability is critically important when implementing Chaos Engineering techniques.  As [Charity Majors](https://twitter.com/mipsytipsy), CEO of [Honeycomb](https://www.honeycomb.io/), puts it, "Without observability, you don't have 'chaos engineering'.  You just have chaos."
+
+{% comment %}
+- https://www.gremlin.com/blog/charity-majors-closing-the-loop-on-chaos-with-observability-chaos-conf-2018/
+- https://www.honeycomb.io/wp-content/uploads/2018/08/Honeycomb-Guide-Achieving-Observability-v1_1.pdf
+- https://landing.google.com/sre/sre-book/toc/
+- https://ai.google/research/pubs/pub36356
+- https://blog.twitter.com/engineering/en_us/a/2016/observability-at-twitter-technical-overview-part-i.html
+- https://blog.twitter.com/engineering/en_us/a/2016/observability-at-twitter-technical-overview-part-ii.html
+{% endcomment %}
+
+### 2. Define the Critical Dependencies
 
 Start by documenting every application dependency that is _required_ for the application to function at all.  This type of dependency is referred to as a **critical dependency**.
 
-### 2. Define the Non-Critical Dependencies
+### 3. Define the Non-Critical Dependencies
 
 Once all critical dependencies are identified then all remaining dependencies should be **non-critical dependencies**.  If the core application can still function -- even in a degraded state -- when a dependency is missing, then that dependency is considered non-critical.
 
-### 3. Create a Disaster Recovery Failover Playbook
+### 4. Create a Disaster Recovery Failover Playbook
 
 Your team should create a disaster recovery plan specific to **failover**.  A **disaster recovery failover playbook** should include the following information, at a minimum:
 
@@ -78,11 +127,11 @@ Your team should create a disaster recovery plan specific to **failover**.  A **
 **TIP**: Not sure which failover scenarios to expect or plan for?  Unable to determine if a dependency is critical vs non-critical?  Consider running a GameDay to better prepare for and test specific scenarios in a controlled manner.  Check out [How to Run a GameDay](https://www.gremlin.com/community/tutorials/how-to-run-a-gameday/) for more info.
 {: .notice--tip }
 
-### 4. Create a Critical Dependency Failover Playbook
+### 5. Create a Critical Dependency Failover Playbook
 
 A **critical dependency failover playbook** is a subset of the disaster recovery failover playbook and it should detail the step-by-step procedures for handling the potential failover scenarios for each critical dependency.
 
-### 5. Create a Non-Critical Dependency Failover Playbook
+### 6. Create a Non-Critical Dependency Failover Playbook
 
 The final prerequisite is to determine how non-critical dependency failures will impact the system.  Your team may not _necessarily_ have failover procedures in place for non-critical dependencies, so this process can be as simple as testing and documenting what happens when each non-critical dependency is unavailable.  Be sure to gauge the **severity** of the failure impact on the core application, which will provide the team with a better understanding of the system and its interactions (see [Recovery Objectives][#recovery-objectives]).
 
