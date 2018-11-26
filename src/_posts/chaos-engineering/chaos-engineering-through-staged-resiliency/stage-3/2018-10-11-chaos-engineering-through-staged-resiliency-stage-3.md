@@ -55,27 +55,17 @@ If the team isn't already doing so, this is a prime opportunity to introduce Cha
 
 ## Execute a Resiliency Experiment in Production
 
-> Configure Gremlin: https://help.gremlin.com/configuration/
+Resiliency experiments in non-production are beneficial, but a system is never truly being properly tested unless you're willing to perform experiments in production.  Use of internal or third-party Chaos Engineering tools can help with the process of executing a resiliency experiment in production.  A tool that configures and executes a given experiment can be used to _repeat_ that experiment over and over, without introducing any issues that may normally be introduced due to human intervention.  As experiments are performed and the results evaluated, observability will improve, playbooks are updated, and overall support costs are reduced.
 
 ## Publish Test Results
 
-> Level 3 — manual + automated — Regular exercises
-> All of level 2 requirements, plus
-> Run tests regularly on a cadence (at least once every 4–5 weeks)
-> Publish results to dashboards to track resiliency over time
-> Run at least one resiliency exercise (failure injection) in production environment
-
-> level three is where automation starts kicking in. so we are pushing teams to start doing using tools right tools like gremlin we have internal tools which they can use to basically push that either infrastructure or that applications to fail and then see what the response looks like and make sure that they have good playbooks to fix that and reduce the revenue loss over time.
+As you've been doing thus far, you must continue publishing test results to the entire team.  This step is _especially_ critical now that experiments are being performed in production.
 
 ## Resiliency Stage 3: Implementation Example
 
-### Perform Frequent, Semi-Automated Tests
+### How to Automate Blue/Green Instance Failover in AWS
 
-- Status: **Complete**
-
-#### Automating Blue/Green Instance Failover
-
-We have a blue/green deployment for the **Bookstore** application service that provides two identical production environment instances of the system.  However, if the currently active instance fails we still have to manually swap DNS records from blue to green (or vice versa).  Since this process should be automated in order to work through these final **Resiliency Stages**, we'll take some time to create a failover configuration for the `bookstore-api` instances.
+The blue/green deployment for the **Bookstore** application provides two identical production environment instances of the system.  However, if the currently active instance fails we still have to manually swap DNS records from blue to green (or vice versa).  In order to meet the requirement of executing a resiliency experiment in production we need to automate this failover process.
 
 1. Create a metric alarm within Amazon CloudWatch.
 
@@ -261,9 +251,9 @@ We have a blue/green deployment for the **Bookstore** application service that p
     }
     ```
 
-#### Automated Instance Failover Verification
+#### Verifying Automated Instance Failover
 
-To test the failover process for the **Bookstore** API application instances we'll use a Gremlin [Shutdown Attack](https://help.gremlin.com/attack-params-ref/#shutdown).  This attack will temporarily shutdown the `bookstore-api-blue` Amazon EC2 instance for us.
+To test the failover process for the **Bookstore** API application instances we'll use a Gremlin [Shutdown Attack](https://help.gremlin.com/attack-params-ref/#shutdown).  This attack will temporarily shutdown the `bookstore-api-blue` Amazon EC2 instance.
 
 1. Verify the current status of the **Bookstore** API by checking the `bookstore.pingpublications.com/version/` endpoint.
 
@@ -289,11 +279,13 @@ To test the failover process for the **Bookstore** API application instances we'
     }
     ```
 
-#### Generating Custom AWS Metrics
+### How to Generate Custom AWS Metrics
 
-To properly automate our critical dependency failure tests we need a way to _simulate_ the failure of our CDN and database services.  Tools like Gremlin can help with this task.  Running a Gremlin **Blackhole Attack** on the **Bookstore** API environment can prevent all network communication between the API instance and the CDN and/or database endpoints.  However, AWS EC2 instances don't have any built-in capability to monitor the connectivity between said instance and another arbitrary endpoint.  Therefore, the solution is to create some _custom_ metrics that will effectively measure the "health" of the connection between the **Bookstore** API instance and its critical dependencies.
+Automating critical dependency failure tests often requires a way to _simulate_ the failure of critical dependencies if those dependencies are third-party and therefore out of our control.  This is the case with the **Bookstore** app that relies on Amazon S3 and Amazon RDS for its CDN and database services, respectively.  Tools like Gremlin can help with this task.  Running a Gremlin **Blackhole Attack** on the **Bookstore** API environment can block all network communication between the API instance and specified endpoints, including those for the CDN and database.
 
-While AWS provides tons of built-in metrics, creating a [custom metrics](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/publishingMetrics.html) requires that you generate _all_ the relevant data for said metric.  For this reason, a custom metric is little more than a combination of a metric `name` and list of `dimensions`, which are used as `key/value` pairs to distinguish and categorize metrics.  We're creating simple metrics that act as a health monitor for each critical dependency.
+However, AWS EC2 instances don't have any built-in capability to monitor the connectivity between said instance and another arbitrary endpoint.  Therefore, the solution is to create some _custom_ metrics that will effectively measure the "health" of the connection between the **Bookstore** API instance and its critical dependencies.
+
+While AWS provides many built-in metrics, creating [custom metrics](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/publishingMetrics.html) requires that you explicitly generate _all_ the relevant data for said metric.  For this reason, a custom metric is little more than a combination of a metric `name` and list of `dimensions`, which are used as `key/value` pairs to distinguish and categorize metrics.  For our purposes here we're creating simple metrics that act as a health monitor for each critical dependency.
 
 1. We start by creating a couple bash scripts within our application code repository.  These scripts are executed from the **Bookstore** API instances.
 
@@ -331,9 +323,10 @@ While AWS provides tons of built-in metrics, creating a [custom metrics](https:/
     done
     ```
 
-    To check the connectivity for the database or CDN endpoint we first retrieve the Amazon EC2 instance Id and, from that, get the `Name` tag value, which we use as the `Host` dimension when creating our metric.  This `Host` value specifies which environment (blue or green) is being measured.
+    To check the connectivity for the database or CDN endpoint we first retrieve the Amazon EC2 instance Id and, from that, get the `Name` tag value, which is passed as the `Host` dimension when creating our metric.  This `Host` value specifies which environment (blue/green) is being evaluated.
 
-    The purpose of the script is to perform a network connectivity check (using `netcat`) to the dependency endpoint every few seconds.  It then uses the AWS CLI to generate metric data for the `db-connectivity` or `cdn-connectivity` metric, passing a value of `1` if the connection succeeded and `0` for a failure.
+    These scripts use [netcat](https://linux.die.net/man/1/nc) to check the current network connectivity between the instance and the primary critical dependency endpoint.  This check is performed every `10 seconds`.  The AWS CLI then generates metric data for the `db-connectivity` and `cdn-connectivity` metrics, passing a value of `1` if the connection succeeded and `0` for a failure.
+    {: .notice--tip }
 
 2. Create `systemd` service configuration files so the bash scripts will be executed and remain active.
 
@@ -351,9 +344,10 @@ While AWS provides tons of built-in metrics, creating a [custom metrics](https:/
         [Service]
         Type=simple
         User=ubuntu
+        Group=ubuntu
         WorkingDirectory=/home/ubuntu
         ExecStart=/home/ubuntu/apps/bookstore_api/metrics/db-connectivity.sh
-        Restart=on-failure
+        Restart=always
 
         [Install]
         WantedBy=multi-user.target
@@ -373,9 +367,10 @@ While AWS provides tons of built-in metrics, creating a [custom metrics](https:/
         [Service]
         Type=simple
         User=ubuntu
+        Group=ubuntu
         WorkingDirectory=/home/ubuntu
         ExecStart=/home/ubuntu/apps/bookstore_api/metrics/cdn-connectivity.sh
-        Restart=on-failure
+        Restart=always
 
         [Install]
         WantedBy=multi-user.target
@@ -387,7 +382,11 @@ While AWS provides tons of built-in metrics, creating a [custom metrics](https:/
     chmod +x /home/ubuntu/apps/bookstore_api/metrics/db-connectivity.sh && chmod +x /home/ubuntu/apps/bookstore_api/metrics/cdn-connectivity.sh
     ```
 
-4. Initially, we'll need to manually start both monitoring services.
+4. Enable both services and either reboot the instance or manually start the services.
+
+    ```bash
+    sudo systemctl enable bookstore-db-connectivity && sudo systemctl enable bookstore-cdn-connectivity
+    ```
 
     ```bash
     sudo systemctl start bookstore-db-connectivity && sudo systemctl start bookstore-cdn-connectivity
@@ -421,7 +420,7 @@ While AWS provides tons of built-in metrics, creating a [custom metrics](https:/
         "AlarmActions": [
             "arn:aws:sns:us-west-2:532151327118:PingPublicationsSNS"
         ],
-        "AlarmDescription": "Database Connectivity failure for Bookstore API (Blue).",
+        "AlarmDescription": "Database connectivity failure for Bookstore API (Blue).",
         "AlarmName": "bookstore-api-blue-db-connectivity-failed",
         "ComparisonOperator": "LessThanThreshold",
         "DatapointsToAlarm": 2,
@@ -446,7 +445,7 @@ While AWS provides tons of built-in metrics, creating a [custom metrics](https:/
         "AlarmActions": [
             "arn:aws:sns:us-west-2:532151327118:PingPublicationsSNS"
         ],
-        "AlarmDescription": "CDN Connectivity failure for Bookstore API (Blue).",
+        "AlarmDescription": "CDN connectivity failure for Bookstore API (Blue).",
         "AlarmName": "bookstore-api-blue-cdn-connectivity-failed",
         "ComparisonOperator": "LessThanThreshold",
         "DatapointsToAlarm": 2,
@@ -471,7 +470,7 @@ While AWS provides tons of built-in metrics, creating a [custom metrics](https:/
         "AlarmActions": [
             "arn:aws:sns:us-west-2:532151327118:PingPublicationsSNS"
         ],
-        "AlarmDescription": "Database Connectivity failure for Bookstore API (Green).",
+        "AlarmDescription": "Database connectivity failure for Bookstore API (Green).",
         "AlarmName": "bookstore-api-green-db-connectivity-failed",
         "ComparisonOperator": "LessThanThreshold",
         "DatapointsToAlarm": 2,
@@ -496,7 +495,7 @@ While AWS provides tons of built-in metrics, creating a [custom metrics](https:/
         "AlarmActions": [
             "arn:aws:sns:us-west-2:532151327118:PingPublicationsSNS"
         ],
-        "AlarmDescription": "CDN Connectivity failure for Bookstore API (Green).",
+        "AlarmDescription": "CDN connectivity failure for Bookstore API (Green).",
         "AlarmName": "bookstore-api-green-cdn-connectivity-failed",
         "ComparisonOperator": "LessThanThreshold",
         "DatapointsToAlarm": 2,
@@ -515,40 +514,92 @@ While AWS provides tons of built-in metrics, creating a [custom metrics](https:/
     }'
     ```
 
-{% comment %}
+### Performing a DB Failure Simulation Test
 
-#### CDN Failure Test
+To meet the **Stage 3** criteria of performing "frequent, semi-automated tests" we can use Chaos Engineering tools like Gremlin to easily schedule automated attacks on relevant services and machines.  This allows your team to properly prepare for, evaluate, and respond to the outcome of these tests.
 
-> (TODO) CloudWatch Agent: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Install-CloudWatch-Agent.html
-> Monitor Scripts: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/mon-scripts.html
+For the **Bookstore** example application we're simulating a failure of the database by preventing the `blue` environment from establishing a database connection.
 
-> 1. Create AWS CloudWatch Alarm/metric.
-> 2. Automate AWS alarm trigger from `AWS CLI`
-> 3. Failover CDN.
+1. Schedule a Gremlin `Blackhole` Attack targeting the `bookstore-api-blue` environment that specifies the primary database endpoint (`db.bookstore.pingpublications.com`) as a `Hostname`.  Check out the [Gremlin API](https://app.gremlin.com/api) or [documentation](https://help.gremlin.com/attacks/) for more details on creating Gremlin Attacks.
 
-#### DB Failure Test
+    This will automatically simulate a failure of the `bookstore-api-blue` instance's ability to connect to the primary database endpoint, which causes the custom `db-connectivity` metrics to fail and trigger the subsequent Amazon Cloudwatch alarm.
 
-> **(TODO)**: Django StatsD: https://github.com/WoLpH/django-statsd
-> Record metrics locally during Django process.
-> Report externally to AWS CloudWatch Agent: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Agent-custom-metrics-statsd.html
->   - https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/install-CloudWatch-Agent-on-first-instance.html
->   - (TODO) Test CloudWatch Agent collections https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/metrics-collected-by-CloudWatch-agent.html
+2. Check the status of the `bookstore-db-connectivity` service to confirm that the health check is now failing.
 
-### Create Metric
+    ```bash
+    $ sudo systemctl status bookstore-db-connectivity.service
+    [...]
+    Nov 25 21:18:02 bookstore-api-blue db-connectivity.sh[785]: Connection to db.bookstore.pingpublications.com 5432 port [tcp/postgresql] succeeded!
+    Nov 25 21:18:18 bookstore-api-blue db-connectivity.sh[785]: Connection to db.bookstore.pingpublications.com 5432 port [tcp/postgresql] failed!
+    Nov 25 21:18:49 bookstore-api-blue db-connectivity.sh[785]: Connection to db.bookstore.pingpublications.com 5432 port [tcp/postgresql] failed!
+    ```
 
-- Create metric
+3. Use `aws cloudwatch get-metric-statistics` to check the `db-connectivity` metric around this time to see the actual metric values reported in AWS.
 
-{% endcomment %}
+    ```bash
+    $ aws cloudwatch get-metric-statistics --metric-name db-connectivity --start-time 2018-11-25T21:17:00Z --end-time 2018-11-25T21:24:00Z --period 60 --namespace Bookstore --statistics Average --dimensions Name=Host,Value=bookstore-api-blue --query "Datapoints[*].{Timestamp:Timestamp,Average:Average}" --output json
+    [
+        {
+            "Timestamp": "2018-11-25T21:20:00Z", 
+            "Average": 0.0
+        }, 
+        {
+            "Timestamp": "2018-11-25T21:18:00Z", 
+            "Average": 0.25
+        }, 
+        {
+            "Timestamp": "2018-11-25T21:19:00Z", 
+            "Average": 0.0
+        }, 
+        {
+            "Timestamp": "2018-11-25T21:23:00Z", 
+            "Average": 1.0
+        }, 
+        {
+            "Timestamp": "2018-11-25T21:17:00Z", 
+            "Average": 1.0
+        }, 
+        {
+            "Timestamp": "2018-11-25T21:22:00Z", 
+            "Average": 0.8
+        }, 
+        {
+            "Timestamp": "2018-11-25T21:21:00Z", 
+            "Average": 0.0
+        }
+    ]
+    ```
 
-### Execute a Resiliency Experiment in Production
+    Here we see the `db-connectivity` health is acceptable (`1.0`) until it starts to drop around `21:18:00`, then remains at `0.0` for a few minutes before returning to healthy status.
 
-- Status: **Complete**
+4. This metric failure triggered the `bookstore-api-blue-db-connectivity-failed` Amazon Cloudwatch alarm that we also created.  This can be confirmed by checking the alarm history status around that same time period.
 
-### Publish Test Results and Track Over Time
+    ```bash
+    $ aws cloudwatch describe-alarm-history --alarm-name bookstore-api-blue-db-connectivity-failed --history-item-type StateUpdate --start-date 2018-11-25T21:17:00Z --end-date 2018-11-25T21:28:00Z --output json --query "AlarmHistoryItems[*].{Timestamp:Timestamp,Summary:HistorySummary}"
+    [
+        {
+            "Timestamp": "2018-11-25T21:24:09.620Z", 
+            "Summary": "Alarm updated from ALARM to OK"
+        }, 
+        {
+            "Timestamp": "2018-11-25T21:20:09.620Z", 
+            "Summary": "Alarm updated from OK to ALARM"
+        }
+    ]
+    ```
 
-- Status: **Complete**
+    Here we see that the alarm was triggered at `21:20:09.620` and remained for four minutes before returning to `OK` status.
+
+Since an _actual_ database failure is handled by the Multi-AZ Amazon RDS configuration created in [Stage 2 - Database Failure Test][#stage-2#database-failure-test], this automated critical dependency failure test doesn't currently trigger any actual failover actions.  However, alarms are now configured to easily hook into disaster recovery actions as progress is made through the final **Resiliency Stages**.
+{: .notice--tip }
+
+### Performing a CDN Failure Simulation Test
+
+We use the same steps as above to perform a scheduled, automated Gremlin `Blackhole` Attack to simulate failure of the CDN for our `bookstore-api-blue` environment.  Simply changing the `db-` references to `cdn-`, and the relevant endpoints, will do the trick.  However, for brevity's sake we won't include the step-by-step instructions for doing so within this section.
 
 ## Resiliency Stage 3 Completion
+
+Your team has been performing semi-automated tests at a regular cadence, has executed at least one resiliency experiment in production, and has disseminated all test results to the entire team.  With that, **Resiliency Stage 3** is now complete.  Revenue loss and support costs should finally be dramatically dropping as fewer failures occur, and those that do happen last for much shorter periods.  In [Chaos Engineering Through Staged Resiliency - Stage 4][#stage-4] we'll explore automating resiliency testing in non-production, along with semi-automation of our disaster recovery failovers.
 
 {% include          links-global.md %}
 {% include_relative links.md %}

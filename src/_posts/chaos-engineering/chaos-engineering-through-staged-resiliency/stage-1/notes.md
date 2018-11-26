@@ -22,6 +22,40 @@ published: false
 > so level one
 > so once you have all of your prerequisites completed, level one was given as a first step for every team to even start educating themselves about what is resiliency. so all of the prerequisites are stored in a well known place. we have agreement on those playbooks. it's not like I write something and then someone else doesn't even know how to run it. we have to make sure that it's in a language that makes sense to everyone. and we end that level one by making sure that we can do a failover exercise manually that verifies that the playbook actually works.
 
+## Observability
+
+{% comment %}
+
+> Re, stage 1 of the maturity model. Any reason it’s missing observability and monitoring?
+> Surprisingly enough, that’s a huge chunk that people miss
+> It’s a critical part
+> **And having a definition for observability, monitoring, and tracing will be helpful**
+> Lots of people have no monitoring, et al, or they aren’t confident their monitoring is working properly
+> Means we can’t sell them anything cause you can’t see the impact of an experiment without monitoring
+> OR sometimes we literally run experiments to test their monitoring out
+> At Walmart, they literally send out of band metrics to on call folks during an outage via slack and it’s automated
+> So you get paged, and you immediately get data to ground you in context
+> **Observability is making monitoring digestible and accessible and meaningful**
+> I have some bigger ideas for how this will pan out as a content experience, so I may have more ideas incoming over the next few days
+
+> https://blog.twitter.com/engineering/en_us/a/2016/observability-at-twitter-technical-overview-part-i.html
+> https://blog.twitter.com/engineering/en_us/a/2016/observability-at-twitter-technical-overview-part-ii.html
+> https://medium.com/@copyconstruct/monitoring-and-observability-8417d1952e1c
+
+{% endcomment %}
+
+{% comment %}
+
+- High Cardinality: Relevant values that are extremely uncommon or even unique within the system (e.g. UUIDs, email, process ID, user ID, DB queries, endpoint, IP, etc).
+
+- https://www.gremlin.com/blog/charity-majors-closing-the-loop-on-chaos-with-observability-chaos-conf-2018/
+- https://www.honeycomb.io/wp-content/uploads/2018/08/Honeycomb-Guide-Achieving-Observability-v1_1.pdf
+- https://landing.google.com/sre/sre-book/toc/
+- https://ai.google/research/pubs/pub36356
+- https://blog.twitter.com/engineering/en_us/a/2016/observability-at-twitter-technical-overview-part-i.html
+- https://blog.twitter.com/engineering/en_us/a/2016/observability-at-twitter-technical-overview-part-ii.html
+{% endcomment %}
+
 ## Disaster Recovery Goals
 
 > Infrastructure issues - failures, glitches, faulty maintenance policies

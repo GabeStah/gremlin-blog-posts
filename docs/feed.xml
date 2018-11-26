@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.4">Jekyll</generator><link href="http://localhost:4000/gremlin-blog-posts/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/gremlin-blog-posts/" rel="alternate" type="text/html" /><updated>2018-11-20T20:59:30-08:00</updated><id>http://localhost:4000/gremlin-blog-posts/feed.xml</id><title type="html">Gremlin: Blog Posts</title><subtitle>An amazing website.</subtitle><author><name>Gabe Wyatt</name></author><entry><title type="html">Chaos Engineering Through Staged Resiliency - Stage 3</title><link href="http://localhost:4000/gremlin-blog-posts/chaos-engineering/chaos-engineering-through-staged-resiliency-stage-3/" rel="alternate" type="text/html" title="Chaos Engineering Through Staged Resiliency - Stage 3" /><published>2018-10-11T00:00:00-07:00</published><updated>2018-10-11T00:00:00-07:00</updated><id>http://localhost:4000/gremlin-blog-posts/chaos-engineering/chaos-engineering-through-staged-resiliency-stage-3</id><content type="html" xml:base="http://localhost:4000/gremlin-blog-posts/chaos-engineering/chaos-engineering-through-staged-resiliency-stage-3/">&lt;p&gt;Performing occasional, manual resiliency testing is useful, but your system must be automatically and frequently tested to provide any real sense of stability.  In &lt;a href=&quot;https://www.gremlin.com/blog/chaos-engineering-through-staged-resiliency-stage-2&quot;&gt;Chaos Engineering Through Staged Resiliency - Stage 2&lt;/a&gt; we focused on critical dependency failure testing in non-production environments.  To work through &lt;strong&gt;Resiliency Stage 3&lt;/strong&gt; your team will need to begin automating these test and experiments.  This allows the testing frequency to improve dramatically and reduces the reliance manual processes.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.4">Jekyll</generator><link href="http://localhost:4000/gremlin-blog-posts/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/gremlin-blog-posts/" rel="alternate" type="text/html" /><updated>2018-11-25T18:56:48-08:00</updated><id>http://localhost:4000/gremlin-blog-posts/feed.xml</id><title type="html">Gremlin: Blog Posts</title><subtitle>An amazing website.</subtitle><author><name>Gabe Wyatt</name></author><entry><title type="html">Chaos Engineering Through Staged Resiliency - Stage 3</title><link href="http://localhost:4000/gremlin-blog-posts/chaos-engineering/chaos-engineering-through-staged-resiliency-stage-3/" rel="alternate" type="text/html" title="Chaos Engineering Through Staged Resiliency - Stage 3" /><published>2018-10-11T00:00:00-07:00</published><updated>2018-10-11T00:00:00-07:00</updated><id>http://localhost:4000/gremlin-blog-posts/chaos-engineering/chaos-engineering-through-staged-resiliency-stage-3</id><content type="html" xml:base="http://localhost:4000/gremlin-blog-posts/chaos-engineering/chaos-engineering-through-staged-resiliency-stage-3/">&lt;p&gt;Performing occasional, manual resiliency testing is useful, but your system must be automatically and frequently tested to provide any real sense of stability.  In &lt;a href=&quot;https://www.gremlin.com/blog/chaos-engineering-through-staged-resiliency-stage-2&quot;&gt;Chaos Engineering Through Staged Resiliency - Stage 2&lt;/a&gt; we focused on critical dependency failure testing in non-production environments.  To work through &lt;strong&gt;Resiliency Stage 3&lt;/strong&gt; your team will need to begin automating these test and experiments.  This allows the testing frequency to improve dramatically and reduces the reliance manual processes.&lt;/p&gt;
 
 &lt;h2 id=&quot;prerequisites&quot;&gt;Prerequisites&lt;/h2&gt;
 
@@ -16,35 +16,17 @@
 
 &lt;h2 id=&quot;execute-a-resiliency-experiment-in-production&quot;&gt;Execute a Resiliency Experiment in Production&lt;/h2&gt;
 
-&lt;blockquote&gt;
-  &lt;p&gt;Configure Gremlin: https://help.gremlin.com/configuration/&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;Resiliency experiments in non-production are beneficial, but a system is never truly being properly tested unless you’re willing to perform experiments in production.  Use of internal or third-party Chaos Engineering tools can help with the process of executing a resiliency experiment in production.  A tool that configures and executes a given experiment can be used to &lt;em&gt;repeat&lt;/em&gt; that experiment over and over, without introducing any issues that may normally be introduced due to human intervention.  As experiments are performed and the results evaluated, observability will improve, playbooks are updated, and overall support costs are reduced.&lt;/p&gt;
 
 &lt;h2 id=&quot;publish-test-results&quot;&gt;Publish Test Results&lt;/h2&gt;
 
-&lt;blockquote&gt;
-  &lt;p&gt;Level 3 — manual + automated — Regular exercises
-All of level 2 requirements, plus
-Run tests regularly on a cadence (at least once every 4–5 weeks)
-Publish results to dashboards to track resiliency over time
-Run at least one resiliency exercise (failure injection) in production environment&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;level three is where automation starts kicking in. so we are pushing teams to start doing using tools right tools like gremlin we have internal tools which they can use to basically push that either infrastructure or that applications to fail and then see what the response looks like and make sure that they have good playbooks to fix that and reduce the revenue loss over time.&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;As you’ve been doing thus far, you must continue publishing test results to the entire team.  This step is &lt;em&gt;especially&lt;/em&gt; critical now that experiments are being performed in production.&lt;/p&gt;
 
 &lt;h2 id=&quot;resiliency-stage-3-implementation-example&quot;&gt;Resiliency Stage 3: Implementation Example&lt;/h2&gt;
 
-&lt;h3 id=&quot;perform-frequent-semi-automated-tests-1&quot;&gt;Perform Frequent, Semi-Automated Tests&lt;/h3&gt;
+&lt;h3 id=&quot;how-to-automate-bluegreen-instance-failover-in-aws&quot;&gt;How to Automate Blue/Green Instance Failover in AWS&lt;/h3&gt;
 
-&lt;ul&gt;
-  &lt;li&gt;Status: &lt;strong&gt;Complete&lt;/strong&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h4 id=&quot;automating-bluegreen-instance-failover&quot;&gt;Automating Blue/Green Instance Failover&lt;/h4&gt;
-
-&lt;p&gt;We have a blue/green deployment for the &lt;strong&gt;Bookstore&lt;/strong&gt; application service that provides two identical production environment instances of the system.  However, if the currently active instance fails we still have to manually swap DNS records from blue to green (or vice versa).  Since this process should be automated in order to work through these final &lt;strong&gt;Resiliency Stages&lt;/strong&gt;, we’ll take some time to create a failover configuration for the &lt;code class=&quot;highlighter-rouge&quot;&gt;bookstore-api&lt;/code&gt; instances.&lt;/p&gt;
+&lt;p&gt;The blue/green deployment for the &lt;strong&gt;Bookstore&lt;/strong&gt; application provides two identical production environment instances of the system.  However, if the currently active instance fails we still have to manually swap DNS records from blue to green (or vice versa).  In order to meet the requirement of executing a resiliency experiment in production we need to automate this failover process.&lt;/p&gt;
 
 &lt;ol&gt;
   &lt;li&gt;
@@ -232,9 +214,9 @@ Run at least one resiliency exercise (failure injection) in production environme
   &lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;h4 id=&quot;automated-instance-failover-verification&quot;&gt;Automated Instance Failover Verification&lt;/h4&gt;
+&lt;h4 id=&quot;verifying-automated-instance-failover&quot;&gt;Verifying Automated Instance Failover&lt;/h4&gt;
 
-&lt;p&gt;To test the failover process for the &lt;strong&gt;Bookstore&lt;/strong&gt; API application instances we’ll use a Gremlin &lt;a href=&quot;https://help.gremlin.com/attack-params-ref/#shutdown&quot;&gt;Shutdown Attack&lt;/a&gt;.  This attack will temporarily shutdown the &lt;code class=&quot;highlighter-rouge&quot;&gt;bookstore-api-blue&lt;/code&gt; Amazon EC2 instance for us.&lt;/p&gt;
+&lt;p&gt;To test the failover process for the &lt;strong&gt;Bookstore&lt;/strong&gt; API application instances we’ll use a Gremlin &lt;a href=&quot;https://help.gremlin.com/attack-params-ref/#shutdown&quot;&gt;Shutdown Attack&lt;/a&gt;.  This attack will temporarily shutdown the &lt;code class=&quot;highlighter-rouge&quot;&gt;bookstore-api-blue&lt;/code&gt; Amazon EC2 instance.&lt;/p&gt;
 
 &lt;ol&gt;
   &lt;li&gt;
@@ -264,11 +246,13 @@ Run at least one resiliency exercise (failure injection) in production environme
   &lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;h4 id=&quot;generating-custom-aws-metrics&quot;&gt;Generating Custom AWS Metrics&lt;/h4&gt;
+&lt;h3 id=&quot;how-to-generate-custom-aws-metrics&quot;&gt;How to Generate Custom AWS Metrics&lt;/h3&gt;
 
-&lt;p&gt;To properly automate our critical dependency failure tests we need a way to &lt;em&gt;simulate&lt;/em&gt; the failure of our CDN and database services.  Tools like Gremlin can help with this task.  Running a Gremlin &lt;strong&gt;Blackhole Attack&lt;/strong&gt; on the &lt;strong&gt;Bookstore&lt;/strong&gt; API environment can prevent all network communication between the API instance and the CDN and/or database endpoints.  However, AWS EC2 instances don’t have any built-in capability to monitor the connectivity between said instance and another arbitrary endpoint.  Therefore, the solution is to create some &lt;em&gt;custom&lt;/em&gt; metrics that will effectively measure the “health” of the connection between the &lt;strong&gt;Bookstore&lt;/strong&gt; API instance and its critical dependencies.&lt;/p&gt;
+&lt;p&gt;Automating critical dependency failure tests often requires a way to &lt;em&gt;simulate&lt;/em&gt; the failure of critical dependencies if those dependencies are third-party and therefore out of our control.  This is the case with the &lt;strong&gt;Bookstore&lt;/strong&gt; app that relies on Amazon S3 and Amazon RDS for its CDN and database services, respectively.  Tools like Gremlin can help with this task.  Running a Gremlin &lt;strong&gt;Blackhole Attack&lt;/strong&gt; on the &lt;strong&gt;Bookstore&lt;/strong&gt; API environment can block all network communication between the API instance and specified endpoints, including those for the CDN and database.&lt;/p&gt;
 
-&lt;p&gt;While AWS provides tons of built-in metrics, creating a &lt;a href=&quot;https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/publishingMetrics.html&quot;&gt;custom metrics&lt;/a&gt; requires that you generate &lt;em&gt;all&lt;/em&gt; the relevant data for said metric.  For this reason, a custom metric is little more than a combination of a metric &lt;code class=&quot;highlighter-rouge&quot;&gt;name&lt;/code&gt; and list of &lt;code class=&quot;highlighter-rouge&quot;&gt;dimensions&lt;/code&gt;, which are used as &lt;code class=&quot;highlighter-rouge&quot;&gt;key/value&lt;/code&gt; pairs to distinguish and categorize metrics.  We’re creating simple metrics that act as a health monitor for each critical dependency.&lt;/p&gt;
+&lt;p&gt;However, AWS EC2 instances don’t have any built-in capability to monitor the connectivity between said instance and another arbitrary endpoint.  Therefore, the solution is to create some &lt;em&gt;custom&lt;/em&gt; metrics that will effectively measure the “health” of the connection between the &lt;strong&gt;Bookstore&lt;/strong&gt; API instance and its critical dependencies.&lt;/p&gt;
+
+&lt;p&gt;While AWS provides many built-in metrics, creating &lt;a href=&quot;https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/publishingMetrics.html&quot;&gt;custom metrics&lt;/a&gt; requires that you explicitly generate &lt;em&gt;all&lt;/em&gt; the relevant data for said metric.  For this reason, a custom metric is little more than a combination of a metric &lt;code class=&quot;highlighter-rouge&quot;&gt;name&lt;/code&gt; and list of &lt;code class=&quot;highlighter-rouge&quot;&gt;dimensions&lt;/code&gt;, which are used as &lt;code class=&quot;highlighter-rouge&quot;&gt;key/value&lt;/code&gt; pairs to distinguish and categorize metrics.  For our purposes here we’re creating simple metrics that act as a health monitor for each critical dependency.&lt;/p&gt;
 
 &lt;ol&gt;
   &lt;li&gt;
@@ -306,9 +290,9 @@ Run at least one resiliency exercise (failure injection) in production environme
  done&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
 
-    &lt;p&gt;To check the connectivity for the database or CDN endpoint we first retrieve the Amazon EC2 instance Id and, from that, get the &lt;code class=&quot;highlighter-rouge&quot;&gt;Name&lt;/code&gt; tag value, which we use as the &lt;code class=&quot;highlighter-rouge&quot;&gt;Host&lt;/code&gt; dimension when creating our metric.  This &lt;code class=&quot;highlighter-rouge&quot;&gt;Host&lt;/code&gt; value specifies which environment (blue or green) is being measured.&lt;/p&gt;
+    &lt;p&gt;To check the connectivity for the database or CDN endpoint we first retrieve the Amazon EC2 instance Id and, from that, get the &lt;code class=&quot;highlighter-rouge&quot;&gt;Name&lt;/code&gt; tag value, which is passed as the &lt;code class=&quot;highlighter-rouge&quot;&gt;Host&lt;/code&gt; dimension when creating our metric.  This &lt;code class=&quot;highlighter-rouge&quot;&gt;Host&lt;/code&gt; value specifies which environment (blue/green) is being evaluated.&lt;/p&gt;
 
-    &lt;p&gt;The purpose of the script is to perform a network connectivity check (using &lt;code class=&quot;highlighter-rouge&quot;&gt;netcat&lt;/code&gt;) to the dependency endpoint every few seconds.  It then uses the AWS CLI to generate metric data for the &lt;code class=&quot;highlighter-rouge&quot;&gt;db-connectivity&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;cdn-connectivity&lt;/code&gt; metric, passing a value of &lt;code class=&quot;highlighter-rouge&quot;&gt;1&lt;/code&gt; if the connection succeeded and &lt;code class=&quot;highlighter-rouge&quot;&gt;0&lt;/code&gt; for a failure.&lt;/p&gt;
+    &lt;p class=&quot;notice--tip&quot;&gt;These scripts use &lt;a href=&quot;https://linux.die.net/man/1/nc&quot;&gt;netcat&lt;/a&gt; to check the current network connectivity between the instance and the primary critical dependency endpoint.  This check is performed every &lt;code class=&quot;highlighter-rouge&quot;&gt;10 seconds&lt;/code&gt;.  The AWS CLI then generates metric data for the &lt;code class=&quot;highlighter-rouge&quot;&gt;db-connectivity&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;cdn-connectivity&lt;/code&gt; metrics, passing a value of &lt;code class=&quot;highlighter-rouge&quot;&gt;1&lt;/code&gt; if the connection succeeded and &lt;code class=&quot;highlighter-rouge&quot;&gt;0&lt;/code&gt; for a failure.&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;Create &lt;code class=&quot;highlighter-rouge&quot;&gt;systemd&lt;/code&gt; service configuration files so the bash scripts will be executed and remain active.&lt;/p&gt;
@@ -327,9 +311,10 @@ Run at least one resiliency exercise (failure injection) in production environme
   &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;Service]
   &lt;span class=&quot;nv&quot;&gt;Type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;simple
   &lt;span class=&quot;nv&quot;&gt;User&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;ubuntu
+  &lt;span class=&quot;nv&quot;&gt;Group&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;ubuntu
   &lt;span class=&quot;nv&quot;&gt;WorkingDirectory&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/home/ubuntu
   &lt;span class=&quot;nv&quot;&gt;ExecStart&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/home/ubuntu/apps/bookstore_api/metrics/db-connectivity.sh
-  &lt;span class=&quot;nv&quot;&gt;Restart&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;on-failure
+  &lt;span class=&quot;nv&quot;&gt;Restart&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;always
 
   &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;Install]
   &lt;span class=&quot;nv&quot;&gt;WantedBy&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;multi-user.target
@@ -348,9 +333,10 @@ Run at least one resiliency exercise (failure injection) in production environme
   &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;Service]
   &lt;span class=&quot;nv&quot;&gt;Type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;simple
   &lt;span class=&quot;nv&quot;&gt;User&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;ubuntu
+  &lt;span class=&quot;nv&quot;&gt;Group&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;ubuntu
   &lt;span class=&quot;nv&quot;&gt;WorkingDirectory&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/home/ubuntu
   &lt;span class=&quot;nv&quot;&gt;ExecStart&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/home/ubuntu/apps/bookstore_api/metrics/cdn-connectivity.sh
-  &lt;span class=&quot;nv&quot;&gt;Restart&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;on-failure
+  &lt;span class=&quot;nv&quot;&gt;Restart&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;always
 
   &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;Install]
   &lt;span class=&quot;nv&quot;&gt;WantedBy&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;multi-user.target
@@ -365,7 +351,10 @@ Run at least one resiliency exercise (failure injection) in production environme
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;Initially, we’ll need to manually start both monitoring services.&lt;/p&gt;
+    &lt;p&gt;Enable both services and either reboot the instance or manually start the services.&lt;/p&gt;
+
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl &lt;span class=&quot;nb&quot;&gt;enable &lt;/span&gt;bookstore-db-connectivity &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl &lt;span class=&quot;nb&quot;&gt;enable &lt;/span&gt;bookstore-cdn-connectivity
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
 
     &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl start bookstore-db-connectivity &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl start bookstore-cdn-connectivity
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
@@ -397,7 +386,7 @@ Run at least one resiliency exercise (failure injection) in production environme
      &quot;AlarmActions&quot;: [
          &quot;arn:aws:sns:us-west-2:532151327118:PingPublicationsSNS&quot;
      ],
-     &quot;AlarmDescription&quot;: &quot;Database Connectivity failure for Bookstore API (Blue).&quot;,
+     &quot;AlarmDescription&quot;: &quot;Database connectivity failure for Bookstore API (Blue).&quot;,
      &quot;AlarmName&quot;: &quot;bookstore-api-blue-db-connectivity-failed&quot;,
      &quot;ComparisonOperator&quot;: &quot;LessThanThreshold&quot;,
      &quot;DatapointsToAlarm&quot;: 2,
@@ -421,7 +410,7 @@ Run at least one resiliency exercise (failure injection) in production environme
      &quot;AlarmActions&quot;: [
          &quot;arn:aws:sns:us-west-2:532151327118:PingPublicationsSNS&quot;
      ],
-     &quot;AlarmDescription&quot;: &quot;CDN Connectivity failure for Bookstore API (Blue).&quot;,
+     &quot;AlarmDescription&quot;: &quot;CDN connectivity failure for Bookstore API (Blue).&quot;,
      &quot;AlarmName&quot;: &quot;bookstore-api-blue-cdn-connectivity-failed&quot;,
      &quot;ComparisonOperator&quot;: &quot;LessThanThreshold&quot;,
      &quot;DatapointsToAlarm&quot;: 2,
@@ -445,7 +434,7 @@ Run at least one resiliency exercise (failure injection) in production environme
      &quot;AlarmActions&quot;: [
          &quot;arn:aws:sns:us-west-2:532151327118:PingPublicationsSNS&quot;
      ],
-     &quot;AlarmDescription&quot;: &quot;Database Connectivity failure for Bookstore API (Green).&quot;,
+     &quot;AlarmDescription&quot;: &quot;Database connectivity failure for Bookstore API (Green).&quot;,
      &quot;AlarmName&quot;: &quot;bookstore-api-green-db-connectivity-failed&quot;,
      &quot;ComparisonOperator&quot;: &quot;LessThanThreshold&quot;,
      &quot;DatapointsToAlarm&quot;: 2,
@@ -469,7 +458,7 @@ Run at least one resiliency exercise (failure injection) in production environme
      &quot;AlarmActions&quot;: [
          &quot;arn:aws:sns:us-west-2:532151327118:PingPublicationsSNS&quot;
      ],
-     &quot;AlarmDescription&quot;: &quot;CDN Connectivity failure for Bookstore API (Green).&quot;,
+     &quot;AlarmDescription&quot;: &quot;CDN connectivity failure for Bookstore API (Green).&quot;,
      &quot;AlarmName&quot;: &quot;bookstore-api-green-cdn-connectivity-failed&quot;,
      &quot;ComparisonOperator&quot;: &quot;LessThanThreshold&quot;,
      &quot;DatapointsToAlarm&quot;: 2,
@@ -490,19 +479,95 @@ Run at least one resiliency exercise (failure injection) in production environme
   &lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;h3 id=&quot;execute-a-resiliency-experiment-in-production-1&quot;&gt;Execute a Resiliency Experiment in Production&lt;/h3&gt;
+&lt;h3 id=&quot;performing-a-db-failure-simulation-test&quot;&gt;Performing a DB Failure Simulation Test&lt;/h3&gt;
 
-&lt;ul&gt;
-  &lt;li&gt;Status: &lt;strong&gt;Complete&lt;/strong&gt;&lt;/li&gt;
-&lt;/ul&gt;
+&lt;p&gt;To meet the &lt;strong&gt;Stage 3&lt;/strong&gt; criteria of performing “frequent, semi-automated tests” we can use Chaos Engineering tools like Gremlin to easily schedule automated attacks on relevant services and machines.  This allows your team to properly prepare for, evaluate, and respond to the outcome of these tests.&lt;/p&gt;
 
-&lt;h3 id=&quot;publish-test-results-and-track-over-time&quot;&gt;Publish Test Results and Track Over Time&lt;/h3&gt;
+&lt;p&gt;For the &lt;strong&gt;Bookstore&lt;/strong&gt; example application we’re simulating a failure of the database by preventing the &lt;code class=&quot;highlighter-rouge&quot;&gt;blue&lt;/code&gt; environment from establishing a database connection.&lt;/p&gt;
 
-&lt;ul&gt;
-  &lt;li&gt;Status: &lt;strong&gt;Complete&lt;/strong&gt;&lt;/li&gt;
-&lt;/ul&gt;
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;Schedule a Gremlin &lt;code class=&quot;highlighter-rouge&quot;&gt;Blackhole&lt;/code&gt; Attack targeting the &lt;code class=&quot;highlighter-rouge&quot;&gt;bookstore-api-blue&lt;/code&gt; environment that specifies the primary database endpoint (&lt;code class=&quot;highlighter-rouge&quot;&gt;db.bookstore.pingpublications.com&lt;/code&gt;) as a &lt;code class=&quot;highlighter-rouge&quot;&gt;Hostname&lt;/code&gt;.  Check out the &lt;a href=&quot;https://app.gremlin.com/api&quot;&gt;Gremlin API&lt;/a&gt; or &lt;a href=&quot;https://help.gremlin.com/attacks/&quot;&gt;documentation&lt;/a&gt; for more details on creating Gremlin Attacks.&lt;/p&gt;
 
-&lt;h2 id=&quot;resiliency-stage-3-completion&quot;&gt;Resiliency Stage 3 Completion&lt;/h2&gt;</content><author><name>Gabe Wyatt</name></author><category term="resiliency" /><category term="staging" /></entry><entry><title type="html">Chaos Engineering Through Staged Resiliency - Stage 2</title><link href="http://localhost:4000/gremlin-blog-posts/chaos-engineering/chaos-engineering-through-staged-resiliency-stage-2/" rel="alternate" type="text/html" title="Chaos Engineering Through Staged Resiliency - Stage 2" /><published>2018-10-11T00:00:00-07:00</published><updated>2018-10-11T00:00:00-07:00</updated><id>http://localhost:4000/gremlin-blog-posts/chaos-engineering/chaos-engineering-through-staged-resiliency-stage-2</id><content type="html" xml:base="http://localhost:4000/gremlin-blog-posts/chaos-engineering/chaos-engineering-through-staged-resiliency-stage-2/">&lt;p&gt;In &lt;a href=&quot;https://www.gremlin.com/blog/chaos-engineering-through-staged-resiliency-stage-1&quot;&gt;Chaos Engineering Through Staged Resiliency - Stage 1&lt;/a&gt; we explored how engineering teams at Walmart successfully identify and combat unexpected system failure using a series of “resiliency stages.”  We also demonstrated the process of going through &lt;strong&gt;Stage 1&lt;/strong&gt; for the &lt;strong&gt;Bookstore&lt;/strong&gt; API sample application.  We showed that completing &lt;strong&gt;Resiliency Stage 1&lt;/strong&gt; requires the definition of a disaster recovery failover playbook, dependency failover playbooks, team-wide agreement on said playbooks, and the execution of a manual failover exercise.&lt;/p&gt;
+    &lt;p&gt;This will automatically simulate a failure of the &lt;code class=&quot;highlighter-rouge&quot;&gt;bookstore-api-blue&lt;/code&gt; instance’s ability to connect to the primary database endpoint, which causes the custom &lt;code class=&quot;highlighter-rouge&quot;&gt;db-connectivity&lt;/code&gt; metrics to fail and trigger the subsequent Amazon Cloudwatch alarm.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Check the status of the &lt;code class=&quot;highlighter-rouge&quot;&gt;bookstore-db-connectivity&lt;/code&gt; service to confirm that the health check is now failing.&lt;/p&gt;
+
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl status bookstore-db-connectivity.service
+ &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;...]
+ Nov 25 21:18:02 bookstore-api-blue db-connectivity.sh[785]: Connection to db.bookstore.pingpublications.com 5432 port &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;tcp/postgresql] succeeded!
+ Nov 25 21:18:18 bookstore-api-blue db-connectivity.sh[785]: Connection to db.bookstore.pingpublications.com 5432 port &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;tcp/postgresql] failed!
+ Nov 25 21:18:49 bookstore-api-blue db-connectivity.sh[785]: Connection to db.bookstore.pingpublications.com 5432 port &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;tcp/postgresql] failed!
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Use &lt;code class=&quot;highlighter-rouge&quot;&gt;aws cloudwatch get-metric-statistics&lt;/code&gt; to check the &lt;code class=&quot;highlighter-rouge&quot;&gt;db-connectivity&lt;/code&gt; metric around this time to see the actual metric values reported in AWS.&lt;/p&gt;
+
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;aws cloudwatch get-metric-statistics &lt;span class=&quot;nt&quot;&gt;--metric-name&lt;/span&gt; db-connectivity &lt;span class=&quot;nt&quot;&gt;--start-time&lt;/span&gt; 2018-11-25T21:17:00Z &lt;span class=&quot;nt&quot;&gt;--end-time&lt;/span&gt; 2018-11-25T21:24:00Z &lt;span class=&quot;nt&quot;&gt;--period&lt;/span&gt; 60 &lt;span class=&quot;nt&quot;&gt;--namespace&lt;/span&gt; Bookstore &lt;span class=&quot;nt&quot;&gt;--statistics&lt;/span&gt; Average &lt;span class=&quot;nt&quot;&gt;--dimensions&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;Host,Value&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;bookstore-api-blue &lt;span class=&quot;nt&quot;&gt;--query&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Datapoints[*].{Timestamp:Timestamp,Average:Average}&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--output&lt;/span&gt; json
+ &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;
+     &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+         &lt;span class=&quot;s2&quot;&gt;&quot;Timestamp&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;2018-11-25T21:20:00Z&quot;&lt;/span&gt;, 
+         &lt;span class=&quot;s2&quot;&gt;&quot;Average&quot;&lt;/span&gt;: 0.0
+     &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;, 
+     &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+         &lt;span class=&quot;s2&quot;&gt;&quot;Timestamp&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;2018-11-25T21:18:00Z&quot;&lt;/span&gt;, 
+         &lt;span class=&quot;s2&quot;&gt;&quot;Average&quot;&lt;/span&gt;: 0.25
+     &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;, 
+     &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+         &lt;span class=&quot;s2&quot;&gt;&quot;Timestamp&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;2018-11-25T21:19:00Z&quot;&lt;/span&gt;, 
+         &lt;span class=&quot;s2&quot;&gt;&quot;Average&quot;&lt;/span&gt;: 0.0
+     &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;, 
+     &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+         &lt;span class=&quot;s2&quot;&gt;&quot;Timestamp&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;2018-11-25T21:23:00Z&quot;&lt;/span&gt;, 
+         &lt;span class=&quot;s2&quot;&gt;&quot;Average&quot;&lt;/span&gt;: 1.0
+     &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;, 
+     &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+         &lt;span class=&quot;s2&quot;&gt;&quot;Timestamp&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;2018-11-25T21:17:00Z&quot;&lt;/span&gt;, 
+         &lt;span class=&quot;s2&quot;&gt;&quot;Average&quot;&lt;/span&gt;: 1.0
+     &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;, 
+     &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+         &lt;span class=&quot;s2&quot;&gt;&quot;Timestamp&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;2018-11-25T21:22:00Z&quot;&lt;/span&gt;, 
+         &lt;span class=&quot;s2&quot;&gt;&quot;Average&quot;&lt;/span&gt;: 0.8
+     &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;, 
+     &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+         &lt;span class=&quot;s2&quot;&gt;&quot;Timestamp&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;2018-11-25T21:21:00Z&quot;&lt;/span&gt;, 
+         &lt;span class=&quot;s2&quot;&gt;&quot;Average&quot;&lt;/span&gt;: 0.0
+     &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+ &lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+
+    &lt;p&gt;Here we see the &lt;code class=&quot;highlighter-rouge&quot;&gt;db-connectivity&lt;/code&gt; health is acceptable (&lt;code class=&quot;highlighter-rouge&quot;&gt;1.0&lt;/code&gt;) until it starts to drop around &lt;code class=&quot;highlighter-rouge&quot;&gt;21:18:00&lt;/code&gt;, then remains at &lt;code class=&quot;highlighter-rouge&quot;&gt;0.0&lt;/code&gt; for a few minutes before returning to healthy status.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;This metric failure triggered the &lt;code class=&quot;highlighter-rouge&quot;&gt;bookstore-api-blue-db-connectivity-failed&lt;/code&gt; Amazon Cloudwatch alarm that we also created.  This can be confirmed by checking the alarm history status around that same time period.&lt;/p&gt;
+
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;aws cloudwatch describe-alarm-history &lt;span class=&quot;nt&quot;&gt;--alarm-name&lt;/span&gt; bookstore-api-blue-db-connectivity-failed &lt;span class=&quot;nt&quot;&gt;--history-item-type&lt;/span&gt; StateUpdate &lt;span class=&quot;nt&quot;&gt;--start-date&lt;/span&gt; 2018-11-25T21:17:00Z &lt;span class=&quot;nt&quot;&gt;--end-date&lt;/span&gt; 2018-11-25T21:28:00Z &lt;span class=&quot;nt&quot;&gt;--output&lt;/span&gt; json &lt;span class=&quot;nt&quot;&gt;--query&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;AlarmHistoryItems[*].{Timestamp:Timestamp,Summary:HistorySummary}&quot;&lt;/span&gt;
+ &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;
+     &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+         &lt;span class=&quot;s2&quot;&gt;&quot;Timestamp&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;2018-11-25T21:24:09.620Z&quot;&lt;/span&gt;, 
+         &lt;span class=&quot;s2&quot;&gt;&quot;Summary&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;Alarm updated from ALARM to OK&quot;&lt;/span&gt;
+     &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;, 
+     &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+         &lt;span class=&quot;s2&quot;&gt;&quot;Timestamp&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;2018-11-25T21:20:09.620Z&quot;&lt;/span&gt;, 
+         &lt;span class=&quot;s2&quot;&gt;&quot;Summary&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;Alarm updated from OK to ALARM&quot;&lt;/span&gt;
+     &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+ &lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+
+    &lt;p&gt;Here we see that the alarm was triggered at &lt;code class=&quot;highlighter-rouge&quot;&gt;21:20:09.620&lt;/code&gt; and remained for four minutes before returning to &lt;code class=&quot;highlighter-rouge&quot;&gt;OK&lt;/code&gt; status.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p class=&quot;notice--tip&quot;&gt;Since an &lt;em&gt;actual&lt;/em&gt; database failure is handled by the Multi-AZ Amazon RDS configuration created in &lt;a href=&quot;https://www.gremlin.com/blog/chaos-engineering-through-staged-resiliency-stage-2#database-failure-test&quot;&gt;Stage 2 - Database Failure Test&lt;/a&gt;, this automated critical dependency failure test doesn’t currently trigger any actual failover actions.  However, alarms are now configured to easily hook into disaster recovery actions as progress is made through the final &lt;strong&gt;Resiliency Stages&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;performing-a-cdn-failure-simulation-test&quot;&gt;Performing a CDN Failure Simulation Test&lt;/h3&gt;
+
+&lt;p&gt;We use the same steps as above to perform a scheduled, automated Gremlin &lt;code class=&quot;highlighter-rouge&quot;&gt;Blackhole&lt;/code&gt; Attack to simulate failure of the CDN for our &lt;code class=&quot;highlighter-rouge&quot;&gt;bookstore-api-blue&lt;/code&gt; environment.  Simply changing the &lt;code class=&quot;highlighter-rouge&quot;&gt;db-&lt;/code&gt; references to &lt;code class=&quot;highlighter-rouge&quot;&gt;cdn-&lt;/code&gt;, and the relevant endpoints, will do the trick.  However, for brevity’s sake we won’t include the step-by-step instructions for doing so within this section.&lt;/p&gt;
+
+&lt;h2 id=&quot;resiliency-stage-3-completion&quot;&gt;Resiliency Stage 3 Completion&lt;/h2&gt;
+
+&lt;p&gt;Your team has been performing semi-automated tests at a regular cadence, has executed at least one resiliency experiment in production, and has disseminated all test results to the entire team.  With that, &lt;strong&gt;Resiliency Stage 3&lt;/strong&gt; is now complete.  Revenue loss and support costs should finally be dramatically dropping as fewer failures occur, and those that do happen last for much shorter periods.  In &lt;a href=&quot;https://www.gremlin.com/blog/chaos-engineering-through-staged-resiliency-stage-4&quot;&gt;Chaos Engineering Through Staged Resiliency - Stage 4&lt;/a&gt; we’ll explore automating resiliency testing in non-production, along with semi-automation of our disaster recovery failovers.&lt;/p&gt;</content><author><name>Gabe Wyatt</name></author><category term="resiliency" /><category term="staging" /></entry><entry><title type="html">Chaos Engineering Through Staged Resiliency - Stage 2</title><link href="http://localhost:4000/gremlin-blog-posts/chaos-engineering/chaos-engineering-through-staged-resiliency-stage-2/" rel="alternate" type="text/html" title="Chaos Engineering Through Staged Resiliency - Stage 2" /><published>2018-10-11T00:00:00-07:00</published><updated>2018-10-11T00:00:00-07:00</updated><id>http://localhost:4000/gremlin-blog-posts/chaos-engineering/chaos-engineering-through-staged-resiliency-stage-2</id><content type="html" xml:base="http://localhost:4000/gremlin-blog-posts/chaos-engineering/chaos-engineering-through-staged-resiliency-stage-2/">&lt;p&gt;In &lt;a href=&quot;https://www.gremlin.com/blog/chaos-engineering-through-staged-resiliency-stage-1&quot;&gt;Chaos Engineering Through Staged Resiliency - Stage 1&lt;/a&gt; we explored how engineering teams at Walmart successfully identify and combat unexpected system failure using a series of “resiliency stages.”  We also demonstrated the process of going through &lt;strong&gt;Stage 1&lt;/strong&gt; for the &lt;strong&gt;Bookstore&lt;/strong&gt; API sample application.  We showed that completing &lt;strong&gt;Resiliency Stage 1&lt;/strong&gt; requires the definition of a disaster recovery failover playbook, dependency failover playbooks, team-wide agreement on said playbooks, and the execution of a manual failover exercise.&lt;/p&gt;
 
 &lt;p&gt;In this second part we’ll dive into the components of &lt;strong&gt;Resiliency Stage 2&lt;/strong&gt;, which focuses on critical dependency failure testing in non-production environments.&lt;/p&gt;
 
@@ -763,13 +828,7 @@ Run at least one resiliency exercise (failure injection) in production environme
 &lt;p class=&quot;text-center&quot;&gt;&lt;img alt=&quot;Stage 2 - Architecture&quot; src=&quot;/gremlin-blog-posts/assets/chaos-engineering/chaos-engineering-through-staged-resiliency/stage-2/stage-2-architecture-eeb5feeb193e86e0a7004de150b11cf20e08a802a02a5b1cb1e6172a4b76e5e3.png&quot; class=&quot;align-center&quot; /&gt;
 &lt;em&gt;Bookstore App Architecture&lt;/em&gt;&lt;/p&gt;
 
-&lt;h3 id=&quot;perform-critical-dependency-failure-tests-in-non-production-1&quot;&gt;Perform Critical Dependency Failure Tests in Non-Production&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Status: &lt;strong&gt;Complete&lt;/strong&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h4 id=&quot;database-failure-test&quot;&gt;Database Failure Test&lt;/h4&gt;
+&lt;h3 id=&quot;database-failure-test&quot;&gt;Database Failure Test&lt;/h3&gt;
 
 &lt;p&gt;With Multi-AZ configured on the Amazon RDS instance we are now ready to perform a failover test for this critical dependency.&lt;/p&gt;
 
@@ -881,7 +940,7 @@ Run at least one resiliency exercise (failure injection) in production environme
   &lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;h4 id=&quot;cdn-failure-test&quot;&gt;CDN Failure Test&lt;/h4&gt;
+&lt;h3 id=&quot;cdn-failure-test&quot;&gt;CDN Failure Test&lt;/h3&gt;
 
 &lt;p&gt;This test ensures that the primary CDN endpoint (&lt;code class=&quot;highlighter-rouge&quot;&gt;cdn.bookstore.pingpublications.com&lt;/code&gt;) performs an automatic failover to the secondary Amazon S3 bucket when the Route53 Health Check fails.&lt;/p&gt;
 
@@ -975,10 +1034,6 @@ Run at least one resiliency exercise (failure injection) in production environme
 
 &lt;h3 id=&quot;publish-test-results-1&quot;&gt;Publish Test Results&lt;/h3&gt;
 
-&lt;ul&gt;
-  &lt;li&gt;Status: &lt;strong&gt;Complete&lt;/strong&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
 &lt;p&gt;Now that both critical dependencies have been tested we’ll publish the results to the entire team, so everyone can keep tabs on the resiliency progress of the project.&lt;/p&gt;
 
 &lt;p&gt;In this case, both the &lt;a href=&quot;#database-failure-test&quot;&gt;Database Failure Test&lt;/a&gt; and &lt;a href=&quot;#cdn-failure-test&quot;&gt;CDN Failure Test&lt;/a&gt; were performed manually within less than 15 minutes.  Therefore, we can safely update some of the playbook information created during the prerequisite phase of &lt;a href=&quot;https://www.gremlin.com/blog/chaos-engineering-through-staged-resiliency-stage-1&quot;&gt;Resiliency Stage 1&lt;/a&gt; and reduce the critical dependency RTO/RPO targets significantly.  Even a conservative estimate of &lt;code class=&quot;highlighter-rouge&quot;&gt;1 hour&lt;/code&gt; is a massive improvement to resiliency and reduction to potential support costs, and we’re only through the second Stage!&lt;/p&gt;
@@ -1031,8 +1086,6 @@ Run at least one resiliency exercise (failure injection) in production environme
 
 &lt;h3 id=&quot;1-establish-high-observability&quot;&gt;1. Establish High Observability&lt;/h3&gt;
 
-&lt;p&gt;(TODO)&lt;/p&gt;
-
 &lt;p&gt;Microservice and clustered architectures favor the scalability and cost-efficiency of distributed computing, but also require a deep understanding of system behavior across a large pool of services and machines.  Robust observability is a necessity for most modern software, which tend to be comprised of these complex distributed systems.&lt;/p&gt;
 
 &lt;ul&gt;
@@ -1040,7 +1093,7 @@ Run at least one resiliency exercise (failure injection) in production environme
   &lt;li&gt;&lt;strong&gt;Observability&lt;/strong&gt;: A measure of the ability to accurately infer what is happening internally within a system based solely on external information.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;A properly observable system is one that allows your team to answer new questions about the internals of the system &lt;em&gt;without&lt;/em&gt; the need to deploy a new build.  Continuous monitoring is critical to catch unexpected behavior that is difficult to reproduce, but monitoring largely focuses on measuring “known unknowns.”  By contrast, a highly-distributed system presents the need to track down and understand a multitude of “unknown unknowns” – an obscure issue that has never happened before, and may never happen again.&lt;/p&gt;
+&lt;p&gt;Continuous monitoring is critical to catch unexpected behavior that is difficult to reproduce, but at least historically, monitoring has largely focused on measuring “known unknowns.”  By contrast, a highly-distributed system often requires tracking down, understanding, and preparing for a multitude of “unknown unknowns” – obscure issues that have never happened before, and may never happen again.  A properly &lt;em&gt;observable&lt;/em&gt; system is one that allows your team to answer new questions about the internals of the system &lt;em&gt;without&lt;/em&gt; the need to deploy a new build.  This kind of observability is often referred to as “blackbox monitoring,” as it allows your team to draw conclusions about unknowable events without using the internals of the system.&lt;/p&gt;
 
 &lt;p&gt;Most importantly, high observability is critically important when implementing Chaos Engineering techniques.  As &lt;a href=&quot;https://twitter.com/mipsytipsy&quot;&gt;Charity Majors&lt;/a&gt;, CEO of &lt;a href=&quot;https://www.honeycomb.io/&quot;&gt;Honeycomb&lt;/a&gt;, puts it, “Without observability, you don’t have ‘chaos engineering’.  You just have chaos.”&lt;/p&gt;
 

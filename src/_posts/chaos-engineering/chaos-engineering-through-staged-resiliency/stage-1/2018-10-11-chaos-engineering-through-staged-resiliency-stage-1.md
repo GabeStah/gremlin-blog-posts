@@ -45,6 +45,9 @@ sources:
         - https://blog.twitter.com/engineering/en_us/a/2016/observability-at-twitter-technical-overview-part-i.html
         - https://blog.twitter.com/engineering/en_us/a/2016/observability-at-twitter-technical-overview-part-ii.html
         - https://www.honeycomb.io/wp-content/uploads/2018/08/Honeycomb-Guide-Achieving-Observability-v1_1.pdf
+        - https://codeascraft.com/2010/12/08/track-every-release/
+        - https://matt.aimonetti.net/posts/2013/06/26/practical-guide-to-graphite-monitoring/
+        - https://graphite.readthedocs.io/en/latest/feeding-carbon.html
 ---
 
 In spite of what the name may suggest, Chaos Engineering is a _disciplined_ approach of identifying potential failures before they become outages.  Ultimately, the goal of Chaos Engineering is to create more stable and **resilient** systems.  There is some disagreement in the community about proper terminology, but regardless of which side of the [Chaos Engineering](https://medium.com/@jpaulreed/chaos-engineered-or-otherwise-is-not-enough-ad5792309ecf) vs [Resilience Engineering](https://www.linkedin.com/pulse/would-chaos-any-othername-casey-rosenthal/) debate you come down on, most engineers probably agree that proper implementation is more important than naming semantics.
@@ -62,51 +65,18 @@ With a bit of adjustment for your own organizational needs, you and your team ca
 
 ## Prerequisites
 
-{% comment %}
-
-(TODO) ### Verify Observability
-
-> Re, stage 1 of the maturity model. Any reason it’s missing observability and monitoring?
-> Surprisingly enough, that’s a huge chunk that people miss
-> It’s a critical part
-> **And having a definition for observability, monitoring, and tracing will be helpful**
-> Lots of people have no monitoring, et al, or they aren’t confident their monitoring is working properly
-> Means we can’t sell them anything cause you can’t see the impact of an experiment without monitoring
-> OR sometimes we literally run experiments to test their monitoring out
-> At Walmart, they literally send out of band metrics to on call folks during an outage via slack and it’s automated
-> So you get paged, and you immediately get data to ground you in context
-> **Observability is making monitoring digestible and accessible and meaningful**
-> I have some bigger ideas for how this will pan out as a content experience, so I may have more ideas incoming over the next few days
-
-> https://blog.twitter.com/engineering/en_us/a/2016/observability-at-twitter-technical-overview-part-i.html
-> https://blog.twitter.com/engineering/en_us/a/2016/observability-at-twitter-technical-overview-part-ii.html
-> https://medium.com/@copyconstruct/monitoring-and-observability-8417d1952e1c
-
-{% endcomment %}
-
 Before you can begin moving through the resiliency stages there are a few prerequisite steps you'll need to complete.  Most of these requirements are standard fare for a well-designed system, but ensuring each and every unique application team is fully prepared for the unknown is paramount to developing resilient systems.
 
 ### 1. Establish High Observability
-
-(TODO)
 
 Microservice and clustered architectures favor the scalability and cost-efficiency of distributed computing, but also require a deep understanding of system behavior across a large pool of services and machines.  Robust observability is a necessity for most modern software, which tend to be comprised of these complex distributed systems.  
 
 - **Monitoring**: The act of collecting, processing, aggregating, and displaying quantitative data about a system.  These data may be anything from query counts/types and error counts/types to processing times and server lifetimes.  Monitoring is a smaller subset of overall measure of observability.
 - **Observability**: A measure of the ability to accurately infer what is happening internally within a system based solely on external information.
 
-A properly observable system is one that allows your team to answer new questions about the internals of the system _without_ the need to deploy a new build.  Continuous monitoring is critical to catch unexpected behavior that is difficult to reproduce, but monitoring largely focuses on measuring "known unknowns."  By contrast, a highly-distributed system presents the need to track down and understand a multitude of "unknown unknowns" -- an obscure issue that has never happened before, and may never happen again.
+Continuous monitoring is critical to catch unexpected behavior that is difficult to reproduce, but at least historically, monitoring has largely focused on measuring "known unknowns."  By contrast, a highly-distributed system often requires tracking down, understanding, and preparing for a multitude of "unknown unknowns" -- obscure issues that have never happened before, and may never happen again.  A properly _observable_ system is one that allows your team to answer new questions about the internals of the system _without_ the need to deploy a new build.  This kind of observability is often referred to as "blackbox monitoring," as it allows your team to draw conclusions about unknowable events without using the internals of the system.
 
 Most importantly, high observability is critically important when implementing Chaos Engineering techniques.  As [Charity Majors](https://twitter.com/mipsytipsy), CEO of [Honeycomb](https://www.honeycomb.io/), puts it, "Without observability, you don't have 'chaos engineering'.  You just have chaos."
-
-{% comment %}
-- https://www.gremlin.com/blog/charity-majors-closing-the-loop-on-chaos-with-observability-chaos-conf-2018/
-- https://www.honeycomb.io/wp-content/uploads/2018/08/Honeycomb-Guide-Achieving-Observability-v1_1.pdf
-- https://landing.google.com/sre/sre-book/toc/
-- https://ai.google/research/pubs/pub36356
-- https://blog.twitter.com/engineering/en_us/a/2016/observability-at-twitter-technical-overview-part-i.html
-- https://blog.twitter.com/engineering/en_us/a/2016/observability-at-twitter-technical-overview-part-ii.html
-{% endcomment %}
 
 ### 2. Define the Critical Dependencies
 

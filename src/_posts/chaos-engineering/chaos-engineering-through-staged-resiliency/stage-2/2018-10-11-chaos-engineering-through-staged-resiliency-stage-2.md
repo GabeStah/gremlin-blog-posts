@@ -274,11 +274,7 @@ The app is now ready for failure testing.  Here is the updated diagram showing t
 _Bookstore App Architecture_
 {: .text-center }
 
-### Perform Critical Dependency Failure Tests in Non-Production
-
-- Status: **Complete**
-
-#### Database Failure Test
+### Database Failure Test
 
 With Multi-AZ configured on the Amazon RDS instance we are now ready to perform a failover test for this critical dependency.
 
@@ -388,7 +384,7 @@ With Multi-AZ configured on the Amazon RDS instance we are now ready to perform 
     ]
     ```
 
-#### CDN Failure Test
+### CDN Failure Test
 
 This test ensures that the primary CDN endpoint (`cdn.bookstore.pingpublications.com`) performs an automatic failover to the secondary Amazon S3 bucket when the Route53 Health Check fails.
 
@@ -478,8 +474,6 @@ This test ensures that the primary CDN endpoint (`cdn.bookstore.pingpublications
     ```
 
 ### Publish Test Results
-
-- Status: **Complete**
 
 Now that both critical dependencies have been tested we'll publish the results to the entire team, so everyone can keep tabs on the resiliency progress of the project.
 

@@ -310,8 +310,6 @@
 
 <h3 id="1-establish-high-observability">1. Establish High Observability</h3>
 
-<p>(TODO)</p>
-
 <p>Microservice and clustered architectures favor the scalability and cost-efficiency of distributed computing, but also require a deep understanding of system behavior across a large pool of services and machines.  Robust observability is a necessity for most modern software, which tend to be comprised of these complex distributed systems.</p>
 
 <ul>
@@ -321,7 +319,7 @@
 <strong>Observability</strong>: A measure of the ability to accurately infer what is happening internally within a system based solely on external information.</li>
 </ul>
 
-<p>A properly observable system is one that allows your team to answer new questions about the internals of the system <em>without</em> the need to deploy a new build.  Continuous monitoring is critical to catch unexpected behavior that is difficult to reproduce, but monitoring largely focuses on measuring “known unknowns.”  By contrast, a highly-distributed system presents the need to track down and understand a multitude of “unknown unknowns” – an obscure issue that has never happened before, and may never happen again.</p>
+<p>Continuous monitoring is critical to catch unexpected behavior that is difficult to reproduce, but at least historically, monitoring has largely focused on measuring “known unknowns.”  By contrast, a highly-distributed system often requires tracking down, understanding, and preparing for a multitude of “unknown unknowns” – obscure issues that have never happened before, and may never happen again.  A properly <em>observable</em> system is one that allows your team to answer new questions about the internals of the system <em>without</em> the need to deploy a new build.  This kind of observability is often referred to as “blackbox monitoring,” as it allows your team to draw conclusions about unknowable events without using the internals of the system.</p>
 
 <p>Most importantly, high observability is critically important when implementing Chaos Engineering techniques.  As <a href="https://twitter.com/mipsytipsy" target="_blank" rel="noopener noreferrer">Charity Majors</a>, CEO of <a href="https://www.honeycomb.io/" target="_blank" rel="noopener noreferrer">Honeycomb</a>, puts it, “Without observability, you don’t have ‘chaos engineering’.  You just have chaos.”</p>
 
@@ -1059,7 +1057,7 @@
 
 
 
-  14 minute read
+  18 minute read
 </p>
     
     <p class="archive__item-excerpt" itemprop="description">

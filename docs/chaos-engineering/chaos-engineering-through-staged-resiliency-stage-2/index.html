@@ -278,7 +278,8 @@
       <li><a href="#adding-a-staging-app-environment">Adding a Staging App Environment</a></li>
       <li><a href="#configuring-multi-az-rds">Configuring Multi-AZ RDS</a></li>
       <li><a href="#amazon-s3-cross-region-replication">Amazon S3 Cross-Region Replication</a></li>
-      <li><a href="#perform-critical-dependency-failure-tests-in-non-production-1">Perform Critical Dependency Failure Tests in Non-Production</a></li>
+      <li><a href="#database-failure-test">Database Failure Test</a></li>
+      <li><a href="#cdn-failure-test">CDN Failure Test</a></li>
       <li><a href="#publish-test-results-1">Publish Test Results</a></li>
     </ul>
   </li>
@@ -567,14 +568,7 @@
 <p class="text-center"><img alt="Stage 2 - Architecture" src="/gremlin-blog-posts/assets/chaos-engineering/chaos-engineering-through-staged-resiliency/stage-2/stage-2-architecture-eeb5feeb193e86e0a7004de150b11cf20e08a802a02a5b1cb1e6172a4b76e5e3.png" class="align-center">
 <em>Bookstore App Architecture</em></p>
 
-<h3 id="perform-critical-dependency-failure-tests-in-non-production-1">Perform Critical Dependency Failure Tests in Non-Production</h3>
-
-<ul>
-  <li>Status: <strong>Complete</strong>
-</li>
-</ul>
-
-<h4 id="database-failure-test">Database Failure Test</h4>
+<h3 id="database-failure-test">Database Failure Test</h3>
 
 <p>With Multi-AZ configured on the Amazon RDS instance we are now ready to perform a failover test for this critical dependency.</p>
 
@@ -692,7 +686,7 @@
   </li>
 </ol>
 
-<h4 id="cdn-failure-test">CDN Failure Test</h4>
+<h3 id="cdn-failure-test">CDN Failure Test</h3>
 
 <p>This test ensures that the primary CDN endpoint (<code class="highlighter-rouge">cdn.bookstore.pingpublications.com</code>) performs an automatic failover to the secondary Amazon S3 bucket when the Route53 Health Check fails.</p>
 
@@ -790,11 +784,6 @@
 </ol>
 
 <h3 id="publish-test-results-1">Publish Test Results</h3>
-
-<ul>
-  <li>Status: <strong>Complete</strong>
-</li>
-</ul>
 
 <p>Now that both critical dependencies have been tested we’ll publish the results to the entire team, so everyone can keep tabs on the resiliency progress of the project.</p>
 
@@ -932,7 +921,7 @@
 
 
 
-  14 minute read
+  18 minute read
 </p>
     
     <p class="archive__item-excerpt" itemprop="description">
