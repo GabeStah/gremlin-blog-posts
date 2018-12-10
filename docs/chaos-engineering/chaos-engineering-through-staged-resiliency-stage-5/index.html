@@ -1,0 +1,788 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.13.0 by Michael Rose
+  Copyright 2013-2018 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE.txt
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Chaos Engineering Through Staged Resiliency - Stage 5 - Gremlin: Blog Posts</title>
+<meta name="description" content="An amazing website.">
+
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Gremlin: Blog Posts">
+<meta property="og:title" content="Chaos Engineering Through Staged Resiliency - Stage 5">
+<meta property="og:url" content="http://localhost:4000/gremlin-blog-posts/chaos-engineering/chaos-engineering-through-staged-resiliency-stage-5/">
+
+
+  <meta property="og:description" content="An amazing website.">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2018-10-11T00:00:00-07:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/gremlin-blog-posts/chaos-engineering/chaos-engineering-through-staged-resiliency-stage-5/">
+
+
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Person",
+      "name": "Gabe Wyatt",
+      "url": "http://localhost:4000/gremlin-blog-posts",
+      "sameAs": null
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/gremlin-blog-posts/feed.xml" type="application/atom+xml" rel="alternate" title="Gremlin: Blog Posts Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/gremlin-blog-posts/assets/css/main.css">
+
+<!--[if lte IE 9]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+    <!-- start custom head snippets -->
+<link rel="icon" href="/gremlin-blog-posts/assets/images/favicon.ico" />
+<meta name="robots" content="noindex, nofollow" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    <div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <a class="site-title" href="/gremlin-blog-posts/">Gremlin: Blog Posts</a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/gremlin-blog-posts/notes-to-editor">Notes to the Editor</a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+  
+    
+
+
+
+<nav class="breadcrumbs">
+  <ol itemscope itemtype="http://schema.org/BreadcrumbList">
+    
+    
+    
+      
+        <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+          <a href="http://localhost:4000/gremlin-blog-posts/" itemprop="item"><span itemprop="name">Home</span></a>
+          <meta itemprop="position" content="1">
+        </li>
+        <span class="sep">/</span>
+      
+      
+        
+        <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+          <a href="/gremlin-blog-posts/categories/#chaos-engineering" itemprop="item"><span itemprop="name">Chaos engineering</span></a>
+          <meta itemprop="position" content="2">
+        </li>
+        <span class="sep">/</span>
+      
+    
+      
+      
+        <li class="current">Chaos Engineering Through Staged Resiliency - Stage 5</li>
+      
+    
+  </ol>
+</nav>
+
+  
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+  
+    
+      
+      
+      
+    
+    
+      
+
+<nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox">
+  <label for="ac-toc">Toggle menu</label>
+  <ul class="nav__items">
+    
+      <li>
+        
+          
+          
+
+          <a href="/gremlin-blog-posts/categories"><span class="nav__sub-title">Categories</span></a>
+        
+
+        
+        <ul>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/gremlin-blog-posts/categories/#chaos-engineering" class="">Chaos Engineering</a></li>
+          
+        </ul>
+        
+      </li>
+    
+      <li>
+        
+          
+          
+
+          <a href="/gremlin-blog-posts/tags"><span class="nav__sub-title">Tags</span></a>
+        
+
+        
+      </li>
+    
+  </ul>
+</nav>
+    
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Chaos Engineering Through Staged Resiliency - Stage 5">
+    <meta itemprop="description" content="">
+    <meta itemprop="datePublished" content="October 11, 2018">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">Chaos Engineering Through Staged Resiliency - Stage 5
+</h1>
+          
+            <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  13 minute read
+</p>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right sticky">
+            <nav class="toc">
+              <header><h4 class="nav__title">
+<i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu">
+  <li><a href="#prerequisites">Prerequisites</a></li>
+  <li><a href="#integrate-automatic-resiliency-testing-in-cicd">Integrate Automatic Resiliency Testing in CI/CD</a></li>
+  <li><a href="#automate-resiliency-and-disaster-recovery-failover-testing-in-production">Automate Resiliency and Disaster Recovery Failover Testing in Production</a></li>
+  <li>
+<a href="#resiliency-stage-5-implementation-example">Resiliency Stage 5: Implementation Example</a>
+    <ul>
+      <li><a href="#jenkins-configuration">Jenkins Configuration</a></li>
+      <li><a href="#performing-a-jenkins-build">Performing a Jenkins Build</a></li>
+    </ul>
+  </li>
+  <li><a href="#resiliency-stage-5-completion">Resiliency Stage 5 Completion</a></li>
+</ul>
+            </nav>
+          </aside>
+        
+        <p>We’ve finally made it to the last <strong>Resiliency Stage</strong>, where your team will be working toward full automation of both resiliency testing and disaster recovery failover procedures.  <a href="https://www.gremlin.com/blog/chaos-engineering-through-staged-resiliency-stage-4" target="_blank" rel="noopener noreferrer">Chaos Engineering Through Staged Resiliency - Stage 4</a>
+emphasized the importance of looking toward the production environment for automation, but this final <strong>Resiliency Stage 5</strong> is where all remaining non-automated tests and processes must be automated <em>within production</em>.  That’s not to say you <em>cannot</em> have any human interactions involved, but rather, that a given resiliency testing or disaster recovery process must not <em>rely on</em> human intervention to succeed.</p>
+
+<p>Once your team has progressed through this final stage your system will be extremely resilient and will require <em>far</em> fewer support hours, including reduced support costs in the event of a failure.</p>
+
+<h2 id="prerequisites">Prerequisites</h2>
+
+<ul>
+  <li>Creation and agreement on <a href="https://www.gremlin.com/blog/chaos-engineering-through-staged-resiliency-stage-1#prerequisites" target="_blank" rel="noopener noreferrer">Disaster Recovery and Dependency Failover Playbooks</a>.</li>
+  <li>Completion of <a href="https://www.gremlin.com/blog/chaos-engineering-through-staged-resiliency-stage-1" target="_blank" rel="noopener noreferrer">Resiliency Stage 1</a>.</li>
+  <li>Completion of <a href="https://www.gremlin.com/blog/chaos-engineering-through-staged-resiliency-stage-2" target="_blank" rel="noopener noreferrer">Resiliency Stage 2</a>.</li>
+  <li>Completion of <a href="https://www.gremlin.com/blog/chaos-engineering-through-staged-resiliency-stage-3" target="_blank" rel="noopener noreferrer">Resiliency Stage 3</a>.</li>
+  <li>Completion of <a href="https://www.gremlin.com/blog/chaos-engineering-through-staged-resiliency-stage-4" target="_blank" rel="noopener noreferrer">Resiliency Stage 4</a>.</li>
+</ul>
+
+<h2 id="integrate-automatic-resiliency-testing-in-cicd">Integrate Automatic Resiliency Testing in CI/CD</h2>
+
+<p>For systems relying on continuous integration and continuous deployment, this final stage is when you should integrate automatic resiliency testing within the CI/CD process.</p>
+
+<p>Additionally, a failed resiliency test should also result in a build and/or deployment failure.  Just as with application-level unit testing, resiliency testing should always be 100% successful prior to releasing a given build, so this prerequisite helps maintain system stability.</p>
+
+<h2 id="automate-resiliency-and-disaster-recovery-failover-testing-in-production">Automate Resiliency and Disaster Recovery Failover Testing in Production</h2>
+
+<p>The final and most critical requirement for <strong>Resiliency Stage 5</strong> is the nearly-total automation of both resiliency and disaster recovery failover testing in the <strong>production</strong> environment.  An SRE <em>can</em> be involved, but everything should be so automated that running tests merely requires a minimal amount of support time to get the process started.</p>
+
+<h2 id="resiliency-stage-5-implementation-example">Resiliency Stage 5: Implementation Example</h2>
+
+<p>To keep things simple the <strong>Bookstore</strong> application uses <a href="https://jenkins.io/" target="_blank" rel="noopener noreferrer">Jenkins</a> to handle CI/CD.  We’ve propagated a new Amazon EC2 instance onto which Jenkins is installed.  An Amazon Route53 DNS record points the <code class="highlighter-rouge">jenkins.bookstore.pingpublications.com</code> endpoint to the EC2 instance, so accessing the Jenkins front end is done through <code class="highlighter-rouge">http://jenkins.bookstore.pingpublications.com:8080</code>.</p>
+
+<p>The steps for installing and running Jenkins on an Amazon EC2 instance are beyond the scope of this article, but a <a href="https://docs.aws.amazon.com/aws-technical-content/latest/jenkins-on-aws/traditional-deployment.html" target="_blank" rel="noopener noreferrer">traditional deployment</a> is easy to accomplish.</p>
+
+<p>This is now what the final <strong>Bookstore</strong> architecture looks like.</p>
+
+<p class="text-center"><img alt="Stage 5 - Architecture" src="/gremlin-blog-posts/assets/chaos-engineering/chaos-engineering-through-staged-resiliency/stage-5/stage-5-architecture-3595304e0918e908381a4afc4644598175ebba1e4f19822d650ae8166647570d.png" class="align-center">
+<em>Bookstore App Architecture</em></p>
+
+<h3 id="jenkins-configuration">Jenkins Configuration</h3>
+
+<p>With Jenkins installed we need to create a new <strong>Project</strong> for the <strong>Bookstore</strong> application.  We’re using the <a href="http://wiki.jenkins-ci.org/display/JENKINS/Publish+Over+SSH+Plugin" target="_blank" rel="noopener noreferrer">Publish Over SSH</a> plugin to simplify deployment to both the blue/green Amazon EC2 instances.  Once the plugin is installed it must be configured by adding each SSH server we’ll be interacting with.</p>
+
+<ol>
+  <li>Navigate to <strong>Manage Jenkins &gt; Configure System</strong> and scroll down to the <strong>Publish over SSH</strong> section.</li>
+  <li>Enter the appropriate private key allowing connection to both <strong>Bookstore API</strong> Amazon EC2 instances.</li>
+  <li>Under <strong>SSH Servers</strong> click <strong>Add</strong>.</li>
+  <li>Enter the appropriate details for the <code class="highlighter-rouge">bookstore-api-blue</code> server.
+    <ul>
+      <li>
+<strong>Name</strong>: <code class="highlighter-rouge">bookstore-api-blue</code>
+</li>
+      <li>
+<strong>Hostname</strong>: <code class="highlighter-rouge">54.213.54.171</code>
+</li>
+      <li>
+<strong>Username</strong>: <code class="highlighter-rouge">ubuntu</code>
+</li>
+      <li>
+<strong>Remote Directory</strong>: <code class="highlighter-rouge">/home/ubuntu/apps</code>
+</li>
+    </ul>
+  </li>
+  <li>Add another entry for the <code class="highlighter-rouge">bookstore-api-green</code> server.
+    <ul>
+      <li>
+<strong>Name</strong>: <code class="highlighter-rouge">bookstore-api-green</code>
+</li>
+      <li>
+<strong>Hostname</strong>: <code class="highlighter-rouge">52.11.79.9</code>
+</li>
+      <li>
+<strong>Username</strong>: <code class="highlighter-rouge">ubuntu</code>
+</li>
+      <li>
+<strong>Remote Directory</strong>: <code class="highlighter-rouge">/home/ubuntu/apps</code>
+</li>
+    </ul>
+  </li>
+  <li>Click <strong>Save</strong>.</li>
+</ol>
+
+<p>With the SSH connections configured it’s time to create the <strong>Project</strong> to handle actual deployment.</p>
+
+<ol>
+  <li>Click <strong>New Item</strong>.</li>
+  <li>Input <code class="highlighter-rouge">bookstore-deploy</code> in the <strong>Item name</strong> field.</li>
+  <li>Select <strong>Freestyle Project</strong> type and click <strong>OK</strong>.</li>
+  <li>Under <strong>Source Code Management</strong> select <strong>Git</strong> and enter the GitHub endpoint (e.g. <code class="highlighter-rouge">git@github.com:GabeStah/bookstore_api.git</code>).</li>
+  <li>Add the appropriate GitHub credentials.</li>
+</ol>
+
+<p>Deploying the <strong>Bookstore</strong> application code is just a matter of creating an <strong>SSH Publisher</strong> for each environment.</p>
+
+<ol>
+  <li>Under <strong>Build</strong> click <strong>Add build step</strong> and select <strong>Send files or execute commands over SSH</strong>.</li>
+  <li>Under <strong>SSH Server &gt; Name</strong> select <code class="highlighter-rouge">bookstore-api-blue</code>.</li>
+  <li>In the <strong>Source files</strong> field input <code class="highlighter-rouge">**/*</code>.  This field uses the <a href="http://ant.apache.org/manual/dirtasks.html#patterns" target="_blank" rel="noopener noreferrer">Apache Ant</a> pattern format, so here we’re merely ensuring <em>all</em> files in the project directory are published.</li>
+  <li>For <strong>Remote directory</strong> input <code class="highlighter-rouge">bookstore_api</code>.</li>
+  <li>Since the application uses Gunicorn for the web server we need to add a command to restart it after deployment.  Input <code class="highlighter-rouge">sudo systemctl restart gunicorn</code> in the <strong>Exec command</strong> field.</li>
+  <li>Click <strong>Add Server</strong> and repeat steps 2 through 5 for the <code class="highlighter-rouge">bookstore-api-green</code> server.</li>
+  <li>Click <strong>Save</strong> to finalize the settings.  The <code class="highlighter-rouge">bookstore-deploy</code> <strong>Project</strong> will now deploy new builds of the <strong>Bookstore</strong> to each production environment!</li>
+</ol>
+
+<h4 id="automating-resiliency-testing-in-jenkins">Automating Resiliency Testing in Jenkins</h4>
+
+<p>To meet the requirements of <strong>Resiliency Stage 5</strong> we need to integrate automated resiliency testing into the CI/CD pipeline.  For the <strong>Bookstore</strong> application, we’ll use a Gremlin <a href="https://help.gremlin.com/attack-params-ref/#blackhole" target="_blank" rel="noopener noreferrer">Blackhole Attack</a>.  This attack blocks all network communication between the targeted instance and specified endpoints.  Just as we saw in <a href="https://www.gremlin.com/blog/chaos-engineering-through-staged-resiliency-stage-3" target="_blank" rel="noopener noreferrer">Stage 3</a> we’ll be using this attack to perform a resiliency test that interrupts communication and triggers an Amazon CloudWatch alarm.  Check out the <a href="https://help.gremlin.com/" target="_blank" rel="noopener noreferrer">Gremlin Help</a> documentation for more details on creating attacks with Gremlin’s Chaos Engineering tools.</p>
+
+<p>Within Jenkins, we can initiate the resiliency test by executing over SSH.</p>
+
+<ol>
+  <li>Navigate to the <strong>Configure</strong> section of the <code class="highlighter-rouge">bookstore-deploy</code> <strong>Project</strong>.</li>
+  <li>Under <strong>Build</strong> click <strong>Add build step</strong> and select <strong>Send files or execute commands over SSH</strong>.</li>
+  <li>Under <strong>SSH Server &gt; Name</strong> select <code class="highlighter-rouge">bookstore-api-blue</code>.</li>
+  <li>
+    <p>In the <strong>Exec command</strong> field input the following:</p>
+
+    <div class="language-bash highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code> gremlin attack blackhole <span class="nt">-l</span> 240 <span class="nt">-h</span> ^api.gremlin.com,cdn.bookstore.pingpublications.com,db.bookstore.pingpublications.com
+</code></pre></div>    </div>
+
+    <p class="notice--tip"><strong>TIP</strong>: This Gremlin Blackhole attack tests resiliency against the simulated failure of our critical dependencies (database and CDN).  Consequently, this will trigger the respective <code class="highlighter-rouge">bookstore-api-{blue/green}-{db/cdn}-connectivity-failed</code> Amazon CloudWatch Alarms that we configured during <a href="https://www.gremlin.com/blog/chaos-engineering-through-staged-resiliency-stage-3" target="_blank" rel="noopener noreferrer">Resiliency Stage 3</a>.  This causes a DNS failover, which can be confirmed just as it was in <strong>Stage 3</strong>.</p>
+  </li>
+  <li>Click <strong>Add Server</strong> and repeat steps 3 and 4 for the <code class="highlighter-rouge">bookstore-api-green</code> server.</li>
+  <li>Click <strong>Save</strong>.</li>
+</ol>
+
+<h4 id="automating-disaster-recovery-failover-test-in-jenkins">Automating Disaster Recovery Failover Test in Jenkins</h4>
+
+<p>We also want to automate disaster recovery failover testing within the CI/CD pipeline.  This time we’ll use a Gremlin <a href="https://help.gremlin.com/attack-params-ref/#shutdown" target="_blank" rel="noopener noreferrer">Shutdown Attack</a>, which shuts down the targeted instance.</p>
+
+<ol>
+  <li>Navigate to the <strong>Configure</strong> section of the <code class="highlighter-rouge">bookstore-deploy</code> <strong>Project</strong>.</li>
+  <li>Under <strong>Build</strong> click <strong>Add build step</strong> and select <strong>Send files or execute commands over SSH</strong>.</li>
+  <li>Under <strong>SSH Server &gt; Name</strong> select <code class="highlighter-rouge">bookstore-api-blue</code>.</li>
+  <li>
+    <p>In the <strong>Exec command</strong> field input the following: <code class="highlighter-rouge">gremlin attack shutdown -d 1</code>.</p>
+
+    <p class="notice--tip"><strong>TIP</strong>: This Gremlin Shutdown attack performs a disaster recovery failover test by terminating the <code class="highlighter-rouge">bookstore-api-blue</code> instance.  We can also optionally add the <code class="highlighter-rouge">-r</code> flag to have the server restart itself after shutdown.  This triggers the <code class="highlighter-rouge">bookstore-api-blue-StatusCheckFailed</code> Amazon CloudWatch alarm that was created within <a href="https://www.gremlin.com/blog/chaos-engineering-through-staged-resiliency-stage-3" target="_blank" rel="noopener noreferrer">Resiliency Stage 3</a>.  This automatically triggers Amazon Route53 DNS failover to reroute the <code class="highlighter-rouge">bookstore.pingpublications.com</code> endpoint to the <code class="highlighter-rouge">bookstore-api-green</code> environment.</p>
+  </li>
+  <li>Click <strong>Save</strong>.</li>
+</ol>
+
+<h3 id="performing-a-jenkins-build">Performing a Jenkins Build</h3>
+
+<p>Everything is now configured for our simple <strong>Bookstore</strong> application to be automatically deployed via Jenkins, during which resiliency testing and disaster recovery failover testing is performed.  It may be ideal to further automate the build process with Jenkins by configuring a <strong>Build Trigger</strong>, but we can also manually perform a build to confirm it works properly.</p>
+
+<ol>
+  <li>Navigate to the <code class="highlighter-rouge">bookstore-deploy</code> <strong>Project</strong>.</li>
+  <li>Click <strong>Build Now</strong>.</li>
+  <li>
+    <p>Click <strong>Console Output</strong> to view the output generated by Jenkins.  It will look something like the following.</p>
+
+    <div class="language-bash highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code> Started by user Gabe
+ Building <span class="k">in </span>workspace /var/lib/jenkins/workspace/bookstore-deploy
+ <span class="o">&gt;</span> git rev-parse <span class="nt">--is-inside-work-tree</span> <span class="c"># timeout=10</span>
+ Fetching changes from the remote Git repository
+ <span class="o">&gt;</span> git config remote.origin.url https://github.com/GabeStah/bookstore_api <span class="c"># timeout=10</span>
+ Fetching upstream changes from https://github.com/GabeStah/bookstore_api
+ <span class="o">&gt;</span> git <span class="nt">--version</span> <span class="c"># timeout=10</span>
+ using GIT_ASKPASS to <span class="nb">set </span>credentials gabestah@github.com
+ <span class="o">&gt;</span> git fetch <span class="nt">--tags</span> <span class="nt">--progress</span> https://github.com/GabeStah/bookstore_api +refs/heads/<span class="k">*</span>:refs/remotes/origin/<span class="k">*</span>
+ <span class="o">&gt;</span> git rev-parse refs/remotes/origin/master^<span class="o">{</span>commit<span class="o">}</span> <span class="c"># timeout=10</span>
+ <span class="o">&gt;</span> git rev-parse refs/remotes/origin/origin/master^<span class="o">{</span>commit<span class="o">}</span> <span class="c"># timeout=10</span>
+ Checking out Revision d7172265ec23ab20d9eaabc6f3dd37a6c741f2cc <span class="o">(</span>refs/remotes/origin/master<span class="o">)</span>
+ <span class="o">&gt;</span> git config core.sparsecheckout <span class="c"># timeout=10</span>
+ <span class="o">&gt;</span> git checkout <span class="nt">-f</span> d7172265ec23ab20d9eaabc6f3dd37a6c741f2cc
+ Commit message: <span class="s2">"bumped"</span>
+ <span class="o">&gt;</span> git rev-list <span class="nt">--no-walk</span> d7172265ec23ab20d9eaabc6f3dd37a6c741f2cc <span class="c"># timeout=10</span>
+ SSH: Connecting from host <span class="o">[</span>ip-172-31-43-207.us-west-2.compute.internal]
+ SSH: Connecting with configuration <span class="o">[</span>bookstore-api-blue] ...
+ SSH: EXEC: STDOUT/STDERR from <span class="nb">command</span> <span class="o">[</span><span class="nb">sudo </span>systemctl restart gunicorn] ...
+ SSH: EXEC: completed after 401 ms
+ SSH: Disconnecting configuration <span class="o">[</span>bookstore-api-blue] ...
+ SSH: Transferred 20 file<span class="o">(</span>s<span class="o">)</span>
+ SSH: Connecting from host <span class="o">[</span>ip-172-31-43-207.us-west-2.compute.internal]
+ SSH: Connecting with configuration <span class="o">[</span>bookstore-api-green] ...
+ SSH: EXEC: STDOUT/STDERR from <span class="nb">command</span> <span class="o">[</span><span class="nb">sudo </span>systemctl restart gunicorn] ...
+ SSH: EXEC: completed after 200 ms
+ SSH: Disconnecting configuration <span class="o">[</span>bookstore-api-green] ...
+ SSH: Transferred 20 file<span class="o">(</span>s<span class="o">)</span>
+ Build step <span class="s1">'Send files or execute commands over SSH'</span> changed build result to SUCCESS
+ SSH: Connecting from host <span class="o">[</span>ip-172-31-43-207.us-west-2.compute.internal]
+ SSH: Connecting with configuration <span class="o">[</span>bookstore-api-blue] ...
+ SSH: EXEC: STDOUT/STDERR from <span class="nb">command</span> <span class="o">[</span>gremlin attack blackhole <span class="nt">-l</span> 240 <span class="nt">-h</span> ^api.gremlin.com,cdn.bookstore.pingpublications.com,db.bookstore.pingpublications.com] ...
+ Setting up blackhole gremlin with guid <span class="s1">'0367cfe2-f9fc-11e8-acea-0242db4d1180'</span> <span class="k">for </span>240 seconds
+ Setup successfully completed
+ Running blackhole gremlin with guid <span class="s1">'0367cfe2-f9fc-11e8-acea-0242db4d1180'</span> <span class="k">for </span>240 seconds
+ Whitelisting all egress traffic to 54.186.219.32
+ Whitelisting all egress traffic to 54.68.250.40
+ Dropping all egress traffic to 52.84.25.207
+ Dropping all egress traffic to 52.84.25.199
+ Dropping all egress traffic to 52.84.25.64
+ Dropping all egress traffic to 52.84.25.16
+ Dropping all egress traffic to 172.31.22.69
+ Whitelisting all ingress traffic from 54.186.219.32
+ Whitelisting all ingress traffic from 54.68.250.40
+ Dropping all ingress traffic from 52.84.25.207
+ Dropping all ingress traffic from 52.84.25.199
+ Dropping all ingress traffic from 52.84.25.64
+ Dropping all ingress traffic from 52.84.25.16
+ Dropping all ingress traffic from 172.31.22.69
+ Dropping all egress traffic to 13.33.147.150
+ Dropping all egress traffic to 13.33.147.73
+ Dropping all egress traffic to 13.33.147.19
+ Dropping all egress traffic to 13.33.147.18
+ Dropping all ingress traffic from 13.33.147.150
+ Dropping all ingress traffic from 13.33.147.73
+ Dropping all ingress traffic from 13.33.147.19
+ Dropping all ingress traffic from 13.33.147.18
+ Dropping all egress traffic to 13.32.253.5
+ Dropping all egress traffic to 13.32.253.244
+ Dropping all egress traffic to 13.32.253.105
+ Dropping all egress traffic to 13.32.253.26
+ Dropping all ingress traffic from 13.32.253.5
+ Dropping all ingress traffic from 13.32.253.244
+ Dropping all ingress traffic from 13.32.253.105
+ Dropping all ingress traffic from 13.32.253.26
+ Reverting impact!
+ SSH: EXEC: completed after 240,397 ms
+ SSH: Disconnecting configuration <span class="o">[</span>bookstore-api-blue] ...
+ SSH: Transferred 0 file<span class="o">(</span>s<span class="o">)</span>
+ SSH: Connecting from host <span class="o">[</span>ip-172-31-43-207.us-west-2.compute.internal]
+ SSH: Connecting with configuration <span class="o">[</span>bookstore-api-green] ...
+ SSH: EXEC: STDOUT/STDERR from <span class="nb">command</span> <span class="o">[</span>gremlin attack blackhole <span class="nt">-l</span> 240 <span class="nt">-h</span> ^api.gremlin.com,cdn.bookstore.pingpublications.com,db.bookstore.pingpublications.com] ...
+ Setting up blackhole gremlin with guid <span class="s1">'932c78b3-f9fc-11e8-9244-024280df5a87'</span> <span class="k">for </span>240 seconds
+ Setup successfully completed
+ Running blackhole gremlin with guid <span class="s1">'932c78b3-f9fc-11e8-9244-024280df5a87'</span> <span class="k">for </span>240 seconds
+ Whitelisting all egress traffic to 54.186.219.32
+ Whitelisting all egress traffic to 54.68.250.40
+ Dropping all egress traffic to 13.33.147.150
+ Dropping all egress traffic to 13.33.147.73
+ Dropping all egress traffic to 13.33.147.19
+ Dropping all egress traffic to 13.33.147.18
+ Dropping all egress traffic to 172.31.22.69
+ Whitelisting all ingress traffic from 54.186.219.32
+ Whitelisting all ingress traffic from 54.68.250.40
+ Dropping all ingress traffic from 13.33.147.150
+ Dropping all ingress traffic from 13.33.147.73
+ Dropping all ingress traffic from 13.33.147.19
+ Dropping all ingress traffic from 13.33.147.18
+ Dropping all ingress traffic from 172.31.22.69
+ Dropping all egress traffic to 52.84.25.199
+ Dropping all egress traffic to 52.84.25.207
+ Dropping all egress traffic to 52.84.25.16
+ Dropping all egress traffic to 52.84.25.64
+ Dropping all ingress traffic from 52.84.25.64
+ Dropping all ingress traffic from 52.84.25.16
+ Dropping all ingress traffic from 52.84.25.207
+ Dropping all ingress traffic from 52.84.25.199
+ Reverting impact!
+ SSH: EXEC: completed after 240,395 ms
+ SSH: Disconnecting configuration <span class="o">[</span>bookstore-api-green] ...
+ SSH: Transferred 0 file<span class="o">(</span>s<span class="o">)</span>
+ SSH: Connecting from host <span class="o">[</span>ip-172-31-43-207.us-west-2.compute.internal]
+ SSH: Connecting with configuration <span class="o">[</span>bookstore-api-blue] ...
+ SSH: EXEC: STDOUT/STDERR from <span class="nb">command</span> <span class="o">[</span>gremlin attack shutdown <span class="nt">-d</span> 1] ...
+ Setting up shutdown gremlin with guid <span class="s1">'22cdba53-f9fd-11e8-8292-024230fbb3f0'</span> after 1 minute
+ Setup successfully completed
+ Running shutdown gremlin with guid <span class="s1">'22cdba53-f9fd-11e8-8292-024230fbb3f0'</span> after 1 minute
+ SSH: Disconnecting configuration <span class="o">[</span>bookstore-api-blue] ...
+ SSH: EXEC: completed after 60,450 ms
+ Finished: SUCCESS
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<p>The initial build steps grab the latest version via Git, deploy the new app version to both the blue/green environments via SSH, then perform the resiliency and disaster recovery tests via Gremlin.  As expected, all relevant <code class="highlighter-rouge">bookstore-api-{blue/green}-{db/cdn}-connectivity-failed</code> Amazon CloudWatch Alarms are triggered, forcing Amazon Route53 and Amazon RDS to engage its automated failover policies that we established in previous <strong>Resiliency Stages</strong>.</p>
+
+<p class="notice--warning"><strong>WARNING</strong>: The above Jenkins deployment configuration for the <strong>Bookstore</strong> example app is merely a functional proof of concept.  For an actual production configuration, we’d want to add many more safeguards, such as automating the alternation of deployment between blue/green environments, to ensure one environment is always ready in the event of a rollback.</p>
+
+<h2 id="resiliency-stage-5-completion">Resiliency Stage 5 Completion</h2>
+
+<p>With <strong>Resiliency Stage 5</strong> finished you and your team have reached the end of the current journey, but site reliability engineering is an ongoing battle.  Your system should now be fully monitored, provide high observability, and automatically perform resiliency and disaster recovery testing in the production environment at regular intervals.</p>
+
+<p>Working through all the <strong>Stages of Resiliency</strong> takes time and will invariably be more difficult for some teams, so do not be discouraged.  For organizations with multiple teams, the integration of this staged process allows for teams, as well as individuals within said teams, to be empowered to make improvements and be responsible for the services under their purview.  As teams progress further through the stages, overall support costs will drop dramatically, while system stability and resiliency will inversely increase.</p>
+
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/gremlin-blog-posts/tags/#resiliency" class="page__taxonomy-item" rel="tag">resiliency</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/gremlin-blog-posts/tags/#staging" class="page__taxonomy-item" rel="tag">staging</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/gremlin-blog-posts/categories/#chaos-engineering" class="page__taxonomy-item" rel="tag">chaos-engineering</a>
+    
+    </span>
+  </p>
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2018-10-11T00:00:00-07:00">October 11, 2018</time></p>
+        
+      </footer>
+
+      
+
+      
+  <nav class="pagination">
+    
+      <a href="/gremlin-blog-posts/chaos-engineering/chaos-engineering-through-staged-resiliency-stage-4/" class="pagination--pager" title="Chaos Engineering Through Staged Resiliency - Stage 4
+">Previous</a>
+    
+    
+      <a href="#" class="pagination--pager disabled">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/gremlin-blog-posts/chaos-engineering/chaos-engineering-through-staged-resiliency-stage-4/" rel="permalink">Chaos Engineering Through Staged Resiliency - Stage 4
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  3 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">
+</p>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/gremlin-blog-posts/chaos-engineering/chaos-engineering-through-staged-resiliency-stage-3/" rel="permalink">Chaos Engineering Through Staged Resiliency - Stage 3
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  17 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">
+</p>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/gremlin-blog-posts/chaos-engineering/chaos-engineering-through-staged-resiliency-stage-2/" rel="permalink">Chaos Engineering Through Staged Resiliency - Stage 2
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  14 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">
+</p>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/gremlin-blog-posts/chaos-engineering/chaos-engineering-through-staged-resiliency-stage-1/" rel="permalink">Chaos Engineering Through Staged Resiliency - Stage 1
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  22 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">
+</p>
+  </article>
+</div>
+        
+      </div>
+    </div>
+  
+  
+</div>
+    </div>
+
+    
+
+    <div class="page__footer">
+      <footer>
+        
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+    
+    
+    
+    
+    
+    <li><a href="/gremlin-blog-posts/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">© 2018 Gabe Wyatt</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/gremlin-blog-posts/assets/js/main.min.js"></script>
+  <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+
+
+
+
+
+
+
+
+  </body>
+</html>

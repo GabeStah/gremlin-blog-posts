@@ -23,4 +23,14 @@ var store = [{
         "excerpt":"Performing occasional, manual resiliency testing is useful, but your system must be automatically and frequently tested to provide any real sense of stability. In Chaos Engineering Through Staged Resiliency - Stage 2 we focused on critical dependency failure testing in non-production environments. To work through Resiliency Stage 3 your team...","categories": ["chaos-engineering"],
         "tags": ["resiliency","staging"],
         "url": "http://localhost:4000/gremlin-blog-posts/chaos-engineering/chaos-engineering-through-staged-resiliency-stage-3/",
+        "teaser":null},{
+        "title": "Chaos Engineering Through Staged Resiliency - Stage 4",
+        "excerpt":"In Chaos Engineering Through Staged Resiliency - Stage 3 we examined partial automation by implementing a handful of automated resiliency tests. Now, as we progress through Resiliency Stage 4 it’s time to fully embrace automation: All resiliency testing in non-production environments should be completely automated, requiring little to no manual...","categories": ["chaos-engineering"],
+        "tags": ["resiliency","staging"],
+        "url": "http://localhost:4000/gremlin-blog-posts/chaos-engineering/chaos-engineering-through-staged-resiliency-stage-4/",
+        "teaser":null},{
+        "title": "Chaos Engineering Through Staged Resiliency - Stage 5",
+        "excerpt":"We’ve finally made it to the last Resiliency Stage, where your team will be working toward full automation of both resiliency testing and disaster recovery failover procedures. Chaos Engineering Through Staged Resiliency - Stage 4emphasized the importance of looking toward the production environment for automation, but this final Resiliency Stage...","categories": ["chaos-engineering"],
+        "tags": ["resiliency","staging"],
+        "url": "http://localhost:4000/gremlin-blog-posts/chaos-engineering/chaos-engineering-through-staged-resiliency-stage-5/",
         "teaser":null}]

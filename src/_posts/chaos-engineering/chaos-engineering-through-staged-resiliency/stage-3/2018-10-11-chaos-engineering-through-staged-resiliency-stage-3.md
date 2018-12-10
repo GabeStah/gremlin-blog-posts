@@ -16,30 +16,10 @@ sources:
     - tags: [chaosconf 2018, resiliency, sre, interview]
       urls: https://www.infoq.com/articles/chaos-engineering-conf
     - tags: [blue/green, aws]
-      urls: https://aws.amazon.com/blogs/startups/upgrades-without-tears-part-2-bluegreen-deployment-step-by-step-on-aws/
-    - tags: []
-      urls: 
-    - tags: []
-      urls: 
-    - tags: []
-      urls: 
-    - tags: []
-      urls: 
-    - tags: []
-      urls: 
-    - tags: []
-      urls: 
-    - tags: []
-      urls: 
-    - tags: []
-      urls: 
-    - tags: []
-      urls: 
-    - tags: []
-      urls:   
+      urls: https://aws.amazon.com/blogs/startups/upgrades-without-tears-part-2-bluegreen-deployment-step-by-step-on-aws/ 
 ---
 
-Performing occasional, manual resiliency testing is useful, but your system must be automatically and frequently tested to provide any real sense of stability.  In [Chaos Engineering Through Staged Resiliency - Stage 2][#stage-2] we focused on critical dependency failure testing in non-production environments.  To work through **Resiliency Stage 3** your team will need to begin automating these test and experiments.  This allows the testing frequency to improve dramatically and reduces the reliance manual processes.
+Performing occasional, manual resiliency testing is useful, but your system must be automatically and frequently tested to provide any real sense of stability.  In [Chaos Engineering Through Staged Resiliency - Stage 2][#stage-2] we focused on critical dependency failure testing in non-production environments.  To work through **Resiliency Stage 3** your team will need to begin automating these test and experiments.  This allows the testing frequency to improve dramatically and reduces the reliance on manual processes.
 
 ## Prerequisites
 
@@ -49,7 +29,7 @@ Performing occasional, manual resiliency testing is useful, but your system must
 
 ## Perform Frequent, Semi-Automated Tests
 
-There's no more putting it off -- it's time to begin automating your testing procedures.  During this third **Resiliency Stage** the team should aim to automate as much of the resiliency testing process as reasonably possible.  The overall goal of this stage isn't to finalize automation, but to work toward a regular cadence of testing.  The frequency of each test is up to the team, but once established it's critical that the schedule is maintained and automation handles at least _some_ of the testing process.
+There's no more putting it off -- it's time to begin automating your testing procedures.  During this third **Resiliency Stage**, the team should aim to automate as much of the resiliency testing process as reasonably possible.  The overall goal of this stage isn't to finalize automation, but to work toward a regular cadence of testing.  The frequency of each test is up to the team, but once established it's critical that the schedule is maintained and automation handles at least _some_ of the testing process.
 
 If the team isn't already doing so, this is a prime opportunity to introduce Chaos Engineering tools.  These tools empower the team to intelligently create controlled experiments that can be executed precisely when necessary.  For example, Gremlin attacks can be [scheduled](https://help.gremlin.com/attacks/#how-to-schedule-attacks-with-gremlin) to execute on certain days of the week and within a specified window of time.
 
@@ -65,7 +45,7 @@ As you've been doing thus far, you must continue publishing test results to the 
 
 ### How to Automate Blue/Green Instance Failover in AWS
 
-The blue/green deployment for the **Bookstore** application provides two identical production environment instances of the system.  However, if the currently active instance fails we still have to manually swap DNS records from blue to green (or vice versa).  In order to meet the requirement of executing a resiliency experiment in production we need to automate this failover process.
+The blue/green deployment for the **Bookstore** application provides two identical production environment instances of the system.  However, if the currently active instance fails we still have to manually swap DNS records from blue to green (or vice versa).  In order to meet the requirement of executing a resiliency experiment in production, we need to automate this failover process.
 
 1. Create a metric alarm within Amazon CloudWatch.
 
@@ -287,7 +267,7 @@ However, AWS EC2 instances don't have any built-in capability to monitor the con
 
 While AWS provides many built-in metrics, creating [custom metrics](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/publishingMetrics.html) requires that you explicitly generate _all_ the relevant data for said metric.  For this reason, a custom metric is little more than a combination of a metric `name` and list of `dimensions`, which are used as `key/value` pairs to distinguish and categorize metrics.  For our purposes here we're creating simple metrics that act as a health monitor for each critical dependency.
 
-1. We start by creating a couple bash scripts within our application code repository.  These scripts are executed from the **Bookstore** API instances.
+1. We start by creating a couple of bash scripts within our application code repository.  These scripts are executed from the **Bookstore** API instances.
 
     ```bash
     #!/bin/bash
@@ -514,11 +494,17 @@ While AWS provides many built-in metrics, creating [custom metrics](https://docs
     }'
     ```
 
+Here is the updated architecture diagram for the **Bookstore** app at the end of **Resiliency Stage 3**.
+
+{% asset '{{ page.asset-path }}'/stage-3-architecture.png alt='Stage 3 - Architecture' %}{: .align-center }
+_Bookstore App Architecture_
+{: .text-center }
+
 ### Performing a DB Failure Simulation Test
 
 To meet the **Stage 3** criteria of performing "frequent, semi-automated tests" we can use Chaos Engineering tools like Gremlin to easily schedule automated attacks on relevant services and machines.  This allows your team to properly prepare for, evaluate, and respond to the outcome of these tests.
 
-For the **Bookstore** example application we're simulating a failure of the database by preventing the `blue` environment from establishing a database connection.
+For the **Bookstore** example application, we're simulating a failure of the database by preventing the `blue` environment from establishing a database connection.
 
 1. Schedule a Gremlin `Blackhole` Attack targeting the `bookstore-api-blue` environment that specifies the primary database endpoint (`db.bookstore.pingpublications.com`) as a `Hostname`.  Check out the [Gremlin API](https://app.gremlin.com/api) or [documentation](https://help.gremlin.com/attacks/) for more details on creating Gremlin Attacks.
 
@@ -595,7 +581,7 @@ Since an _actual_ database failure is handled by the Multi-AZ Amazon RDS configu
 
 ### Performing a CDN Failure Simulation Test
 
-We use the same steps as above to perform a scheduled, automated Gremlin `Blackhole` Attack to simulate failure of the CDN for our `bookstore-api-blue` environment.  Simply changing the `db-` references to `cdn-`, and the relevant endpoints, will do the trick.  However, for brevity's sake we won't include the step-by-step instructions for doing so within this section.
+We use the same steps as above to perform a scheduled, automated Gremlin `Blackhole` Attack to simulate failure of the CDN for our `bookstore-api-blue` environment.  Simply changing the `db-` references to `cdn-` and the relevant endpoints will do the trick.  However, for brevity's sake, we won't include the step-by-step instructions for doing so within this section.
 
 ## Resiliency Stage 3 Completion
 

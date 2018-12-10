@@ -282,19 +282,19 @@
             </nav>
           </aside>
         
-        <p>Performing occasional, manual resiliency testing is useful, but your system must be automatically and frequently tested to provide any real sense of stability.  In <a href="https://www.gremlin.com/blog/chaos-engineering-through-staged-resiliency-stage-2" target="_blank" rel="noopener noreferrer">Chaos Engineering Through Staged Resiliency - Stage 2</a> we focused on critical dependency failure testing in non-production environments.  To work through <strong>Resiliency Stage 3</strong> your team will need to begin automating these test and experiments.  This allows the testing frequency to improve dramatically and reduces the reliance manual processes.</p>
+        <p>Performing occasional, manual resiliency testing is useful, but your system must be automatically and frequently tested to provide any real sense of stability.  In <a href="https://www.gremlin.com/blog/chaos-engineering-through-staged-resiliency-stage-2" target="_blank" rel="noopener noreferrer">Chaos Engineering Through Staged Resiliency - Stage 2</a> we focused on critical dependency failure testing in non-production environments.  To work through <strong>Resiliency Stage 3</strong> your team will need to begin automating these test and experiments.  This allows the testing frequency to improve dramatically and reduces the reliance on manual processes.</p>
 
 <h2 id="prerequisites">Prerequisites</h2>
 
 <ul>
-  <li>Creation and agreement on [Disaster Recovery and Dependency Failover Playbooks][#stage-1#prerequisites].</li>
+  <li>Creation and agreement on <a href="https://www.gremlin.com/blog/chaos-engineering-through-staged-resiliency-stage-1#prerequisites" target="_blank" rel="noopener noreferrer">Disaster Recovery and Dependency Failover Playbooks</a>.</li>
   <li>Completion of <a href="https://www.gremlin.com/blog/chaos-engineering-through-staged-resiliency-stage-1" target="_blank" rel="noopener noreferrer">Resiliency Stage 1</a>.</li>
   <li>Completion of <a href="https://www.gremlin.com/blog/chaos-engineering-through-staged-resiliency-stage-2" target="_blank" rel="noopener noreferrer">Resiliency Stage 2</a>.</li>
 </ul>
 
 <h2 id="perform-frequent-semi-automated-tests">Perform Frequent, Semi-Automated Tests</h2>
 
-<p>There’s no more putting it off – it’s time to begin automating your testing procedures.  During this third <strong>Resiliency Stage</strong> the team should aim to automate as much of the resiliency testing process as reasonably possible.  The overall goal of this stage isn’t to finalize automation, but to work toward a regular cadence of testing.  The frequency of each test is up to the team, but once established it’s critical that the schedule is maintained and automation handles at least <em>some</em> of the testing process.</p>
+<p>There’s no more putting it off – it’s time to begin automating your testing procedures.  During this third <strong>Resiliency Stage</strong>, the team should aim to automate as much of the resiliency testing process as reasonably possible.  The overall goal of this stage isn’t to finalize automation, but to work toward a regular cadence of testing.  The frequency of each test is up to the team, but once established it’s critical that the schedule is maintained and automation handles at least <em>some</em> of the testing process.</p>
 
 <p>If the team isn’t already doing so, this is a prime opportunity to introduce Chaos Engineering tools.  These tools empower the team to intelligently create controlled experiments that can be executed precisely when necessary.  For example, Gremlin attacks can be <a href="https://help.gremlin.com/attacks/#how-to-schedule-attacks-with-gremlin" target="_blank" rel="noopener noreferrer">scheduled</a> to execute on certain days of the week and within a specified window of time.</p>
 
@@ -310,7 +310,7 @@
 
 <h3 id="how-to-automate-bluegreen-instance-failover-in-aws">How to Automate Blue/Green Instance Failover in AWS</h3>
 
-<p>The blue/green deployment for the <strong>Bookstore</strong> application provides two identical production environment instances of the system.  However, if the currently active instance fails we still have to manually swap DNS records from blue to green (or vice versa).  In order to meet the requirement of executing a resiliency experiment in production we need to automate this failover process.</p>
+<p>The blue/green deployment for the <strong>Bookstore</strong> application provides two identical production environment instances of the system.  However, if the currently active instance fails we still have to manually swap DNS records from blue to green (or vice versa).  In order to meet the requirement of executing a resiliency experiment in production, we need to automate this failover process.</p>
 
 <ol>
   <li>
@@ -547,7 +547,7 @@
 
 <ol>
   <li>
-    <p>We start by creating a couple bash scripts within our application code repository.  These scripts are executed from the <strong>Bookstore</strong> API instances.</p>
+    <p>We start by creating a couple of bash scripts within our application code repository.  These scripts are executed from the <strong>Bookstore</strong> API instances.</p>
 
     <div class="language-bash highlighter-rouge">
 <div class="highlight"><pre class="highlight"><code> <span class="c">#!/bin/bash</span>
@@ -785,11 +785,16 @@
   </li>
 </ol>
 
+<p>Here is the updated architecture diagram for the <strong>Bookstore</strong> app at the end of <strong>Resiliency Stage 3</strong>.</p>
+
+<p class="text-center"><img alt="Stage 3 - Architecture" src="/gremlin-blog-posts/assets/chaos-engineering/chaos-engineering-through-staged-resiliency/stage-3/stage-3-architecture-6d9f9cc4bfe7ae937b41f92bb4ae3dba472f145fdd9cb855bde6b1325469b633.png" class="align-center">
+<em>Bookstore App Architecture</em></p>
+
 <h3 id="performing-a-db-failure-simulation-test">Performing a DB Failure Simulation Test</h3>
 
 <p>To meet the <strong>Stage 3</strong> criteria of performing “frequent, semi-automated tests” we can use Chaos Engineering tools like Gremlin to easily schedule automated attacks on relevant services and machines.  This allows your team to properly prepare for, evaluate, and respond to the outcome of these tests.</p>
 
-<p>For the <strong>Bookstore</strong> example application we’re simulating a failure of the database by preventing the <code class="highlighter-rouge">blue</code> environment from establishing a database connection.</p>
+<p>For the <strong>Bookstore</strong> example application, we’re simulating a failure of the database by preventing the <code class="highlighter-rouge">blue</code> environment from establishing a database connection.</p>
 
 <ol>
   <li>
@@ -872,7 +877,7 @@
 
 <h3 id="performing-a-cdn-failure-simulation-test">Performing a CDN Failure Simulation Test</h3>
 
-<p>We use the same steps as above to perform a scheduled, automated Gremlin <code class="highlighter-rouge">Blackhole</code> Attack to simulate failure of the CDN for our <code class="highlighter-rouge">bookstore-api-blue</code> environment.  Simply changing the <code class="highlighter-rouge">db-</code> references to <code class="highlighter-rouge">cdn-</code>, and the relevant endpoints, will do the trick.  However, for brevity’s sake we won’t include the step-by-step instructions for doing so within this section.</p>
+<p>We use the same steps as above to perform a scheduled, automated Gremlin <code class="highlighter-rouge">Blackhole</code> Attack to simulate failure of the CDN for our <code class="highlighter-rouge">bookstore-api-blue</code> environment.  Simply changing the <code class="highlighter-rouge">db-</code> references to <code class="highlighter-rouge">cdn-</code> and the relevant endpoints will do the trick.  However, for brevity’s sake, we won’t include the step-by-step instructions for doing so within this section.</p>
 
 <h2 id="resiliency-stage-3-completion">Resiliency Stage 3 Completion</h2>
 
@@ -943,7 +948,8 @@
 ">Previous</a>
     
     
-      <a href="#" class="pagination--pager disabled">Next</a>
+      <a href="/gremlin-blog-posts/chaos-engineering/chaos-engineering-through-staged-resiliency-stage-4/" class="pagination--pager" title="Chaos Engineering Through Staged Resiliency - Stage 4
+">Next</a>
     
   </nav>
 
@@ -957,6 +963,60 @@
     <div class="page__related">
       <h4 class="page__related-title">You may also enjoy</h4>
       <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/gremlin-blog-posts/chaos-engineering/chaos-engineering-through-staged-resiliency-stage-5/" rel="permalink">Chaos Engineering Through Staged Resiliency - Stage 5
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  14 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">
+</p>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/gremlin-blog-posts/chaos-engineering/chaos-engineering-through-staged-resiliency-stage-4/" rel="permalink">Chaos Engineering Through Staged Resiliency - Stage 4
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  4 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">
+</p>
+  </article>
+</div>
         
           
 
@@ -1008,60 +1068,6 @@
 </p>
     
     <p class="archive__item-excerpt" itemprop="description">
-</p>
-  </article>
-</div>
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title" itemprop="headline">
-      
-        <a href="/gremlin-blog-posts/gremlin/content-pitches/" rel="permalink">Content Pitches
-</a>
-      
-    </h2>
-    
-      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
-
-
-
-
-  11 minute read
-</p>
-    
-    <p class="archive__item-excerpt" itemprop="description">Content pitches and ideas for Gremlin.
-</p>
-  </article>
-</div>
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title" itemprop="headline">
-      
-        <a href="/gremlin-blog-posts/chaos-engineering/migrating-cloud-chaotic-embrace/" rel="permalink">Migrating to the Cloud Is Chaotic. Embrace It.
-</a>
-      
-    </h2>
-    
-      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
-
-
-
-
-  22 minute read
-</p>
-    
-    <p class="archive__item-excerpt" itemprop="description">Why organizations planning to migrate to the cloud should embrace Chaos Engineering as a thoughtful strategy to avoid pain down the road.
 </p>
   </article>
 </div>

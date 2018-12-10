@@ -34,7 +34,7 @@ sources:
 
 In [Chaos Engineering Through Staged Resiliency - Stage 1][#stage-1] we explored how engineering teams at Walmart successfully identify and combat unexpected system failure using a series of "resiliency stages."  We also demonstrated the process of going through **Stage 1** for the **Bookstore** API sample application.  We showed that completing **Resiliency Stage 1** requires the definition of a disaster recovery failover playbook, dependency failover playbooks, team-wide agreement on said playbooks, and the execution of a manual failover exercise.
 
-In this second part we'll dive into the components of **Resiliency Stage 2**, which focuses on critical dependency failure testing in non-production environments.
+In this second part, we'll dive into the components of **Resiliency Stage 2**, which focuses on critical dependency failure testing in non-production environments.
 
 ## Prerequisites
 
@@ -51,7 +51,7 @@ Eventually, all experiments should be executed automatically, with little to no 
 
 ## Publish Test Results
 
-After every critical dependency failure test is performed the results should be globally published to the entire team.  This allows every team member to closely scrutinize the outcome of a given test.  This encourages feedback and communication, which naturally provides insightful evaluation from the members that are best equipped to analyze the test results.
+After every critical dependency failure test is performed the results should be globally published to the entire team.  This allows every team member to closely scrutinize the outcome of a given test.  This encourages feedback and communication, which naturally provides an insightful evaluation from the members that are best equipped to analyze the test results.
 
 ## Resiliency Stage 2: Implementation Example
 
@@ -61,7 +61,7 @@ At present the **Bookstore** sample app has no real concept of failover or resil
 _Bookstore App Architecture_
 {: .text-center }
 
-Completing **Resiliency Stage 2** requires testing in a non-production environment, so this forces us to improve deployment and system resiliency by moving beyond a single point of failure.  Since we're taking advantage of AWS we _could_ jump straight into implementing all the safety net features the AWS platform brings with it (e.g. auto scaling, elastic load balancing, traffic manipulation, etc).  However, going through each resiliency stage by meeting the minimal requirements provides more robust examples and lets us learn the intricacies of all components within the system.
+Completing **Resiliency Stage 2** requires testing in a non-production environment, so this forces us to improve deployment and system resiliency by moving beyond a single point of failure.  Since we're taking advantage of AWS we _could_ jump straight into implementing all the safety net features the AWS platform brings with it (e.g. auto-scaling, elastic load balancing, traffic manipulation, etc).  However, going through each resiliency stage by meeting the minimal requirements provides more robust examples and lets us learn the intricacies of all components within the system.
 
 Therefore, before we go through this stage we'll be modifying the **Bookstore** architecture by adding a secondary staging environment.  In fact, this is a good opportunity to use a blue/green deployment strategy.  A blue/green configuration requires creating two parallel production environments.  
 
@@ -90,7 +90,7 @@ As an example scenario, the `blue` environment is "active" and is handling produ
     ssh ec2-54-191-29-110.us-west-2.compute.amazonaws.com
     ```
 
-4. Pull any new application changes and restart application.
+4. Pull any new application changes and restart the application.
 
     ```bash
     $ cd ~/apps/bookstore_api && git pull && sudo systemctl restart gunicorn
@@ -120,7 +120,7 @@ As an example scenario, the `blue` environment is "active" and is handling produ
 
 ### Configuring Multi-AZ RDS
 
-The PostgreSQL database on Amazon RDS is not resilient -- if the single instance fails, the entire application goes down.  RDS provides a [Multi-AZ Deployment](https://aws.amazon.com/rds/details/multi-az/) solution, which automatically creates a synchronous database replica on another Availability Zone.  In the event of a primary failure the secondary performs an automatic failover so there is little to no downtime.
+The PostgreSQL database on Amazon RDS is not resilient -- if the single instance fails, the entire application goes down.  RDS provides a [Multi-AZ Deployment](https://aws.amazon.com/rds/details/multi-az/) solution, which automatically creates a synchronous database replica on another Availability Zone.  In the event of a primary failure, the secondary performs an automatic failover so there is little to no downtime.
 
 Modifying the existing `bookstore-db` RDS instance so it uses a Multi-AZ Deployment is fairly simple.
 
@@ -144,7 +144,7 @@ Modifying the existing `bookstore-db` RDS instance so it uses a Multi-AZ Deploym
     True
     ```
 
-4. After about 10 minutes we can check the status once again to confirm that a Mutli-AZ Deployment is now active.
+4. After about 10 minutes we can check the status once again to confirm that a Multi-AZ Deployment is now active.
 
     ```bash
     $ aws rds describe-db-instances --db-instance-identifier bookstore-db --query "DBInstances[*].[AvailabilityZone,MultiAZ]"
@@ -153,18 +153,18 @@ Modifying the existing `bookstore-db` RDS instance so it uses a Multi-AZ Deploym
 
 ### Amazon S3 Cross-Region Replication
 
-The last critical dependency for the **Bookstore** app is the CDN, which relies on Amazon S3.  While Amazon S3 is a extremely resilient system and not prone to downtime, there is still some precedent for Amazon S3 failure.  Luckily, the service has the ability to automatically replicate objects between buckets within different AWS regions.
+The last critical dependency for the **Bookstore** app is the CDN, which relies on Amazon S3.  While Amazon S3 is an extremely resilient system and not prone to downtime, there is still some precedent for Amazon S3 failure.  Luckily, the service has the ability to automatically replicate objects between buckets within different AWS regions.
 
 To accomplish this we're working around a quirk with Amazon S3 bucket naming and DNS routing.  Specifically, a CNAME DNS name must _exactly match_ a referenced Amazon S3 bucket name.  Therefore, we'll continue using the `cdn.bookstore.pingpublications.com.s3.amazonaws.com` Amazon S3 bucket (and Route53 CNAME record), but this bucket is now the _secondary_ CDN.  A new Amazon S3 bucket named `cdn-primary.bookstore.pingpublications.com` is now the _primary_ CDN bucket.
 
-We then create a CloudFront endpoint that points to the `cdn-primary` bucket, but uses the DNS CNAME `cdn.bookstore.pingpublications.com`.  From there, Amazon Route53 failover properly handles requests based on whichever Amazon S3 bucket is available.  This automates the CDN failover process.
+We then create a CloudFront endpoint that points to the `cdn-primary` bucket but uses the DNS CNAME `cdn.bookstore.pingpublications.com`.  From there, Amazon Route53 failover properly handles requests based on whichever Amazon S3 bucket is available.  This automates the CDN failover process.
 
 1. Start by creating an Amazon CloudFront Distribution.  The fields we need to set are as follows.
 
     - **Origin Domain Name**: This must be set the _primary_ Amazon S3 bucket (`cdn-primary.bookstore.pingpublications.com.s3-us-west-2.amazonaws.com`).
     - **Alternate Domain Names (CNAMEs)**: This should point to the root CDN endpoint (`cdn.bookstore.pingpublications.com`).
 
-2. Create a Amazon Route53 Health Check to check the health of the _primary_ Amazon S3 bucket, which is behind the CloudFront endpoint created above.
+2. Create an Amazon Route53 Health Check to check the health of the _primary_ Amazon S3 bucket, which is behind the CloudFront endpoint created above.
 
     ```bash
     $ aws route53 create-health-check --caller-reference BookstoreCloudfront --output json \

@@ -310,16 +310,16 @@
 
 <h3 id="1-establish-high-observability">1. Establish High Observability</h3>
 
-<p>Microservice and clustered architectures favor the scalability and cost-efficiency of distributed computing, but also require a deep understanding of system behavior across a large pool of services and machines.  Robust observability is a necessity for most modern software, which tend to be comprised of these complex distributed systems.</p>
+<p>Microservice and clustered architectures favor the scalability and cost-efficiency of distributed computing, but also require a deep understanding of system behavior across a large pool of services and machines.  Robust observability is a necessity for most modern software, which tends to be comprised of these complex distributed systems.</p>
 
 <ul>
   <li>
-<strong>Monitoring</strong>: The act of collecting, processing, aggregating, and displaying quantitative data about a system.  These data may be anything from query counts/types and error counts/types to processing times and server lifetimes.  Monitoring is a smaller subset of overall measure of observability.</li>
+<strong>Monitoring</strong>: The act of collecting, processing, aggregating, and displaying quantitative data about a system.  These data may be anything from query counts/types and error counts/types to processing times and server lifetimes.  Monitoring is a smaller subset of the overall measure of observability.</li>
   <li>
 <strong>Observability</strong>: A measure of the ability to accurately infer what is happening internally within a system based solely on external information.</li>
 </ul>
 
-<p>Continuous monitoring is critical to catch unexpected behavior that is difficult to reproduce, but at least historically, monitoring has largely focused on measuring “known unknowns.”  By contrast, a highly-distributed system often requires tracking down, understanding, and preparing for a multitude of “unknown unknowns” – obscure issues that have never happened before, and may never happen again.  A properly <em>observable</em> system is one that allows your team to answer new questions about the internals of the system <em>without</em> the need to deploy a new build.  This kind of observability is often referred to as “blackbox monitoring,” as it allows your team to draw conclusions about unknowable events without using the internals of the system.</p>
+<p>Continuous monitoring is critical to catch unexpected behavior that is difficult to reproduce, but at least historically, monitoring has largely focused on measuring “known unknowns.”  By contrast, a highly-distributed system often requires tracking down, understanding, and preparing for a multitude of “unknown unknowns” – obscure issues that have never happened before, and may never happen again.  A properly <em>observable</em> system is one that allows your team to answer new questions about the internals of the system <em>without</em> the need to deploy a new build.  This kind of observability is often referred to as “black box monitoring,” as it allows your team to draw conclusions about unknowable events without using the internals of the system.</p>
 
 <p>Most importantly, high observability is critically important when implementing Chaos Engineering techniques.  As <a href="https://twitter.com/mipsytipsy" target="_blank" rel="noopener noreferrer">Charity Majors</a>, CEO of <a href="https://www.honeycomb.io/" target="_blank" rel="noopener noreferrer">Honeycomb</a>, puts it, “Without observability, you don’t have ‘chaos engineering’.  You just have chaos.”</p>
 
@@ -481,7 +481,7 @@
 
 <h4 id="1-define-the-critical-dependencies">1. Define the Critical Dependencies</h4>
 
-<p>At this early stage of the application <em>all</em> dependencies are critical.</p>
+<p>At this early stage of the application, <em>all</em> dependencies are critical.</p>
 
 <table>
   <thead>
@@ -735,7 +735,7 @@
   </li>
   <li>Update the Amazon Route 53 DNS <code class="highlighter-rouge">A</code> record to point to the new <code class="highlighter-rouge">bookstore-api</code> EC2 instance IPv4 address.</li>
   <li>
-    <p>Once DNS propagation completes verify that the API endpoint is functional.</p>
+    <p>Once DNS propagation completes then verify that the API endpoint is functional.</p>
 
     <div class="language-bash highlighter-rouge">
 <div class="highlight"><pre class="highlight"><code> <span class="nv">$ </span>curl bookstore.pingpublications.com | jq
@@ -1047,6 +1047,60 @@
     
     <h2 class="archive__item-title" itemprop="headline">
       
+        <a href="/gremlin-blog-posts/chaos-engineering/chaos-engineering-through-staged-resiliency-stage-5/" rel="permalink">Chaos Engineering Through Staged Resiliency - Stage 5
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  14 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">
+</p>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/gremlin-blog-posts/chaos-engineering/chaos-engineering-through-staged-resiliency-stage-4/" rel="permalink">Chaos Engineering Through Staged Resiliency - Stage 4
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  4 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">
+</p>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
         <a href="/gremlin-blog-posts/chaos-engineering/chaos-engineering-through-staged-resiliency-stage-3/" rel="permalink">Chaos Engineering Through Staged Resiliency - Stage 3
 </a>
       
@@ -1088,60 +1142,6 @@
 </p>
     
     <p class="archive__item-excerpt" itemprop="description">
-</p>
-  </article>
-</div>
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title" itemprop="headline">
-      
-        <a href="/gremlin-blog-posts/gremlin/content-pitches/" rel="permalink">Content Pitches
-</a>
-      
-    </h2>
-    
-      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
-
-
-
-
-  11 minute read
-</p>
-    
-    <p class="archive__item-excerpt" itemprop="description">Content pitches and ideas for Gremlin.
-</p>
-  </article>
-</div>
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title" itemprop="headline">
-      
-        <a href="/gremlin-blog-posts/chaos-engineering/migrating-cloud-chaotic-embrace/" rel="permalink">Migrating to the Cloud Is Chaotic. Embrace It.
-</a>
-      
-    </h2>
-    
-      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
-
-
-
-
-  22 minute read
-</p>
-    
-    <p class="archive__item-excerpt" itemprop="description">Why organizations planning to migrate to the cloud should embrace Chaos Engineering as a thoughtful strategy to avoid pain down the road.
 </p>
   </article>
 </div>

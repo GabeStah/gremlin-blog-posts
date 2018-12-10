@@ -290,7 +290,7 @@
         
         <p>In <a href="https://www.gremlin.com/blog/chaos-engineering-through-staged-resiliency-stage-1" target="_blank" rel="noopener noreferrer">Chaos Engineering Through Staged Resiliency - Stage 1</a> we explored how engineering teams at Walmart successfully identify and combat unexpected system failure using a series of “resiliency stages.”  We also demonstrated the process of going through <strong>Stage 1</strong> for the <strong>Bookstore</strong> API sample application.  We showed that completing <strong>Resiliency Stage 1</strong> requires the definition of a disaster recovery failover playbook, dependency failover playbooks, team-wide agreement on said playbooks, and the execution of a manual failover exercise.</p>
 
-<p>In this second part we’ll dive into the components of <strong>Resiliency Stage 2</strong>, which focuses on critical dependency failure testing in non-production environments.</p>
+<p>In this second part, we’ll dive into the components of <strong>Resiliency Stage 2</strong>, which focuses on critical dependency failure testing in non-production environments.</p>
 
 <h2 id="prerequisites">Prerequisites</h2>
 
@@ -309,7 +309,7 @@
 
 <h2 id="publish-test-results">Publish Test Results</h2>
 
-<p>After every critical dependency failure test is performed the results should be globally published to the entire team.  This allows every team member to closely scrutinize the outcome of a given test.  This encourages feedback and communication, which naturally provides insightful evaluation from the members that are best equipped to analyze the test results.</p>
+<p>After every critical dependency failure test is performed the results should be globally published to the entire team.  This allows every team member to closely scrutinize the outcome of a given test.  This encourages feedback and communication, which naturally provides an insightful evaluation from the members that are best equipped to analyze the test results.</p>
 
 <h2 id="resiliency-stage-2-implementation-example">Resiliency Stage 2: Implementation Example</h2>
 
@@ -318,7 +318,7 @@
 <p class="text-center"><img alt="Bookstore App Architecture" src="/gremlin-blog-posts/assets/chaos-engineering/chaos-engineering-through-staged-resiliency/stage-1/stage-1-architecture-09757f8939b8928a7e67174b1608765bba3acc766990411ec05e28a66d641805.png" class="align-center">
 <em>Bookstore App Architecture</em></p>
 
-<p>Completing <strong>Resiliency Stage 2</strong> requires testing in a non-production environment, so this forces us to improve deployment and system resiliency by moving beyond a single point of failure.  Since we’re taking advantage of AWS we <em>could</em> jump straight into implementing all the safety net features the AWS platform brings with it (e.g. auto scaling, elastic load balancing, traffic manipulation, etc).  However, going through each resiliency stage by meeting the minimal requirements provides more robust examples and lets us learn the intricacies of all components within the system.</p>
+<p>Completing <strong>Resiliency Stage 2</strong> requires testing in a non-production environment, so this forces us to improve deployment and system resiliency by moving beyond a single point of failure.  Since we’re taking advantage of AWS we <em>could</em> jump straight into implementing all the safety net features the AWS platform brings with it (e.g. auto-scaling, elastic load balancing, traffic manipulation, etc).  However, going through each resiliency stage by meeting the minimal requirements provides more robust examples and lets us learn the intricacies of all components within the system.</p>
 
 <p>Therefore, before we go through this stage we’ll be modifying the <strong>Bookstore</strong> architecture by adding a secondary staging environment.  In fact, this is a good opportunity to use a blue/green deployment strategy.  A blue/green configuration requires creating two parallel production environments.</p>
 
@@ -352,7 +352,7 @@
 </code></pre></div>    </div>
   </li>
   <li>
-    <p>Pull any new application changes and restart application.</p>
+    <p>Pull any new application changes and restart the application.</p>
 
     <div class="language-bash highlighter-rouge">
 <div class="highlight"><pre class="highlight"><code> <span class="nv">$ </span><span class="nb">cd</span> ~/apps/bookstore_api <span class="o">&amp;&amp;</span> git pull <span class="o">&amp;&amp;</span> <span class="nb">sudo </span>systemctl restart gunicorn
@@ -390,7 +390,7 @@
 
 <h3 id="configuring-multi-az-rds">Configuring Multi-AZ RDS</h3>
 
-<p>The PostgreSQL database on Amazon RDS is not resilient – if the single instance fails, the entire application goes down.  RDS provides a <a href="https://aws.amazon.com/rds/details/multi-az/" target="_blank" rel="noopener noreferrer">Multi-AZ Deployment</a> solution, which automatically creates a synchronous database replica on another Availability Zone.  In the event of a primary failure the secondary performs an automatic failover so there is little to no downtime.</p>
+<p>The PostgreSQL database on Amazon RDS is not resilient – if the single instance fails, the entire application goes down.  RDS provides a <a href="https://aws.amazon.com/rds/details/multi-az/" target="_blank" rel="noopener noreferrer">Multi-AZ Deployment</a> solution, which automatically creates a synchronous database replica on another Availability Zone.  In the event of a primary failure, the secondary performs an automatic failover so there is little to no downtime.</p>
 
 <p>Modifying the existing <code class="highlighter-rouge">bookstore-db</code> RDS instance so it uses a Multi-AZ Deployment is fairly simple.</p>
 
@@ -419,7 +419,7 @@
 </code></pre></div>    </div>
   </li>
   <li>
-    <p>After about 10 minutes we can check the status once again to confirm that a Mutli-AZ Deployment is now active.</p>
+    <p>After about 10 minutes we can check the status once again to confirm that a Multi-AZ Deployment is now active.</p>
 
     <div class="language-bash highlighter-rouge">
 <div class="highlight"><pre class="highlight"><code> <span class="nv">$ </span>aws rds describe-db-instances <span class="nt">--db-instance-identifier</span> bookstore-db <span class="nt">--query</span> <span class="s2">"DBInstances[*].[AvailabilityZone,MultiAZ]"</span>
@@ -430,11 +430,11 @@
 
 <h3 id="amazon-s3-cross-region-replication">Amazon S3 Cross-Region Replication</h3>
 
-<p>The last critical dependency for the <strong>Bookstore</strong> app is the CDN, which relies on Amazon S3.  While Amazon S3 is a extremely resilient system and not prone to downtime, there is still some precedent for Amazon S3 failure.  Luckily, the service has the ability to automatically replicate objects between buckets within different AWS regions.</p>
+<p>The last critical dependency for the <strong>Bookstore</strong> app is the CDN, which relies on Amazon S3.  While Amazon S3 is an extremely resilient system and not prone to downtime, there is still some precedent for Amazon S3 failure.  Luckily, the service has the ability to automatically replicate objects between buckets within different AWS regions.</p>
 
 <p>To accomplish this we’re working around a quirk with Amazon S3 bucket naming and DNS routing.  Specifically, a CNAME DNS name must <em>exactly match</em> a referenced Amazon S3 bucket name.  Therefore, we’ll continue using the <code class="highlighter-rouge">cdn.bookstore.pingpublications.com.s3.amazonaws.com</code> Amazon S3 bucket (and Route53 CNAME record), but this bucket is now the <em>secondary</em> CDN.  A new Amazon S3 bucket named <code class="highlighter-rouge">cdn-primary.bookstore.pingpublications.com</code> is now the <em>primary</em> CDN bucket.</p>
 
-<p>We then create a CloudFront endpoint that points to the <code class="highlighter-rouge">cdn-primary</code> bucket, but uses the DNS CNAME <code class="highlighter-rouge">cdn.bookstore.pingpublications.com</code>.  From there, Amazon Route53 failover properly handles requests based on whichever Amazon S3 bucket is available.  This automates the CDN failover process.</p>
+<p>We then create a CloudFront endpoint that points to the <code class="highlighter-rouge">cdn-primary</code> bucket but uses the DNS CNAME <code class="highlighter-rouge">cdn.bookstore.pingpublications.com</code>.  From there, Amazon Route53 failover properly handles requests based on whichever Amazon S3 bucket is available.  This automates the CDN failover process.</p>
 
 <ol>
   <li>
@@ -448,7 +448,7 @@
     </ul>
   </li>
   <li>
-    <p>Create a Amazon Route53 Health Check to check the health of the <em>primary</em> Amazon S3 bucket, which is behind the CloudFront endpoint created above.</p>
+    <p>Create an Amazon Route53 Health Check to check the health of the <em>primary</em> Amazon S3 bucket, which is behind the CloudFront endpoint created above.</p>
 
     <div class="language-bash highlighter-rouge">
 <div class="highlight"><pre class="highlight"><code> <span class="nv">$ </span>aws route53 create-health-check <span class="nt">--caller-reference</span> BookstoreCloudfront <span class="nt">--output</span> json <span class="se">\</span>
@@ -911,6 +911,60 @@
     
     <h2 class="archive__item-title" itemprop="headline">
       
+        <a href="/gremlin-blog-posts/chaos-engineering/chaos-engineering-through-staged-resiliency-stage-5/" rel="permalink">Chaos Engineering Through Staged Resiliency - Stage 5
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  14 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">
+</p>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/gremlin-blog-posts/chaos-engineering/chaos-engineering-through-staged-resiliency-stage-4/" rel="permalink">Chaos Engineering Through Staged Resiliency - Stage 4
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  4 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">
+</p>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
         <a href="/gremlin-blog-posts/chaos-engineering/chaos-engineering-through-staged-resiliency-stage-3/" rel="permalink">Chaos Engineering Through Staged Resiliency - Stage 3
 </a>
       
@@ -952,60 +1006,6 @@
 </p>
     
     <p class="archive__item-excerpt" itemprop="description">
-</p>
-  </article>
-</div>
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title" itemprop="headline">
-      
-        <a href="/gremlin-blog-posts/gremlin/content-pitches/" rel="permalink">Content Pitches
-</a>
-      
-    </h2>
-    
-      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
-
-
-
-
-  11 minute read
-</p>
-    
-    <p class="archive__item-excerpt" itemprop="description">Content pitches and ideas for Gremlin.
-</p>
-  </article>
-</div>
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title" itemprop="headline">
-      
-        <a href="/gremlin-blog-posts/chaos-engineering/migrating-cloud-chaotic-embrace/" rel="permalink">Migrating to the Cloud Is Chaotic. Embrace It.
-</a>
-      
-    </h2>
-    
-      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
-
-
-
-
-  22 minute read
-</p>
-    
-    <p class="archive__item-excerpt" itemprop="description">Why organizations planning to migrate to the cloud should embrace Chaos Engineering as a thoughtful strategy to avoid pain down the road.
 </p>
   </article>
 </div>

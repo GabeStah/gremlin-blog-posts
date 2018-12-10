@@ -69,12 +69,12 @@ Before you can begin moving through the resiliency stages there are a few prereq
 
 ### 1. Establish High Observability
 
-Microservice and clustered architectures favor the scalability and cost-efficiency of distributed computing, but also require a deep understanding of system behavior across a large pool of services and machines.  Robust observability is a necessity for most modern software, which tend to be comprised of these complex distributed systems.  
+Microservice and clustered architectures favor the scalability and cost-efficiency of distributed computing, but also require a deep understanding of system behavior across a large pool of services and machines.  Robust observability is a necessity for most modern software, which tends to be comprised of these complex distributed systems.  
 
-- **Monitoring**: The act of collecting, processing, aggregating, and displaying quantitative data about a system.  These data may be anything from query counts/types and error counts/types to processing times and server lifetimes.  Monitoring is a smaller subset of overall measure of observability.
+- **Monitoring**: The act of collecting, processing, aggregating, and displaying quantitative data about a system.  These data may be anything from query counts/types and error counts/types to processing times and server lifetimes.  Monitoring is a smaller subset of the overall measure of observability.
 - **Observability**: A measure of the ability to accurately infer what is happening internally within a system based solely on external information.
 
-Continuous monitoring is critical to catch unexpected behavior that is difficult to reproduce, but at least historically, monitoring has largely focused on measuring "known unknowns."  By contrast, a highly-distributed system often requires tracking down, understanding, and preparing for a multitude of "unknown unknowns" -- obscure issues that have never happened before, and may never happen again.  A properly _observable_ system is one that allows your team to answer new questions about the internals of the system _without_ the need to deploy a new build.  This kind of observability is often referred to as "blackbox monitoring," as it allows your team to draw conclusions about unknowable events without using the internals of the system.
+Continuous monitoring is critical to catch unexpected behavior that is difficult to reproduce, but at least historically, monitoring has largely focused on measuring "known unknowns."  By contrast, a highly-distributed system often requires tracking down, understanding, and preparing for a multitude of "unknown unknowns" -- obscure issues that have never happened before, and may never happen again.  A properly _observable_ system is one that allows your team to answer new questions about the internals of the system _without_ the need to deploy a new build.  This kind of observability is often referred to as "black box monitoring," as it allows your team to draw conclusions about unknowable events without using the internals of the system.
 
 Most importantly, high observability is critically important when implementing Chaos Engineering techniques.  As [Charity Majors](https://twitter.com/mipsytipsy), CEO of [Honeycomb](https://www.honeycomb.io/), puts it, "Without observability, you don't have 'chaos engineering'.  You just have chaos."
 
@@ -191,7 +191,7 @@ It may be useful to take a moment to define the basic components of the system, 
 
 #### 1. Define the Critical Dependencies
 
-At this early stage of the application _all_ dependencies are critical.
+At this early stage of the application, _all_ dependencies are critical.
 
 | Dependency | Criticality Period | Manual Workaround                    | RTO | RPO | Child Dependencies |
 | ---------- | ------------------ | ------------------------------------ | --- | --- | ------------------ |
@@ -353,7 +353,7 @@ The current architecture of the **Bookstore** app is limited to a manual _Backup
     ```
 
 8. Update the Amazon Route 53 DNS `A` record to point to the new `bookstore-api` EC2 instance IPv4 address.
-9. Once DNS propagation completes verify that the API endpoint is functional.
+9. Once DNS propagation completes then verify that the API endpoint is functional.
 
     ```bash
     $ curl bookstore.pingpublications.com | jq

@@ -1,0 +1,539 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.13.0 by Michael Rose
+  Copyright 2013-2018 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE.txt
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Chaos Engineering Through Staged Resiliency - Stage 4 - Gremlin: Blog Posts</title>
+<meta name="description" content="An amazing website.">
+
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Gremlin: Blog Posts">
+<meta property="og:title" content="Chaos Engineering Through Staged Resiliency - Stage 4">
+<meta property="og:url" content="http://localhost:4000/gremlin-blog-posts/chaos-engineering/chaos-engineering-through-staged-resiliency-stage-4/">
+
+
+  <meta property="og:description" content="An amazing website.">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2018-10-11T00:00:00-07:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/gremlin-blog-posts/chaos-engineering/chaos-engineering-through-staged-resiliency-stage-4/">
+
+
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Person",
+      "name": "Gabe Wyatt",
+      "url": "http://localhost:4000/gremlin-blog-posts",
+      "sameAs": null
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/gremlin-blog-posts/feed.xml" type="application/atom+xml" rel="alternate" title="Gremlin: Blog Posts Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/gremlin-blog-posts/assets/css/main.css">
+
+<!--[if lte IE 9]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+    <!-- start custom head snippets -->
+<link rel="icon" href="/gremlin-blog-posts/assets/images/favicon.ico" />
+<meta name="robots" content="noindex, nofollow" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    <div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <a class="site-title" href="/gremlin-blog-posts/">Gremlin: Blog Posts</a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/gremlin-blog-posts/notes-to-editor">Notes to the Editor</a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+  
+    
+
+
+
+<nav class="breadcrumbs">
+  <ol itemscope itemtype="http://schema.org/BreadcrumbList">
+    
+    
+    
+      
+        <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+          <a href="http://localhost:4000/gremlin-blog-posts/" itemprop="item"><span itemprop="name">Home</span></a>
+          <meta itemprop="position" content="1">
+        </li>
+        <span class="sep">/</span>
+      
+      
+        
+        <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+          <a href="/gremlin-blog-posts/categories/#chaos-engineering" itemprop="item"><span itemprop="name">Chaos engineering</span></a>
+          <meta itemprop="position" content="2">
+        </li>
+        <span class="sep">/</span>
+      
+    
+      
+      
+        <li class="current">Chaos Engineering Through Staged Resiliency - Stage 4</li>
+      
+    
+  </ol>
+</nav>
+
+  
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+  
+    
+      
+      
+      
+    
+    
+      
+
+<nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox">
+  <label for="ac-toc">Toggle menu</label>
+  <ul class="nav__items">
+    
+      <li>
+        
+          
+          
+
+          <a href="/gremlin-blog-posts/categories"><span class="nav__sub-title">Categories</span></a>
+        
+
+        
+        <ul>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/gremlin-blog-posts/categories/#chaos-engineering" class="">Chaos Engineering</a></li>
+          
+        </ul>
+        
+      </li>
+    
+      <li>
+        
+          
+          
+
+          <a href="/gremlin-blog-posts/tags"><span class="nav__sub-title">Tags</span></a>
+        
+
+        
+      </li>
+    
+  </ul>
+</nav>
+    
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Chaos Engineering Through Staged Resiliency - Stage 4">
+    <meta itemprop="description" content="">
+    <meta itemprop="datePublished" content="October 11, 2018">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">Chaos Engineering Through Staged Resiliency - Stage 4
+</h1>
+          
+            <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  3 minute read
+</p>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right sticky">
+            <nav class="toc">
+              <header><h4 class="nav__title">
+<i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu">
+  <li><a href="#prerequisites">Prerequisites</a></li>
+  <li><a href="#automate-resiliency-testing-in-non-production">Automate Resiliency Testing in Non-Production</a></li>
+  <li><a href="#semi-automate-disaster-recovery-failover">Semi-Automate Disaster Recovery Failover</a></li>
+  <li><a href="#resiliency-stage-4-implementation-example">Resiliency Stage 4: Implementation Example</a></li>
+  <li><a href="#resiliency-stage-4-completion">Resiliency Stage 4 Completion</a></li>
+</ul>
+            </nav>
+          </aside>
+        
+        <p>In <a href="https://www.gremlin.com/blog/chaos-engineering-through-staged-resiliency-stage-3" target="_blank" rel="noopener noreferrer">Chaos Engineering Through Staged Resiliency - Stage 3</a> we examined partial automation by implementing a handful of automated resiliency tests.  Now, as we progress through <strong>Resiliency Stage 4</strong> it’s time to fully embrace automation: All resiliency testing in non-production environments should be completely automated, requiring little to no manual interaction.  After completing the entirety of this <strong>Resiliency Stage</strong> your application will be quite resilient and – at least outside of production – should require minimal supervision and support costs.  Let’s get to it!</p>
+
+<h2 id="prerequisites">Prerequisites</h2>
+
+<ul>
+  <li>Creation and agreement on <a href="https://www.gremlin.com/blog/chaos-engineering-through-staged-resiliency-stage-1#prerequisites" target="_blank" rel="noopener noreferrer">Disaster Recovery and Dependency Failover Playbooks</a>.</li>
+  <li>Completion of <a href="https://www.gremlin.com/blog/chaos-engineering-through-staged-resiliency-stage-1" target="_blank" rel="noopener noreferrer">Resiliency Stage 1</a>.</li>
+  <li>Completion of <a href="https://www.gremlin.com/blog/chaos-engineering-through-staged-resiliency-stage-2" target="_blank" rel="noopener noreferrer">Resiliency Stage 2</a>.</li>
+  <li>Completion of <a href="https://www.gremlin.com/blog/chaos-engineering-through-staged-resiliency-stage-3" target="_blank" rel="noopener noreferrer">Resiliency Stage 3</a>.</li>
+</ul>
+
+<h2 id="automate-resiliency-testing-in-non-production">Automate Resiliency Testing in Non-Production</h2>
+
+<p>After progressing through <a href="https://www.gremlin.com/blog/chaos-engineering-through-staged-resiliency-stage-3" target="_blank" rel="noopener noreferrer">Resiliency Stage 3</a> your team implemented at least <em>some</em> semi-automated resiliency testing.  However, this fourth stage is where all non-automated resiliency tests must also be integrated into your automated testing suite.  If your application features a development or other non-production environment, you can opt to integrate these automated resilience tests in that non-production environment, as full-blown production testing isn’t required until <a href="https://www.gremlin.com/blog/chaos-engineering-through-staged-resiliency-stage-5" target="_blank" rel="noopener noreferrer">Stage 5</a>.  However, the earlier the team starts thinking about and practicing implementation within production systems, the smoother the transition will be and the sooner you’ll see that dramatic increase in resilience and drop in support costs that staged resiliency aims to provide.</p>
+
+<h2 id="semi-automate-disaster-recovery-failover">Semi-Automate Disaster Recovery Failover</h2>
+
+<p>In spite of everyone’s best efforts, not all disaster can be avoided, so it’s critical that the team implement at least a <em>semi</em>-automated disaster recovery failover script.  As with resiliency testing, it’s best to automate as much of the disaster recovery failover process as possible, requiring as little human intervention as feasible.  However, depending on the breadth of the system and initial planning throughout the earlier <strong>Resiliency Stages</strong>, it’s entirely possible your disaster recovery failover will require at least a modicum of human supervision.</p>
+
+<p>As the team progresses through this stage make sure you follow the playbooks that have been previously established.  If something needs to be changed in a process or playbook, this is the time to suss that out and make those updates.</p>
+
+<h2 id="resiliency-stage-4-implementation-example">Resiliency Stage 4: Implementation Example</h2>
+
+<p>As will sometimes be the case when your own team is working through each <strong>Stage of Resiliency</strong>, the <strong>Bookstore</strong> application has already been configured to automatically perform resiliency testing in non-production environments.  In <strong>Stage 3</strong> we explored <a href="https://www.gremlin.com/blog/chaos-engineering-through-staged-resiliency-stage-3#performing-a-cdn-failure-simulation-test" target="_blank" rel="noopener noreferrer">Performing a CDN Failure Simulation Test</a> and <a href="https://www.gremlin.com/blog/chaos-engineering-through-staged-resiliency-stage-3#performing-a-db-failure-simulation-test" target="_blank" rel="noopener noreferrer">Performing a DB Failure Simulation Test</a>, which handles the major resiliency tests for the system by creating Gremlin attacks to sever the connection between the <code class="highlighter-rouge">bookstore-api</code> instances and the respective CDN/DB endpoints.</p>
+
+<p>To ensure these tests are performed automatically, we can use the <a href="https://app.gremlin.com/api" target="_blank" rel="noopener noreferrer">Gremlin API</a> or <a href="https://app.gremlin.com/attacks" target="_blank" rel="noopener noreferrer">web front-end</a> to <em>automatically schedule</em> attacks for our given testing schedule.  Similarly, we’d want to schedule an automatic disaster recovery failover test using a Gremlin <a href="https://help.gremlin.com/attack-params-ref/#shutdown" target="_blank" rel="noopener noreferrer">Shutdown Attack</a>, as illustrated in <a href="https://www.gremlin.com/blog/chaos-engineering-through-staged-resiliency-stage-3#verifying-automated-instance-failover" target="_blank" rel="noopener noreferrer">Verifying Automated Instance Failover</a> in <strong>Stage 3</strong>.  Check out the <a href="https://help.gremlin.com/" target="_blank" rel="noopener noreferrer">Gremlin Help</a> documentation for more details on creating attacks with Gremlin.</p>
+
+<h2 id="resiliency-stage-4-completion">Resiliency Stage 4 Completion</h2>
+
+<p>You’ve automated resiliency testing in a non-production environment (and, ideally, even a bit in production).  Your team has also semi-automated disaster recovery failover procedures to ensure your service can moderately recover itself after a failure, with minimal human intervention.  In the last chapter of this series, <a href="https://www.gremlin.com/blog/chaos-engineering-through-staged-resiliency-stage-5" target="_blank" rel="noopener noreferrer">Chaos Engineering Through Staged Resiliency - Stage 5</a>, we’ll explore the final steps of fully automating resiliency testing in production, along with CI/CD integration to ensure your service maintains stability throughout every step of the software development life cycle.</p>
+
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/gremlin-blog-posts/tags/#resiliency" class="page__taxonomy-item" rel="tag">resiliency</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/gremlin-blog-posts/tags/#staging" class="page__taxonomy-item" rel="tag">staging</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/gremlin-blog-posts/categories/#chaos-engineering" class="page__taxonomy-item" rel="tag">chaos-engineering</a>
+    
+    </span>
+  </p>
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2018-10-11T00:00:00-07:00">October 11, 2018</time></p>
+        
+      </footer>
+
+      
+
+      
+  <nav class="pagination">
+    
+      <a href="/gremlin-blog-posts/chaos-engineering/chaos-engineering-through-staged-resiliency-stage-3/" class="pagination--pager" title="Chaos Engineering Through Staged Resiliency - Stage 3
+">Previous</a>
+    
+    
+      <a href="/gremlin-blog-posts/chaos-engineering/chaos-engineering-through-staged-resiliency-stage-5/" class="pagination--pager" title="Chaos Engineering Through Staged Resiliency - Stage 5
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/gremlin-blog-posts/chaos-engineering/chaos-engineering-through-staged-resiliency-stage-5/" rel="permalink">Chaos Engineering Through Staged Resiliency - Stage 5
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  14 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">
+</p>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/gremlin-blog-posts/chaos-engineering/chaos-engineering-through-staged-resiliency-stage-3/" rel="permalink">Chaos Engineering Through Staged Resiliency - Stage 3
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  17 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">
+</p>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/gremlin-blog-posts/chaos-engineering/chaos-engineering-through-staged-resiliency-stage-2/" rel="permalink">Chaos Engineering Through Staged Resiliency - Stage 2
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  14 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">
+</p>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/gremlin-blog-posts/chaos-engineering/chaos-engineering-through-staged-resiliency-stage-1/" rel="permalink">Chaos Engineering Through Staged Resiliency - Stage 1
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  22 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">
+</p>
+  </article>
+</div>
+        
+      </div>
+    </div>
+  
+  
+</div>
+    </div>
+
+    
+
+    <div class="page__footer">
+      <footer>
+        
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+    
+    
+    
+    
+    
+    <li><a href="/gremlin-blog-posts/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">© 2018 Gabe Wyatt</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/gremlin-blog-posts/assets/js/main.min.js"></script>
+  <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+
+
+
+
+
+
+
+
+  </body>
+</html>
